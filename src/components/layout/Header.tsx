@@ -4,7 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 import Logo from '../ui-elements/Logo';
 import AnimatedButton from '../ui-elements/AnimatedButton';
 import MasonicSymbol from '../masonic/MasonicSymbols';
+import NotificationIndicator from '../notifications/NotificationIndicator';
 import { cn } from '@/lib/utils';
+import { UserCircle } from 'lucide-react';
 
 interface NavLink {
   name: string;
@@ -81,35 +83,65 @@ const Header: React.FC = () => {
               </Link>
             ))}
             
-            <div className="ml-4">
-              <AnimatedButton to="/login" variant="secondary" size="sm">
-                Connexion
-              </AnimatedButton>
+            <div className="flex items-center ml-4 space-x-1">
+              <NotificationIndicator />
+              
+              <Link 
+                to="/profile"
+                className={cn(
+                  "rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors",
+                  location.pathname === '/profile' ? "text-masonic-blue-700 bg-masonic-blue-50" : ""
+                )}
+                aria-label="Profil"
+              >
+                <UserCircle className="h-5 w-5" />
+              </Link>
+              
+              <div className="ml-2">
+                <AnimatedButton to="/login" variant="secondary" size="sm">
+                  Connexion
+                </AnimatedButton>
+              </div>
             </div>
           </nav>
           
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 focus:outline-none"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {mobileMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
+          <div className="md:hidden flex items-center space-x-1">
+            <NotificationIndicator />
+            
+            <Link 
+              to="/profile"
+              className={cn(
+                "rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors",
+                location.pathname === '/profile' ? "text-masonic-blue-700 bg-masonic-blue-50" : ""
               )}
-            </svg>
-          </button>
+              aria-label="Profil"
+            >
+              <UserCircle className="h-5 w-5" />
+            </Link>
+            
+            <button
+              className="rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 focus:outline-none"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {mobileMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
       
