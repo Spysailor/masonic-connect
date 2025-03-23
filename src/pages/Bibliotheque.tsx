@@ -1,8 +1,8 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Book, FileText, MessageCircle, Filter, ChevronDown } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Search, Book, FileText, MessageCircle, Filter, ChevronDown, Plus } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Input } from '@/components/ui/input';
@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 // Resource type definition
 type Resource = {
@@ -17,21 +19,41 @@ type Resource = {
   title: string;
   description: string;
   author: string;
-  authorRole: string;
-  date: Date;
-  type: 'book' | 'document' | 'article';
+  authorRole?: string;
+  authorName?: string;
+  lodge?: string;
+  date?: Date;
+  createdAt?: Date;
+  degree?: number;
+  type: 'book' | 'document' | 'article' | 'planche';
   category: string;
+  tags?: string[];
   imageUrl?: string;
   downloadUrl?: string;
   linkUrl?: string;
+  fileURL?: string;
+  content?: string;
 };
 
 const Bibliotheque = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedDegree, setSelectedDegree] = useState<number | null>(null);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
   
+  // Parse the URL query parameters
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const typeParam = params.get('type');
+    if (typeParam) {
+      setSelectedType(typeParam);
+    }
+  }, [location.search]);
+
   // Mock data for library resources
   const resources: Resource[] = [
     {
@@ -39,10 +61,13 @@ const Bibliotheque = () => {
       title: 'Les Symboles Maçonniques',
       description: 'Une exploration détaillée des symboles fondamentaux de la Franc-Maçonnerie et leur signification ésotérique à travers les âges.',
       author: 'Jean Dupont',
+      authorName: 'Jean Dupont',
       authorRole: 'Vénérable Maître',
       date: new Date('2023-01-15'),
+      createdAt: new Date('2023-01-15'),
       type: 'book',
       category: 'Symbolisme',
+      tags: ['Symbolisme', 'Tradition', 'Rituel'],
       imageUrl: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
       downloadUrl: '#'
     },
@@ -51,10 +76,13 @@ const Bibliotheque = () => {
       title: 'Histoire de la Franc-Maçonnerie au XVIIIe siècle',
       description: 'Une étude complète sur l\'évolution de la Franc-Maçonnerie pendant le siècle des Lumières et son influence sur la société européenne.',
       author: 'Michel Lebrun',
+      authorName: 'Michel Lebrun',
       authorRole: 'Historien',
       date: new Date('2022-11-20'),
+      createdAt: new Date('2022-11-20'),
       type: 'book',
       category: 'Histoire',
+      tags: ['Histoire', 'Lumières', 'Europe'],
       imageUrl: 'https://images.unsplash.com/photo-1461360228754-6e81c478b882?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
       downloadUrl: '#'
     },
@@ -63,62 +91,168 @@ const Bibliotheque = () => {
       title: 'Le Rite Écossais Ancien et Accepté',
       description: 'Une analyse approfondie du REAA, son histoire, ses degrés et sa place dans le paysage maçonnique mondial.',
       author: 'Pierre Martin',
+      authorName: 'Pierre Martin',
       authorRole: 'Grand Maître',
       date: new Date('2022-08-05'),
+      createdAt: new Date('2022-08-05'),
       type: 'document',
       category: 'Rituel',
+      tags: ['REAA', 'Rituel', 'Degrés'],
       imageUrl: 'https://images.unsplash.com/photo-1516383607781-913a19294fd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      linkUrl: '/planches/3'
+      linkUrl: '/bibliotheque/3'
     },
     {
       id: '4',
       title: 'L\'Art Royal et la Géométrie Sacrée',
       description: 'Exploration du lien entre les principes mathématiques, la géométrie sacrée et leur application dans l\'Art Royal maçonnique.',
       author: 'Sophie Dubois',
+      authorName: 'Sophie Dubois',
       authorRole: 'Architecte',
       date: new Date('2023-03-12'),
+      createdAt: new Date('2023-03-12'),
       type: 'article',
       category: 'Philosophie',
-      linkUrl: '/planches/4'
+      tags: ['Géométrie', 'Art Royal', 'Philosophie'],
+      linkUrl: '/bibliotheque/4'
     },
     {
       id: '5',
       title: 'Les Landmarks de la Franc-Maçonnerie',
       description: 'Une étude comparative des différentes interprétations des Landmarks à travers les obédiences et les époques.',
       author: 'Robert Leroy',
+      authorName: 'Robert Leroy',
       authorRole: 'Juriste',
       date: new Date('2022-10-30'),
+      createdAt: new Date('2022-10-30'),
       type: 'document',
       category: 'Tradition',
-      linkUrl: '/planches/5'
+      tags: ['Landmarks', 'Tradition', 'Obédiences'],
+      linkUrl: '/bibliotheque/5'
     },
     {
       id: '6',
       title: 'Communication entre Frères',
       description: 'Guide pratique sur la fraternité et la communication efficace au sein de la loge.',
       author: 'Antoine Mercier',
+      authorName: 'Antoine Mercier',
       authorRole: 'Orateur',
       date: new Date('2023-02-28'),
+      createdAt: new Date('2023-02-28'),
       type: 'article',
       category: 'Communication',
+      tags: ['Communication', 'Fraternité', 'Loge'],
       linkUrl: '/messages'
+    },
+    // Planches
+    {
+      id: '7',
+      title: 'Symbolisme du pavé mosaïque',
+      content: 'Étude approfondie du symbolisme du pavé mosaïque dans les loges maçonniques...',
+      description: 'Étude approfondie du symbolisme du pavé mosaïque dans les loges maçonniques...',
+      degree: 1,
+      author: 'Jean Dupont',
+      authorName: 'Jean Dupont',
+      lodge: 'Les Trois Vertus',
+      tags: ['Symbolisme', 'Temple', 'Art Royal'],
+      fileURL: '#',
+      createdAt: new Date('2023-03-15'),
+      type: 'planche',
+      category: 'Symbolisme',
+      linkUrl: '/planches/1'
+    },
+    {
+      id: '8',
+      title: 'Les voyages initiatiques',
+      content: 'Analyse des voyages initiatiques et leur signification dans le rite écossais ancien et accepté...',
+      description: 'Analyse des voyages initiatiques et leur signification dans le rite écossais ancien et accepté...',
+      degree: 1,
+      author: 'Paul Martin',
+      authorName: 'Paul Martin',
+      lodge: 'Les Trois Vertus',
+      tags: ['Initiation', 'Rituel', 'Tradition'],
+      fileURL: '#',
+      createdAt: new Date('2023-02-20'),
+      type: 'planche',
+      category: 'Rituel',
+      linkUrl: '/planches/2'
+    },
+    {
+      id: '9',
+      title: 'L\'étoile flamboyante',
+      content: 'Étude de l\'étoile flamboyante, son origine et sa signification dans la franc-maçonnerie...',
+      description: 'Étude de l\'étoile flamboyante, son origine et sa signification dans la franc-maçonnerie...',
+      degree: 2,
+      author: 'Philippe Moreau',
+      authorName: 'Philippe Moreau',
+      lodge: 'La Sagesse',
+      tags: ['Symbolisme', 'Géométrie', 'Lumière'],
+      fileURL: '#',
+      createdAt: new Date('2023-01-10'),
+      type: 'planche',
+      category: 'Symbolisme',
+      linkUrl: '/planches/3'
+    },
+    {
+      id: '10',
+      title: 'La légende d\'Hiram',
+      content: 'Analyse approfondie de la légende d\'Hiram et son importance dans le grade de Maître...',
+      description: 'Analyse approfondie de la légende d\'Hiram et son importance dans le grade de Maître...',
+      degree: 3,
+      author: 'Michel Bernard',
+      authorName: 'Michel Bernard',
+      lodge: 'Les Trois Vertus',
+      tags: ['Légende', 'Rituel', 'Tradition'],
+      fileURL: '#',
+      createdAt: new Date('2022-12-05'),
+      type: 'planche',
+      category: 'Légende',
+      linkUrl: '/planches/4'
+    },
+    {
+      id: '11',
+      title: 'Les outils du Compagnon',
+      content: 'Étude des outils symboliques du Compagnon et leur utilisation dans le travail maçonnique...',
+      description: 'Étude des outils symboliques du Compagnon et leur utilisation dans le travail maçonnique...',
+      degree: 2,
+      author: 'Pierre Lambert',
+      authorName: 'Pierre Lambert',
+      lodge: 'La Sagesse',
+      tags: ['Symbolisme', 'Outils', 'Art Royal'],
+      fileURL: '#',
+      createdAt: new Date('2022-11-15'),
+      type: 'planche',
+      category: 'Symbolisme',
+      linkUrl: '/planches/5'
     }
   ];
 
-  // Get unique categories and types for filters
+  // Get unique categories, types, and tags for filters
   const categories = [...new Set(resources.map(resource => resource.category))];
   const types = [...new Set(resources.map(resource => resource.type))];
+  const allTags = Array.from(new Set(resources.flatMap(resource => resource.tags || [])));
   
-  // Filter resources based on search term, type, and category
+  // Filter resources based on search term, type, category, degree, and tag
   const filteredResources = resources.filter(resource => {
-    const matchesSearch = 
+    const matchesSearch = searchTerm === '' || 
       resource.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      resource.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesType = selectedType ? resource.type === selectedType : true;
-    const matchesCategory = selectedCategory ? resource.category === selectedCategory : true;
+      resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (resource.authorName && resource.authorName.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+    const matchesType = selectedType === null || resource.type === selectedType;
+    const matchesCategory = selectedCategory === null || resource.category === selectedCategory;
+    const matchesDegree = selectedDegree === null || resource.degree === selectedDegree;
+    const matchesTag = selectedTag === null || (resource.tags && resource.tags.includes(selectedTag));
     
-    return matchesSearch && matchesType && matchesCategory;
+    return matchesSearch && matchesType && matchesCategory && matchesDegree && matchesTag;
   });
+
+  // Function to get the correct path based on resource type
+  const getResourcePath = (resource: Resource) => {
+    if (resource.linkUrl) return resource.linkUrl;
+    return resource.type === 'planche' 
+      ? `/planches/${resource.id}` 
+      : `/bibliotheque/${resource.id}`;
+  };
 
   // Helper function to render appropriate icon based on resource type
   const renderTypeIcon = (type: string) => {
@@ -126,12 +260,43 @@ const Bibliotheque = () => {
       case 'book':
         return <Book className="h-5 w-5" />;
       case 'document':
+      case 'planche':
         return <FileText className="h-5 w-5" />;
       case 'article':
         return <MessageCircle className="h-5 w-5" />;
       default:
         return <Book className="h-5 w-5" />;
     }
+  };
+
+  // Helper function to get human-readable type name
+  const getTypeName = (type: string) => {
+    switch (type) {
+      case 'book': return 'Livre';
+      case 'document': return 'Document';
+      case 'article': return 'Article';
+      case 'planche': return 'Planche';
+      default: return type;
+    }
+  };
+
+  // Function to handle type filter changes
+  const handleTypeChange = (value: string) => {
+    const newType = value === 'all' ? null : value;
+    setSelectedType(newType);
+    
+    // Update URL query parameters
+    const params = new URLSearchParams(location.search);
+    if (newType) {
+      params.set('type', newType);
+    } else {
+      params.delete('type');
+    }
+    
+    navigate({
+      pathname: location.pathname,
+      search: params.toString()
+    });
   };
 
   return (
@@ -170,22 +335,33 @@ const Bibliotheque = () => {
                     />
                   </div>
                   
-                  <Button 
-                    variant="outline" 
-                    className="flex items-center gap-2"
-                    onClick={() => setShowFilters(!showFilters)}
-                  >
-                    <Filter className="h-4 w-4" />
-                    Filtres
-                    <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
-                  </Button>
+                  <div className="flex gap-2">
+                    {selectedType === 'planche' && (
+                      <Link to="/planches/create">
+                        <Button className="whitespace-nowrap">
+                          <Plus className="mr-2 h-4 w-4" />
+                          Rédiger une planche
+                        </Button>
+                      </Link>
+                    )}
+                    
+                    <Button 
+                      variant="outline" 
+                      className="flex items-center gap-2"
+                      onClick={() => setShowFilters(!showFilters)}
+                    >
+                      <Filter className="h-4 w-4" />
+                      Filtres
+                      <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+                    </Button>
+                  </div>
                 </div>
                 
                 {showFilters && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 p-4 bg-gray-50 rounded-lg">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 p-4 bg-gray-50 rounded-lg">
                     <div>
                       <label className="text-sm font-medium text-gray-700 mb-1 block">Type de ressource</label>
-                      <Select onValueChange={(value) => setSelectedType(value === 'all' ? null : value)}>
+                      <Select onValueChange={handleTypeChange} value={selectedType || 'all'}>
                         <SelectTrigger>
                           <SelectValue placeholder="Tous les types" />
                         </SelectTrigger>
@@ -193,9 +369,7 @@ const Bibliotheque = () => {
                           <SelectItem value="all">Tous les types</SelectItem>
                           {types.map(type => (
                             <SelectItem key={type} value={type}>
-                              {type === 'book' && 'Livre'}
-                              {type === 'document' && 'Document'}
-                              {type === 'article' && 'Article'}
+                              {getTypeName(type)}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -215,6 +389,53 @@ const Bibliotheque = () => {
                           ))}
                         </SelectContent>
                       </Select>
+                    </div>
+                    
+                    {selectedType === 'planche' && (
+                      <div>
+                        <label className="text-sm font-medium text-gray-700 mb-1 block">Degré</label>
+                        <Select onValueChange={(value) => setSelectedDegree(value === 'all' ? null : parseInt(value))}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Tous les degrés" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="all">Tous les degrés</SelectItem>
+                            <SelectItem value="1">1° degré</SelectItem>
+                            <SelectItem value="2">2° degré</SelectItem>
+                            <SelectItem value="3">3° degré</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+                    
+                    <div className={selectedType === 'planche' ? 'sm:col-span-2 md:col-span-3' : 'sm:col-span-2'}>
+                      <label className="text-sm font-medium text-gray-700 mb-1 block">Thèmes</label>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        <button
+                          onClick={() => setSelectedTag(null)}
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            selectedTag === null 
+                              ? 'bg-masonic-blue-700 text-white' 
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          Tous
+                        </button>
+                        
+                        {allTags.map((tag) => (
+                          <button
+                            key={tag}
+                            onClick={() => setSelectedTag(tag)}
+                            className={`px-3 py-1 rounded-full text-xs font-medium ${
+                              selectedTag === tag 
+                                ? 'bg-masonic-blue-700 text-white' 
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            }`}
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -268,22 +489,43 @@ const Bibliotheque = () => {
                                 "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium mr-2",
                                 resource.type === 'book' && "bg-blue-100 text-blue-800",
                                 resource.type === 'document' && "bg-green-100 text-green-800",
-                                resource.type === 'article' && "bg-purple-100 text-purple-800"
+                                resource.type === 'article' && "bg-purple-100 text-purple-800",
+                                resource.type === 'planche' && "bg-amber-100 text-amber-800"
                               )}>
                                 <span className="mr-1">{renderTypeIcon(resource.type)}</span>
-                                {resource.type === 'book' && 'Livre'}
-                                {resource.type === 'document' && 'Document'}
-                                {resource.type === 'article' && 'Article'}
+                                {getTypeName(resource.type)}
                               </span>
                               
-                              <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-800">
-                                {resource.category}
-                              </span>
+                              {resource.degree && (
+                                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-800 ${
+                                  resource.degree === 1 ? 'bg-blue-50 text-blue-700' : 
+                                  resource.degree === 2 ? 'bg-yellow-50 text-yellow-700' : 
+                                  'bg-red-50 text-red-700'
+                                }`}>
+                                  {resource.degree}° degré
+                                </span>
+                              )}
+                              
+                              {!resource.degree && (
+                                <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-800">
+                                  {resource.category}
+                                </span>
+                              )}
                             </div>
                             
                             <h3 className="text-lg font-semibold text-masonic-blue-900 mb-2">{resource.title}</h3>
                             
                             <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">{resource.description}</p>
+                            
+                            {resource.tags && resource.tags.length > 0 && (
+                              <div className="flex flex-wrap gap-2 mb-4">
+                                {resource.tags.map((tag, index) => (
+                                  <span key={index} className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
                             
                             <div className="flex items-center justify-between mt-auto">
                               <div className="flex items-center">
@@ -294,7 +536,7 @@ const Bibliotheque = () => {
                                     className="w-full h-full object-cover"
                                   />
                                 </div>
-                                <span className="text-xs text-gray-700">{resource.author}</span>
+                                <span className="text-xs text-gray-700">{resource.authorName || resource.author}</span>
                               </div>
                               
                               {resource.downloadUrl && (
@@ -306,14 +548,12 @@ const Bibliotheque = () => {
                                 </a>
                               )}
                               
-                              {resource.linkUrl && (
-                                <Link
-                                  to={resource.linkUrl}
-                                  className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
-                                >
-                                  Consulter →
-                                </Link>
-                              )}
+                              <Link
+                                to={getResourcePath(resource)}
+                                className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
+                              >
+                                Consulter →
+                              </Link>
                             </div>
                           </div>
                         </div>
@@ -338,6 +578,7 @@ const Bibliotheque = () => {
                                 resource.type === 'book' && "bg-blue-600",
                                 resource.type === 'document' && "bg-green-600",
                                 resource.type === 'article' && "bg-purple-600",
+                                resource.type === 'planche' && "bg-amber-600"
                               )}>
                                 {renderTypeIcon(resource.type)}
                               </div>
@@ -349,36 +590,74 @@ const Bibliotheque = () => {
                               <h3 className="text-md font-semibold text-masonic-blue-900">
                                 {resource.title}
                               </h3>
-                              <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-800 ml-2">
-                                {resource.category}
-                              </span>
+                              
+                              <div className="flex ml-2 gap-1">
+                                <span className={cn(
+                                  "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium",
+                                  resource.type === 'book' && "bg-blue-100 text-blue-800",
+                                  resource.type === 'document' && "bg-green-100 text-green-800",
+                                  resource.type === 'article' && "bg-purple-100 text-purple-800",
+                                  resource.type === 'planche' && "bg-amber-100 text-amber-800"
+                                )}>
+                                  {getTypeName(resource.type)}
+                                </span>
+                                
+                                {resource.degree && (
+                                  <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
+                                    resource.degree === 1 ? 'bg-blue-50 text-blue-700' : 
+                                    resource.degree === 2 ? 'bg-yellow-50 text-yellow-700' : 
+                                    'bg-red-50 text-red-700'
+                                  }`}>
+                                    {resource.degree}° degré
+                                  </span>
+                                )}
+                                
+                                {!resource.degree && (
+                                  <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-800">
+                                    {resource.category}
+                                  </span>
+                                )}
+                              </div>
                             </div>
                             
                             <p className="text-gray-600 text-sm mb-2 line-clamp-2">{resource.description}</p>
                             
+                            {resource.tags && resource.tags.length > 0 && (
+                              <div className="flex flex-wrap gap-1 mb-1">
+                                {resource.tags.slice(0, 3).map((tag, index) => (
+                                  <span key={index} className="bg-gray-100 text-gray-600 text-xs px-1.5 py-0.5 rounded-full">
+                                    {tag}
+                                  </span>
+                                ))}
+                                {resource.tags.length > 3 && (
+                                  <span className="bg-gray-100 text-gray-600 text-xs px-1.5 py-0.5 rounded-full">
+                                    +{resource.tags.length - 3}
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                            
                             <div className="flex items-center text-xs text-gray-500">
-                              <span>{resource.author}</span>
+                              <span>{resource.authorName || resource.author}</span>
                               <span className="mx-2">•</span>
-                              <span>{resource.date.toLocaleDateString('fr-FR')}</span>
+                              <span>{format(resource.date || resource.createdAt || new Date(), 'd MMM yyyy', { locale: fr })}</span>
                               
                               <div className="ml-auto">
                                 {resource.downloadUrl && (
                                   <a 
                                     href={resource.downloadUrl}
-                                    className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
+                                    className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors mr-4"
                                   >
                                     Télécharger
                                   </a>
                                 )}
                                 
-                                {resource.linkUrl && (
-                                  <Link
-                                    to={resource.linkUrl}
-                                    className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
-                                  >
-                                    Consulter →
-                                  </Link>
-                                )}
+                                <Link
+                                  to={getResourcePath(resource)}
+                                  className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
+                                >
+                                  Consulter →
+                                </Link>
                               </div>
                             </div>
                           </div>

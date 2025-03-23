@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Pages
@@ -15,7 +15,6 @@ import Members from "./pages/Members";
 import MemberDetail from "./pages/MemberDetail";
 import Agenda from "./pages/Agenda";
 import TenueDetail from "./pages/TenueDetail";
-import Planches from "./pages/Planches";
 import PlancheDetail from "./pages/PlancheDetail";
 import Actualites from "./pages/Actualites";
 import Messages from "./pages/Messages";
@@ -41,7 +40,7 @@ const App = () => (
             <Route path="/freres/:id" element={<MemberDetail />} />
             <Route path="/agenda" element={<Agenda />} />
             <Route path="/agenda/:id" element={<TenueDetail />} />
-            <Route path="/planches" element={<Planches />} />
+            <Route path="/planches" element={<Navigate to="/bibliotheque?type=planche" replace />} />
             <Route path="/planches/:id" element={<PlancheDetail />} />
             <Route path="/actualites" element={<Actualites />} />
             <Route path="/actualites/:id" element={<BibliothequeDetail />} />

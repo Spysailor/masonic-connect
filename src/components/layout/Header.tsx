@@ -65,7 +65,8 @@ const Header: React.FC = () => {
                 to={link.path}
                 className={cn(
                   "px-3 py-2 rounded-md text-sm font-medium transition-colors",
-                  location.pathname === link.path
+                  location.pathname === link.path || 
+                  (link.path === '/bibliotheque' && location.pathname.startsWith('/planches'))
                     ? "text-masonic-blue-700 bg-masonic-blue-50"
                     : "text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50"
                 )}
@@ -120,7 +121,8 @@ const Header: React.FC = () => {
               to={link.path}
               className={cn(
                 "px-4 py-3 rounded-md text-base font-medium transition-colors",
-                location.pathname === link.path
+                location.pathname === link.path || 
+                (link.path === '/bibliotheque' && location.pathname.startsWith('/planches'))
                   ? "text-masonic-blue-700 bg-masonic-blue-50"
                   : "text-gray-600 hover:text-masonic-blue-700 hover:bg-gray-50"
               )}

@@ -34,11 +34,6 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/planches" className="text-gray-600 hover:text-masonic-blue-700 text-sm">
-                  Planches
-                </Link>
-              </li>
-              <li>
                 <Link to="/actualites" className="text-gray-600 hover:text-masonic-blue-700 text-sm">
                   Actualités
                 </Link>
@@ -55,8 +50,13 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/documents" className="text-gray-600 hover:text-masonic-blue-700 text-sm">
+                <Link to="/bibliotheque?type=document" className="text-gray-600 hover:text-masonic-blue-700 text-sm">
                   Documents
+                </Link>
+              </li>
+              <li>
+                <Link to="/bibliotheque?type=planche" className="text-gray-600 hover:text-masonic-blue-700 text-sm">
+                  Planches
                 </Link>
               </li>
               <li>
