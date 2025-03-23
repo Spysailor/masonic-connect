@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, MapPin, Download, Clock, Users, BookOpen } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, Download, Clock, Users, BookOpen, Edit } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
@@ -72,11 +72,19 @@ const TenueDetail = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3 }}
-            className="mb-6"
+            className="mb-6 flex justify-between items-center"
           >
             <Link to="/agenda" className="inline-flex items-center text-masonic-blue-700 hover:text-masonic-blue-900">
               <ArrowLeft className="h-4 w-4 mr-1" />
               <span>Retour à l'agenda</span>
+            </Link>
+            
+            <Link 
+              to={`/agenda/${id}/edit`}
+              className="inline-flex items-center text-masonic-blue-700 hover:text-masonic-blue-900"
+            >
+              <Edit className="h-4 w-4 mr-1" />
+              <span>Modifier</span>
             </Link>
           </motion.div>
           

@@ -16,6 +16,7 @@ import Members from "./pages/Members";
 import MemberDetail from "./pages/MemberDetail";
 import Agenda from "./pages/Agenda";
 import TenueDetail from "./pages/TenueDetail";
+import TenueForm from "./pages/TenueForm";
 import PlancheDetail from "./pages/PlancheDetail";
 import Actualites from "./pages/Actualites";
 import Messages from "./pages/Messages";
@@ -43,6 +44,8 @@ const App = () => (
               <Route path="/freres" element={<Members />} />
               <Route path="/freres/:id" element={<MemberDetail />} />
               <Route path="/agenda" element={<Agenda />} />
+              <Route path="/agenda/create" element={<TenueForm />} />
+              <Route path="/agenda/:id/edit" element={<TenueForm />} />
               <Route path="/agenda/:id" element={<TenueDetail />} />
               <Route path="/planches" element={<Navigate to="/bibliotheque?type=planche" replace />} />
               <Route path="/planches/:id" element={<PlancheDetail />} />
