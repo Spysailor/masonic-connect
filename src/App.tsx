@@ -13,6 +13,10 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Members from "./pages/Members";
 import MemberDetail from "./pages/MemberDetail";
+import Agenda from "./pages/Agenda";
+import TenueDetail from "./pages/TenueDetail";
+import Planches from "./pages/Planches";
+import PlancheDetail from "./pages/PlancheDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +35,10 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/freres" element={<Members />} />
             <Route path="/freres/:id" element={<MemberDetail />} />
+            <Route path="/agenda" element={<Agenda />} />
+            <Route path="/agenda/:id" element={<TenueDetail />} />
+            <Route path="/planches" element={<Planches />} />
+            <Route path="/planches/:id" element={<PlancheDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
