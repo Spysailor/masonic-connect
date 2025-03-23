@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../ui-elements/Logo';
 import AnimatedButton from '../ui-elements/AnimatedButton';
+import MasonicSymbol from '../masonic/MasonicSymbols';
 import { cn } from '@/lib/utils';
 
 interface NavLink {
@@ -54,8 +55,13 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Logo variant={scrolled ? 'default' : 'default'} />
+          {/* Logo with Masonic Symbol */}
+          <div className="flex items-center space-x-2">
+            <Logo variant={scrolled ? 'default' : 'default'} />
+            <div className="hidden sm:block">
+              <MasonicSymbol type="square-compass" size={32} />
+            </div>
+          </div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">

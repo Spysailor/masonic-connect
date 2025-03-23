@@ -5,6 +5,8 @@ import { Search } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import MemberCard from '@/components/dashboard/MemberCard';
+import MasonicSymbol from '@/components/masonic/MasonicSymbols';
+import LodgeInfo from '@/components/masonic/LodgeInfo';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
@@ -17,56 +19,56 @@ const Members = () => {
       id: '1',
       name: 'Jean Dupont',
       role: 'Vénérable Maître',
-      lodge: 'Les Trois Vertus',
+      lodge: 'Universalys',
       avatarUrl: 'https://randomuser.me/api/portraits/men/32.jpg',
     },
     {
       id: '2',
-      name: 'Paul Martin',
-      role: 'Premier Surveillant',
-      lodge: 'Les Trois Vertus',
+      name: 'Paul Emmanuel',
+      role: 'Vénérable Maître',
+      lodge: 'Universalys',
       avatarUrl: 'https://randomuser.me/api/portraits/men/41.jpg',
     },
     {
       id: '3',
       name: 'Philippe Moreau',
       role: 'Deuxième Surveillant',
-      lodge: 'Les Trois Vertus',
+      lodge: 'Universalys',
       avatarUrl: 'https://randomuser.me/api/portraits/men/55.jpg',
     },
     {
       id: '4',
       name: 'Pierre Lambert',
       role: 'Orateur',
-      lodge: 'Les Trois Vertus',
+      lodge: 'Universalys',
       avatarUrl: 'https://randomuser.me/api/portraits/men/64.jpg',
     },
     {
       id: '5',
       name: 'Michel Bernard',
       role: 'Secrétaire',
-      lodge: 'Les Trois Vertus',
+      lodge: 'Universalys',
       avatarUrl: 'https://randomuser.me/api/portraits/men/22.jpg',
     },
     {
       id: '6',
       name: 'Jacques Renaud',
       role: 'Trésorier',
-      lodge: 'Les Trois Vertus',
+      lodge: 'Universalys',
       avatarUrl: 'https://randomuser.me/api/portraits/men/36.jpg',
     },
     {
       id: '7',
       name: 'André Petit',
       role: 'Expert',
-      lodge: 'Les Trois Vertus',
+      lodge: 'Universalys',
       avatarUrl: 'https://randomuser.me/api/portraits/men/48.jpg',
     },
     {
       id: '8',
       name: 'Robert Leroy',
       role: 'Maître des Cérémonies',
-      lodge: 'Les Trois Vertus',
+      lodge: 'Universalys',
       avatarUrl: 'https://randomuser.me/api/portraits/men/53.jpg',
     },
   ];
@@ -90,8 +92,15 @@ const Members = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-masonic-blue-900">Annuaire des Frères</h1>
-            <p className="text-gray-600 mt-1">Consultez les profils des membres de votre loge</p>
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-masonic-blue-900">Annuaire des Frères</h1>
+                <p className="text-gray-600 mt-1">Consultez les profils des membres de la loge Universalys</p>
+              </div>
+              <div className="hidden md:block">
+                <MasonicSymbol type="square-compass-vintage" size={64} />
+              </div>
+            </div>
           </motion.div>
           
           <motion.div
@@ -100,6 +109,8 @@ const Members = () => {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="mb-8"
           >
+            <LodgeInfo className="mb-6" />
+            
             <div className="relative mb-6">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input

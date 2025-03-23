@@ -8,6 +8,8 @@ import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import MasonicSymbol from '@/components/masonic/MasonicSymbols';
+import LodgeInfo from '@/components/masonic/LodgeInfo';
 
 const MemberDetail = () => {
   const { id } = useParams();
@@ -17,14 +19,14 @@ const MemberDetail = () => {
     id: id || '1',
     name: 'Jean Dupont',
     role: 'Vénérable Maître',
-    lodge: 'Les Trois Vertus',
-    obedience: 'Grande Loge de France',
+    lodge: 'Universalys',
+    obedience: 'Grande Loge de l\'Île Maurice',
     degree: 3,
     initiation: '15/09/2005',
     raising: '22/03/2008',
     email: 'jean.dupont@example.com',
     phone: '+33 6 12 34 56 78',
-    address: '15 rue de la Paix, 75001 Paris',
+    address: 'Pereybere, Île Maurice',
     profession: 'Architecte',
     birthdate: '12/05/1970',
     interests: 'Philosophie, Histoire, Symbolisme',
@@ -65,7 +67,10 @@ const MemberDetail = () => {
                   />
                 </div>
                 <CardContent className="p-6">
-                  <h1 className="text-2xl font-bold text-masonic-blue-900">{member.name}</h1>
+                  <div className="flex items-center justify-between mb-3">
+                    <h1 className="text-2xl font-bold text-masonic-blue-900">{member.name}</h1>
+                    <MasonicSymbol type="square-compass" size={36} />
+                  </div>
                   <p className="text-masonic-blue-700 font-medium mb-2">{member.role}</p>
                   <p className="text-gray-500 text-sm mb-4">{member.lodge} • {member.obedience}</p>
                   
@@ -132,9 +137,14 @@ const MemberDetail = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
+              <LodgeInfo className="mb-6" />
+              
               <Card className="mb-6">
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-semibold text-masonic-blue-900 mb-4">Parcours maçonnique</h2>
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-semibold text-masonic-blue-900 mb-4">Parcours maçonnique</h2>
+                    <MasonicSymbol type="all-seeing-eye" size={32} />
+                  </div>
                   
                   <div className="space-y-4">
                     <div className="border-l-2 border-masonic-blue-200 pl-4 py-1">
@@ -183,12 +193,18 @@ const MemberDetail = () => {
                     <TabsContent value="planches" className="pt-4">
                       <div className="space-y-4">
                         <div className="bg-gray-50 p-4 rounded-lg">
-                          <p className="font-medium text-masonic-blue-900">Symbolisme du pavé mosaïque</p>
+                          <div className="flex justify-between items-center">
+                            <p className="font-medium text-masonic-blue-900">Symbolisme du pavé mosaïque</p>
+                            <MasonicSymbol type="square-compass-vintage" size={24} />
+                          </div>
                           <p className="text-sm text-gray-500 mt-1">Présentée le 12/10/2022</p>
                         </div>
                         
                         <div className="bg-gray-50 p-4 rounded-lg">
-                          <p className="font-medium text-masonic-blue-900">Les voyages initiatiques</p>
+                          <div className="flex justify-between items-center">
+                            <p className="font-medium text-masonic-blue-900">Les voyages initiatiques</p>
+                            <MasonicSymbol type="all-seeing-eye" size={24} />
+                          </div>
                           <p className="text-sm text-gray-500 mt-1">Présentée le 05/03/2021</p>
                         </div>
                         

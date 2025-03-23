@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from "sonner";
 import Logo from '@/components/ui-elements/Logo';
 import AnimatedButton from '@/components/ui-elements/AnimatedButton';
+import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -13,8 +13,9 @@ const Register = () => {
     email: '',
     password: '',
     passwordConfirm: '',
-    lodge: '',
-    obedience: '',
+    lodge: 'Universalys',
+    obedience: 'Grande Loge de l\'Île Maurice',
+    rite: 'Rite Écossais Ancien et Accepté',
     degree: '1',
   });
   const [currentStep, setCurrentStep] = useState(1);
@@ -73,7 +74,6 @@ const Register = () => {
     
     setLoading(true);
     
-    // Simulating registration - in a real app, this would call an auth service
     setTimeout(() => {
       toast.error("Fonctionnalité d'inscription non implémentée dans cette démonstration");
       setLoading(false);
@@ -91,18 +91,23 @@ const Register = () => {
         >
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div className="p-8">
-              <div className="flex justify-center mb-8">
+              <div className="flex justify-center mb-2">
                 <Logo />
+              </div>
+              <div className="flex justify-center mb-6">
+                <MasonicSymbol type="square-compass" size={48} />
               </div>
               
               <h1 className="text-2xl font-bold text-center text-masonic-blue-900 mb-2">
                 Créer un compte
               </h1>
-              <p className="text-center text-gray-600 mb-8">
-                Rejoignez la communauté MasonConnect
+              <p className="text-center text-gray-600 mb-2">
+                Rejoignez la loge Universalys
+              </p>
+              <p className="text-center text-gray-500 text-sm mb-6">
+                Grande Loge de l'Île Maurice • Rite Écossais Ancien et Accepté
               </p>
               
-              {/* Progress steps */}
               <div className="mb-8">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
@@ -128,7 +133,6 @@ const Register = () => {
               </div>
               
               <form onSubmit={handleSubmit}>
-                {/* Step 1 */}
                 {currentStep === 1 && (
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
@@ -228,7 +232,6 @@ const Register = () => {
                   </motion.div>
                 )}
                 
-                {/* Step 2 */}
                 {currentStep === 2 && (
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
@@ -265,6 +268,22 @@ const Register = () => {
                         onChange={handleChange}
                         className="input-masonic"
                         placeholder="Votre obédience"
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="rite" className="block text-sm font-medium text-gray-700 mb-1">
+                        Rite *
+                      </label>
+                      <input
+                        id="rite"
+                        name="rite"
+                        type="text"
+                        value={formData.rite}
+                        onChange={handleChange}
+                        className="input-masonic"
+                        placeholder="Votre rite"
                         required
                       />
                     </div>

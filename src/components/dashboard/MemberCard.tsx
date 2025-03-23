@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MasonicSymbol from '../masonic/MasonicSymbols';
 
 interface MemberProps {
   member: {
@@ -18,12 +19,17 @@ const MemberCard: React.FC<MemberProps> = ({ member }) => {
       to={`/freres/${member.id}`}
       className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col"
     >
-      <div className="aspect-square overflow-hidden">
+      <div className="aspect-square overflow-hidden relative">
         <img 
           src={member.avatarUrl} 
           alt={member.name} 
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
         />
+        {member.role === 'Vénérable Maître' && (
+          <div className="absolute top-2 right-2">
+            <MasonicSymbol type="square-compass" size={32} className="bg-white/80 rounded-full p-1" />
+          </div>
+        )}
       </div>
       
       <div className="p-4">
