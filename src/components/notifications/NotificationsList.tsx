@@ -1,111 +1,29 @@
 
-import React, { useState } from 'react';
-import { Bell, Mail, Calendar, BookOpen, CheckCircle, Info, AlertTriangle, X } from 'lucide-react';
+import React from 'react';
+import { Bell, Mail, Calendar, BookOpen, CheckCircle, Info, AlertTriangle, X, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { motion } from 'framer-motion';
+import { useNotifications } from '@/hooks/use-notifications';
+import { NotificationType } from '@/hooks/use-notifications';
 
-type NotificationType = 'info' | 'success' | 'warning' | 'message' | 'event' | 'document';
-
-interface Notification {
-  id: string;
-  type: NotificationType;
-  title: string;
-  message: string;
-  timestamp: Date;
-  read: boolean;
-  link?: string;
+interface NotificationsListProps {
+  filterType?: string;
 }
 
-const NotificationsList = () => {
+const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all' }) => {
   const { toast } = useToast();
+  const { notifications, markAsRead, deleteNotification } = useNotifications();
   
-  // Mock notification data
-  const [notifications, setNotifications] = useState<Notification[]>([
-    {
-      id: '1',
-      type: 'event',
-      title: 'Nouvelle tenue',
-      message: 'Une nouvelle tenue a été programmée le 15 juin 2023.',
-      timestamp: new Date('2023-05-25T09:30:00'),
-      read: false,
-      link: '/agenda/1',
-    },
-    {
-      id: '2',
-      type: 'message',
-      title: 'Nouveau message',
-      message: 'Vous avez reçu un nouveau message de Paul Martin concernant la prochaine réunion.',
-      timestamp: new Date('2023-05-24T14:20:00'),
-      read: false,
-      link: '/messages',
-    },
-    {
-      id: '3',
-      type: 'document',
-      title: 'Nouveau document',
-      message: 'Une nouvelle planche a été ajoutée à la bibliothèque: "Symbolisme du compas".',
-      timestamp: new Date('2023-05-22T11:15:00'),
-      read: false,
-      link: '/bibliotheque/5',
-    },
-    {
-      id: '4',
-      type: 'info',
-      title: 'Mise à jour du profil',
-      message: 'Votre profil a été mis à jour avec succès.',
-      timestamp: new Date('2023-05-20T16:45:00'),
-      read: true,
-    },
-    {
-      id: '5',
-      type: 'success',
-      title: 'Cotisation reçue',
-      message: 'Votre cotisation annuelle a bien été reçue. Merci.',
-      timestamp: new Date('2023-05-18T10:30:00'),
-      read: true,
-    },
-    {
-      id: '6',
-      type: 'warning',
-      title: 'Rappel',
-      message: 'N\'oubliez pas la tenue spéciale ce vendredi.',
-      timestamp: new Date('2023-05-15T08:20:00'),
-      read: true,
-    }
-  ]);
-
-  // Get number of unread notifications
-  const unreadCount = notifications.filter(n => !n.read).length;
-
-  // Mark single notification as read
-  const markAsRead = (id: string) => {
-    setNotifications(notifications.map(notification => 
-      notification.id === id ? { ...notification, read: true } : notification
-    ));
-    toast({
-      title: "Notification marquée comme lue",
-    });
-  };
-
-  // Mark all notifications as read
-  const markAllAsRead = () => {
-    setNotifications(notifications.map(notification => ({ ...notification, read: true })));
-    toast({
-      title: "Toutes les notifications ont été marquées comme lues",
-    });
-  };
-
-  // Delete notification
-  const deleteNotification = (id: string) => {
-    setNotifications(notifications.filter(notification => notification.id !== id));
-    toast({
-      title: "Notification supprimée",
-    });
-  };
+  // Filter notifications based on active tab
+  const filteredNotifications = notifications.filter(notification => {
+    if (filterType === 'all') return true;
+    if (filterType === 'unread') return !notification.read;
+    return notification.type === filterType as NotificationType;
+  });
 
   // Get icon based on notification type
   const getNotificationIcon = (type: NotificationType) => {
@@ -127,98 +45,94 @@ const NotificationsList = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <Bell className="h-5 w-5 mr-2 text-masonic-blue-700" />
-          <h3 className="text-lg font-medium">Notifications</h3>
-          {unreadCount > 0 && (
-            <span className="ml-2 bg-masonic-blue-600 text-white text-xs rounded-full px-2 py-0.5">
-              {unreadCount}
-            </span>
-          )}
-        </div>
-        
-        {unreadCount > 0 && (
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={markAllAsRead}
-          >
-            Tout marquer comme lu
-          </Button>
-        )}
-      </div>
-      
-      <ScrollArea className="h-[400px] pr-4">
-        {notifications.length > 0 ? (
-          <div className="space-y-3">
-            {notifications.map((notification) => (
-              <div 
-                key={notification.id} 
-                className={`p-3 rounded-lg border ${notification.read ? 'bg-white' : 'bg-blue-50 border-blue-200'}`}
-              >
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 mr-3 mt-1">
+    <ScrollArea className="h-[500px]">
+      {filteredNotifications.length > 0 ? (
+        <div className="divide-y divide-gray-100">
+          {filteredNotifications.map((notification) => (
+            <motion.div
+              key={notification.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
+              className={`p-4 ${notification.read ? 'bg-white' : 'bg-blue-50'}`}
+            >
+              <div className="flex items-start">
+                <div className="flex-shrink-0 mr-4">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                    notification.type === 'event' ? 'bg-purple-100' :
+                    notification.type === 'message' ? 'bg-blue-100' :
+                    notification.type === 'document' ? 'bg-amber-100' :
+                    notification.type === 'success' ? 'bg-green-100' :
+                    notification.type === 'warning' ? 'bg-orange-100' : 'bg-sky-100'
+                  }`}>
                     {getNotificationIcon(notification.type)}
                   </div>
+                </div>
+                
+                <div className="flex-1 min-w-0">
+                  <div className="flex justify-between items-start">
+                    <p className={`text-base font-medium ${
+                      notification.read ? 'text-gray-900' : 'text-blue-900'
+                    }`}>
+                      {notification.title}
+                    </p>
+                    <span className="text-xs text-gray-500 whitespace-nowrap ml-2">
+                      {formatDistanceToNow(notification.timestamp, { addSuffix: true, locale: fr })}
+                    </span>
+                  </div>
                   
-                  <div className="flex-1 min-w-0">
-                    <div className="flex justify-between items-start">
-                      <p className={`text-sm font-medium ${notification.read ? 'text-gray-900' : 'text-blue-900'}`}>
-                        {notification.title}
-                      </p>
-                      <div className="flex space-x-2 items-center">
-                        <span className="text-xs text-gray-500">
-                          {formatDistanceToNow(notification.timestamp, { addSuffix: true, locale: fr })}
-                        </span>
-                        
-                        <button 
-                          onClick={() => deleteNotification(notification.id)}
-                          className="text-gray-400 hover:text-gray-500"
-                        >
-                          <X className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
+                  <p className="text-sm text-gray-600 mt-1 mb-3">{notification.message}</p>
+                  
+                  <div className="flex items-center justify-between mt-2">
+                    {notification.link && (
+                      <a 
+                        href={notification.link} 
+                        className="text-sm text-blue-600 hover:text-blue-800 hover:underline font-medium flex items-center"
+                      >
+                        Voir les détails →
+                      </a>
+                    )}
                     
-                    <p className="text-sm text-gray-600 mt-1">{notification.message}</p>
-                    
-                    <div className="mt-2 flex items-center justify-between">
-                      {notification.link && (
-                        <a 
-                          href={notification.link} 
-                          className="text-xs text-masonic-blue-600 hover:text-masonic-blue-800 hover:underline"
-                        >
-                          Voir les détails
-                        </a>
-                      )}
-                      
+                    <div className="flex space-x-2 ml-auto">
                       {!notification.read && (
                         <Button 
-                          variant="ghost" 
+                          variant="outline" 
                           size="sm" 
-                          className="text-xs h-7" 
+                          className="text-xs"
                           onClick={() => markAsRead(notification.id)}
                         >
+                          <Check className="mr-1 h-4 w-4" />
                           Marquer comme lu
                         </Button>
                       )}
+                      
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        className="text-xs text-red-500 hover:text-red-700 hover:bg-red-50"
+                        onClick={() => deleteNotification(notification.id)}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
+            </motion.div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center py-16 text-center">
+          <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+            <Bell className="h-8 w-8 text-gray-400" />
           </div>
-        ) : (
-          <div className="text-center py-12 text-gray-500">
-            <Bell className="h-12 w-12 mx-auto text-gray-300" />
-            <p className="mt-2 text-lg font-medium text-gray-900">Pas de notifications</p>
-            <p className="text-sm">Vous n'avez aucune notification pour le moment.</p>
-          </div>
-        )}
-      </ScrollArea>
-    </div>
+          <h3 className="text-lg font-medium text-gray-900 mb-1">Pas de notifications</h3>
+          <p className="text-sm text-gray-500 max-w-sm">
+            Vous n'avez aucune notification pour le moment dans cette catégorie.
+          </p>
+        </div>
+      )}
+    </ScrollArea>
   );
 };
 
