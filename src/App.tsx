@@ -17,6 +17,8 @@ import Agenda from "./pages/Agenda";
 import TenueDetail from "./pages/TenueDetail";
 import Planches from "./pages/Planches";
 import PlancheDetail from "./pages/PlancheDetail";
+import Actualites from "./pages/Actualites";
+import Messages from "./pages/Messages";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +41,8 @@ const App = () => (
             <Route path="/agenda/:id" element={<TenueDetail />} />
             <Route path="/planches" element={<Planches />} />
             <Route path="/planches/:id" element={<PlancheDetail />} />
+            <Route path="/actualites" element={<Actualites />} />
+            <Route path="/messages" element={<Messages />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
