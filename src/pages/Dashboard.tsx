@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/layout/Header';
@@ -18,7 +17,7 @@ const Dashboard = () => {
       date: new Date('2023-05-15T19:00:00'),
       location: 'Temple Les Trois Vertus',
       degree: 1,
-      status: 'confirmed',
+      status: 'confirmed' as 'confirmed' | 'pending' | 'declined',
     },
     {
       id: '2',
@@ -26,7 +25,7 @@ const Dashboard = () => {
       date: new Date('2023-05-22T19:00:00'),
       location: 'Temple La Sagesse',
       degree: 3,
-      status: 'pending',
+      status: 'pending' as 'confirmed' | 'pending' | 'declined',
     },
     {
       id: '3',
@@ -34,7 +33,7 @@ const Dashboard = () => {
       date: new Date('2023-05-29T19:00:00'),
       location: 'Temple Les Trois Vertus',
       degree: 2,
-      status: 'pending',
+      status: 'pending' as 'confirmed' | 'pending' | 'declined',
     },
   ];
   
@@ -289,7 +288,7 @@ const Dashboard = () => {
               <a href="/qrcode" className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center">
                 <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-masonic-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1z" />
                   </svg>
                 </div>
                 <span className="text-sm font-medium text-gray-900">Générer QR Code</span>
