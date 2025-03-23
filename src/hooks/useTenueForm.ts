@@ -44,7 +44,7 @@ export const mockTenue = {
 };
 
 export const useTenueForm = (id?: string) => {
-  const formMode = id ? 'edit' : 'create';
+  const formMode: 'create' | 'edit' = id ? 'edit' : 'create';
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
