@@ -6,7 +6,8 @@ import AnimatedButton from '../ui-elements/AnimatedButton';
 import MasonicSymbol from '../masonic/MasonicSymbols';
 import NotificationIndicator from '../notifications/NotificationIndicator';
 import { cn } from '@/lib/utils';
-import { UserCircle } from 'lucide-react';
+import { UserCircle, Menu, X } from 'lucide-react';
+import { useNotifications } from '@/hooks/use-notifications';
 
 interface NavLink {
   name: string;
@@ -17,6 +18,7 @@ const Header: React.FC = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { unreadCount } = useNotifications();
   
   const navLinks: NavLink[] = [
     { name: 'Accueil', path: '/' },
@@ -82,7 +84,18 @@ const Header: React.FC = () => {
             ))}
             
             <div className="flex items-center ml-4 space-x-1">
-              <NotificationIndicator />
+              <Link 
+                to="/notifications"
+                className={cn(
+                  "rounded-md p-2 relative",
+                  location.pathname === '/notifications' 
+                    ? "text-masonic-blue-700 bg-masonic-blue-50" 
+                    : "text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors"
+                )}
+                aria-label="Notifications"
+              >
+                <NotificationIndicator />
+              </Link>
               
               <Link 
                 to="/profile"
@@ -105,7 +118,18 @@ const Header: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-1">
-            <NotificationIndicator />
+            <Link 
+              to="/notifications"
+              className={cn(
+                "rounded-md p-2 relative",
+                location.pathname === '/notifications' 
+                  ? "text-masonic-blue-700 bg-masonic-blue-50" 
+                  : "text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors"
+              )}
+              aria-label="Notifications"
+            >
+              <NotificationIndicator />
+            </Link>
             
             <Link 
               to="/profile"
@@ -123,21 +147,11 @@ const Header: React.FC = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {mobileMenuOpen ? (
-                  <path d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>

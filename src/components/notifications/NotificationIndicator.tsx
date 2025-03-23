@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { 
@@ -14,45 +14,17 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
-
-// Define a function to get mock notifications - in a real app this would come from an API or store
-const getNotifications = () => {
-  return [
-    {
-      id: '1',
-      title: 'Nouvelle tenue',
-      message: 'Une nouvelle tenue a été programmée.',
-      timestamp: new Date('2023-05-25T09:30:00'),
-      read: false,
-      link: '/agenda/1'
-    },
-    {
-      id: '2',
-      title: 'Nouveau message',
-      message: 'Vous avez reçu un nouveau message.',
-      timestamp: new Date('2023-05-24T14:20:00'),
-      read: false,
-      link: '/messages'
-    },
-    {
-      id: '3',
-      title: 'Nouvelle planche',
-      message: 'Une nouvelle planche a été ajoutée.',
-      timestamp: new Date('2023-05-22T11:15:00'),
-      read: false,
-      link: '/bibliotheque/5'
-    }
-  ];
-};
+import { useNotifications } from '@/hooks/use-notifications';
 
 const NotificationIndicator = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const { toast } = useToast();
-  const notifications = getNotifications();
-  const unreadCount = notifications.filter(n => !n.read).length;
-
-  const markAllAsRead = () => {
-    // In a real app, this would call an API to mark notifications as read
+  const { notifications, unreadCount, markAllAsRead } = useNotifications();
+  
+  const handleMarkAllAsRead = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    markAllAsRead();
     toast({
       title: "Toutes les notifications ont été marquées comme lues",
     });
@@ -62,14 +34,14 @@ const NotificationIndicator = () => {
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
+        <div className="relative cursor-pointer">
           <Bell className="h-5 w-5" />
           {unreadCount > 0 && (
-            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
               {unreadCount}
             </span>
           )}
-        </Button>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-80">
         <DropdownMenuLabel className="flex items-center justify-between">
@@ -79,7 +51,7 @@ const NotificationIndicator = () => {
               variant="ghost" 
               size="sm" 
               className="h-7 text-xs"
-              onClick={markAllAsRead}
+              onClick={handleMarkAllAsRead}
             >
               Tout marquer comme lu
             </Button>
@@ -91,8 +63,8 @@ const NotificationIndicator = () => {
           <>
             {notifications.slice(0, 5).map((notification) => (
               <DropdownMenuItem key={notification.id} asChild>
-                <Link to={notification.link} className="cursor-pointer">
-                  <div className="flex flex-col w-full py-1">
+                <Link to={notification.link || '/notifications'} className="cursor-pointer py-2">
+                  <div className="flex flex-col w-full">
                     <div className="flex justify-between items-center">
                       <p className="font-medium text-sm">{notification.title}</p>
                       <span className="text-xs text-gray-500">
@@ -106,7 +78,7 @@ const NotificationIndicator = () => {
             ))}
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link to="/profile" className="cursor-pointer w-full text-center text-sm text-masonic-blue-600 hover:text-masonic-blue-800">
+              <Link to="/notifications" className="cursor-pointer w-full text-center text-sm text-masonic-blue-600 hover:text-masonic-blue-800">
                 Voir toutes les notifications
               </Link>
             </DropdownMenuItem>
