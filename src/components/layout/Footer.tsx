@@ -2,13 +2,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../ui-elements/Logo';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Footer: React.FC = () => {
+  const isMobile = useIsMobile();
+  
+  if (isMobile) return null;
+  
   return (
     <footer className="bg-gray-50 border-t border-gray-100">
       <div className="container mx-auto px-4 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="col-span-1">
             <Logo />
             <p className="mt-4 text-gray-600 text-sm">
               La plateforme dédiée aux Francs-Maçons pour se connecter, partager et grandir ensemble.
@@ -64,25 +69,9 @@ const Footer: React.FC = () => {
                   Messages
                 </Link>
               </li>
-            </ul>
-          </div>
-          
-          <div className="col-span-1">
-            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">Légal</h3>
-            <ul className="mt-4 space-y-2">
               <li>
-                <Link to="/conditions" className="text-gray-600 hover:text-masonic-blue-700 text-sm">
-                  Conditions d'utilisation
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy" className="text-gray-600 hover:text-masonic-blue-700 text-sm">
-                  Politique de confidentialité
-                </Link>
-              </li>
-              <li>
-                <Link to="/mentions-legales" className="text-gray-600 hover:text-masonic-blue-700 text-sm">
-                  Mentions légales
+                <Link to="/profile" className="text-gray-600 hover:text-masonic-blue-700 text-sm">
+                  Informations légales
                 </Link>
               </li>
             </ul>

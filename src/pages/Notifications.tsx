@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Bell, Book, Calendar, Mail, Check, Filter, ArchiveX, RefreshCw } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import MobileFooterMenu from '@/components/layout/MobileFooterMenu';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -11,17 +12,19 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useNotifications } from '@/hooks/use-notifications';
 import NotificationsList from '@/components/notifications/NotificationsList';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Notifications = () => {
   const { notifications, markAllAsRead, clearNotifications } = useNotifications();
   const { unreadCount } = useNotifications();
   const [activeTab, setActiveTab] = useState('all');
+  const isMobile = useIsMobile();
   
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-blue-50">
       <Header />
       
-      <main className="flex-1 pt-28 pb-16">
+      <main className={`flex-1 pt-28 ${isMobile ? 'pb-24' : 'pb-16'}`}>
         <div className="container mx-auto px-4 max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,7 +93,8 @@ const Notifications = () => {
         </div>
       </main>
       
-      <Footer />
+      {!isMobile && <Footer />}
+      <MobileFooterMenu />
     </div>
   );
 };

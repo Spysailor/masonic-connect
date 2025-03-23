@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { NotificationProvider } from "@/hooks/use-notifications";
+import MobileFooterMenu from "@/components/layout/MobileFooterMenu";
 
 // Pages
 import Index from "./pages/Index";
@@ -60,6 +61,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AnimatePresence>
+          <MobileFooterMenu />
         </BrowserRouter>
       </TooltipProvider>
     </NotificationProvider>
