@@ -73,7 +73,7 @@ const Dashboard = () => {
     {
       id: '1',
       title: 'Élection du nouveau Vénérable',
-      content: 'Les élections pour le nouveau collège d'officiers se tiendront lors de la prochaine tenue...',
+      content: "Les élections pour le nouveau collège d'officiers se tiendront lors de la prochaine tenue...",
       date: new Date('2023-05-01'),
       author: 'Jean Dupont',
       imageUrl: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
