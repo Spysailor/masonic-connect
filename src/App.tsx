@@ -19,6 +19,8 @@ import Planches from "./pages/Planches";
 import PlancheDetail from "./pages/PlancheDetail";
 import Actualites from "./pages/Actualites";
 import Messages from "./pages/Messages";
+import Bibliotheque from "./pages/Bibliotheque";
+import BibliothequeDetail from "./pages/BibliothequeDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,7 +44,10 @@ const App = () => (
             <Route path="/planches" element={<Planches />} />
             <Route path="/planches/:id" element={<PlancheDetail />} />
             <Route path="/actualites" element={<Actualites />} />
+            <Route path="/actualites/:id" element={<BibliothequeDetail />} />
             <Route path="/messages" element={<Messages />} />
+            <Route path="/bibliotheque" element={<Bibliotheque />} />
+            <Route path="/bibliotheque/:id" element={<BibliothequeDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
