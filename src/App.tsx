@@ -27,6 +27,11 @@ import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
 import NotFound from "./pages/NotFound";
 
+// Nouvelles pages pour la plateforme multi-tenant
+import Invitations from "./pages/Invitations";
+import LogeSettings from "./pages/LogeSettings";
+import Join from "./pages/Join";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -57,6 +62,12 @@ const App = () => (
               <Route path="/bibliotheque/:id" element={<BibliothequeDetail />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/notifications" element={<Notifications />} />
+              
+              {/* Nouvelles routes pour la plateforme multi-tenant */}
+              <Route path="/invitations" element={<Invitations />} />
+              <Route path="/loge-settings" element={<LogeSettings />} />
+              <Route path="/join" element={<Join />} />
+              
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

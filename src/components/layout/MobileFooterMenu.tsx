@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Calendar, Users, MessageSquare, User } from 'lucide-react';
+import { Home, Calendar, Users, MessageSquare, User, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -17,6 +17,7 @@ const MobileFooterMenu: React.FC = () => {
     { icon: Users, label: 'Frères', path: '/freres' },
     { icon: MessageSquare, label: 'Messages', path: '/messages' },
     { icon: User, label: 'Profil', path: '/profile' },
+    { icon: Settings, label: 'Loge', path: '/loge-settings' },
   ];
 
   return (
