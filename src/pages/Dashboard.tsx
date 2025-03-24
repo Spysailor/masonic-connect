@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { Calendar, Users, FileText, Bell, BookOpen } from 'lucide-react';
@@ -11,6 +11,20 @@ import Footer from '@/components/layout/Footer';
 import TenueCard from '@/components/dashboard/TenueCard';
 import MemberCard from '@/components/dashboard/MemberCard';
 import NewsCard from '@/components/dashboard/NewsCard';
+
+// Define types for Supabase query results
+type ProfileWithRelations = {
+  id: string;
+  display_name: string | null;
+  photo_url: string | null;
+  lodge_memberships: {
+    office: string | null;
+    lodge_id: string;
+  }[] | null;
+  lodges: {
+    name: string;
+  }[] | null;
+}
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('agenda');
@@ -86,11 +100,13 @@ const Dashboard = () => {
         
         if (error) throw error;
         
-        return data.map(profile => ({
+        return (data as ProfileWithRelations[]).map(profile => ({
           id: profile.id,
           name: profile.display_name || 'Membre',
-          role: profile.lodge_memberships?.[0]?.office || 'Membre',
-          lodge: profile.lodges?.[0]?.name || 'Loge',
+          role: profile.lodge_memberships && profile.lodge_memberships[0] ? 
+                profile.lodge_memberships[0].office || 'Membre' : 'Membre',
+          lodge: profile.lodges && profile.lodges[0] ? 
+                 profile.lodges[0].name || 'Loge' : 'Loge',
           avatarUrl: profile.photo_url || 'https://randomuser.me/api/portraits/men/32.jpg',
         }));
       } catch (error) {
