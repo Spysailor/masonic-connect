@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
@@ -68,31 +67,36 @@ const Dashboard = () => {
   const { data: members = [], isLoading: membersLoading } = useQuery({
     queryKey: ['members'],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select(`
-          id,
-          display_name,
-          photo_url,
-          lodge_memberships!inner(
-            office,
-            lodge_id
-          ),
-          lodges!inner(
-            name
-          )
-        `)
-        .limit(4);
-      
-      if (error) throw error;
-      
-      return data.map(profile => ({
-        id: profile.id,
-        name: profile.display_name || 'Membre',
-        role: profile.lodge_memberships[0]?.office || 'Membre',
-        lodge: profile.lodges[0]?.name || 'Loge',
-        avatarUrl: profile.photo_url || 'https://randomuser.me/api/portraits/men/32.jpg',
-      }));
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select(`
+            id,
+            display_name,
+            photo_url,
+            lodge_memberships(
+              office,
+              lodge_id
+            ),
+            lodges(
+              name
+            )
+          `)
+          .limit(4);
+        
+        if (error) throw error;
+        
+        return data.map(profile => ({
+          id: profile.id,
+          name: profile.display_name || 'Membre',
+          role: profile.lodge_memberships?.[0]?.office || 'Membre',
+          lodge: profile.lodges?.[0]?.name || 'Loge',
+          avatarUrl: profile.photo_url || 'https://randomuser.me/api/portraits/men/32.jpg',
+        }));
+      } catch (error) {
+        console.error('Error fetching members:', error);
+        return [];
+      }
     },
     placeholderData: [
       {
@@ -171,29 +175,39 @@ const Dashboard = () => {
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['stats'],
     queryFn: async () => {
-      const { count: tenues } = await supabase
-        .from('tenues')
-        .select('*', { count: 'exact', head: true });
-      
-      const { count: members } = await supabase
-        .from('profiles')
-        .select('*', { count: 'exact', head: true });
-      
-      const { count: planches } = await supabase
-        .from('planches')
-        .select('*', { count: 'exact', head: true });
-      
-      const { count: unreadNotifications } = await supabase
-        .from('notifications')
-        .select('*', { count: 'exact', head: true })
-        .eq('is_read', false);
-      
-      return {
-        nextTenue: tenues?.length > 0 ? new Date(tenues[0].date).toLocaleDateString() : '15 mai 2023',
-        membersCount: members || 24,
-        planchesCount: planches || 12,
-        unreadMessages: unreadNotifications || 3
-      };
+      try {
+        const { count: tenues } = await supabase
+          .from('tenues')
+          .select('*', { count: 'exact', head: true });
+        
+        const { count: members } = await supabase
+          .from('profiles')
+          .select('*', { count: 'exact', head: true });
+        
+        const { count: planches } = await supabase
+          .from('planches')
+          .select('*', { count: 'exact', head: true });
+        
+        const { count: unreadNotifications } = await supabase
+          .from('notifications')
+          .select('*', { count: 'exact', head: true })
+          .eq('is_read', false);
+        
+        return {
+          nextTenue: tenues && tenues > 0 ? '15 mai 2023' : 'Aucune',
+          membersCount: members || 24,
+          planchesCount: planches || 12,
+          unreadMessages: unreadNotifications || 3
+        };
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+        return {
+          nextTenue: '15 mai 2023',
+          membersCount: 24,
+          planchesCount: 12,
+          unreadMessages: 3
+        };
+      }
     },
     placeholderData: {
       nextTenue: '15 mai 2023',

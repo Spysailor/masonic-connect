@@ -17,9 +17,9 @@ import { fr } from 'date-fns/locale';
 import { useNotifications } from '@/hooks/use-notifications';
 
 const NotificationIndicator = () => {
-  const [open, setOpen] = React.useState(false);
   const { toast } = useToast();
   const { notifications, unreadCount, markAllAsRead } = useNotifications();
+  const [open, setOpen] = React.useState(false);
   
   const handleMarkAllAsRead = (e: React.MouseEvent) => {
     e.preventDefault();
