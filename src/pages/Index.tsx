@@ -2,10 +2,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 import { cn } from '@/lib/utils';
+import { Gavel, Library, Column } from 'lucide-react';
 
 const Index = () => {
   return (
@@ -14,7 +13,7 @@ const Index = () => {
       <header className="container mx-auto px-4 py-6 flex justify-between items-center">
         <div className="flex items-center">
           <MasonicSymbol type="square-compass" size={40} className="mr-3" />
-          <h1 className="text-2xl font-bold">MasonConnect</h1>
+          <h1 className="text-2xl font-bold">LodgeConnect</h1>
         </div>
         <div className="space-x-4">
           <Link to="/login" className="px-4 py-2 rounded bg-masonic-blue-700 hover:bg-masonic-blue-600 transition-colors">
@@ -59,12 +58,12 @@ const Index = () => {
           <FeatureCard 
             title="Gestion des tenues" 
             description="Agenda des tenues, confirmation de présence, gestion des agapes et visiteurs, feuille de présence."
-            icon={<MasonicSymbol type="square-compass" size={48} />}
+            icon={<Gavel className="w-12 h-12" />}
           />
           <FeatureCard 
             title="Planches et documents" 
             description="Accès aux planches, rituels, documents de la Loge et de l'Obédience."
-            icon={<MasonicSymbol type="square-compass-vintage" size={48} />}
+            icon={<Column className="w-12 h-12" />}
           />
           <FeatureCard 
             title="Annuaire des membres" 
@@ -74,7 +73,7 @@ const Index = () => {
           <FeatureCard 
             title="Bibliothèque maçonnique" 
             description="Catalogue d'ouvrages disponibles, système de réservation, références maçonniques."
-            icon={<MasonicSymbol type="all-seeing-eye" size={48} />}
+            icon={<Library className="w-12 h-12" />}
           />
           <FeatureCard 
             title="Accès visiteurs" 
@@ -160,7 +159,7 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-6 md:mb-0">
               <MasonicSymbol type="square-compass" size={32} className="mr-3" />
-              <h2 className="text-xl font-bold">MasonConnect</h2>
+              <h2 className="text-xl font-bold">LodgeConnect</h2>
             </div>
             <div className="flex flex-wrap gap-8">
               <Link to="/profile" className="text-blue-200 hover:text-white">À propos</Link>
@@ -170,7 +169,7 @@ const Index = () => {
             </div>
           </div>
           <div className="text-center mt-8 text-blue-300 text-sm">
-            © {new Date().getFullYear()} MasonConnect. Tous droits réservés.
+            © {new Date().getFullYear()} LodgeConnect. Tous droits réservés.
           </div>
         </div>
       </footer>
