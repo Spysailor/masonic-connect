@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 import { cn } from '@/lib/utils';
-import { Gavel, Library, Column } from 'lucide-react';
+import { Gavel, Library, Columns } from 'lucide-react';
 
 const Index = () => {
   return (
@@ -63,7 +62,7 @@ const Index = () => {
           <FeatureCard 
             title="Planches et documents" 
             description="Accès aux planches, rituels, documents de la Loge et de l'Obédience."
-            icon={<Column className="w-12 h-12" />}
+            icon={<Columns className="w-12 h-12" />}
           />
           <FeatureCard 
             title="Annuaire des membres" 
