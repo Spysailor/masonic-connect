@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion } from '@/utils/motion';
+import { motion } from 'framer-motion';
 import { MapPin, User, BookOpen } from 'lucide-react';
 import MasonicSymbol from './MasonicSymbols';
 
