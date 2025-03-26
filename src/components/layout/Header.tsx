@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../ui-elements/Logo';
@@ -21,7 +22,7 @@ const Header: React.FC = () => {
   const isMobile = useIsMobile();
   
   const navLinks: NavLink[] = [
-    { name: 'Accueil', path: '/' },
+    { name: 'Dashboard', path: '/dashboard' },
     { name: 'Agenda', path: '/agenda' },
     { name: 'Frères', path: '/freres' },
     { name: 'Actualités', path: '/actualites' },
