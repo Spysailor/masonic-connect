@@ -20,6 +20,8 @@ import TenueDetail from "./pages/TenueDetail";
 import TenueForm from "./pages/TenueForm";
 import PlancheDetail from "./pages/PlancheDetail";
 import Actualites from "./pages/Actualites";
+import NewsCreate from "./pages/NewsCreate";
+import NewsEdit from "./pages/NewsEdit";
 import Messages from "./pages/Messages";
 import Bibliotheque from "./pages/Bibliotheque";
 import BibliothequeDetail from "./pages/BibliothequeDetail";
@@ -56,6 +58,8 @@ const App = () => (
               <Route path="/planches" element={<Navigate to="/bibliotheque?type=planche" replace />} />
               <Route path="/planches/:id" element={<PlancheDetail />} />
               <Route path="/actualites" element={<Actualites />} />
+              <Route path="/actualites/create" element={<NewsCreate />} />
+              <Route path="/actualites/:id/edit" element={<NewsEdit />} />
               <Route path="/actualites/:id" element={<BibliothequeDetail />} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/bibliotheque" element={<Bibliotheque />} />
