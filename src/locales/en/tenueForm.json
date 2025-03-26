@@ -4,9 +4,9 @@
   "editTitle": "Edit meeting",
   "createDescription": "Fill in the information below to create a new meeting.",
   "editDescription": "Modify the information below to update the meeting.",
-  "details": "Details",
-  "agenda": "Agenda",
-  "participants": "Participants",
+  "detailsTab": "Details",
+  "agendaTab": "Agenda",
+  "participantsTab": "Participants",
   "sections": {
     "basicInfo": "Basic Information",
     "location": "Location Information",
