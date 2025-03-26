@@ -1,202 +1,278 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { ArrowLeft, Download, Share2, Bookmark } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Download, MessageCircle, FileText, Book, BookOpen, Calendar, User, Tag } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Card } from '@/components/ui/card';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/components/ui/use-toast';
 
 const BibliothequeDetail = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  
-  // Mock data - this would normally come from an API
-  const resource = {
-    id: id || '1',
-    title: 'Les Symboles Maçonniques',
-    description: 'Une exploration détaillée des symboles fondamentaux de la Franc-Maçonnerie et leur signification ésotérique à travers les âges.',
-    content: `
-      <p class="mb-4">La symbolique maçonnique est l'un des aspects les plus fascinants et essentiels de la Franc-Maçonnerie. Les symboles servent de langage universel pour transmettre des vérités profondes et des enseignements moraux.</p>
-      
-      <h3 class="text-xl font-semibold mb-3 mt-6">L'Équerre et le Compas</h3>
-      <p class="mb-4">Probablement le symbole le plus reconnaissable de la Franc-Maçonnerie, l'équerre et le compas représentent l'union des principes matériels et spirituels. L'équerre nous enseigne à équarrir nos actions, tandis que le compas nous invite à circonscrire nos désirs et à garder nos passions dans de justes limites.</p>
-      
-      <h3 class="text-xl font-semibold mb-3 mt-6">La Lettre G</h3>
-      <p class="mb-4">Souvent placée au centre de l'équerre et du compas, la lettre G peut représenter plusieurs concepts : Géométrie, Gnose, ou le Grand Architecte de l'Univers. Elle nous rappelle l'importance de la science et de la connaissance dans notre quête de vérité.</p>
-      
-      <h3 class="text-xl font-semibold mb-3 mt-6">Les Trois Piliers</h3>
-      <p class="mb-4">Les trois piliers de la Sagesse, de la Force et de la Beauté soutiennent symboliquement le Temple. La Sagesse pour concevoir, la Force pour soutenir, et la Beauté pour orner. Ces piliers rappellent également les trois Lumières de la Loge : le Vénérable Maître et les deux Surveillants.</p>
-      
-      <h3 class="text-xl font-semibold mb-3 mt-6">Le Pavé Mosaïque</h3>
-      <p class="mb-4">Le sol du Temple, composé de carreaux noirs et blancs alternés, symbolise la dualité inhérente à l'existence humaine : le bien et le mal, la lumière et l'obscurité, la vie et la mort. Il nous enseigne que ces opposés sont complémentaires et nécessaires à l'harmonie universelle.</p>
-    `,
-    author: 'Jean Dupont',
-    authorRole: 'Vénérable Maître',
-    date: new Date('2023-01-15'),
-    type: 'book',
-    category: 'Symbolisme',
-    imageUrl: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-    downloadUrl: '#',
-    relatedResources: [
-      {
-        id: '2',
-        title: 'Histoire de la Franc-Maçonnerie au XVIIIe siècle',
-        type: 'book',
-        category: 'Histoire'
-      },
-      {
-        id: '4',
-        title: 'L\'Art Royal et la Géométrie Sacrée',
-        type: 'article',
-        category: 'Philosophie'
-      }
-    ]
-  };
+  const location = useLocation();
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState(true);
+  const [item, setItem] = useState<any>(null);
+  const isNewsView = location.pathname.includes('/actualites/');
 
-  const renderTypeIcon = (type: string) => {
-    switch (type) {
-      case 'book':
-        return <Book className="h-5 w-5" />;
-      case 'document':
-        return <FileText className="h-5 w-5" />;
-      case 'article':
-        return <MessageCircle className="h-5 w-5" />;
-      default:
-        return <Book className="h-5 w-5" />;
+  useEffect(() => {
+    const fetchItem = async () => {
+      try {
+        setLoading(true);
+        
+        // Determine if we're fetching a news item or a planche based on the route
+        const table = isNewsView ? 'news' : 'planches';
+        
+        const { data, error } = await supabase
+          .from(table)
+          .select('*')
+          .eq('id', id)
+          .single();
+          
+        if (error) {
+          throw error;
+        }
+        
+        if (data) {
+          setItem(data);
+        }
+      } catch (error) {
+        console.error('Error fetching item:', error);
+        toast({
+          title: t('actualites.errors.error'),
+          description: isNewsView 
+            ? t('actualites.errors.cantLoadNews') 
+            : t('planches.search.noResults'),
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (id) {
+      fetchItem();
+    }
+  }, [id, isNewsView, t]);
+  
+  const handleGoBack = () => {
+    if (isNewsView) {
+      navigate('/actualites');
+    } else {
+      navigate('/bibliotheque');
     }
   };
-
-  return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
-      
-      <main className="flex-1 pt-24 pb-16">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="mb-8"
-          >
-            <Button 
-              variant="ghost" 
-              className="mb-4 text-gray-600 hover:text-masonic-blue-700" 
-              onClick={() => navigate('/bibliotheque')}
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1 pt-24 pb-16">
+          <div className="container mx-auto px-4">
+            <div className="flex justify-center items-center min-h-[400px]">
+              <div className="w-8 h-8 border-4 border-masonic-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  
+  if (!item) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1 pt-24 pb-16">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col justify-center items-center min-h-[400px]">
+              <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+                {isNewsView 
+                  ? t('actualites.noResults') 
+                  : t('planches.noPlanche')}
+              </h2>
+              <Button onClick={handleGoBack}>
+                {isNewsView 
+                  ? t('actualites.backToNews') 
+                  : t('plancheDetail.backToPlanche')}
+              </Button>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  
+  // Different rendering based on news or planche
+  if (isNewsView) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <Header />
+        
+        <main className="flex-1 pt-24 pb-16">
+          <div className="container mx-auto px-4">
+            <Button
+              variant="ghost"
+              className="mb-6 text-masonic-blue-600 hover:text-masonic-blue-800 hover:bg-masonic-blue-50 -ml-3"
+              onClick={handleGoBack}
             >
-              <ArrowLeft className="mr-2 h-4 w-4" /> Retour à la bibliothèque
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              {t('actualites.backToNews') || 'Back to news'}
             </Button>
             
-            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-              {resource.imageUrl && (
-                <div className="w-full h-64 md:h-80 relative">
-                  <img 
-                    src={resource.imageUrl} 
-                    alt={resource.title} 
-                    className="object-cover w-full h-full"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 p-6 text-white">
-                    <div className="flex items-center mb-2">
-                      <span className={cn(
-                        "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium mr-2 bg-black/30 backdrop-blur-sm",
-                      )}>
-                        <span className="mr-1">{renderTypeIcon(resource.type)}</span>
-                        {resource.type === 'book' && 'Livre'}
-                        {resource.type === 'document' && 'Document'}
-                        {resource.type === 'article' && 'Article'}
-                      </span>
-                      
-                      <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-black/30 backdrop-blur-sm">
-                        {resource.category}
-                      </span>
-                    </div>
-                    <h1 className="text-3xl font-bold text-white">{resource.title}</h1>
-                  </div>
-                </div>
-              )}
-              
-              <div className="p-6 md:p-8">
-                <div className="flex flex-col md:flex-row md:items-center mb-6 pb-6 border-b border-gray-200">
-                  <div className="flex items-center mb-4 md:mb-0">
-                    <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
-                      <img 
-                        src={`https://randomuser.me/api/portraits/men/${parseInt(resource.id) + 25}.jpg`}
-                        alt={resource.author} 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-gray-900 font-medium">{resource.author}</div>
-                      <div className="text-gray-500 text-sm">{resource.authorRole}</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center md:ml-auto space-x-4">
-                    <div className="flex items-center text-gray-500 text-sm">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {format(resource.date, 'dd MMMM yyyy', { locale: fr })}
-                    </div>
-                    
-                    {resource.downloadUrl && (
-                      <Button variant="outline" size="sm" className="flex items-center">
-                        <Download className="mr-1 h-4 w-4" />
-                        Télécharger
-                      </Button>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="prose max-w-none">
-                  <p className="text-lg text-gray-700 mb-6 leading-relaxed">{resource.description}</p>
-                  
-                  <div 
-                    className="mt-8 text-gray-800"
-                    dangerouslySetInnerHTML={{ __html: resource.content }}
-                  />
-                </div>
-                
-                {resource.relatedResources && resource.relatedResources.length > 0 && (
-                  <div className="mt-12 pt-6 border-t border-gray-200">
-                    <h3 className="text-xl font-semibold mb-4">Ressources liées</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {resource.relatedResources.map(related => (
-                        <Link 
-                          key={related.id}
-                          to={`/bibliotheque/${related.id}`}
-                          className="group p-4 border border-gray-200 rounded-lg hover:border-masonic-blue-300 hover:bg-masonic-blue-50/30 transition-colors"
-                        >
-                          <div className="flex items-center">
-                            <div className={cn(
-                              "w-8 h-8 rounded-full flex items-center justify-center text-white mr-3",
-                              related.type === 'book' && "bg-blue-600",
-                              related.type === 'document' && "bg-green-600",
-                              related.type === 'article' && "bg-purple-600",
-                            )}>
-                              {renderTypeIcon(related.type)}
-                            </div>
-                            <div>
-                              <h4 className="font-medium text-gray-900 group-hover:text-masonic-blue-700 transition-colors">{related.title}</h4>
-                              <span className="text-xs text-gray-500">{related.category}</span>
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Card className="border-0 shadow-md overflow-hidden">
+                {item.image_url && (
+                  <div className="w-full h-64 md:h-96 relative">
+                    <img
+                      src={item.image_url}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 )}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </main>
-      
-      <Footer />
-    </div>
-  );
+                
+                <div className="p-6 md:p-8">
+                  <h1 className="text-3xl font-bold text-gray-800 mb-4">{item.title}</h1>
+                  
+                  <div className="flex items-center mb-6">
+                    <Avatar className="h-10 w-10 mr-3">
+                      <AvatarFallback>{item.author_name?.charAt(0) || 'A'}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-sm font-medium">{item.author_name || t('actualites.administrator')}</p>
+                      <p className="text-xs text-gray-500">
+                        {new Date(item.published_at).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="prose prose-masonic max-w-none">
+                    {item.content?.split('\n').map((paragraph: string, idx: number) => (
+                      <p key={idx} className="mb-4">{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+        </main>
+        
+        <Footer />
+      </div>
+    );
+  } else {
+    // Planche detail view
+    return (
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <Header />
+
+        <main className="flex-1 pt-24 pb-16">
+          <div className="container mx-auto px-4">
+            <Button
+              variant="ghost"
+              className="mb-6 text-masonic-blue-600 hover:text-masonic-blue-800 hover:bg-masonic-blue-50 -ml-3"
+              onClick={handleGoBack}
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              {t('plancheDetail.backToPlanche')}
+            </Button>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Card className="border-0 shadow-md overflow-hidden">
+                <div className="p-6 md:p-8">
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h1 className="text-3xl font-bold text-gray-800 mb-4">{item.title}</h1>
+                      <div className="flex items-center space-x-2">
+                        <Badge variant="secondary">{t('plancheDetail.firstDegree')}</Badge>
+                        <Badge variant="secondary">{t('plancheDetail.secondDegree')}</Badge>
+                        <Badge variant="secondary">{t('plancheDetail.thirdDegree')}</Badge>
+                      </div>
+                    </div>
+                    <div className="space-x-2">
+                      <Button size="icon" variant="ghost">
+                        <Download className="h-5 w-5" />
+                      </Button>
+                      <Button size="icon" variant="ghost">
+                        <Share2 className="h-5 w-5" />
+                      </Button>
+                      <Button size="icon" variant="ghost">
+                        <Bookmark className="h-5 w-5" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center mb-6">
+                    <Avatar className="h-10 w-10 mr-3">
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>{item.author?.charAt(0) || 'A'}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-sm font-medium">{item.author || 'Anonyme'}</p>
+                      <p className="text-xs text-gray-500">
+                        {t('plancheDetail.worshipfulMaster')}, {new Date().toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="prose prose-masonic max-w-none">
+                    <h3>{t('plancheDetail.mockData.intro')}</h3>
+                    <br />
+                    <h4>{t('plancheDetail.mockData.originTitle')}</h4>
+                    <p>{t('plancheDetail.mockData.originDesc1')}</p>
+                    <p>{t('plancheDetail.mockData.originDesc2')}</p>
+                    <br />
+                    <h4>{t('plancheDetail.mockData.symbolismTitle')}</h4>
+                    <p>{t('plancheDetail.mockData.symbolismDesc')}</p>
+                    <ul>
+                      <li>{t('plancheDetail.mockData.duality.item1')}</li>
+                      <li>{t('plancheDetail.mockData.duality.item2')}</li>
+                      <li>{t('plancheDetail.mockData.duality.item3')}</li>
+                      <li>{t('plancheDetail.mockData.duality.item4')}</li>
+                      <li>{t('plancheDetail.mockData.duality.item5')}</li>
+                      <li>{t('plancheDetail.mockData.duality.item6')}</li>
+                    </ul>
+                    <p>{t('plancheDetail.mockData.dualityDesc')}</p>
+                    <br />
+                    <h4>{t('plancheDetail.mockData.interpretationsTitle')}</h4>
+                    <p>{t('plancheDetail.mockData.interpretationsIntro')}</p>
+                    <h5>{t('plancheDetail.mockData.interpretation1.title')}</h5>
+                    <p>{t('plancheDetail.mockData.interpretation1.desc')}</p>
+                    <h5>{t('plancheDetail.mockData.interpretation2.title')}</h5>
+                    <p>{t('plancheDetail.mockData.interpretation2.desc')}</p>
+                    <h5>{t('plancheDetail.mockData.interpretation3.title')}</h5>
+                    <p>{t('plancheDetail.mockData.interpretation3.desc')}</p>
+                    <br />
+                    <h4>{t('plancheDetail.mockData.conclusionTitle')}</h4>
+                    <p>{t('plancheDetail.mockData.conclusionDesc1')}</p>
+                    <p>{t('plancheDetail.mockData.conclusionDesc2')}</p>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+        </main>
+
+        <Footer />
+      </div>
+    );
+  }
 };
 
 export default BibliothequeDetail;

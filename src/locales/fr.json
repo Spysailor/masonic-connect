@@ -1,3 +1,4 @@
+
 {
   "common": {
     "appName": "MasonConnect",
@@ -428,6 +429,7 @@
     "newsDeleted": "L'actualité a été supprimée",
     "newsCreated": "L'actualité a été créée",
     "newsUpdated": "L'actualité a été mise à jour",
+    "backToNews": "Retour aux actualités",
     "errors": {
       "error": "Erreur",
       "fetchFailed": "Erreur",
