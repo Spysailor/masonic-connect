@@ -40,8 +40,12 @@ import Join from "./pages/Join";
 
 const queryClient = new QueryClient();
 
+interface PageWrapperProps {
+  children: React.ReactNode;
+}
+
 const App = () => {
-  const PageWrapper = ({ children }) => (
+  const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
