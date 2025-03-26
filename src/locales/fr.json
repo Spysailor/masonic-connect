@@ -433,7 +433,8 @@
       "fetchFailed": "Erreur",
       "cantLoadNews": "Impossible de charger les actualités",
       "cantDeleteNews": "Impossible de supprimer l'actualité",
-      "cantSaveNews": "Impossible de sauvegarder l'actualité"
+      "cantSaveNews": "Impossible de sauvegarder l'actualité",
+      "missingId": "ID d'actualité manquant"
     },
     "form": {
       "title": "Titre",

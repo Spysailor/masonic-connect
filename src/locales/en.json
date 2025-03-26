@@ -433,7 +433,8 @@
       "fetchFailed": "Error",
       "cantLoadNews": "Unable to load news",
       "cantDeleteNews": "Unable to delete the news",
-      "cantSaveNews": "Unable to save the news"
+      "cantSaveNews": "Unable to save the news",
+      "missingId": "Missing news ID"
     },
     "form": {
       "title": "Title",

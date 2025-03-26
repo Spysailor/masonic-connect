@@ -5,12 +5,14 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import NewsForm from '@/components/actualites/NewsForm';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const NewsEdit = () => {
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation();
   
   if (!id) {
-    return <div>ID d'actualité manquant</div>;
+    return <div>{t('actualites.errors.missingId')}</div>;
   }
   
   return (
@@ -25,8 +27,8 @@ const NewsEdit = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-masonic-blue-900">Modifier une actualité</h1>
-            <p className="text-gray-600 mt-1">Modifiez les détails de l'actualité</p>
+            <h1 className="text-3xl font-bold text-masonic-blue-900">{t('actualites.editTitle')}</h1>
+            <p className="text-gray-600 mt-1">{t('actualites.createDescription')}</p>
           </motion.div>
           
           <motion.div
