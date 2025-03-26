@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -60,10 +61,68 @@ const Index = () => {
       {/* Pricing */}
       <section className="container mx-auto px-4 py-20">
         <h2 className="text-3xl font-bold text-center mb-12 text-masonic-blue-900">Solutions adaptées à chaque loge</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <PricingCard title="Basique" price="1 €" features={["1€/mois par membre ou 10€/an", "Jusqu'à 30 membres", "Messagerie sécurisée", "Agenda des tenues", "Planches et documents", "Gestion des présences", "Bibliothèque maçonnique"]} buttonText="Commencer" to="/register" />
-          <PricingCard title="Premium" price="19,99 €" featured={true} features={["Jusqu'à 100 membres", "Tous les avantages du plan Basique", "Stockage illimité", "Bibliothèque maçonnique", "Tuilage électronique"]} buttonText="Choisir Premium" to="/register?plan=premium" />
-          <PricingCard title="Illimité" price="39,99 €" features={["Membres illimités", "Tous les avantages du plan Premium", "Support prioritaire", "Analytiques avancées", "Personnalisation complète"]} buttonText="Contacter" to="/register?plan=unlimited" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <PricingCard 
+            title="Basique Mensuel" 
+            price="1 €" 
+            period="mois"
+            features={[
+              "1€/mois par membre", 
+              "Jusqu'à 30 membres", 
+              "Messagerie sécurisée", 
+              "Agenda des tenues", 
+              "Planches et documents", 
+              "Gestion des présences", 
+              "Bibliothèque maçonnique"
+            ]} 
+            buttonText="Commencer" 
+            to="/register" 
+          />
+          <PricingCard 
+            title="Basique Annuel" 
+            price="10 €" 
+            period="an"
+            featured={true}
+            features={[
+              "10€/an par membre", 
+              "Jusqu'à 30 membres", 
+              "Messagerie sécurisée", 
+              "Agenda des tenues", 
+              "Planches et documents", 
+              "Gestion des présences", 
+              "Bibliothèque maçonnique"
+            ]} 
+            buttonText="Offre Spéciale" 
+            to="/register?plan=annual" 
+          />
+          <PricingCard 
+            title="Premium" 
+            price="19,99 €" 
+            period="mois"
+            features={[
+              "Jusqu'à 100 membres", 
+              "Tous les avantages du plan Basique", 
+              "Stockage illimité", 
+              "Bibliothèque maçonnique", 
+              "Tuilage électronique"
+            ]} 
+            buttonText="Choisir Premium" 
+            to="/register?plan=premium" 
+          />
+          <PricingCard 
+            title="Illimité" 
+            price="39,99 €" 
+            period="mois"
+            features={[
+              "Membres illimités", 
+              "Tous les avantages du plan Premium", 
+              "Support prioritaire", 
+              "Analytiques avancées", 
+              "Personnalisation complète"
+            ]} 
+            buttonText="Contacter" 
+            to="/register?plan=unlimited" 
+          />
         </div>
       </section>
 
@@ -117,6 +176,7 @@ const FeatureCard = ({
 const PricingCard = ({
   title,
   price,
+  period = "mois",
   features,
   buttonText,
   featured = false,
@@ -133,7 +193,7 @@ const PricingCard = ({
   duration: 0.5
 }}>
     <h3 className={cn("text-xl font-bold mb-2", featured ? "text-masonic-blue-900" : "text-gray-900")}>{title}</h3>
-    <p className="text-3xl font-bold mb-4">{price}<span className="text-sm font-normal text-gray-500">/mois</span></p>
+    <p className="text-3xl font-bold mb-4">{price}<span className="text-sm font-normal text-gray-500">/{period}</span></p>
     <ul className="mb-6 space-y-2 flex-grow">
       {features.map((feature, index) => <li key={index} className="flex items-start">
           <span className="text-green-500 mr-2">✓</span>
