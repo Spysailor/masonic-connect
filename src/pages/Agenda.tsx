@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
@@ -49,7 +50,8 @@ const Agenda = () => {
                 <h1 className="text-3xl font-bold text-masonic-blue-900">Agenda des Tenues</h1>
                 <MasonicSymbol 
                   type="temple" 
-                  size={40}
+                  size={50}
+                  className="ml-2"
                 />
               </div>
               <Link 

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Calendar, Tag, Plus, Edit, Trash2 } from 'lucide-react';
@@ -127,7 +128,8 @@ const Actualites = () => {
                 <h1 className="text-3xl font-bold text-masonic-blue-900">Actualités</h1>
                 <MasonicSymbol 
                   type="checkerboard" 
-                  size={40}
+                  size={50}
+                  className="ml-2"
                 />
               </div>
               <Button 
