@@ -1,7 +1,6 @@
 
 import React from 'react';
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 import TenueListItem from './TenueListItem';
 
 interface TenueListProps {
@@ -21,6 +20,8 @@ interface TenueListProps {
 }
 
 const TenueList: React.FC<TenueListProps> = ({ groupedTenues }) => {
+  const { t } = useTranslation();
+  
   return (
     <div>
       {Object.entries(groupedTenues).map(([month, monthTenues]) => (

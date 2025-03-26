@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS } from 'date-fns/locale';
 import AgendaFilter from '@/components/agenda/AgendaFilter';
 import AgendaTabView from '@/components/agenda/AgendaTabView';
 import { getTenues } from '@/data/tenuesData';
@@ -14,6 +15,7 @@ import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 
 const Agenda = () => {
   const [filterDegree, setFilterDegree] = useState<number | null>(null);
+  const { t, i18n } = useTranslation();
 
   // Get tenues data
   const tenues = getTenues();
@@ -23,9 +25,12 @@ const Agenda = () => {
     ? tenues.filter(tenue => tenue.degree === filterDegree) 
     : tenues;
 
+  // Get the current locale for date formatting
+  const dateLocale = i18n.language === 'fr' ? fr : enUS;
+
   // Group tenues by month
   const groupedTenues = filteredTenues.reduce((groups, tenue) => {
-    const month = format(tenue.date, 'MMMM yyyy', { locale: fr });
+    const month = format(tenue.date, 'MMMM yyyy', { locale: dateLocale });
     if (!groups[month]) {
       groups[month] = [];
     }
@@ -47,7 +52,7 @@ const Agenda = () => {
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <h1 className="text-3xl font-bold text-masonic-blue-900">Agenda des Tenues</h1>
+                <h1 className="text-3xl font-bold text-masonic-blue-900">{t('common.agenda')}</h1>
                 <MasonicSymbol 
                   type="temple" 
                   size={50}
@@ -59,10 +64,10 @@ const Agenda = () => {
                 className="inline-flex items-center justify-center rounded-md bg-masonic-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-masonic-blue-800 transition-colors"
               >
                 <Calendar className="mr-2 h-4 w-4" />
-                Créer une tenue
+                {t('dashboard.actions.createTenue')}
               </Link>
             </div>
-            <p className="text-gray-600 mt-1">Consultez et gérez vos tenues maçonniques</p>
+            <p className="text-gray-600 mt-1">{t('agenda.upcoming')}</p>
           </motion.div>
           
           <motion.div
@@ -83,7 +88,7 @@ const Agenda = () => {
                   className="inline-flex items-center justify-center rounded-md bg-masonic-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-masonic-blue-800 transition-colors w-full md:w-auto md:hidden"
                 >
                   <Calendar className="mr-2 h-4 w-4" />
-                  Créer une tenue
+                  {t('dashboard.actions.createTenue')}
                 </Link>
               </div>
               

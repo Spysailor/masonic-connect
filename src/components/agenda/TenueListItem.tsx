@@ -2,7 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 
 interface TenueProps {
   tenue: {
@@ -21,6 +22,14 @@ interface TenueProps {
 }
 
 const TenueListItem: React.FC<TenueProps> = ({ tenue }) => {
+  const { t, i18n } = useTranslation();
+  const dateLocale = i18n.language === 'fr' ? fr : enUS;
+  
+  const statusLabels = {
+    confirmed: i18n.language === 'fr' ? 'Confirmée' : 'Confirmed',
+    pending: i18n.language === 'fr' ? 'En attente' : 'Pending'
+  };
+
   return (
     <Link 
       key={tenue.id} 
@@ -29,9 +38,9 @@ const TenueListItem: React.FC<TenueProps> = ({ tenue }) => {
     >
       <div className="flex flex-col md:flex-row">
         <div className="p-4 md:w-1/4 flex flex-col justify-center items-center md:items-start border-b md:border-b-0 md:border-r border-gray-200">
-          <div className="text-gray-500 text-sm">{format(tenue.date, 'EEEE', { locale: fr })}</div>
-          <div className="text-xl font-bold text-masonic-blue-900">{format(tenue.date, 'd MMMM', { locale: fr })}</div>
-          <div className="text-gray-700">{format(tenue.date, 'HH:mm', { locale: fr })} - {tenue.endTime}</div>
+          <div className="text-gray-500 text-sm">{format(tenue.date, 'EEEE', { locale: dateLocale })}</div>
+          <div className="text-xl font-bold text-masonic-blue-900">{format(tenue.date, 'd MMMM', { locale: dateLocale })}</div>
+          <div className="text-gray-700">{format(tenue.date, 'HH:mm', { locale: dateLocale })} - {tenue.endTime}</div>
         </div>
         
         <div className="p-4 md:w-2/4">
@@ -41,8 +50,7 @@ const TenueListItem: React.FC<TenueProps> = ({ tenue }) => {
               tenue.degree === 2 ? 'bg-yellow-500' : 'bg-red-500'
             }`}></span>
             <span className="text-sm text-gray-500">
-              {tenue.degree === 1 ? '1er degré' : 
-               tenue.degree === 2 ? '2ème degré' : '3ème degré'}
+              {t('agenda.degree', { count: tenue.degree })}
             </span>
           </div>
           <h3 className="text-lg font-semibold text-masonic-blue-900">{tenue.title}</h3>
@@ -58,7 +66,7 @@ const TenueListItem: React.FC<TenueProps> = ({ tenue }) => {
                 ? 'bg-green-100 text-green-800' 
                 : 'bg-yellow-100 text-yellow-800'
             }`}>
-              {tenue.status === 'confirmed' ? 'Confirmée' : 'En attente'}
+              {statusLabels[tenue.status]}
             </span>
           </div>
         </div>
