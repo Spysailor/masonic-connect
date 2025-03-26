@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Mail, MapPin, Phone, Book, Settings, Bell, ExternalLink } from 'lucide-react';
@@ -14,14 +13,14 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 import { useNotifications } from '@/hooks/use-notifications';
+import LanguageSelector from '@/components/ui/LanguageSelector';
 
 const Profile = () => {
   const { toast } = useToast();
   const { unreadCount } = useNotifications();
   const [activeTab, setActiveTab] = useState('personal');
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  // Mock data for the profile
   const userData = {
     name: 'Jean Dupont',
     role: t('profile.masterMason'),
@@ -54,7 +53,6 @@ const Profile = () => {
             transition={{ duration: 0.4 }}
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Left sidebar with profile info */}
               <Card className="md:col-span-1 border-0 shadow-md">
                 <CardContent className="p-6">
                   <div className="flex flex-col items-center text-center">
@@ -115,7 +113,6 @@ const Profile = () => {
                 </CardContent>
               </Card>
               
-              {/* Main content */}
               <div className="md:col-span-2 space-y-6">
                 <Card className="border-0 shadow-md">
                   <CardHeader>
@@ -311,11 +308,9 @@ const Profile = () => {
                             <div className="flex items-center justify-between">
                               <div>
                                 <p className="font-medium">{t('profile.settings.language')}</p>
-                                <p className="text-sm text-gray-500">Français</p>
+                                <p className="text-sm text-gray-500">{i18n.language === 'fr' ? 'Français' : 'English'}</p>
                               </div>
-                              <Button variant="outline" size="sm">
-                                {t('profile.settings.modify')}
-                              </Button>
+                              <LanguageSelector />
                             </div>
                           </div>
                           

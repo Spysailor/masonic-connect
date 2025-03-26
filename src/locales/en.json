@@ -501,14 +501,14 @@
   },
   "profile": {
     "masterMason": "Master Mason",
-    "thirdDegree": "3rd degree",
+    "thirdDegree": "3rd Degree",
     "lodge": "Lodge",
     "initiationDate": "Initiation date",
     "elevationDate": "Elevation date",
-    "myProfile": "My profile",
-    "description": "Manage your personal information and account settings",
+    "myProfile": "My Profile",
+    "description": "Manage your personal information and preferences",
     "tabs": {
-      "info": "Information",
+      "info": "Personal information",
       "settings": "Settings",
       "notifications": "Notifications"
     },
@@ -518,34 +518,34 @@
     "phone": "Phone",
     "address": "Address",
     "update": "Update",
-    "notificationCenter": "Notification center",
-    "manageNotifications": "Manage all your notifications in one place",
+    "save": "Save",
+    "notificationCenter": "Notification Center",
+    "manageNotifications": "Manage your notification preferences",
     "viewAll": "View all",
     "notificationPreferences": "Notification preferences",
-    "save": "Save",
-    "accountSettings": "Account settings",
     "notifications": {
       "newTenues": "New meetings",
-      "newTenesDesc": "Receive a notification for new meetings",
+      "newTenesDesc": "Receive notifications for new scheduled meetings",
       "newMessages": "New messages",
-      "newMessagesDesc": "Receive a notification for new messages",
+      "newMessagesDesc": "Receive notifications for new messages",
       "newNews": "New news",
-      "newNewsDesc": "Receive a notification for new news"
+      "newNewsDesc": "Receive notifications for new lodge news"
     },
+    "accountSettings": "Account settings",
     "settings": {
       "profilePrivacy": "Profile privacy",
-      "profilePrivacyDesc": "Make your profile visible only to members of your lodge",
+      "profilePrivacyDesc": "Make your profile visible to your lodge brothers only",
       "twoFactor": "Two-factor authentication",
-      "twoFactorDesc": "Enhance the security of your account",
-      "language": "Application language",
+      "twoFactorDesc": "Add an extra layer of security to your account",
+      "language": "Language",
       "modify": "Modify"
     },
     "toast": {
       "updated": "Profile updated",
-      "updatedDescription": "Your information has been successfully updated.",
+      "updatedDescription": "Your personal information has been successfully updated",
       "settingsSaved": "Settings saved",
-      "notificationPreferencesSaved": "Your notification preferences have been updated.",
-      "accountSettingsSaved": "Your account settings have been successfully updated."
+      "notificationPreferencesSaved": "Your notification preferences have been successfully saved",
+      "accountSettingsSaved": "Your account settings have been successfully saved"
     }
   },
   "notifications": {

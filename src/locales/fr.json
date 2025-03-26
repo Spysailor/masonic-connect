@@ -503,6 +503,55 @@
       "description": "Il n'y a aucun message correspondant à votre recherche"
     }
   },
+  "profile": {
+    "masterMason": "Maître Maçon",
+    "thirdDegree": "3ème Degré",
+    "lodge": "Loge",
+    "initiationDate": "Date d'initiation",
+    "elevationDate": "Date d'élévation",
+    "myProfile": "Mon Profil",
+    "description": "Gérez vos informations personnelles et vos préférences",
+    "tabs": {
+      "info": "Informations personnelles",
+      "settings": "Paramètres",
+      "notifications": "Notifications"
+    },
+    "fullName": "Nom complet",
+    "grade": "Grade",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "update": "Mettre à jour",
+    "save": "Enregistrer",
+    "notificationCenter": "Centre de notifications",
+    "manageNotifications": "Gérez vos préférences de notifications",
+    "viewAll": "Voir tout",
+    "notificationPreferences": "Préférences de notifications",
+    "notifications": {
+      "newTenues": "Nouvelles tenues",
+      "newTenuesDesc": "Recevez des notifications pour les nouvelles tenues programmées",
+      "newMessages": "Nouveaux messages",
+      "newMessagesDesc": "Recevez des notifications pour les nouveaux messages",
+      "newNews": "Nouvelles actualités",
+      "newNewsDesc": "Recevez des notifications pour les nouvelles actualités de la loge"
+    },
+    "accountSettings": "Paramètres du compte",
+    "settings": {
+      "profilePrivacy": "Confidentialité du profil",
+      "profilePrivacyDesc": "Rendez votre profil visible aux frères de votre loge uniquement",
+      "twoFactor": "Authentification à deux facteurs",
+      "twoFactorDesc": "Ajoutez une couche de sécurité supplémentaire à votre compte",
+      "language": "Langue",
+      "modify": "Modifier"
+    },
+    "toast": {
+      "updated": "Profil mis à jour",
+      "updatedDescription": "Vos informations personnelles ont été mises à jour avec succès",
+      "settingsSaved": "Paramètres enregistrés",
+      "notificationPreferencesSaved": "Vos préférences de notifications ont été enregistrées avec succès",
+      "accountSettingsSaved": "Les paramètres de votre compte ont été enregistrés avec succès"
+    }
+  },
   "logeSettings": {
     "title": "Paramètres de la loge",
     "subtitle": "Personnalisez l'espace virtuel de votre loge",
