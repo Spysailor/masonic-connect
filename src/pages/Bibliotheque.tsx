@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Book, FileText, MessageCircle, Filter, ChevronDown, Plus } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Input } from '@/components/ui/input';
@@ -38,6 +39,7 @@ type Resource = {
 const Bibliotheque = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -287,10 +289,10 @@ const Bibliotheque = () => {
   // Helper function to get human-readable type name
   const getTypeName = (type: string) => {
     switch (type) {
-      case 'book': return 'Livre';
-      case 'document': return 'Document';
-      case 'article': return 'Article';
-      case 'planche': return 'Planche';
+      case 'book': return t('bibliotheque.resourceTypes.book');
+      case 'document': return t('bibliotheque.resourceTypes.document');
+      case 'article': return t('bibliotheque.resourceTypes.article');
+      case 'planche': return t('bibliotheque.resourceTypes.planche');
       default: return type;
     }
   };
@@ -319,7 +321,7 @@ const Bibliotheque = () => {
     if (resources.length === 0) {
       return (
         <div className="text-center py-10">
-          <p className="text-gray-500">Aucune ressource ne correspond à votre recherche.</p>
+          <p className="text-gray-500">{t('bibliotheque.noResults')}</p>
         </div>
       );
     }
@@ -361,7 +363,7 @@ const Bibliotheque = () => {
                       resource.degree === 2 ? 'bg-yellow-50 text-yellow-700' : 
                       'bg-red-50 text-red-700'
                     }`}>
-                      {resource.degree}° degré
+                      {resource.degree}° {t('bibliotheque.degree')}
                     </span>
                   )}
                   
@@ -403,7 +405,7 @@ const Bibliotheque = () => {
                       href={resource.downloadUrl}
                       className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
                     >
-                      Télécharger
+                      {t('bibliotheque.download')}
                     </a>
                   )}
                   
@@ -411,7 +413,7 @@ const Bibliotheque = () => {
                     to={getResourcePath(resource)}
                     className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
                   >
-                    Consulter →
+                    {t('bibliotheque.view')} →
                   </Link>
                 </div>
               </div>
@@ -461,7 +463,7 @@ const Bibliotheque = () => {
                         resource.degree === 2 ? 'bg-yellow-50 text-yellow-700' : 
                         'bg-red-50 text-red-700'
                       }`}>
-                        {resource.degree}° degré
+                        {resource.degree}° {t('bibliotheque.degree')}
                       </span>
                     )}
                     
@@ -501,7 +503,7 @@ const Bibliotheque = () => {
                         href={resource.downloadUrl}
                         className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors mr-4"
                       >
-                        Télécharger
+                        {t('bibliotheque.download')}
                       </a>
                     )}
                     
@@ -509,7 +511,7 @@ const Bibliotheque = () => {
                       to={getResourcePath(resource)}
                       className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
                     >
-                      Consulter →
+                      {t('bibliotheque.view')} →
                     </Link>
                   </div>
                 </div>
@@ -533,8 +535,8 @@ const Bibliotheque = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-masonic-blue-900">Bibliothèque</h1>
-            <p className="text-gray-600 mt-1">Explorez notre collection de ressources maçonniques</p>
+            <h1 className="text-3xl font-bold text-masonic-blue-900">{t('bibliotheque.title')}</h1>
+            <p className="text-gray-600 mt-1">{t('bibliotheque.subtitle')}</p>
           </motion.div>
           
           <motion.div
@@ -553,10 +555,10 @@ const Bibliotheque = () => {
               >
                 <TabsList className="grid w-full grid-cols-2 mb-6">
                   <TabsTrigger value="planches" className="text-base py-3">
-                    Nos Planches
+                    {t('bibliotheque.tabs.planches')}
                   </TabsTrigger>
                   <TabsTrigger value="resources" className="text-base py-3">
-                    Ressources Maçonniques
+                    {t('bibliotheque.tabs.resources')}
                   </TabsTrigger>
                 </TabsList>
                 
@@ -566,7 +568,7 @@ const Bibliotheque = () => {
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                       <Input
                         type="text"
-                        placeholder="Rechercher dans la bibliothèque..."
+                        placeholder={t('bibliotheque.search')}
                         className="pl-10"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -578,7 +580,7 @@ const Bibliotheque = () => {
                         <Link to="/planches/create">
                           <Button className="whitespace-nowrap">
                             <Plus className="mr-2 h-4 w-4" />
-                            Rédiger une planche
+                            {t('bibliotheque.createPlanche')}
                           </Button>
                         </Link>
                       )}
@@ -589,7 +591,7 @@ const Bibliotheque = () => {
                         onClick={() => setShowFilters(!showFilters)}
                       >
                         <Filter className="h-4 w-4" />
-                        Filtres
+                        {t('bibliotheque.filters')}
                         <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
                       </Button>
                     </div>
@@ -599,13 +601,13 @@ const Bibliotheque = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 p-4 bg-gray-50 rounded-lg">
                       {categoryView === 'resources' && (
                         <div>
-                          <label className="text-sm font-medium text-gray-700 mb-1 block">Type de ressource</label>
+                          <label className="text-sm font-medium text-gray-700 mb-1 block">{t('bibliotheque.filters.resourceType')}</label>
                           <Select onValueChange={handleTypeChange} value={selectedType || 'all'}>
                             <SelectTrigger>
-                              <SelectValue placeholder="Tous les types" />
+                              <SelectValue placeholder={t('bibliotheque.filters.allTypes')} />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="all">Tous les types</SelectItem>
+                              <SelectItem value="all">{t('bibliotheque.filters.allTypes')}</SelectItem>
                               {types.filter(type => type !== 'planche').map(type => (
                                 <SelectItem key={type} value={type}>
                                   {getTypeName(type)}
@@ -617,13 +619,13 @@ const Bibliotheque = () => {
                       )}
                       
                       <div>
-                        <label className="text-sm font-medium text-gray-700 mb-1 block">Catégorie</label>
+                        <label className="text-sm font-medium text-gray-700 mb-1 block">{t('bibliotheque.filters.category')}</label>
                         <Select onValueChange={(value) => setSelectedCategory(value === 'all' ? null : value)}>
                           <SelectTrigger>
-                            <SelectValue placeholder="Toutes les catégories" />
+                            <SelectValue placeholder={t('bibliotheque.filters.allCategories')} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="all">Toutes les catégories</SelectItem>
+                            <SelectItem value="all">{t('bibliotheque.filters.allCategories')}</SelectItem>
                             {categories.map(category => (
                               <SelectItem key={category} value={category}>{category}</SelectItem>
                             ))}
@@ -633,23 +635,23 @@ const Bibliotheque = () => {
                       
                       {categoryView === 'planches' && (
                         <div>
-                          <label className="text-sm font-medium text-gray-700 mb-1 block">Degré</label>
+                          <label className="text-sm font-medium text-gray-700 mb-1 block">{t('bibliotheque.filters.degree')}</label>
                           <Select onValueChange={(value) => setSelectedDegree(value === 'all' ? null : parseInt(value))}>
                             <SelectTrigger>
-                              <SelectValue placeholder="Tous les degrés" />
+                              <SelectValue placeholder={t('bibliotheque.filters.allDegrees')} />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="all">Tous les degrés</SelectItem>
-                              <SelectItem value="1">1° degré</SelectItem>
-                              <SelectItem value="2">2° degré</SelectItem>
-                              <SelectItem value="3">3° degré</SelectItem>
+                              <SelectItem value="all">{t('bibliotheque.filters.allDegrees')}</SelectItem>
+                              <SelectItem value="1">1° {t('bibliotheque.filters.degreeLabel')}</SelectItem>
+                              <SelectItem value="2">2° {t('bibliotheque.filters.degreeLabel')}</SelectItem>
+                              <SelectItem value="3">3° {t('bibliotheque.filters.degreeLabel')}</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
                       )}
                       
                       <div className={categoryView === 'planches' ? 'sm:col-span-2 md:col-span-3' : 'sm:col-span-2'}>
-                        <label className="text-sm font-medium text-gray-700 mb-1 block">Thèmes</label>
+                        <label className="text-sm font-medium text-gray-700 mb-1 block">{t('bibliotheque.filters.themes')}</label>
                         <div className="flex flex-wrap gap-2 mt-2">
                           <button
                             onClick={() => setSelectedTag(null)}
@@ -659,7 +661,7 @@ const Bibliotheque = () => {
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             }`}
                           >
-                            Tous
+                            {t('bibliotheque.filters.all')}
                           </button>
                           
                           {allTags.map((tag) => (
@@ -685,7 +687,7 @@ const Bibliotheque = () => {
                   <Tabs defaultValue="grid" className="w-full">
                     <div className="flex justify-between items-center mb-6">
                       <div className="text-sm text-gray-500">
-                        {filteredPlanches.length} planche{filteredPlanches.length !== 1 ? 's' : ''} trouvée{filteredPlanches.length !== 1 ? 's' : ''}
+                        {t('bibliotheque.planchesFound', { count: filteredPlanches.length })}
                       </div>
                       <TabsList>
                         <TabsTrigger value="grid" className="flex items-center">
@@ -695,13 +697,13 @@ const Bibliotheque = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                           </svg>
-                          Grille
+                          {t('bibliotheque.viewMode.grid')}
                         </TabsTrigger>
                         <TabsTrigger value="list" className="flex items-center">
                           <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                           </svg>
-                          Liste
+                          {t('bibliotheque.viewMode.list')}
                         </TabsTrigger>
                       </TabsList>
                     </div>
@@ -720,7 +722,7 @@ const Bibliotheque = () => {
                   <Tabs defaultValue="grid" className="w-full">
                     <div className="flex justify-between items-center mb-6">
                       <div className="text-sm text-gray-500">
-                        {filteredResources.length} ressource{filteredResources.length !== 1 ? 's' : ''} trouvée{filteredResources.length !== 1 ? 's' : ''}
+                        {t('bibliotheque.resourcesFound', { count: filteredResources.length })}
                       </div>
                       <TabsList>
                         <TabsTrigger value="grid" className="flex items-center">
@@ -730,13 +732,13 @@ const Bibliotheque = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                           </svg>
-                          Grille
+                          {t('bibliotheque.viewMode.grid')}
                         </TabsTrigger>
                         <TabsTrigger value="list" className="flex items-center">
                           <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                           </svg>
-                          Liste
+                          {t('bibliotheque.viewMode.list')}
                         </TabsTrigger>
                       </TabsList>
                     </div>

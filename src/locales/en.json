@@ -1,3 +1,4 @@
+
 {
   "common": {
     "appName": "MasonConnect",
@@ -352,7 +353,33 @@
     "search": "Search in the library...",
     "filters": "Filters",
     "createPlanche": "Write a planche",
-    "planchesFound": "{{count}} planches found"
+    "degree": "degree",
+    "download": "Download",
+    "view": "View",
+    "noResults": "No resources match your search criteria.",
+    "planchesFound": "{{count}} planches found",
+    "resourcesFound": "{{count}} resources found",
+    "resourceTypes": {
+      "book": "Book",
+      "document": "Document",
+      "article": "Article",
+      "planche": "Planche"
+    },
+    "filters": {
+      "resourceType": "Resource type",
+      "allTypes": "All types",
+      "category": "Category",
+      "allCategories": "All categories",
+      "degree": "Degree",
+      "allDegrees": "All degrees",
+      "degreeLabel": "degree",
+      "themes": "Themes",
+      "all": "All"
+    },
+    "viewMode": {
+      "grid": "Grid",
+      "list": "List"
+    }
   },
   "plancheDetail": {
     "backToPlanche": "Back to planches",
