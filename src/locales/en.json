@@ -412,6 +412,9 @@
     "title": "News",
     "subtitle": "Latest news from our lodge",
     "createNews": "Create News",
+    "createTitle": "Create news",
+    "editTitle": "Edit news",
+    "createDescription": "Add new information to share with your brothers",
     "search": "Search news...",
     "filterByCategory": "Filter by category",
     "allCategories": "All categories",
@@ -423,11 +426,29 @@
     "readMore": "Read more",
     "success": "Success",
     "newsDeleted": "The news has been deleted",
+    "newsCreated": "News has been created",
+    "newsUpdated": "News has been updated",
     "errors": {
       "error": "Error",
       "fetchFailed": "Error",
       "cantLoadNews": "Unable to load news",
-      "cantDeleteNews": "Unable to delete the news"
+      "cantDeleteNews": "Unable to delete the news",
+      "cantSaveNews": "Unable to save the news"
+    },
+    "form": {
+      "title": "Title",
+      "titlePlaceholder": "News title",
+      "titleRequired": "Title is required",
+      "content": "Content",
+      "contentPlaceholder": "News content",
+      "contentRequired": "Content is required",
+      "author": "Author",
+      "authorPlaceholder": "Author name",
+      "imageUrl": "Image URL",
+      "imageUrlPlaceholder": "https://example.com/image.jpg",
+      "invalidUrl": "The image URL must be valid",
+      "create": "Create news",
+      "update": "Update news"
     }
   }
 }

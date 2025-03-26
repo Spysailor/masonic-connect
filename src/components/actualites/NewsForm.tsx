@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { 
   Form, 
   FormControl, 
@@ -20,23 +21,24 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Save } from 'lucide-react';
 
-const formSchema = z.object({
-  title: z.string().min(1, "Le titre est requis"),
-  content: z.string().min(1, "Le contenu est requis"),
-  author_name: z.string().optional(),
-  image_url: z.string().url("L'URL de l'image doit être valide").optional().or(z.literal('')),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 interface NewsFormProps {
   newsId?: string;
 }
 
 const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
+  const { t } = useTranslation();
   const isEditMode = !!newsId;
   const navigate = useNavigate();
   const { toast } = useToast();
+  
+  const formSchema = z.object({
+    title: z.string().min(1, t('actualites.form.titleRequired')),
+    content: z.string().min(1, t('actualites.form.contentRequired')),
+    author_name: z.string().optional(),
+    image_url: z.string().url(t('actualites.form.invalidUrl')).optional().or(z.literal('')),
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -72,15 +74,15 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
       } catch (error) {
         console.error('Error fetching news:', error);
         toast({
-          title: "Erreur",
-          description: "Impossible de charger l'actualité",
+          title: t('actualites.errors.error'),
+          description: t('actualites.errors.cantLoadNews'),
           variant: "destructive",
         });
       }
     };
     
     fetchNewsData();
-  }, [newsId, form, toast, isEditMode]);
+  }, [newsId, form, toast, isEditMode, t]);
 
   const onSubmit = async (values: FormValues) => {
     try {
@@ -99,8 +101,8 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
         if (error) throw error;
         
         toast({
-          title: "Succès",
-          description: "L'actualité a été mise à jour",
+          title: t('actualites.success'),
+          description: t('actualites.newsUpdated'),
         });
       } else {
         // Create new news
@@ -120,8 +122,8 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
         if (error) throw error;
         
         toast({
-          title: "Succès",
-          description: "L'actualité a été créée",
+          title: t('actualites.success'),
+          description: t('actualites.newsCreated'),
         });
       }
       
@@ -130,8 +132,8 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
     } catch (error) {
       console.error('Error saving news:', error);
       toast({
-        title: "Erreur",
-        description: "Impossible de sauvegarder l'actualité",
+        title: t('actualites.errors.error'),
+        description: t('actualites.errors.cantSaveNews'),
         variant: "destructive",
       });
     }
@@ -149,7 +151,7 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
           >
             <ArrowLeft size={16} />
           </Button>
-          <CardTitle>{isEditMode ? "Modifier l'actualité" : "Créer une nouvelle actualité"}</CardTitle>
+          <CardTitle>{isEditMode ? t('actualites.editTitle') : t('actualites.createTitle')}</CardTitle>
         </div>
       </CardHeader>
       <CardContent>
@@ -160,9 +162,9 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Titre</FormLabel>
+                  <FormLabel>{t('actualites.form.title')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Titre de l'actualité" {...field} />
+                    <Input placeholder={t('actualites.form.titlePlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -174,10 +176,10 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
               name="content"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Contenu</FormLabel>
+                  <FormLabel>{t('actualites.form.content')}</FormLabel>
                   <FormControl>
                     <Textarea 
-                      placeholder="Contenu de l'actualité" 
+                      placeholder={t('actualites.form.contentPlaceholder')} 
                       className="min-h-[200px]" 
                       {...field} 
                     />
@@ -193,10 +195,10 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
                 name="author_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Auteur</FormLabel>
+                    <FormLabel>{t('actualites.form.author')}</FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="Nom de l'auteur" 
+                        placeholder={t('actualites.form.authorPlaceholder')} 
                         {...field} 
                         value={field.value || ''} 
                       />
@@ -212,10 +214,10 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
               name="image_url"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Image URL</FormLabel>
+                  <FormLabel>{t('actualites.form.imageUrl')}</FormLabel>
                   <FormControl>
                     <Input 
-                      placeholder="https://example.com/image.jpg" 
+                      placeholder={t('actualites.form.imageUrlPlaceholder')} 
                       {...field} 
                       value={field.value || ''} 
                     />
@@ -228,7 +230,7 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
             <div className="flex justify-end">
               <Button type="submit" className="bg-masonic-blue-700 hover:bg-masonic-blue-800">
                 <Save className="mr-2 h-4 w-4" />
-                {isEditMode ? "Mettre à jour" : "Créer l'actualité"}
+                {isEditMode ? t('actualites.form.update') : t('actualites.form.create')}
               </Button>
             </div>
           </form>

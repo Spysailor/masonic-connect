@@ -4,8 +4,11 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import NewsForm from '@/components/actualites/NewsForm';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const NewsCreate = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
@@ -18,8 +21,8 @@ const NewsCreate = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-masonic-blue-900">Créer une actualité</h1>
-            <p className="text-gray-600 mt-1">Ajoutez une nouvelle actualité à partager avec vos frères</p>
+            <h1 className="text-3xl font-bold text-masonic-blue-900">{t('actualites.createTitle')}</h1>
+            <p className="text-gray-600 mt-1">{t('actualites.createDescription')}</p>
           </motion.div>
           
           <motion.div

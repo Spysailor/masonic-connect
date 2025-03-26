@@ -412,6 +412,9 @@
     "title": "Actualités",
     "subtitle": "Dernières nouvelles de notre loge",
     "createNews": "Créer une actualité",
+    "createTitle": "Créer une actualité",
+    "editTitle": "Modifier l'actualité",
+    "createDescription": "Ajoutez une nouvelle information à partager avec vos frères",
     "search": "Rechercher des actualités...",
     "filterByCategory": "Filtrer par catégorie",
     "allCategories": "Toutes les catégories",
@@ -423,11 +426,29 @@
     "readMore": "Lire la suite",
     "success": "Succès",
     "newsDeleted": "L'actualité a été supprimée",
+    "newsCreated": "L'actualité a été créée",
+    "newsUpdated": "L'actualité a été mise à jour",
     "errors": {
       "error": "Erreur",
       "fetchFailed": "Erreur",
       "cantLoadNews": "Impossible de charger les actualités",
-      "cantDeleteNews": "Impossible de supprimer l'actualité"
+      "cantDeleteNews": "Impossible de supprimer l'actualité",
+      "cantSaveNews": "Impossible de sauvegarder l'actualité"
+    },
+    "form": {
+      "title": "Titre",
+      "titlePlaceholder": "Titre de l'actualité",
+      "titleRequired": "Le titre est requis",
+      "content": "Contenu",
+      "contentPlaceholder": "Contenu de l'actualité",
+      "contentRequired": "Le contenu est requis",
+      "author": "Auteur",
+      "authorPlaceholder": "Nom de l'auteur",
+      "imageUrl": "URL de l'image",
+      "imageUrlPlaceholder": "https://exemple.com/image.jpg",
+      "invalidUrl": "L'URL de l'image doit être valide",
+      "create": "Créer l'actualité",
+      "update": "Mettre à jour"
     }
   }
 }
