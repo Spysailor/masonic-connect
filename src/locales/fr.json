@@ -1,3 +1,4 @@
+
 {
   "common": {
     "appName": "MasonConnect",
@@ -334,6 +335,23 @@
       "theme": "Filtrer par thème"
     },
     "createPlanche": "Rédiger une planche",
-    "noPlanche": "Aucune planche trouvée"
+    "noPlanche": "Aucune planche trouvée",
+    "planchesFound": "{{count}} planches trouvées",
+    "viewMode": {
+      "grid": "Grille",
+      "list": "Liste"
+    },
+    "consult": "Consulter"
+  },
+  "bibliotheque": {
+    "title": "Bibliothèque",
+    "subtitle": "Explorez notre collection de ressources maçonniques",
+    "tabs": {
+      "planches": "Nos Planches",
+      "resources": "Ressources Maçonniques"
+    },
+    "search": "Rechercher dans la bibliothèque...",
+    "filters": "Filtres",
+    "createPlanche": "Rédiger une planche"
   }
 }

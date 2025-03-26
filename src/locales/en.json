@@ -1,3 +1,4 @@
+
 {
   "common": {
     "appName": "MasonConnect",
@@ -334,6 +335,23 @@
       "theme": "Filter by theme"
     },
     "createPlanche": "Write a planche",
-    "noPlanche": "No planche found"
+    "noPlanche": "No planche found",
+    "planchesFound": "{{count}} planches found",
+    "viewMode": {
+      "grid": "Grid",
+      "list": "List"
+    },
+    "consult": "View"
+  },
+  "bibliotheque": {
+    "title": "Library",
+    "subtitle": "Explore our collection of masonic resources",
+    "tabs": {
+      "planches": "Our Planches",
+      "resources": "Masonic Resources"
+    },
+    "search": "Search in the library...",
+    "filters": "Filters",
+    "createPlanche": "Write a planche"
   }
 }

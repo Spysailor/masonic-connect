@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { NotificationProvider } from "@/hooks/use-notifications";
 import MobileFooterMenu from "@/components/layout/MobileFooterMenu";
@@ -36,6 +36,12 @@ import Join from "./pages/Join";
 
 const queryClient = new QueryClient();
 
+// Composant pour gérer la redirection tout en préservant les paramètres de requête
+const PlanchesRedirect = () => {
+  const location = useLocation();
+  return <Navigate to={`/bibliotheque${location.search ? location.search + '&' : '?'}type=planche`} replace />;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <NotificationProvider>
@@ -55,7 +61,7 @@ const App = () => (
               <Route path="/agenda/create" element={<TenueForm />} />
               <Route path="/agenda/:id/edit" element={<TenueForm />} />
               <Route path="/agenda/:id" element={<TenueDetail />} />
-              <Route path="/planches" element={<Navigate to="/bibliotheque?type=planche" replace />} />
+              <Route path="/planches" element={<PlanchesRedirect />} />
               <Route path="/planches/:id" element={<PlancheDetail />} />
               <Route path="/actualites" element={<Actualites />} />
               <Route path="/actualites/create" element={<NewsCreate />} />
