@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -154,7 +155,7 @@ const Header: React.FC = () => {
       
       <div
         className={cn(
-          "md:hidden fixed inset-0 top-[48px] bg-white z-40 transition-all duration-300 ease-in-out transform",
+          "md:hidden fixed inset-0 top-[56px] bg-white z-40 transition-all duration-300 ease-in-out transform",
           mobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         )}
       >

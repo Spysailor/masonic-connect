@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
-import { HomeIcon, ArrowLeft } from "lucide-react";
+import { HomeIcon, ArrowLeft, AlertCircle } from "lucide-react";
 import Header from '@/components/layout/Header';
 import Logo from '@/components/ui-elements/Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -28,7 +28,11 @@ const NotFound = () => {
       <div className="flex flex-grow items-center justify-center px-4">
         <div className="text-center max-w-md mx-auto py-12">
           <div className="mb-6 flex justify-center">
-            <Logo size={isMobile ? "md" : "lg"} variant="default" withText={false} />
+            <Logo size={isMobile ? "md" : "lg"} withText={false} />
+          </div>
+          
+          <div className="mb-6 flex justify-center">
+            <AlertCircle className="h-16 w-16 text-red-500" />
           </div>
           
           <h1 className={cn(
