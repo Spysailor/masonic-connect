@@ -185,5 +185,31 @@
     "haveAccount": "Vous avez déjà un compte?",
     "signIn": "Connectez-vous",
     "demoNotice": "Fonctionnalité d'inscription non implémentée dans cette démonstration"
+  },
+  "memberDetail": {
+    "backToDirectory": "Retour à l'annuaire",
+    "masonicJourney": "Parcours maçonnique",
+    "degree": "Degré",
+    "initiation": "Initiation",
+    "companionPassage": "Passage au grade de compagnon",
+    "lodge": "Loge",
+    "obedience": "Obédience",
+    "activities": "Activités",
+    "planches": "Planches",
+    "presence": "Présence",
+    "interests": "Intérêts",
+    "contact": {
+      "mobile": "Mobile",
+      "email": "Email",
+      "address": "Adresse",
+      "profession": "Profession",
+      "birthdate": "Date de naissance",
+      "call": "Appeler",
+      "sendEmail": "Email"
+    },
+    "planchePresented": "Présentée le",
+    "viewAllPlanches": "Voir toutes les planches",
+    "presenceSince": "Présence aux tenues depuis le",
+    "meetings": "tenues sur"
   }
 }

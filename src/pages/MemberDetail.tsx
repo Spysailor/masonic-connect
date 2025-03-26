@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Phone, Mail, MapPin, Briefcase, Calendar, BookOpen } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,7 @@ import LodgeInfo from '@/components/masonic/LodgeInfo';
 
 const MemberDetail = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
   
   // Mock data for demonstration - in a real app this would be fetched based on the ID
   const member = {
@@ -47,7 +49,7 @@ const MemberDetail = () => {
           >
             <Link to="/freres" className="inline-flex items-center text-masonic-blue-700 hover:text-masonic-blue-900">
               <ArrowLeft className="h-4 w-4 mr-1" />
-              <span>Retour à l'annuaire</span>
+              <span>{t('memberDetail.backToDirectory')}</span>
             </Link>
           </motion.div>
           
@@ -77,11 +79,11 @@ const MemberDetail = () => {
                   <div className="flex space-x-2 mb-6">
                     <Button size="sm" className="flex-1">
                       <Phone className="h-4 w-4 mr-2" />
-                      Appeler
+                      {t('memberDetail.contact.call')}
                     </Button>
                     <Button size="sm" variant="outline" className="flex-1">
                       <Mail className="h-4 w-4 mr-2" />
-                      Email
+                      {t('memberDetail.contact.sendEmail')}
                     </Button>
                   </div>
                   
@@ -90,7 +92,7 @@ const MemberDetail = () => {
                       <Phone className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-gray-900">{member.phone}</p>
-                        <p className="text-xs text-gray-500">Mobile</p>
+                        <p className="text-xs text-gray-500">{t('memberDetail.contact.mobile')}</p>
                       </div>
                     </div>
                     
@@ -98,7 +100,7 @@ const MemberDetail = () => {
                       <Mail className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-gray-900">{member.email}</p>
-                        <p className="text-xs text-gray-500">Email</p>
+                        <p className="text-xs text-gray-500">{t('memberDetail.contact.email')}</p>
                       </div>
                     </div>
                     
@@ -106,7 +108,7 @@ const MemberDetail = () => {
                       <MapPin className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-gray-900">{member.address}</p>
-                        <p className="text-xs text-gray-500">Adresse</p>
+                        <p className="text-xs text-gray-500">{t('memberDetail.contact.address')}</p>
                       </div>
                     </div>
                     
@@ -114,7 +116,7 @@ const MemberDetail = () => {
                       <Briefcase className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-gray-900">{member.profession}</p>
-                        <p className="text-xs text-gray-500">Profession</p>
+                        <p className="text-xs text-gray-500">{t('memberDetail.contact.profession')}</p>
                       </div>
                     </div>
                     
@@ -122,7 +124,7 @@ const MemberDetail = () => {
                       <Calendar className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-gray-900">{member.birthdate}</p>
-                        <p className="text-xs text-gray-500">Date de naissance</p>
+                        <p className="text-xs text-gray-500">{t('memberDetail.contact.birthdate')}</p>
                       </div>
                     </div>
                   </div>
@@ -142,37 +144,37 @@ const MemberDetail = () => {
               <Card className="mb-6">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold text-masonic-blue-900 mb-4">Parcours maçonnique</h2>
+                    <h2 className="text-xl font-semibold text-masonic-blue-900 mb-4">{t('memberDetail.masonicJourney')}</h2>
                     <MasonicSymbol type="all-seeing-eye" size={32} />
                   </div>
                   
                   <div className="space-y-4">
                     <div className="border-l-2 border-masonic-blue-200 pl-4 py-1">
-                      <p className="text-sm text-gray-500">Degré</p>
+                      <p className="text-sm text-gray-500">{t('memberDetail.degree')}</p>
                       <p className="font-medium">
-                        {member.degree === 1 ? 'Apprenti' : 
-                         member.degree === 2 ? 'Compagnon' : 
-                         'Maître'}
+                        {member.degree === 1 ? t('members.filters.apprentices') : 
+                         member.degree === 2 ? t('members.filters.companions') : 
+                         t('members.filters.masters')}
                       </p>
                     </div>
                     
                     <div className="border-l-2 border-masonic-blue-200 pl-4 py-1">
-                      <p className="text-sm text-gray-500">Initiation</p>
+                      <p className="text-sm text-gray-500">{t('memberDetail.initiation')}</p>
                       <p className="font-medium">{member.initiation}</p>
                     </div>
                     
                     <div className="border-l-2 border-masonic-blue-200 pl-4 py-1">
-                      <p className="text-sm text-gray-500">Passage au grade de compagnon</p>
+                      <p className="text-sm text-gray-500">{t('memberDetail.companionPassage')}</p>
                       <p className="font-medium">{member.raising}</p>
                     </div>
                     
                     <div className="border-l-2 border-masonic-blue-200 pl-4 py-1">
-                      <p className="text-sm text-gray-500">Loge</p>
+                      <p className="text-sm text-gray-500">{t('memberDetail.lodge')}</p>
                       <p className="font-medium">{member.lodge}</p>
                     </div>
                     
                     <div className="border-l-2 border-masonic-blue-200 pl-4 py-1">
-                      <p className="text-sm text-gray-500">Obédience</p>
+                      <p className="text-sm text-gray-500">{t('memberDetail.obedience')}</p>
                       <p className="font-medium">{member.obedience}</p>
                     </div>
                   </div>
@@ -181,13 +183,13 @@ const MemberDetail = () => {
               
               <Card>
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-semibold text-masonic-blue-900 mb-4">Activités</h2>
+                  <h2 className="text-xl font-semibold text-masonic-blue-900 mb-4">{t('memberDetail.activities')}</h2>
                   
                   <Tabs defaultValue="planches">
                     <TabsList className="w-full">
-                      <TabsTrigger value="planches" className="flex-1">Planches</TabsTrigger>
-                      <TabsTrigger value="presence" className="flex-1">Présence</TabsTrigger>
-                      <TabsTrigger value="interests" className="flex-1">Intérêts</TabsTrigger>
+                      <TabsTrigger value="planches" className="flex-1">{t('memberDetail.planches')}</TabsTrigger>
+                      <TabsTrigger value="presence" className="flex-1">{t('memberDetail.presence')}</TabsTrigger>
+                      <TabsTrigger value="interests" className="flex-1">{t('memberDetail.interests')}</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="planches" className="pt-4">
@@ -197,7 +199,7 @@ const MemberDetail = () => {
                             <p className="font-medium text-masonic-blue-900">Symbolisme du pavé mosaïque</p>
                             <MasonicSymbol type="square-compass-vintage" size={24} />
                           </div>
-                          <p className="text-sm text-gray-500 mt-1">Présentée le 12/10/2022</p>
+                          <p className="text-sm text-gray-500 mt-1">{t('memberDetail.planchePresented')} 12/10/2022</p>
                         </div>
                         
                         <div className="bg-gray-50 p-4 rounded-lg">
@@ -205,12 +207,12 @@ const MemberDetail = () => {
                             <p className="font-medium text-masonic-blue-900">Les voyages initiatiques</p>
                             <MasonicSymbol type="all-seeing-eye" size={24} />
                           </div>
-                          <p className="text-sm text-gray-500 mt-1">Présentée le 05/03/2021</p>
+                          <p className="text-sm text-gray-500 mt-1">{t('memberDetail.planchePresented')} 05/03/2021</p>
                         </div>
                         
                         <div className="flex items-center justify-center mt-6">
                           <BookOpen className="h-5 w-5 text-gray-400 mr-2" />
-                          <span className="text-sm text-gray-500">Voir toutes les planches</span>
+                          <span className="text-sm text-gray-500">{t('memberDetail.viewAllPlanches')}</span>
                         </div>
                       </div>
                     </TabsContent>
@@ -218,12 +220,12 @@ const MemberDetail = () => {
                     <TabsContent value="presence" className="pt-4">
                       <div className="space-y-2">
                         <p className="text-sm text-gray-600">
-                          Présence aux tenues depuis le 01/01/2023:
+                          {t('memberDetail.presenceSince')} 01/01/2023:
                         </p>
                         <div className="w-full bg-gray-200 rounded-full h-2.5">
                           <div className="bg-green-600 h-2.5 rounded-full" style={{ width: '85%' }}></div>
                         </div>
-                        <p className="text-sm text-right text-gray-500">17 tenues sur 20</p>
+                        <p className="text-sm text-right text-gray-500">17 {t('memberDetail.meetings')} 20</p>
                       </div>
                     </TabsContent>
                     

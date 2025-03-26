@@ -185,5 +185,31 @@
     "haveAccount": "Already have an account?",
     "signIn": "Sign in",
     "demoNotice": "Registration feature not implemented in this demo"
+  },
+  "memberDetail": {
+    "backToDirectory": "Back to directory",
+    "masonicJourney": "Masonic journey",
+    "degree": "Degree",
+    "initiation": "Initiation",
+    "companionPassage": "Passage to companion degree",
+    "lodge": "Lodge",
+    "obedience": "Obedience",
+    "activities": "Activities",
+    "planches": "Planches",
+    "presence": "Presence",
+    "interests": "Interests",
+    "contact": {
+      "mobile": "Mobile",
+      "email": "Email",
+      "address": "Address",
+      "profession": "Profession",
+      "birthdate": "Date of birth",
+      "call": "Call",
+      "sendEmail": "Email"
+    },
+    "planchePresented": "Presented on",
+    "viewAllPlanches": "View all planches",
+    "presenceSince": "Presence at meetings since",
+    "meetings": "meetings out of"
   }
 }
