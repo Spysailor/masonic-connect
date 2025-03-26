@@ -1,12 +1,15 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 import Logo from '@/components/ui-elements/Logo';
 import AnimatedButton from '@/components/ui-elements/AnimatedButton';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 
 const Register = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -30,22 +33,22 @@ const Register = () => {
     const { firstName, lastName, email, password, passwordConfirm } = formData;
     
     if (!firstName || !lastName || !email) {
-      toast.error("Veuillez remplir tous les champs obligatoires");
+      toast.error(t('common.fillAllRequiredFields', 'Please fill all required fields'));
       return false;
     }
     
     if (!email.includes('@')) {
-      toast.error("Veuillez saisir une adresse email valide");
+      toast.error(t('common.invalidEmail', 'Please enter a valid email address'));
       return false;
     }
     
     if (password.length < 8) {
-      toast.error("Le mot de passe doit contenir au moins 8 caractères");
+      toast.error(t('common.passwordMinLength', 'Password must be at least 8 characters long'));
       return false;
     }
     
     if (password !== passwordConfirm) {
-      toast.error("Les mots de passe ne correspondent pas");
+      toast.error(t('common.passwordMismatch', 'Passwords do not match'));
       return false;
     }
     
@@ -68,14 +71,14 @@ const Register = () => {
     const { lodge, obedience, degree } = formData;
     
     if (!lodge || !obedience || !degree) {
-      toast.error("Veuillez remplir tous les champs obligatoires");
+      toast.error(t('common.fillAllRequiredFields', 'Please fill all required fields'));
       return;
     }
     
     setLoading(true);
     
     setTimeout(() => {
-      toast.error("Fonctionnalité d'inscription non implémentée dans cette démonstration");
+      toast.error(t('register.demoNotice'));
       setLoading(false);
     }, 1500);
   };
@@ -99,13 +102,13 @@ const Register = () => {
               </div>
               
               <h1 className="text-2xl font-bold text-center text-masonic-blue-900 mb-2">
-                Créer un compte
+                {t('register.title')}
               </h1>
               <p className="text-center text-gray-600 mb-2">
-                Rejoignez la loge Universalys
+                {t('register.joinLodge')}
               </p>
               <p className="text-center text-gray-500 text-sm mb-6">
-                Grande Loge de l'Île Maurice • Rite Écossais Ancien et Accepté
+                {t('register.obedienceRite')}
               </p>
               
               <div className="mb-8">
@@ -116,7 +119,7 @@ const Register = () => {
                     }`}>
                       1
                     </div>
-                    <span className="ml-2 text-sm font-medium">Informations personnelles</span>
+                    <span className="ml-2 text-sm font-medium">{t('register.step1')}</span>
                   </div>
                   <div className="flex-1 h-1 mx-4 bg-gray-200">
                     <div className={`h-full ${currentStep >= 2 ? 'bg-masonic-blue-700' : 'bg-gray-200'}`} style={{ width: currentStep > 1 ? '100%' : '0%' }}></div>
@@ -127,7 +130,7 @@ const Register = () => {
                     }`}>
                       2
                     </div>
-                    <span className="ml-2 text-sm font-medium">Informations maçonniques</span>
+                    <span className="ml-2 text-sm font-medium">{t('register.step2')}</span>
                   </div>
                 </div>
               </div>
@@ -144,7 +147,7 @@ const Register = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                          Prénom *
+                          {t('register.firstName')} *
                         </label>
                         <input
                           id="firstName"
@@ -158,7 +161,7 @@ const Register = () => {
                       </div>
                       <div>
                         <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                          Nom *
+                          {t('register.lastName')} *
                         </label>
                         <input
                           id="lastName"
@@ -174,7 +177,7 @@ const Register = () => {
                     
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                        Email *
+                        {t('register.email')} *
                       </label>
                       <input
                         id="email"
@@ -190,7 +193,7 @@ const Register = () => {
                     
                     <div>
                       <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                        Mot de passe *
+                        {t('register.password')} *
                       </label>
                       <input
                         id="password"
@@ -199,14 +202,14 @@ const Register = () => {
                         value={formData.password}
                         onChange={handleChange}
                         className="input-masonic"
-                        placeholder="8 caractères minimum"
+                        placeholder={t('register.passwordPlaceholder')}
                         required
                       />
                     </div>
                     
                     <div>
                       <label htmlFor="passwordConfirm" className="block text-sm font-medium text-gray-700 mb-1">
-                        Confirmer le mot de passe *
+                        {t('register.confirmPassword')} *
                       </label>
                       <input
                         id="passwordConfirm"
@@ -226,7 +229,7 @@ const Register = () => {
                         fullWidth
                         onClick={handleNextStep}
                       >
-                        Continuer
+                        {t('register.continue')}
                       </AnimatedButton>
                     </div>
                   </motion.div>
@@ -242,7 +245,7 @@ const Register = () => {
                   >
                     <div>
                       <label htmlFor="lodge" className="block text-sm font-medium text-gray-700 mb-1">
-                        Loge *
+                        {t('register.lodge')} *
                       </label>
                       <input
                         id="lodge"
@@ -251,14 +254,13 @@ const Register = () => {
                         value={formData.lodge}
                         onChange={handleChange}
                         className="input-masonic"
-                        placeholder="Nom de votre loge"
                         required
                       />
                     </div>
                     
                     <div>
                       <label htmlFor="obedience" className="block text-sm font-medium text-gray-700 mb-1">
-                        Obédience *
+                        {t('register.obedience')} *
                       </label>
                       <input
                         id="obedience"
@@ -267,14 +269,13 @@ const Register = () => {
                         value={formData.obedience}
                         onChange={handleChange}
                         className="input-masonic"
-                        placeholder="Votre obédience"
                         required
                       />
                     </div>
                     
                     <div>
                       <label htmlFor="rite" className="block text-sm font-medium text-gray-700 mb-1">
-                        Rite *
+                        {t('register.rite')} *
                       </label>
                       <input
                         id="rite"
@@ -283,14 +284,13 @@ const Register = () => {
                         value={formData.rite}
                         onChange={handleChange}
                         className="input-masonic"
-                        placeholder="Votre rite"
                         required
                       />
                     </div>
                     
                     <div>
                       <label htmlFor="degree" className="block text-sm font-medium text-gray-700 mb-1">
-                        Degré *
+                        {t('register.degree')} *
                       </label>
                       <select
                         id="degree"
@@ -300,9 +300,9 @@ const Register = () => {
                         className="input-masonic"
                         required
                       >
-                        <option value="1">Apprenti (1er degré)</option>
-                        <option value="2">Compagnon (2ème degré)</option>
-                        <option value="3">Maître (3ème degré)</option>
+                        <option value="1">{t('register.degree1')}</option>
+                        <option value="2">{t('register.degree2')}</option>
+                        <option value="3">{t('register.degree3')}</option>
                       </select>
                     </div>
                     
@@ -312,7 +312,7 @@ const Register = () => {
                         variant="secondary"
                         onClick={handlePrevStep}
                       >
-                        Retour
+                        {t('register.back')}
                       </AnimatedButton>
                       <AnimatedButton
                         type="submit"
@@ -320,7 +320,7 @@ const Register = () => {
                         fullWidth
                         disabled={loading}
                       >
-                        {loading ? 'Création en cours...' : 'Créer mon compte'}
+                        {loading ? t('register.creating') : t('register.create')}
                       </AnimatedButton>
                     </div>
                   </motion.div>
@@ -329,16 +329,16 @@ const Register = () => {
             </div>
             
             <div className="px-8 py-4 bg-gray-50 border-t border-gray-100 text-center text-sm text-gray-600">
-              Vous avez déjà un compte?{' '}
+              {t('register.haveAccount')}{' '}
               <Link to="/login" className="text-masonic-blue-700 hover:text-masonic-blue-600 font-medium">
-                Connectez-vous
+                {t('register.signIn')}
               </Link>
             </div>
           </div>
           
           <div className="mt-6 text-center">
             <Link to="/" className="text-sm text-gray-600 hover:text-masonic-blue-700">
-              Retour à l'accueil
+              {t('login.backToHome')}
             </Link>
           </div>
         </motion.div>

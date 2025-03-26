@@ -158,5 +158,32 @@
     "and": "et notre",
     "privacyLink": "politique de confidentialité",
     "backToHome": "Retour à l'accueil"
+  },
+  "register": {
+    "title": "Créer un compte",
+    "joinLodge": "Rejoignez la loge Universalys",
+    "obedienceRite": "Grande Loge de l'Île Maurice • Rite Écossais Ancien et Accepté",
+    "step1": "Informations personnelles",
+    "step2": "Informations maçonniques",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Email",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "8 caractères minimum",
+    "confirmPassword": "Confirmer le mot de passe",
+    "lodge": "Loge",
+    "obedience": "Obédience",
+    "rite": "Rite",
+    "degree": "Degré",
+    "degree1": "Apprenti (1er degré)",
+    "degree2": "Compagnon (2ème degré)",
+    "degree3": "Maître (3ème degré)",
+    "continue": "Continuer",
+    "back": "Retour",
+    "creating": "Création en cours...",
+    "create": "Créer mon compte",
+    "haveAccount": "Vous avez déjà un compte?",
+    "signIn": "Connectez-vous",
+    "demoNotice": "Fonctionnalité d'inscription non implémentée dans cette démonstration"
   }
 }
