@@ -316,5 +316,24 @@
       "confirmed": "Confirmée",
       "pending": "En attente"
     }
+  },
+  "planches": {
+    "title": "Planches",
+    "subtitle": "Consultez et partagez les travaux de votre loge",
+    "search": {
+      "placeholder": "Rechercher par titre, contenu ou auteur...",
+      "noResults": "Aucune planche trouvée",
+      "noResultsMessage": "Essayez de modifier vos critères de recherche"
+    },
+    "filters": {
+      "degree": "Filtrer par degré",
+      "all": "Tous les degrés",
+      "firstDegree": "1° degré",
+      "secondDegree": "2° degré",
+      "thirdDegree": "3° degré",
+      "theme": "Filtrer par thème"
+    },
+    "createPlanche": "Rédiger une planche",
+    "noPlanche": "Aucune planche trouvée"
   }
 }

@@ -316,5 +316,24 @@
       "confirmed": "Confirmed",
       "pending": "Pending"
     }
+  },
+  "planches": {
+    "title": "Planches",
+    "subtitle": "Consult and share your lodge's work",
+    "search": {
+      "placeholder": "Search by title, content or author...",
+      "noResults": "No planches found",
+      "noResultsMessage": "Try modifying your search criteria"
+    },
+    "filters": {
+      "degree": "Filter by degree",
+      "all": "All degrees",
+      "firstDegree": "1° degree",
+      "secondDegree": "2° degree",
+      "thirdDegree": "3° degree",
+      "theme": "Filter by theme"
+    },
+    "createPlanche": "Write a planche",
+    "noPlanche": "No planche found"
   }
 }

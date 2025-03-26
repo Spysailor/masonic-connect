@@ -3,17 +3,21 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, FileText, Plus, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS } from 'date-fns/locale';
 
 const Planches = () => {
+  const { t, i18n } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDegree, setSelectedDegree] = useState<number | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  
+  const dateLocale = i18n.language === 'fr' ? fr : enUS;
   
   // Mock data for demonstration
   const planches = [
@@ -108,8 +112,8 @@ const Planches = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-masonic-blue-900">Planches</h1>
-            <p className="text-gray-600 mt-1">Consultez et partagez les travaux de votre loge</p>
+            <h1 className="text-3xl font-bold text-masonic-blue-900">{t('planches.title')}</h1>
+            <p className="text-gray-600 mt-1">{t('planches.subtitle')}</p>
           </motion.div>
           
           <motion.div
@@ -124,7 +128,7 @@ const Planches = () => {
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
                   <Input
                     type="text"
-                    placeholder="Rechercher par titre, contenu ou auteur..."
+                    placeholder={t('planches.search.placeholder')}
                     className="pl-10"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -134,7 +138,7 @@ const Planches = () => {
                 <Link to="/planches/create">
                   <Button className="w-full md:w-auto">
                     <Plus className="mr-2 h-4 w-4" />
-                    Rédiger une planche
+                    {t('planches.createPlanche')}
                   </Button>
                 </Link>
               </div>
@@ -142,7 +146,7 @@ const Planches = () => {
               <div className="mb-6">
                 <div className="flex items-center mb-2">
                   <Filter className="h-4 w-4 text-gray-400 mr-2" />
-                  <span className="text-sm font-medium text-gray-700">Filtrer par degré:</span>
+                  <span className="text-sm font-medium text-gray-700">{t('planches.filters.degree')}:</span>
                 </div>
                 
                 <div className="flex flex-wrap gap-2">
@@ -154,7 +158,7 @@ const Planches = () => {
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    Tous
+                    {t('planches.filters.all')}
                   </button>
                   <button
                     onClick={() => setSelectedDegree(1)}
@@ -164,7 +168,7 @@ const Planches = () => {
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    1° degré
+                    {t('planches.filters.firstDegree')}
                   </button>
                   <button
                     onClick={() => setSelectedDegree(2)}
@@ -174,7 +178,7 @@ const Planches = () => {
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    2° degré
+                    {t('planches.filters.secondDegree')}
                   </button>
                   <button
                     onClick={() => setSelectedDegree(3)}
@@ -184,7 +188,7 @@ const Planches = () => {
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    3° degré
+                    {t('planches.filters.thirdDegree')}
                   </button>
                 </div>
               </div>
@@ -192,7 +196,7 @@ const Planches = () => {
               <div className="mb-6">
                 <div className="flex items-center mb-2">
                   <Filter className="h-4 w-4 text-gray-400 mr-2" />
-                  <span className="text-sm font-medium text-gray-700">Filtrer par thème:</span>
+                  <span className="text-sm font-medium text-gray-700">{t('planches.filters.theme')}:</span>
                 </div>
                 
                 <div className="flex flex-wrap gap-2">
@@ -204,7 +208,7 @@ const Planches = () => {
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    Tous
+                    {t('planches.filters.all')}
                   </button>
                   
                   {allTags.map((tag) => (
@@ -270,8 +274,8 @@ const Planches = () => {
                 ) : (
                   <div className="text-center py-8">
                     <FileText className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                    <h3 className="text-lg font-medium text-gray-700">Aucune planche trouvée</h3>
-                    <p className="text-gray-500 mt-1">Essayez de modifier vos critères de recherche.</p>
+                    <h3 className="text-lg font-medium text-gray-700">{t('planches.search.noResults')}</h3>
+                    <p className="text-gray-500 mt-1">{t('planches.search.noResultsMessage')}</p>
                   </div>
                 )}
               </div>
