@@ -8,7 +8,8 @@ export type SymbolType =
   'all-seeing-eye-triangle' | 
   'temple' | 
   'eye' | 
-  'compass';
+  'compass' |
+  'square-compass-vintage';
 
 interface MasonicSymbolProps {
   type: SymbolType;
@@ -30,7 +31,8 @@ const MasonicSymbol: React.FC<MasonicSymbolProps> = ({
     'all-seeing-eye-triangle': '/lovable-uploads/c4518bbb-1092-4d0d-ad9a-21781e8fa84d.png',
     'temple': '/lovable-uploads/099c0f52-fd56-469b-8df9-c72a6d51f0b4.png',
     'eye': '/lovable-uploads/1a93857a-7e47-4dc1-b41f-34070c45ddf3.png',
-    'compass': '/lovable-uploads/6c51c45b-f5ed-4df2-a766-c940b4e4bdc0.png'
+    'compass': '/lovable-uploads/6c51c45b-f5ed-4df2-a766-c940b4e4bdc0.png',
+    'square-compass-vintage': '/lovable-uploads/b87be19d-7ab0-40ca-8629-18541433817e.png' // Using the square-compass image for vintage variant
   };
   
   return (
