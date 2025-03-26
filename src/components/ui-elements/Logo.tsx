@@ -34,39 +34,11 @@ const Logo: React.FC<LogoProps> = ({
       aria-label="Masonic Connect - Home"
     >
       <div className="relative">
-        <svg 
-          className={`${sizeClasses[size]} w-auto`} 
-          viewBox="0 0 50 50" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path 
-            d="M25 2L2 18.5L25 35L48 18.5L25 2Z" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            fill="none"
-          />
-          <path 
-            d="M25 48V35" 
-            stroke="currentColor" 
-            strokeWidth="2"
-          />
-          <path 
-            d="M2 18.5V32L25 48L48 32V18.5" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            fill="none" 
-            strokeLinecap="round"
-          />
-          <circle 
-            cx="25" 
-            cy="18" 
-            r="5" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            fill="none"
-          />
-        </svg>
+        <img 
+          src="/lovable-uploads/0dde5c68-ce03-4035-ada6-3b2f1aae5f7f.png" 
+          alt="Masonic Square and Compass Logo" 
+          className={`${sizeClasses[size]} w-auto`}
+        />
       </div>
       
       {withText && (

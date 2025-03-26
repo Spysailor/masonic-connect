@@ -23,9 +23,8 @@ import { ArrowLeft, Save } from 'lucide-react';
 const formSchema = z.object({
   title: z.string().min(1, "Le titre est requis"),
   content: z.string().min(1, "Le contenu est requis"),
-  category: z.string().optional(),
-  image_url: z.string().url("L'URL de l'image doit être valide").optional().or(z.literal('')),
   author_name: z.string().optional(),
+  image_url: z.string().url("L'URL de l'image doit être valide").optional().or(z.literal('')),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -44,9 +43,8 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
     defaultValues: {
       title: '',
       content: '',
-      category: '',
-      image_url: '',
       author_name: '',
+      image_url: '',
     },
   });
 
@@ -67,9 +65,8 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
           form.reset({
             title: data.title || '',
             content: data.content || '',
-            category: data.category || '',
-            image_url: data.image_url || '',
             author_name: data.author_name || '',
+            image_url: data.image_url || '',
           });
         }
       } catch (error) {
@@ -94,9 +91,8 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
           .update({
             title: values.title,
             content: values.content,
-            category: values.category || null,
-            image_url: values.image_url || null,
             author_name: values.author_name || null,
+            image_url: values.image_url || null,
           })
           .eq('id', newsId);
           
@@ -113,10 +109,12 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
           .insert({
             title: values.title,
             content: values.content,
-            category: values.category || null,
-            image_url: values.image_url || null,
             author_name: values.author_name || null,
+            image_url: values.image_url || null,
             published_at: new Date().toISOString(),
+            // We need to add these fields for Supabase
+            author_id: 'user123', // This should be replaced with the actual user ID
+            lodge_id: 'lodge123', // This should be replaced with the actual lodge ID
           });
           
         if (error) throw error;
@@ -190,24 +188,6 @@ const NewsForm: React.FC<NewsFormProps> = ({ newsId }) => {
             />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Catégorie</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Ex: Événement, Loge, Publication..." 
-                        {...field} 
-                        value={field.value || ''} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
               <FormField
                 control={form.control}
                 name="author_name"
