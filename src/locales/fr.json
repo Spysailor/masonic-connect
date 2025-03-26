@@ -1,0 +1,100 @@
+
+{
+  "common": {
+    "appName": "MasonConnect",
+    "dashboard": "Tableau de bord",
+    "agenda": "Agenda",
+    "brothers": "Frères",
+    "news": "Actualités",
+    "library": "Bibliothèque",
+    "messages": "Messages",
+    "login": "Connexion",
+    "profile": "Profil",
+    "notifications": "Notifications",
+    "search": "Rechercher"
+  },
+  "index": {
+    "heroTitle": "La plateforme digitale pour toutes les loges maçonniques",
+    "heroSubtitle": "Créez votre espace de loge personnalisé et connectez vos frères et sœurs en quelques clics",
+    "createLodge": "Créer votre loge",
+    "invitationCode": "J'ai un code d'invitation",
+    "featuresTitle": "Fonctionnalités 100% Maçonniques",
+    "pricingTitle": "Nos Prix : 1 € symbolique",
+    "testimonialTitle": "Ce que disent nos utilisateurs",
+    "readyTitle": "Prêt à franchir le pas?",
+    "readySubtitle": "Rejoignez les centaines de loges qui utilisent déjà notre plateforme",
+    "createSpace": "Créer votre espace loge"
+  },
+  "features": {
+    "secureComms": {
+      "title": "Communications sécurisées",
+      "description": "Actualités de la Loge, messagerie interne dédiée et sécurisée, notifications personnalisées."
+    },
+    "tenueManagement": {
+      "title": "Gestion des tenues",
+      "description": "Agenda des tenues, confirmation de présence, gestion des agapes et visiteurs, feuille de présence."
+    },
+    "documents": {
+      "title": "Planches et documents",
+      "description": "Accès aux planches, rituels, documents de la Loge et de l'Obédience."
+    },
+    "memberDirectory": {
+      "title": "Annuaire des membres",
+      "description": "Carnet d'adresses avec contacts, profil personnalisable, calcul d'itinéraire vers le temple."
+    },
+    "masonicLibrary": {
+      "title": "Bibliothèque maçonnique",
+      "description": "Catalogue d'ouvrages disponibles, système de réservation, références maçonniques."
+    },
+    "visitorAccess": {
+      "title": "Accès visiteurs",
+      "description": "QR code pour visiteurs, validation humaine pour les calendriers, sécurité renforcée."
+    }
+  },
+  "pricing": {
+    "basicMonthly": {
+      "title": "Basique Mensuel",
+      "price": "1 €",
+      "period": "mois",
+      "features": [
+        "1€/mois par membre",
+        "Messagerie sécurisée",
+        "Agenda des tenues",
+        "Planches et documents",
+        "Gestion des présences",
+        "Bibliothèque maçonnique"
+      ],
+      "button": "Commencer"
+    },
+    "basicAnnual": {
+      "title": "Basique Annuel",
+      "price": "10 €",
+      "period": "an",
+      "features": [
+        "10€/an par membre",
+        "Messagerie sécurisée",
+        "Agenda des tenues",
+        "Planches et documents",
+        "Gestion des présences",
+        "Bibliothèque maçonnique"
+      ],
+      "button": "Offre Spéciale"
+    }
+  },
+  "agenda": {
+    "upcoming": "Tenues à venir",
+    "filter": "Filtrer par degré",
+    "all": "Tous les degrés",
+    "degree": "{{count}}° degré",
+    "list": "Liste",
+    "calendar": "Calendrier",
+    "noEvent": "Aucune tenue prévue pour cette date"
+  },
+  "footer": {
+    "description": "La plateforme dédiée aux Francs-Maçons pour se connecter, partager et grandir ensemble.",
+    "navigation": "Navigation",
+    "resources": "Ressources",
+    "legal": "Informations légales",
+    "copyright": "Tous droits réservés."
+  }
+}

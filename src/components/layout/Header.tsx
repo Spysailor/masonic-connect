@@ -1,9 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Logo from '../ui-elements/Logo';
 import AnimatedButton from '../ui-elements/AnimatedButton';
 import NotificationIndicator from '../notifications/NotificationIndicator';
+import LanguageSelector from '../language/LanguageSelector';
 import { cn } from '@/lib/utils';
 import { UserCircle, Menu, X } from 'lucide-react';
 import { useNotifications } from '@/hooks/use-notifications';
@@ -12,6 +14,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 interface NavLink {
   name: string;
   path: string;
+  translationKey: string;
 }
 
 const Header: React.FC = () => {
@@ -20,14 +23,15 @@ const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { unreadCount } = useNotifications();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
   
   const navLinks: NavLink[] = [
-    { name: 'Dashboard', path: '/dashboard' },
-    { name: 'Agenda', path: '/agenda' },
-    { name: 'Frères', path: '/freres' },
-    { name: 'Actualités', path: '/actualites' },
-    { name: 'Bibliothèque', path: '/bibliotheque' },
-    { name: 'Messages', path: '/messages' },
+    { name: t('common.dashboard'), path: '/dashboard', translationKey: 'common.dashboard' },
+    { name: t('common.agenda'), path: '/agenda', translationKey: 'common.agenda' },
+    { name: t('common.brothers'), path: '/freres', translationKey: 'common.brothers' },
+    { name: t('common.news'), path: '/actualites', translationKey: 'common.news' },
+    { name: t('common.library'), path: '/bibliotheque', translationKey: 'common.library' },
+    { name: t('common.messages'), path: '/messages', translationKey: 'common.messages' },
   ];
   
   // Handle scroll
@@ -77,11 +81,13 @@ const Header: React.FC = () => {
                     : "text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50"
                 )}
               >
-                {link.name}
+                {t(link.translationKey)}
               </Link>
             ))}
             
             <div className="flex items-center ml-4 space-x-1">
+              <LanguageSelector />
+              
               <Link 
                 to="/notifications"
                 className={cn(
@@ -90,7 +96,7 @@ const Header: React.FC = () => {
                     ? "text-masonic-blue-700 bg-masonic-blue-50" 
                     : "text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors"
                 )}
-                aria-label="Notifications"
+                aria-label={t('common.notifications')}
               >
                 <NotificationIndicator />
               </Link>
@@ -101,14 +107,14 @@ const Header: React.FC = () => {
                   "rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors",
                   location.pathname === '/profile' ? "text-masonic-blue-700 bg-masonic-blue-50" : ""
                 )}
-                aria-label="Profil"
+                aria-label={t('common.profile')}
               >
                 <UserCircle className="h-5 w-5" />
               </Link>
               
               <div className="ml-2">
                 <AnimatedButton to="/login" variant="secondary" size="sm">
-                  Connexion
+                  {t('common.login')}
                 </AnimatedButton>
               </div>
             </div>
@@ -116,6 +122,8 @@ const Header: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-1">
+            <LanguageSelector />
+            
             <Link 
               to="/notifications"
               className={cn(
@@ -124,7 +132,7 @@ const Header: React.FC = () => {
                   ? "text-masonic-blue-700 bg-masonic-blue-50" 
                   : "text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors"
               )}
-              aria-label="Notifications"
+              aria-label={t('common.notifications')}
             >
               <NotificationIndicator />
             </Link>
@@ -135,7 +143,7 @@ const Header: React.FC = () => {
                 "rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors",
                 location.pathname === '/profile' ? "text-masonic-blue-700 bg-masonic-blue-50" : ""
               )}
-              aria-label="Profil"
+              aria-label={t('common.profile')}
             >
               <UserCircle className="h-5 w-5" />
             </Link>
@@ -175,13 +183,13 @@ const Header: React.FC = () => {
                   : "text-gray-600 hover:text-masonic-blue-700 hover:bg-gray-50"
               )}
             >
-              {link.name}
+              {t(link.translationKey)}
             </Link>
           ))}
           
           <div className="pt-4">
             <AnimatedButton to="/login" variant="primary" fullWidth>
-              Connexion
+              {t('common.login')}
             </AnimatedButton>
           </div>
         </nav>

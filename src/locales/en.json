@@ -1,0 +1,100 @@
+
+{
+  "common": {
+    "appName": "MasonConnect",
+    "dashboard": "Dashboard",
+    "agenda": "Schedule",
+    "brothers": "Brothers",
+    "news": "News",
+    "library": "Library",
+    "messages": "Messages",
+    "login": "Login",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "search": "Search"
+  },
+  "index": {
+    "heroTitle": "The digital platform for all masonic lodges",
+    "heroSubtitle": "Create your custom lodge space and connect your brothers and sisters in a few clicks",
+    "createLodge": "Create your lodge",
+    "invitationCode": "I have an invitation code",
+    "featuresTitle": "100% Masonic Features",
+    "pricingTitle": "Our Prices: Symbolic €1",
+    "testimonialTitle": "What our users say",
+    "readyTitle": "Ready to take the step?",
+    "readySubtitle": "Join hundreds of lodges already using our platform",
+    "createSpace": "Create your lodge space"
+  },
+  "features": {
+    "secureComms": {
+      "title": "Secure Communications",
+      "description": "Lodge news, dedicated secure messaging, personalized notifications."
+    },
+    "tenueManagement": {
+      "title": "Meeting Management",
+      "description": "Meeting schedule, attendance confirmation, agape and visitor management, attendance sheets."
+    },
+    "documents": {
+      "title": "Documents & Tracing boards",
+      "description": "Access to tracing boards, rituals, Lodge and Obedience documents."
+    },
+    "memberDirectory": {
+      "title": "Member Directory",
+      "description": "Address book with contacts, customizable profile, route calculation to the temple."
+    },
+    "masonicLibrary": {
+      "title": "Masonic Library",
+      "description": "Catalog of available books, reservation system, masonic references."
+    },
+    "visitorAccess": {
+      "title": "Visitor Access",
+      "description": "QR code for visitors, human validation for calendars, enhanced security."
+    }
+  },
+  "pricing": {
+    "basicMonthly": {
+      "title": "Basic Monthly",
+      "price": "€1",
+      "period": "month",
+      "features": [
+        "€1/month per member",
+        "Secure messaging",
+        "Meeting schedule",
+        "Documents & tracing boards",
+        "Attendance management",
+        "Masonic library"
+      ],
+      "button": "Start"
+    },
+    "basicAnnual": {
+      "title": "Basic Annual",
+      "price": "€10",
+      "period": "year",
+      "features": [
+        "€10/year per member",
+        "Secure messaging",
+        "Meeting schedule",
+        "Documents & tracing boards",
+        "Attendance management",
+        "Masonic library"
+      ],
+      "button": "Special Offer"
+    }
+  },
+  "agenda": {
+    "upcoming": "Upcoming Meetings",
+    "filter": "Filter by degree",
+    "all": "All degrees",
+    "degree": "{{count}}° degree",
+    "list": "List",
+    "calendar": "Calendar",
+    "noEvent": "No meetings scheduled for this date"
+  },
+  "footer": {
+    "description": "The platform dedicated to Freemasons to connect, share and grow together.",
+    "navigation": "Navigation",
+    "resources": "Resources",
+    "legal": "Legal Information",
+    "copyright": "All rights reserved."
+  }
+}
