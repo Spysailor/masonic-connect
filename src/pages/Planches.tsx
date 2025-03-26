@@ -11,8 +11,12 @@ const Planches = () => {
   
   useEffect(() => {
     // Rediriger vers /bibliotheque avec le paramètre type=planche
-    navigate(`/bibliotheque${location.search ? location.search + '&' : '?'}type=planche`, { replace: true });
-  }, [navigate, location.search]);
+    // en préservant la langue actuelle
+    const query = new URLSearchParams(location.search);
+    query.append('type', 'planche');
+    
+    navigate(`/bibliotheque?${query.toString()}`, { replace: true });
+  }, [navigate, location.search, i18n.language]);
 
   return (
     <div className="flex justify-center items-center min-h-screen">

@@ -24,8 +24,12 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
     
-    // Rafraîchir la page courante pour s'assurer que tous les éléments sont traduits
-    if (location.pathname === '/bibliotheque' && location.search.includes('type=planche')) {
+    // Force refresh when on specific pages that need full translation reload
+    const needsRefresh = 
+      (location.pathname === '/bibliotheque' && location.search.includes('type=planche')) ||
+      location.pathname === '/planches';
+      
+    if (needsRefresh) {
       // Force refresh to ensure translations are applied
       navigate(0);
     }

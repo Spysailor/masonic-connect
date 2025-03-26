@@ -352,6 +352,7 @@
     },
     "search": "Search in the library...",
     "filters": "Filters",
-    "createPlanche": "Write a planche"
+    "createPlanche": "Write a planche",
+    "planchesFound": "{{count}} planches found"
   }
 }

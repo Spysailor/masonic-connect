@@ -28,6 +28,7 @@ import BibliothequeDetail from "./pages/BibliothequeDetail";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
 import NotFound from "./pages/NotFound";
+import Planches from "./pages/Planches";
 
 // Nouvelles pages pour la plateforme multi-tenant
 import Invitations from "./pages/Invitations";
@@ -35,12 +36,6 @@ import LogeSettings from "./pages/LogeSettings";
 import Join from "./pages/Join";
 
 const queryClient = new QueryClient();
-
-// Composant pour gérer la redirection tout en préservant les paramètres de requête
-const PlanchesRedirect = () => {
-  const location = useLocation();
-  return <Navigate to={`/bibliotheque${location.search ? location.search + '&' : '?'}type=planche`} replace />;
-};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -61,7 +56,7 @@ const App = () => (
               <Route path="/agenda/create" element={<TenueForm />} />
               <Route path="/agenda/:id/edit" element={<TenueForm />} />
               <Route path="/agenda/:id" element={<TenueDetail />} />
-              <Route path="/planches" element={<PlanchesRedirect />} />
+              <Route path="/planches" element={<Planches />} />
               <Route path="/planches/:id" element={<PlancheDetail />} />
               <Route path="/actualites" element={<Actualites />} />
               <Route path="/actualites/create" element={<NewsCreate />} />
