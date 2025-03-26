@@ -16,7 +16,18 @@
     "next": "Suivant",
     "previous": "Précédent",
     "details": "Détails",
-    "view": "Voir"
+    "view": "Voir",
+    "dashboard": "Tableau de bord",
+    "agenda": "Agenda",
+    "brothers": "Frères",
+    "news": "Actualités",
+    "library": "Bibliothèque",
+    "messages": "Messages",
+    "profile": "Profil",
+    "notifications": "Notifications",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion"
   },
   "auth": {
     "success": {
@@ -95,6 +106,156 @@
       "sendFailed": "Échec de l'envoi du message",
       "createFailed": "Échec de la création de la conversation",
       "tryAgain": "Veuillez réessayer"
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue dans votre espace maçonnique",
+    "upcomingTenues": "Prochaines tenues",
+    "lodgeOfficers": "Officiers de la loge",
+    "latestNews": "Dernières actualités",
+    "quickActions": "Actions rapides",
+    "seeAll": "Voir tout",
+    "stats": {
+      "nextTenue": "Prochaine tenue",
+      "membersCount": "Membres",
+      "members": "membres",
+      "planchesCount": "Planches",
+      "documents": "documents",
+      "unreadMessages": "Messages non lus",
+      "unread": "non lus"
+    },
+    "tabs": {
+      "agenda": "Agenda",
+      "brothers": "Frères",
+      "news": "Actualités"
+    },
+    "actions": {
+      "createTenue": "Créer une tenue",
+      "writePlanche": "Rédiger une planche",
+      "brothersDirectory": "Annuaire des frères",
+      "agenda": "Consulter l'agenda"
+    }
+  },
+  "agenda": {
+    "title": "Agenda",
+    "upcoming": "Vos prochains événements maçonniques",
+    "filter": "Filtrer par degré",
+    "list": "Liste",
+    "calendar": "Calendrier",
+    "all": "Tous les degrés",
+    "firstDegree": "1er degré",
+    "secondDegree": "2ème degré",
+    "thirdDegree": "3ème degré",
+    "degree": "Degré",
+    "noTenues": "Aucune tenue à venir",
+    "noTenesDesc": "Il n'y a pas de tenues programmées pour le moment"
+  },
+  "members": {
+    "title": "Frères",
+    "subtitle": "Annuaire des membres de votre loge",
+    "search": "Rechercher un frère",
+    "filters": {
+      "all": "Tous les membres",
+      "officers": "Officiers",
+      "masters": "Maîtres",
+      "companions": "Compagnons",
+      "apprentices": "Apprentis"
+    },
+    "empty": {
+      "title": "Aucun membre trouvé",
+      "description": "Essayez de modifier vos critères de recherche"
+    }
+  },
+  "actualites": {
+    "title": "Actualités",
+    "subtitle": "Actualités de la loge et de la maçonnerie",
+    "createNews": "Créer une actualité",
+    "search": "Rechercher dans les actualités",
+    "filterByCategory": "Filtrer par catégorie",
+    "allCategories": "Toutes les catégories",
+    "noResults": "Aucune actualité trouvée",
+    "administrator": "Administrateur",
+    "empty": {
+      "title": "Aucune actualité",
+      "description": "Il n'y a pas encore d'actualités publiées"
+    },
+    "backToNews": "Retour aux actualités",
+    "success": "Succès",
+    "newsDeleted": "L'actualité a été supprimée",
+    "errors": {
+      "error": "Erreur",
+      "fetchFailed": "Échec du chargement",
+      "cantLoadNews": "Impossible de charger les actualités",
+      "cantDeleteNews": "Impossible de supprimer l'actualité"
+    }
+  },
+  "bibliotheque": {
+    "title": "Bibliothèque",
+    "subtitle": "Accédez aux planches et aux ressources maçonniques",
+    "tabs": {
+      "planches": "Planches",
+      "resources": "Ressources"
+    },
+    "search": "Rechercher dans la bibliothèque",
+    "createPlanche": "Créer une planche",
+    "filters": "Filtres",
+    "viewMode": {
+      "grid": "Grille",
+      "list": "Liste"
+    },
+    "planchesFound": "planches trouvées",
+    "resourceTypes": {
+      "planche": "Planche"
+    }
+  },
+  "plancheDetail": {
+    "backToPlanche": "Retour à la bibliothèque",
+    "firstDegree": "1er degré",
+    "secondDegree": "2ème degré", 
+    "thirdDegree": "3ème degré",
+    "worshipfulMaster": "Vénérable Maître",
+    "noPlanche": "Planche introuvable",
+    "mockData": {
+      "intro": "Introduction",
+      "originTitle": "Origine",
+      "originDesc1": "Le pavé mosaïque est un élément décoratif et symbolique fondamental dans les loges maçonniques. Il se présente sous la forme d'un tapis ou d'un dessin de carreaux alternant généralement le noir et le blanc, disposé sur le sol de la loge.",
+      "originDesc2": "Son origine remonte aux temples de Salomon, où le sol était recouvert de pierres carrées alternées. Cette symbolique a été reprise par les bâtisseurs de cathédrales au Moyen Âge, puis dans la franc-maçonnerie moderne dès ses débuts au XVIIIe siècle.",
+      "symbolismTitle": "Symbolisme",
+      "symbolismDesc": "Le pavé mosaïque représente la dualité fondamentale qui structure notre compréhension du monde, exprimée par l'alternance des carreaux blancs et noirs. Cette dualité s'exprime à travers plusieurs niveaux de sens :",
+      "duality": {
+        "item1": "Lumière et ténèbres",
+        "item2": "Bien et mal",
+        "item3": "Esprit et matière",
+        "item4": "Sagesse et ignorance",
+        "item5": "Vie et mort",
+        "item6": "Ordre et chaos"
+      },
+      "dualityDesc": "Le franc-maçon est invité à marcher sur ce pavé mosaïque tout au long de son parcours initiatique. Ce faisant, il apprend que les opposés ne sont pas nécessairement contradictoires, mais complémentaires et nécessaires à l'équilibre du monde.",
+      "interpretationsTitle": "Interprétations",
+      "interpretationsIntro": "Le pavé mosaïque se prête à différentes interprétations selon les traditions et les degrés maçonniques :",
+      "interpretation1": {
+        "title": "Le chemin initiatique",
+        "desc": "Les carreaux alternés représentent les épreuves et les joies qui jalonnent le parcours du maçon. La progression sur ce pavé symbolise l'avancement sur le chemin de la connaissance et de la sagesse."
+      },
+      "interpretation2": {
+        "title": "Équilibre et harmonie",
+        "desc": "Le mélange équilibré du noir et du blanc évoque la recherche d'harmonie entre les forces opposées, objectif fondamental du travail maçonnique. C'est la représentation de l'équilibre que le maçon doit trouver en lui-même."
+      },
+      "interpretation3": {
+        "title": "La loi de la polarité",
+        "desc": "Le pavé illustre la loi hermétique de la polarité qui affirme que tout a deux pôles, deux aspects, deux principes. L'initié doit apprendre à transcender cette dualité pour atteindre une compréhension supérieure."
+      },
+      "conclusionTitle": "Conclusion",
+      "conclusionDesc1": "Le pavé mosaïque est bien plus qu'un simple élément décoratif du temple maçonnique. Il constitue un outil pédagogique permanent qui rappelle au franc-maçon l'importance de l'équilibre, de la relativité des choses et de la complémentarité des opposés.",
+      "conclusionDesc2": "Marcher sur le pavé mosaïque, c'est accepter la complexité du monde et chercher à dépasser les contradictions apparentes pour accéder à une vision plus complète et plus harmonieuse de l'existence."
+    }
+  },
+  "tenueDetail": {
+    "status": {
+      "confirmed": "Confirmée",
+      "pending": "En attente",
+      "cancelled": "Annulée"
     }
   }
 }

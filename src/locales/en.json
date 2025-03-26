@@ -16,7 +16,18 @@
     "next": "Next",
     "previous": "Previous",
     "details": "Details",
-    "view": "View"
+    "view": "View",
+    "dashboard": "Dashboard",
+    "agenda": "Agenda",
+    "brothers": "Brothers",
+    "news": "News",
+    "library": "Library",
+    "messages": "Messages",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
   },
   "auth": {
     "success": {
@@ -95,6 +106,156 @@
       "sendFailed": "Failed to send message",
       "createFailed": "Failed to create conversation",
       "tryAgain": "Please try again"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to your masonic space",
+    "upcomingTenues": "Upcoming meetings",
+    "lodgeOfficers": "Lodge officers",
+    "latestNews": "Latest news",
+    "quickActions": "Quick actions",
+    "seeAll": "See all",
+    "stats": {
+      "nextTenue": "Next meeting",
+      "membersCount": "Members",
+      "members": "members",
+      "planchesCount": "Papers",
+      "documents": "documents",
+      "unreadMessages": "Unread messages",
+      "unread": "unread"
+    },
+    "tabs": {
+      "agenda": "Agenda",
+      "brothers": "Brothers",
+      "news": "News"
+    },
+    "actions": {
+      "createTenue": "Create meeting",
+      "writePlanche": "Write paper",
+      "brothersDirectory": "Brothers directory",
+      "agenda": "View agenda"
+    }
+  },
+  "agenda": {
+    "title": "Agenda",
+    "upcoming": "Your upcoming masonic events",
+    "filter": "Filter by degree",
+    "list": "List",
+    "calendar": "Calendar",
+    "all": "All degrees",
+    "firstDegree": "1st degree",
+    "secondDegree": "2nd degree",
+    "thirdDegree": "3rd degree",
+    "degree": "Degree",
+    "noTenues": "No upcoming meetings",
+    "noTenesDesc": "There are no scheduled meetings at the moment"
+  },
+  "members": {
+    "title": "Brothers",
+    "subtitle": "Directory of your lodge members",
+    "search": "Search for a brother",
+    "filters": {
+      "all": "All members",
+      "officers": "Officers",
+      "masters": "Masters",
+      "companions": "Fellows",
+      "apprentices": "Apprentices"
+    },
+    "empty": {
+      "title": "No members found",
+      "description": "Try modifying your search criteria"
+    }
+  },
+  "actualites": {
+    "title": "News",
+    "subtitle": "News from the lodge and freemasonry",
+    "createNews": "Create news",
+    "search": "Search in news",
+    "filterByCategory": "Filter by category",
+    "allCategories": "All categories",
+    "noResults": "No news found",
+    "administrator": "Administrator",
+    "empty": {
+      "title": "No news",
+      "description": "There are no published news yet"
+    },
+    "backToNews": "Back to news",
+    "success": "Success",
+    "newsDeleted": "The news has been deleted",
+    "errors": {
+      "error": "Error",
+      "fetchFailed": "Loading failure",
+      "cantLoadNews": "Unable to load news",
+      "cantDeleteNews": "Unable to delete news"
+    }
+  },
+  "bibliotheque": {
+    "title": "Library",
+    "subtitle": "Access to masonic papers and resources",
+    "tabs": {
+      "planches": "Papers",
+      "resources": "Resources"
+    },
+    "search": "Search in the library",
+    "createPlanche": "Create paper",
+    "filters": "Filters",
+    "viewMode": {
+      "grid": "Grid",
+      "list": "List"
+    },
+    "planchesFound": "papers found",
+    "resourceTypes": {
+      "planche": "Paper"
+    }
+  },
+  "plancheDetail": {
+    "backToPlanche": "Back to library",
+    "firstDegree": "1st degree",
+    "secondDegree": "2nd degree", 
+    "thirdDegree": "3rd degree",
+    "worshipfulMaster": "Worshipful Master",
+    "noPlanche": "Paper not found",
+    "mockData": {
+      "intro": "Introduction",
+      "originTitle": "Origin",
+      "originDesc1": "The mosaic pavement is a fundamental decorative and symbolic element in Masonic lodges. It appears as a carpet or a pattern of tiles, generally alternating black and white, arranged on the floor of the lodge.",
+      "originDesc2": "Its origin dates back to Solomon's temples, where the floor was covered with alternating square stones. This symbolism was adopted by cathedral builders in the Middle Ages, and then in modern Freemasonry from its beginnings in the 18th century.",
+      "symbolismTitle": "Symbolism",
+      "symbolismDesc": "The mosaic pavement represents the fundamental duality that structures our understanding of the world, expressed by the alternation of white and black tiles. This duality is expressed through several levels of meaning:",
+      "duality": {
+        "item1": "Light and darkness",
+        "item2": "Good and evil",
+        "item3": "Spirit and matter",
+        "item4": "Wisdom and ignorance",
+        "item5": "Life and death",
+        "item6": "Order and chaos"
+      },
+      "dualityDesc": "The Freemason is invited to walk on this mosaic pavement throughout his initiatory journey. In doing so, he learns that opposites are not necessarily contradictory, but complementary and necessary for the balance of the world.",
+      "interpretationsTitle": "Interpretations",
+      "interpretationsIntro": "The mosaic pavement lends itself to different interpretations according to Masonic traditions and degrees:",
+      "interpretation1": {
+        "title": "The initiatory path",
+        "desc": "The alternating tiles represent the trials and joys that mark the Mason's journey. Progress on this pavement symbolizes advancement on the path of knowledge and wisdom."
+      },
+      "interpretation2": {
+        "title": "Balance and harmony",
+        "desc": "The balanced mixture of black and white evokes the search for harmony between opposing forces, a fundamental objective of Masonic work. It is the representation of the balance that the Mason must find within himself."
+      },
+      "interpretation3": {
+        "title": "The law of polarity",
+        "desc": "The pavement illustrates the hermetic law of polarity which affirms that everything has two poles, two aspects, two principles. The initiate must learn to transcend this duality to reach a higher understanding."
+      },
+      "conclusionTitle": "Conclusion",
+      "conclusionDesc1": "The mosaic pavement is much more than a simple decorative element of the Masonic temple. It constitutes a permanent educational tool that reminds the Freemason of the importance of balance, the relativity of things, and the complementarity of opposites.",
+      "conclusionDesc2": "Walking on the mosaic pavement means accepting the complexity of the world and seeking to overcome apparent contradictions to access a more complete and harmonious vision of existence."
+    }
+  },
+  "tenueDetail": {
+    "status": {
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "cancelled": "Cancelled"
     }
   }
 }

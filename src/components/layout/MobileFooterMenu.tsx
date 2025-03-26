@@ -1,22 +1,24 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Calendar, Users, MessageSquare, User, Settings } from 'lucide-react';
+import { Home, Calendar, Users, MessageSquare, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useTranslation } from 'react-i18next';
 
 const MobileFooterMenu: React.FC = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
   
   if (!isMobile) return null;
   
   const menuItems = [
-    { icon: Home, label: 'Accueil', path: '/dashboard' },
-    { icon: Calendar, label: 'Agenda', path: '/agenda' },
-    { icon: Users, label: 'Frères', path: '/freres' },
-    { icon: MessageSquare, label: 'Messages', path: '/messages' },
-    { icon: User, label: 'Profil', path: '/profile' },
+    { icon: Home, label: t('common.dashboard'), path: '/dashboard' },
+    { icon: Calendar, label: t('common.agenda'), path: '/agenda' },
+    { icon: Users, label: t('common.brothers'), path: '/freres' },
+    { icon: MessageSquare, label: t('common.messages'), path: '/messages' },
+    { icon: User, label: t('common.profile'), path: '/profile' },
   ];
 
   return (
