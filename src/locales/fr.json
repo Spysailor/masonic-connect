@@ -1,3 +1,4 @@
+
 {
   "common": {
     "appName": "MasonConnect",
@@ -10,7 +11,10 @@
     "login": "Connexion",
     "profile": "Profil",
     "notifications": "Notifications",
-    "search": "Rechercher"
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "register": "S'inscrire",
+    "logout": "Déconnexion"
   },
   "index": {
     "heroTitle": "La plateforme digitale pour toutes les loges maçonniques",
@@ -161,16 +165,25 @@
   },
   "register": {
     "title": "Créer un compte",
+    "subtitle": "Rejoignez la loge Universalys",
     "joinLodge": "Rejoignez la loge Universalys",
     "obedienceRite": "Grande Loge de l'Île Maurice • Rite Écossais Ancien et Accepté",
     "step1": "Informations personnelles",
     "step2": "Informations maçonniques",
     "firstName": "Prénom",
     "lastName": "Nom",
+    "displayName": "Nom d'affichage",
+    "displayNamePlaceholder": "Votre nom d'affichage",
+    "displayNameValidation": "Le nom doit contenir au moins 3 caractères",
     "email": "Email",
+    "emailPlaceholder": "votre@email.com",
+    "emailValidation": "Email invalide",
     "password": "Mot de passe",
     "passwordPlaceholder": "8 caractères minimum",
+    "passwordValidation": "Le mot de passe doit contenir au moins 6 caractères",
     "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+    "passwordMatch": "Les mots de passe ne correspondent pas",
     "lodge": "Loge",
     "obedience": "Obédience",
     "rite": "Rite",
@@ -182,8 +195,13 @@
     "back": "Retour",
     "creating": "Création en cours...",
     "create": "Créer mon compte",
+    "submitButton": "Créer mon compte",
     "haveAccount": "Vous avez déjà un compte?",
     "signIn": "Connectez-vous",
+    "loginLink": "Se connecter",
+    "termsText": "En créant un compte, vous acceptez nos",
+    "termsLink": "conditions d'utilisation",
+    "alreadyAccount": "Vous avez déjà un compte?",
     "demoNotice": "Fonctionnalité d'inscription non implémentée dans cette démonstration"
   },
   "memberDetail": {

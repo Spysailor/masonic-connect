@@ -12,19 +12,26 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
 
-const formSchema = z.object({
-  displayName: z.string().min(3, { message: "Le nom doit contenir au moins 3 caractères" }),
-  email: z.string().email({ message: "Email invalide" }),
-  password: z.string().min(6, { message: "Le mot de passe doit contenir au moins 6 caractères" }),
-  confirmPassword: z.string()
-}).refine(data => data.password === data.confirmPassword, {
-  message: "Les mots de passe ne correspondent pas",
-  path: ["confirmPassword"]
-});
-
 const Register = () => {
   const { t } = useTranslation();
   const { signUp, isLoading } = useAuth();
+
+  // Définition du schéma de validation avec les messages traduits
+  const formSchema = z.object({
+    displayName: z.string().min(3, { 
+      message: t('register.displayNameValidation', 'Le nom doit contenir au moins 3 caractères') 
+    }),
+    email: z.string().email({ 
+      message: t('register.emailValidation', 'Email invalide') 
+    }),
+    password: z.string().min(6, { 
+      message: t('register.passwordValidation', 'Le mot de passe doit contenir au moins 6 caractères') 
+    }),
+    confirmPassword: z.string()
+  }).refine(data => data.password === data.confirmPassword, {
+    message: t('register.passwordMatch', 'Les mots de passe ne correspondent pas'),
+    path: ["confirmPassword"]
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

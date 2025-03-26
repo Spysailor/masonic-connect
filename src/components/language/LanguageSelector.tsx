@@ -27,7 +27,9 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
     // Force refresh when on specific pages that need full translation reload
     const needsRefresh = 
       (location.pathname === '/bibliotheque' && location.search.includes('type=planche')) ||
-      location.pathname === '/planches';
+      location.pathname === '/planches' ||
+      location.pathname === '/register' ||
+      location.pathname === '/login';
       
     if (needsRefresh) {
       // Force refresh to ensure translations are applied
