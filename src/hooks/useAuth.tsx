@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { initDatabaseIfNeeded } from '@/utils/initSupabaseData';
 
 type AuthContextType = {
   session: Session | null;
@@ -36,15 +35,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          // Initialize database if needed when user logs in
-          if (event === 'SIGNED_IN') {
-            try {
-              await initDatabaseIfNeeded(session.user.id);
-            } catch (error) {
-              console.error('Error initializing database:', error);
-            }
-          }
-          
           await fetchProfile(session.user.id);
         } else {
           setProfile(null);
@@ -62,13 +52,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          // Initialize database if needed for the existing session
-          try {
-            await initDatabaseIfNeeded(session.user.id);
-          } catch (error) {
-            console.error('Error initializing database:', error);
-          }
-          
           await fetchProfile(session.user.id);
         }
       } catch (error) {
@@ -149,7 +132,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email: string, password: string, displayName: string) => {
     try {
       setIsLoading(true);
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -160,21 +143,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       
       if (error) throw error;
-      
-      // Create the profile if the sign-up was successful
-      if (data?.user) {
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert({
-            id: data.user.id,
-            display_name: displayName,
-            created_at: new Date().toISOString()
-          });
-        
-        if (profileError) {
-          console.error('Error creating profile:', profileError);
-        }
-      }
       
       toast({
         title: "Inscription réussie",

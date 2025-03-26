@@ -16,7 +16,7 @@ interface TenueNotesFormProps {
 }
 
 const TenueNotesForm: React.FC<TenueNotesFormProps> = ({ form }) => {
-  const { t } = useTranslation('tenueForm');
+  const { t } = useTranslation();
   
   return (
     <div className="space-y-6">
@@ -25,10 +25,10 @@ const TenueNotesForm: React.FC<TenueNotesFormProps> = ({ form }) => {
         name="description"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('details.description')}</FormLabel>
+            <FormLabel>{t('tenueForm.details.description')}</FormLabel>
             <FormControl>
               <Textarea 
-                placeholder={t('details.descriptionPlaceholder')} 
+                placeholder={t('tenueForm.details.descriptionPlaceholder')} 
                 className="min-h-[100px]" 
                 {...field} 
               />
@@ -43,10 +43,10 @@ const TenueNotesForm: React.FC<TenueNotesFormProps> = ({ form }) => {
         name="notes"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('details.notes')}</FormLabel>
+            <FormLabel>{t('tenueForm.details.notes')}</FormLabel>
             <FormControl>
               <Textarea 
-                placeholder={t('details.notesPlaceholder')} 
+                placeholder={t('tenueForm.details.notesPlaceholder')} 
                 className="min-h-[100px]" 
                 {...field} 
               />

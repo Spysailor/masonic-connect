@@ -3,42 +3,16 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Import des fichiers de traduction
-import frCommon from './locales/fr/common.json';
-import frDashboard from './locales/fr/dashboard.json';
-import frNav from './locales/fr/nav.json';
-import frAgenda from './locales/fr/agenda.json';
-import frTenueForm from './locales/fr/tenueForm.json';
-import frAuth from './locales/fr/auth.json';
-import frActualites from './locales/fr/actualites.json';
+import frTranslation from './locales/fr.json';
+import enTranslation from './locales/en.json';
 
-import enCommon from './locales/en/common.json';
-import enDashboard from './locales/en/dashboard.json';
-import enNav from './locales/en/nav.json';
-import enAgenda from './locales/en/agenda.json';
-import enTenueForm from './locales/en/tenueForm.json';
-import enAuth from './locales/en/auth.json';
-import enActualites from './locales/en/actualites.json';
-
-// Construction des ressources avec les espaces de noms
+// Les ressources contiennent les traductions
 const resources = {
   fr: {
-    common: frCommon,
-    dashboard: frDashboard,
-    nav: frNav,
-    agenda: frAgenda,
-    tenueForm: frTenueForm,
-    auth: frAuth,
-    actualites: frActualites
+    translation: frTranslation
   },
   en: {
-    common: enCommon,
-    dashboard: enDashboard,
-    nav: enNav,
-    agenda: enAgenda,
-    tenueForm: enTenueForm,
-    auth: enAuth,
-    actualites: enActualites
+    translation: enTranslation
   }
 };
 
@@ -59,17 +33,16 @@ i18n
       order: ['localStorage', 'navigator'],
       caches: ['localStorage']
     },
-    // Ajout de la fonction de signalement des clés de traduction manquantes
+    // Ajout de la fonction de résolution des clés de traduction manquantes
     missingKeyHandler: (lng, ns, key) => {
-      console.warn(`Clé de traduction manquante: ${key} pour l'espace de noms: ${ns} et la langue: ${lng}`);
+      console.warn(`Missing translation key: ${key} for language: ${lng}`);
     },
     saveMissing: true,
     missingKeyNoValueFallbackToKey: false,
     returnNull: false,
     returnEmptyString: false,
-    returnObjects: false, // Important: empêche le retour d'objets pour éviter des erreurs React
-    defaultNS: 'common',
-    fallbackNS: 'common'
+    returnObjects: false, // Changed to false to prevent object returns
+    fallbackNS: 'translation'
   });
 
 export default i18n;

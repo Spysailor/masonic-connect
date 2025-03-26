@@ -1,0 +1,252 @@
+
+{
+  "common": {
+    "appName": "MasonConnect",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search...",
+    "filter": "Filter",
+    "sort": "Sort",
+    "actions": "Actions",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "yes": "Yes",
+    "no": "No",
+    "more": "More",
+    "less": "Less"
+  },
+  "dashboard": {
+    "welcome": "Welcome to your masonic space",
+    "quickAccess": "Quick access",
+    "recentActivity": "Recent activity",
+    "upcomingTenues": "Upcoming meetings",
+    "lodgeOfficers": "Lodge officers",
+    "latestNews": "Latest news",
+    "seeAll": "See all",
+    "quickActions": "Quick actions",
+    "stats": {
+      "nextTenue": "Next meeting",
+      "membersCount": "Number of brothers",
+      "planchesCount": "Number of tracing boards",
+      "unreadMessages": "Unread messages",
+      "members": "members",
+      "documents": "documents",
+      "unread": "unread"
+    },
+    "actions": {
+      "createTenue": "Create meeting",
+      "writePlanche": "Write tracing board",
+      "brothersDirectory": "Brothers directory",
+      "agenda": "Calendar"
+    },
+    "tabs": {
+      "agenda": "Calendar",
+      "brothers": "Brothers",
+      "news": "News"
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "agenda": "Calendar",
+    "planches": "Tracing boards",
+    "bibliotheque": "Library",
+    "freres": "Brothers",
+    "actualites": "News",
+    "messages": "Messages",
+    "profil": "Profile",
+    "parametres": "Settings",
+    "aide": "Help",
+    "deconnexion": "Logout"
+  },
+  "agenda": {
+    "title": "Calendar",
+    "createTenue": "Create meeting",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "all": "All",
+    "noTenues": "No meetings to display",
+    "search": "Search for a meeting...",
+    "filter": {
+      "title": "Filter meetings",
+      "type": "Meeting type",
+      "degree": "Degree",
+      "date": "Date",
+      "location": "Location",
+      "lodge": "Lodge",
+      "apply": "Apply filters",
+      "reset": "Reset"
+    },
+    "tenueTypes": {
+      "all": "All",
+      "regular": "Regular",
+      "initiation": "Initiation",
+      "elevation": "Passing",
+      "installation": "Installation",
+      "white": "Open"
+    },
+    "statuses": {
+      "scheduled": "Scheduled",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "canceled": "Canceled"
+    }
+  },
+  "tenueForm": {
+    "createTitle": "Create a new meeting",
+    "editTitle": "Edit meeting",
+    "createDescription": "Fill in the information below to create a new meeting.",
+    "editDescription": "Modify the information below to update the meeting.",
+    "details": "Details",
+    "agenda": "Agenda",
+    "participants": "Participants",
+    "sections": {
+      "basicInfo": "Basic Information",
+      "location": "Location Information",
+      "notes": "Notes and Description"
+    },
+    "details": {
+      "title": "Title",
+      "titlePlaceholder": "Enter the meeting title",
+      "type": "Meeting type",
+      "typePlaceholder": "Select the meeting type",
+      "typeOptions": {
+        "regular": "Regular meeting",
+        "initiation": "Initiation",
+        "elevation": "Passing",
+        "installation": "Installation",
+        "white": "Open meeting"
+      },
+      "date": "Date",
+      "datePlaceholder": "Select a date",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "degree": "Degree",
+      "degreeLabel": "degree",
+      "theme": "Theme",
+      "themePlaceholder": "Enter the meeting theme (optional)",
+      "lodge": "Lodge",
+      "lodgePlaceholder": "Enter the lodge name",
+      "location": "Location",
+      "locationPlaceholder": "Enter the meeting location",
+      "address": "Address",
+      "addressPlaceholder": "Enter the full address",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the meeting proceedings (optional)",
+      "notes": "Notes",
+      "notesPlaceholder": "Add additional information (optional)"
+    },
+    "buttons": {
+      "save": "Save meeting",
+      "saveAndShare": "Save and share",
+      "cancel": "Cancel",
+      "delete": "Delete this meeting"
+    },
+    "confirmCancel": {
+      "title": "Discard changes?",
+      "description": "The changes you've made will be lost. Are you sure you want to leave?",
+      "cancel": "Continue editing",
+      "confirm": "Discard"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "Sign in to your masonic space",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "emailValidation": "Invalid email",
+    "password": "Password",
+    "passwordPlaceholder": "Your password",
+    "passwordValidation": "Password is required",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me",
+    "signIn": "Sign in",
+    "signingIn": "Signing in...",
+    "submitButton": "Sign in",
+    "or": "Or",
+    "noAccount": "Don't have an account?",
+    "registerLink": "Register",
+    "createAccount": "Create an account",
+    "termsPrefix": "By logging in, you agree to our",
+    "termsLink": "terms of service",
+    "and": "and",
+    "privacyLink": "privacy policy",
+    "backToHome": "Back to home",
+    "joinWithInvitation": "Join with an invitation"
+  },
+  "register": {
+    "title": "Create an account",
+    "subtitle": "Sign up to access the masonic space",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Enter your full name",
+    "fullNameValidation": "Full name is required",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "emailValidation": "Invalid email",
+    "password": "Password",
+    "passwordPlaceholder": "Choose a secure password",
+    "passwordValidation": "Password must be at least 8 characters",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "confirmPasswordValidation": "Passwords do not match",
+    "obedience": "Obedience",
+    "obediencePlaceholder": "Select your obedience",
+    "lodge": "Lodge",
+    "lodgePlaceholder": "Enter your lodge name",
+    "lodgeValidation": "Lodge is required",
+    "degree": "Degree",
+    "terms": "I agree to the terms of service and privacy policy",
+    "termsValidation": "You must agree to the terms",
+    "registerButton": "Create my account",
+    "submitting": "Creating account...",
+    "alreadyAccount": "Already have an account?",
+    "loginLink": "Sign in",
+    "invitationOnly": "Registration is by invitation only",
+    "getInvitation": "Request an invitation"
+  },
+  "join": {
+    "title": "Join with an invitation",
+    "subtitle": "Enter your invitation code to join the masonic space",
+    "inviteCode": "Invitation code",
+    "inviteCodePlaceholder": "Enter your invitation code",
+    "submitButton": "Continue",
+    "alreadyAccount": "Already have an account?",
+    "loginLink": "Sign in"
+  },
+  "actualites": {
+    "title": "News",
+    "createTitle": "Create news",
+    "editTitle": "Edit news",
+    "createDescription": "Write and publish new content for your lodge",
+    "noNews": "No news to display",
+    "search": "Search news...",
+    "filter": {
+      "title": "Filter news",
+      "category": "Category",
+      "date": "Date",
+      "author": "Author",
+      "apply": "Apply filters",
+      "reset": "Reset"
+    },
+    "categories": {
+      "all": "All",
+      "lodge": "Lodge",
+      "event": "Event",
+      "announcement": "Announcement",
+      "other": "Other"
+    },
+    "errors": {
+      "missingId": "News ID is missing"
+    }
+  }
+}

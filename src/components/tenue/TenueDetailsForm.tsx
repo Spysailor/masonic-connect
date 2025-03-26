@@ -11,22 +11,22 @@ interface TenueDetailsFormProps {
 }
 
 const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
-  const { t } = useTranslation('tenueForm');
+  const { t } = useTranslation();
   
   return (
     <div className="space-y-8">
       <section>
-        <h3 className="text-lg font-medium mb-4">{t('sections.basicInfo')}</h3>
+        <h3 className="text-lg font-medium mb-4">{t('tenueForm.sections.basicInfo')}</h3>
         <TenueBasicInfoForm form={form} />
       </section>
       
       <section>
-        <h3 className="text-lg font-medium mb-4">{t('sections.location')}</h3>
+        <h3 className="text-lg font-medium mb-4">{t('tenueForm.sections.location')}</h3>
         <TenueLocationForm form={form} />
       </section>
       
       <section>
-        <h3 className="text-lg font-medium mb-4">{t('sections.notes')}</h3>
+        <h3 className="text-lg font-medium mb-4">{t('tenueForm.sections.notes')}</h3>
         <TenueNotesForm form={form} />
       </section>
     </div>
