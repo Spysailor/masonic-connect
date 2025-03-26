@@ -43,11 +43,24 @@ const Agenda = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mb-8 flex items-center gap-4"
+            className="mb-8"
           >
-            <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-masonic-blue-900">Agenda des Tenues</h1>
-              <MasonicSymbol type="temple" size={40} />
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <h1 className="text-3xl font-bold text-masonic-blue-900">Agenda des Tenues</h1>
+                <MasonicSymbol 
+                  type="temple" 
+                  size={40} 
+                  className="ml-2" 
+                />
+              </div>
+              <Link 
+                to="/agenda/create" 
+                className="inline-flex items-center justify-center rounded-md bg-masonic-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-masonic-blue-800 transition-colors"
+              >
+                <Calendar className="mr-2 h-4 w-4" />
+                Créer une tenue
+              </Link>
             </div>
             <p className="text-gray-600 mt-1">Consultez et gérez vos tenues maçonniques</p>
           </motion.div>
@@ -67,7 +80,7 @@ const Agenda = () => {
                 
                 <Link 
                   to="/agenda/create" 
-                  className="inline-flex items-center justify-center rounded-md bg-masonic-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-masonic-blue-800 transition-colors w-full md:w-auto"
+                  className="inline-flex items-center justify-center rounded-md bg-masonic-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-masonic-blue-800 transition-colors w-full md:w-auto md:hidden"
                 >
                   <Calendar className="mr-2 h-4 w-4" />
                   Créer une tenue

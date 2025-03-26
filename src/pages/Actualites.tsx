@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Calendar, Tag, Plus, Edit, Trash2 } from 'lucide-react';
@@ -34,7 +33,6 @@ const Actualites = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Fetch actualités from Supabase
   useEffect(() => {
     const fetchActualites = async () => {
       setLoading(true);
@@ -61,7 +59,6 @@ const Actualites = () => {
     fetchActualites();
   }, [toast]);
 
-  // Filter posts based on search term and category
   const filteredActualites = actualites.filter(actualite => {
     const matchesSearch = actualite.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
                          (actualite.content && actualite.content.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -69,20 +66,16 @@ const Actualites = () => {
     return matchesSearch && matchesCategory;
   });
 
-  // Extract unique categories
   const categories = [...new Set(actualites.map(actualite => actualite.category).filter(Boolean))];
 
-  // Handle creating a new news article
   const handleCreateNews = () => {
     navigate('/actualites/create');
   };
 
-  // Handle editing a news article
   const handleEditNews = (id: string) => {
     navigate(`/actualites/${id}/edit`);
   };
 
-  // Handle deleting a news article
   const handleOpenDeleteDialog = (id: string) => {
     setSelectedNewsId(id);
     setDeleteDialogOpen(true);
@@ -127,19 +120,25 @@ const Actualites = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mb-8 flex justify-between items-center"
+            className="mb-8"
           >
-            <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-masonic-blue-900">Actualités</h1>
-              <MasonicSymbol type="checkerboard" size={40} />
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <h1 className="text-3xl font-bold text-masonic-blue-900">Actualités</h1>
+                <MasonicSymbol 
+                  type="checkerboard" 
+                  size={40} 
+                  className="ml-2"
+                />
+              </div>
+              <Button 
+                onClick={handleCreateNews}
+                className="bg-masonic-blue-700 hover:bg-masonic-blue-800"
+              >
+                <Plus className="mr-2 h-4 w-4" />
+                Créer une actualité
+              </Button>
             </div>
-            <Button 
-              onClick={handleCreateNews}
-              className="bg-masonic-blue-700 hover:bg-masonic-blue-800"
-            >
-              <Plus className="mr-2 h-4 w-4" />
-              Créer une actualité
-            </Button>
           </motion.div>
           
           <motion.div
