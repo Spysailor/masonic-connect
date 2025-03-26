@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
@@ -24,7 +25,16 @@ type ProfileWithRelations = {
   lodges: {
     name: string;
   }[] | null;
-}
+};
+
+// Helper type for safely handling potential Supabase query errors
+type QueryResult = {
+  id: string;
+  display_name: string | null;
+  photo_url: string | null;
+  lodge_memberships: any;
+  lodges: any;
+};
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('agenda');
@@ -100,13 +110,14 @@ const Dashboard = () => {
         
         if (error) throw error;
         
-        return (data as ProfileWithRelations[]).map(profile => ({
+        // Safely transform the query results to handle potential relationship errors
+        return (data as QueryResult[]).map(profile => ({
           id: profile.id,
           name: profile.display_name || 'Membre',
-          role: profile.lodge_memberships && profile.lodge_memberships[0] ? 
-                profile.lodge_memberships[0].office || 'Membre' : 'Membre',
-          lodge: profile.lodges && profile.lodges[0] ? 
-                 profile.lodges[0].name || 'Loge' : 'Loge',
+          role: Array.isArray(profile.lodge_memberships) && profile.lodge_memberships.length > 0 && profile.lodge_memberships[0]?.office ? 
+                profile.lodge_memberships[0].office : 'Membre',
+          lodge: Array.isArray(profile.lodges) && profile.lodges.length > 0 && profile.lodges[0]?.name ? 
+                 profile.lodges[0].name : 'Loge',
           avatarUrl: profile.photo_url || 'https://randomuser.me/api/portraits/men/32.jpg',
         }));
       } catch (error) {
