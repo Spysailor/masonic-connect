@@ -12,6 +12,7 @@ import Footer from '@/components/layout/Footer';
 import TenueCard from '@/components/dashboard/TenueCard';
 import MemberCard from '@/components/dashboard/MemberCard';
 import NewsCard from '@/components/dashboard/NewsCard';
+import { Link } from 'react-router-dom';
 
 // Define types for Supabase query results
 type ProfileWithRelations = {
@@ -458,41 +459,49 @@ const Dashboard = () => {
           >
             <h2 className="text-xl font-bold text-masonic-blue-900 mb-4">Actions rapides</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Card className="shadow-sm hover:shadow-md transition-shadow">
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                    <Calendar className="h-6 w-6 text-masonic-blue-700" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-900">Créer une tenue</span>
-                </CardContent>
-              </Card>
+              <Link to="/agenda/create">
+                <Card className="shadow-sm hover:shadow-md transition-shadow">
+                  <CardContent className="p-6 flex flex-col items-center text-center">
+                    <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
+                      <Calendar className="h-6 w-6 text-masonic-blue-700" />
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">Créer une tenue</span>
+                  </CardContent>
+                </Card>
+              </Link>
               
-              <Card className="shadow-sm hover:shadow-md transition-shadow">
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                    <FileText className="h-6 w-6 text-masonic-blue-700" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-900">Rédiger une planche</span>
-                </CardContent>
-              </Card>
+              <Link to="/bibliotheque?type=planche&action=new">
+                <Card className="shadow-sm hover:shadow-md transition-shadow">
+                  <CardContent className="p-6 flex flex-col items-center text-center">
+                    <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
+                      <FileText className="h-6 w-6 text-masonic-blue-700" />
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">Rédiger une planche</span>
+                  </CardContent>
+                </Card>
+              </Link>
               
-              <Card className="shadow-sm hover:shadow-md transition-shadow">
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                    <Bell className="h-6 w-6 text-masonic-blue-700" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-900">Nouveau message</span>
-                </CardContent>
-              </Card>
+              <Link to="/messages?action=new">
+                <Card className="shadow-sm hover:shadow-md transition-shadow">
+                  <CardContent className="p-6 flex flex-col items-center text-center">
+                    <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
+                      <Bell className="h-6 w-6 text-masonic-blue-700" />
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">Nouveau message</span>
+                  </CardContent>
+                </Card>
+              </Link>
               
-              <Card className="shadow-sm hover:shadow-md transition-shadow">
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                    <BookOpen className="h-6 w-6 text-masonic-blue-700" />
-                  </div>
-                  <span className="text-sm font-medium text-gray-900">Bibliothèque</span>
-                </CardContent>
-              </Card>
+              <Link to="/bibliotheque?type=planche">
+                <Card className="shadow-sm hover:shadow-md transition-shadow">
+                  <CardContent className="p-6 flex flex-col items-center text-center">
+                    <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
+                      <BookOpen className="h-6 w-6 text-masonic-blue-700" />
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">Bibliothèque</span>
+                  </CardContent>
+                </Card>
+              </Link>
             </div>
           </motion.div>
         </div>
