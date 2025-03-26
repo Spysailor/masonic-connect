@@ -354,5 +354,59 @@
     "filters": "Filtres",
     "createPlanche": "Rédiger une planche",
     "planchesFound": "{{count}} planches trouvées"
+  },
+  "plancheDetail": {
+    "backToPlanche": "Retour aux planches",
+    "planche": "Planche",
+    "firstDegree": "1er degré",
+    "secondDegree": "2ème degré",
+    "thirdDegree": "3ème degré",
+    "author": "Auteur",
+    "viewProfile": "Voir le profil",
+    "actions": "Actions",
+    "downloadPDF": "Télécharger (PDF)",
+    "share": "Partager",
+    "save": "Sauvegarder",
+    "mockData": {
+      "title": "Symbolisme du pavé mosaïque",
+      "worshipfulMaster": "Vénérable Maître",
+      "intro": "Le pavé mosaïque est l'un des symboles les plus visibles dans les loges maçonniques. Ce sol formé de carreaux alternativement noirs et blancs est présent dans toutes les loges, quel que soit le rite pratiqué.",
+      "originTitle": "Origine et description",
+      "originDesc1": "Le pavé mosaïque, également appelé \"tableau de la loge\", est directement inspiré du sol du Temple de Salomon. Il est constitué de carreaux alternés blancs et noirs, disposés à la manière d'un damier. Dans les temples maçonniques, il occupe généralement la partie centrale de la loge.",
+      "originDesc2": "La disposition des carreaux peut varier selon les rites et les obédiences, mais la symbolique reste similaire. Le nombre de carreaux n'est pas fixe et peut avoir sa propre signification symbolique.",
+      "symbolismTitle": "Symbolisme du pavé mosaïque",
+      "symbolismDesc": "Le pavé mosaïque représente la dualité fondamentale de l'existence humaine. Les carreaux blancs et noirs symbolisent les opposés qui régissent notre univers et notre vie :",
+      "duality": {
+        "item1": "Le bien et le mal",
+        "item2": "La lumière et les ténèbres",
+        "item3": "La vie et la mort",
+        "item4": "L'esprit et la matière",
+        "item5": "Le jour et la nuit",
+        "item6": "Le positif et le négatif"
+      },
+      "dualityDesc": "Cette dualité nous rappelle que notre existence est faite de contrastes et de complémentarités. Le franc-maçon, dans sa quête de connaissance, apprend à naviguer entre ces opposés pour trouver l'équilibre et l'harmonie.",
+      "interpretationsTitle": "Interprétations maçonniques",
+      "interpretationsIntro": "En franc-maçonnerie, le pavé mosaïque est interprété de plusieurs façons :",
+      "interpretation1": {
+        "title": "Le chemin initiatique",
+        "desc": "Le pavé représente le chemin de l'initié, alternant entre épreuves (carreaux noirs) et réussites (carreaux blancs)."
+      },
+      "interpretation2": {
+        "title": "L'unité des contraires",
+        "desc": "Il symbolise l'union des contraires, rappelant que les opposés ne s'excluent pas mais se complètent."
+      },
+      "interpretation3": {
+        "title": "Terrain commun",
+        "desc": "C'est sur ce pavé que tous les frères se rencontrent, quelles que soient leurs différences, illustrant l'universalité de la fraternité maçonnique."
+      },
+      "conclusionTitle": "Conclusion",
+      "conclusionDesc1": "Le pavé mosaïque est un symbole riche qui rappelle au maçon que son parcours n'est pas linéaire et que la dualité fait partie intégrante de notre existence. Il nous enseigne à rechercher l'équilibre entre les opposés et à comprendre que la lumière n'existe pas sans l'obscurité.",
+      "conclusionDesc2": "En marchant sur ce pavé lors des cérémonies, le franc-maçon est invité à méditer sur sa propre dualité intérieure et à travailler à l'harmonisation des forces contradictoires qui l'habitent, dans sa quête permanente de perfection.",
+      "tags": {
+        "symbolism": "Symbolisme",
+        "temple": "Temple",
+        "royalArt": "Art Royal"
+      }
+    }
   }
 }

@@ -354,5 +354,59 @@
     "filters": "Filters",
     "createPlanche": "Write a planche",
     "planchesFound": "{{count}} planches found"
+  },
+  "plancheDetail": {
+    "backToPlanche": "Back to planches",
+    "planche": "Planche",
+    "firstDegree": "1st degree",
+    "secondDegree": "2nd degree",
+    "thirdDegree": "3rd degree",
+    "author": "Author",
+    "viewProfile": "View profile",
+    "actions": "Actions",
+    "downloadPDF": "Download (PDF)",
+    "share": "Share",
+    "save": "Save",
+    "mockData": {
+      "title": "Symbolism of the mosaic pavement",
+      "worshipfulMaster": "Worshipful Master",
+      "intro": "The mosaic pavement is one of the most visible symbols in masonic lodges. This floor formed of alternating black and white tiles is present in all lodges, regardless of the rite practiced.",
+      "originTitle": "Origin and description",
+      "originDesc1": "The mosaic pavement, also called the \"lodge table\", is directly inspired by the floor of Solomon's Temple. It is made up of alternating white and black tiles, arranged like a checkerboard. In masonic temples, it generally occupies the central part of the lodge.",
+      "originDesc2": "The arrangement of tiles can vary according to rites and obediences, but the symbolism remains similar. The number of tiles is not fixed and can have its own symbolic meaning.",
+      "symbolismTitle": "Symbolism of the mosaic pavement",
+      "symbolismDesc": "The mosaic pavement represents the fundamental duality of human existence. The white and black tiles symbolize the opposites that govern our universe and our life:",
+      "duality": {
+        "item1": "Good and evil",
+        "item2": "Light and darkness",
+        "item3": "Life and death",
+        "item4": "Spirit and matter",
+        "item5": "Day and night",
+        "item6": "Positive and negative"
+      },
+      "dualityDesc": "This duality reminds us that our existence is made up of contrasts and complementarities. The Freemason, in his quest for knowledge, learns to navigate between these opposites to find balance and harmony.",
+      "interpretationsTitle": "Masonic interpretations",
+      "interpretationsIntro": "In Freemasonry, the mosaic pavement is interpreted in several ways:",
+      "interpretation1": {
+        "title": "The initiatic path",
+        "desc": "The pavement represents the path of the initiate, alternating between trials (black tiles) and successes (white tiles)."
+      },
+      "interpretation2": {
+        "title": "The unity of opposites",
+        "desc": "It symbolizes the union of opposites, reminding that opposites do not exclude each other but complement each other."
+      },
+      "interpretation3": {
+        "title": "Common ground",
+        "desc": "It is on this pavement that all brothers meet, whatever their differences, illustrating the universality of masonic brotherhood."
+      },
+      "conclusionTitle": "Conclusion",
+      "conclusionDesc1": "The mosaic pavement is a rich symbol that reminds the mason that his journey is not linear and that duality is an integral part of our existence. It teaches us to seek balance between opposites and to understand that light does not exist without darkness.",
+      "conclusionDesc2": "When walking on this pavement during ceremonies, the Freemason is invited to meditate on his own inner duality and to work on harmonizing the contradictory forces that inhabit him, in his permanent quest for perfection.",
+      "tags": {
+        "symbolism": "Symbolism",
+        "temple": "Temple",
+        "royalArt": "Royal Art"
+      }
+    }
   }
 }
