@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import MemberCard from '@/components/dashboard/MemberCard';
@@ -12,6 +13,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 const Members = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const { t } = useTranslation();
   
   // Mock data for demonstration
   const members = [
@@ -94,8 +96,8 @@ const Members = () => {
           >
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold text-masonic-blue-900 break-words">Annuaire des Frères</h1>
-                <p className="text-gray-600 mt-1 break-words">Consultez les profils des membres de la loge Universalys</p>
+                <h1 className="text-3xl font-bold text-masonic-blue-900 break-words">{t('members.title')}</h1>
+                <p className="text-gray-600 mt-1 break-words">{t('members.subtitle')}</p>
               </div>
               <div className="hidden md:block">
                 <MasonicSymbol type="square-compass" size={64} hideImage={true} />
@@ -115,7 +117,7 @@ const Members = () => {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input
                 type="text"
-                placeholder="Rechercher un frère..."
+                placeholder={t('members.search')}
                 className="pl-10"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -124,11 +126,11 @@ const Members = () => {
             
             <Tabs defaultValue="all" className="w-full">
               <TabsList className="mb-6 w-full overflow-x-auto flex flex-nowrap whitespace-nowrap">
-                <TabsTrigger value="all" className="flex-1">Tous</TabsTrigger>
-                <TabsTrigger value="officers" className="flex-1">Officiers</TabsTrigger>
-                <TabsTrigger value="masters" className="flex-1">Maîtres</TabsTrigger>
-                <TabsTrigger value="companions" className="flex-1">Compagnons</TabsTrigger>
-                <TabsTrigger value="apprentices" className="flex-1">Apprentis</TabsTrigger>
+                <TabsTrigger value="all" className="flex-1">{t('members.filters.all')}</TabsTrigger>
+                <TabsTrigger value="officers" className="flex-1">{t('members.filters.officers')}</TabsTrigger>
+                <TabsTrigger value="masters" className="flex-1">{t('members.filters.masters')}</TabsTrigger>
+                <TabsTrigger value="companions" className="flex-1">{t('members.filters.companions')}</TabsTrigger>
+                <TabsTrigger value="apprentices" className="flex-1">{t('members.filters.apprentices')}</TabsTrigger>
               </TabsList>
               
               <TabsContent value="all" className="mt-0">

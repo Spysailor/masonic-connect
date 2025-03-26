@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -125,6 +124,23 @@
       "writePlanche": "Rédiger une planche",
       "brothersDirectory": "Annuaire des Frères",
       "agenda": "Agenda"
+    }
+  },
+  "members": {
+    "title": "Annuaire des Frères",
+    "subtitle": "Consultez les profils des membres de la loge Universalys",
+    "search": "Rechercher un frère...",
+    "filters": {
+      "all": "Tous",
+      "officers": "Officiers",
+      "masters": "Maîtres",
+      "companions": "Compagnons",
+      "apprentices": "Apprentis"
+    },
+    "contact": {
+      "phone": "Appeler",
+      "email": "Email",
+      "message": "Message"
     }
   }
 }

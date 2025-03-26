@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -125,6 +124,23 @@
       "writePlanche": "Write a document",
       "brothersDirectory": "Brothers directory",
       "agenda": "Schedule"
+    }
+  },
+  "members": {
+    "title": "Brothers Directory",
+    "subtitle": "View the profiles of members from the Universalys lodge",
+    "search": "Search for a brother...",
+    "filters": {
+      "all": "All",
+      "officers": "Officers",
+      "masters": "Masters",
+      "companions": "Companions",
+      "apprentices": "Apprentices"
+    },
+    "contact": {
+      "phone": "Call",
+      "email": "Email",
+      "message": "Message"
     }
   }
 }

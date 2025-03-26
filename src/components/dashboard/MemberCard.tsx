@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Mail, Phone, MessageCircle } from 'lucide-react';
 import MasonicSymbol from '../masonic/MasonicSymbols';
@@ -16,6 +17,8 @@ export interface MemberProps {
 }
 
 const MemberCard: React.FC<MemberProps> = ({ member }) => {
+  const { t } = useTranslation();
+  
   return (
     <Card className="overflow-hidden hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
       <div className="aspect-square overflow-hidden relative">
@@ -41,18 +44,21 @@ const MemberCard: React.FC<MemberProps> = ({ member }) => {
         <Link 
           to={`/freres/${member.id}`}
           className="flex-1 flex items-center justify-center text-masonic-blue-700 p-2 rounded-md hover:bg-masonic-blue-50 transition-colors"
+          aria-label={t('members.contact.phone')}
         >
           <Phone className="h-5 w-5" />
         </Link>
         <Link 
           to={`/freres/${member.id}`}
           className="flex-1 flex items-center justify-center text-masonic-blue-700 p-2 rounded-md hover:bg-masonic-blue-50 transition-colors"
+          aria-label={t('members.contact.email')}
         >
           <Mail className="h-5 w-5" />
         </Link>
         <Link 
           to={`/freres/${member.id}`}
           className="flex-1 flex items-center justify-center text-masonic-blue-700 p-2 rounded-md hover:bg-masonic-blue-50 transition-colors"
+          aria-label={t('members.contact.message')}
         >
           <MessageCircle className="h-5 w-5" />
         </Link>
