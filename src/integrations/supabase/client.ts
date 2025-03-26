@@ -3,19 +3,17 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-// Read environment variables
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Read environment variables with fallback values for development
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://krllicbqjxtbozwhcknk.supabase.co';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtybGxpY2Jxanh0Ym96d2hja25rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI3ODk0NDYsImV4cCI6MjA1ODM2NTQ0Nn0.0QZ5ZoqQcPJ-udjqpRa74qiTr_tqDh8zxHZzfLboU-s';
 
-// Validate that environment variables are set
-if (!SUPABASE_URL) {
-  console.error('VITE_SUPABASE_URL environment variable is missing');
-  throw new Error('SUPABASE_URL is required. Please set the VITE_SUPABASE_URL environment variable.');
+// Log a warning if environment variables are missing
+if (!import.meta.env.VITE_SUPABASE_URL) {
+  console.warn('VITE_SUPABASE_URL environment variable is missing, using fallback');
 }
 
-if (!SUPABASE_ANON_KEY) {
-  console.error('VITE_SUPABASE_ANON_KEY environment variable is missing');
-  throw new Error('SUPABASE_ANON_KEY is required. Please set the VITE_SUPABASE_ANON_KEY environment variable.');
+if (!import.meta.env.VITE_SUPABASE_ANON_KEY) {
+  console.warn('VITE_SUPABASE_ANON_KEY environment variable is missing, using fallback');
 }
 
 // Import the supabase client like this:
