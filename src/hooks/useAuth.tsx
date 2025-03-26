@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 type AuthContextType = {
   session: Session | null;
@@ -25,17 +27,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         console.log('Auth state changed:', event);
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          await fetchProfile(session.user.id);
+          // Use setTimeout to avoid potential deadlocks with Supabase auth
+          setTimeout(() => {
+            fetchProfile(session.user.id);
+          }, 0);
         } else {
           setProfile(null);
         }
@@ -46,7 +52,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const initializeAuth = async () => {
       try {
         setIsLoading(true);
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error('Error getting session:', error);
+          return;
+        }
         
         setSession(session);
         setUser(session?.user ?? null);
@@ -94,10 +105,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .eq('id', userId)
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching profile:', error);
+        toast({
+          title: i18nWithFallback('auth.errors.profileFetchFailed', 'Erreur de profil'),
+          description: i18nWithFallback('auth.errors.profileFetchFailedDesc', 'Impossible de récupérer votre profil.'),
+          variant: "destructive",
+        });
+        return;
+      }
+      
       setProfile(data);
     } catch (error) {
-      console.error('Error fetching profile:', error);
+      console.error('Exception fetching profile:', error);
       setProfile(null);
     }
   };
@@ -111,16 +131,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (error) throw error;
       
       toast({
-        title: "Connexion réussie",
-        description: "Bienvenue dans votre espace maçonnique.",
+        title: i18nWithFallback('auth.success.loginTitle', 'Connexion réussie'),
+        description: i18nWithFallback('auth.success.loginDesc', 'Bienvenue dans votre espace maçonnique.'),
       });
       
       navigate('/dashboard');
     } catch (error: any) {
       console.error('Login error:', error);
+      
+      // Map Supabase error codes to translation keys
+      let errorKey = 'auth.errors.default';
+      
+      if (error.message.includes('Invalid login credentials')) {
+        errorKey = 'auth.errors.invalidCredentials';
+      } else if (error.message.includes('Email not confirmed')) {
+        errorKey = 'auth.errors.emailNotConfirmed';
+      } else if (error.message.includes('network')) {
+        errorKey = 'auth.errors.network';
+      }
+      
       toast({
-        title: "Échec de la connexion",
-        description: error.message || "Vérifiez vos identifiants et réessayez.",
+        title: i18nWithFallback('auth.errors.loginFailed', 'Échec de la connexion'),
+        description: i18nWithFallback(errorKey, error.message || "Vérifiez vos identifiants et réessayez."),
         variant: "destructive",
       });
     } finally {
@@ -145,16 +177,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (error) throw error;
       
       toast({
-        title: "Inscription réussie",
-        description: "Un email de confirmation vous a été envoyé.",
+        title: i18nWithFallback('auth.success.signupTitle', 'Inscription réussie'),
+        description: i18nWithFallback('auth.success.signupDesc', 'Un email de confirmation vous a été envoyé.'),
       });
       
       navigate('/login');
     } catch (error: any) {
       console.error('Signup error:', error);
+      
+      // Map error messages to translation keys
+      let errorKey = 'auth.errors.default';
+      
+      if (error.message.includes('already registered')) {
+        errorKey = 'auth.errors.emailAlreadyRegistered';
+      } else if (error.message.includes('weak password')) {
+        errorKey = 'auth.errors.weakPassword';
+      } else if (error.message.includes('network')) {
+        errorKey = 'auth.errors.network';
+      }
+      
       toast({
-        title: "Échec de l'inscription",
-        description: error.message || "Une erreur est survenue lors de l'inscription.",
+        title: i18nWithFallback('auth.errors.signupFailed', 'Échec de l\'inscription'),
+        description: i18nWithFallback(errorKey, error.message || "Une erreur est survenue lors de l'inscription."),
         variant: "destructive",
       });
     } finally {
@@ -175,16 +219,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setProfile(null);
       
       toast({
-        title: "Déconnexion réussie",
-        description: "À bientôt !",
+        title: i18nWithFallback('auth.success.logoutTitle', 'Déconnexion réussie'),
+        description: i18nWithFallback('auth.success.logoutDesc', 'À bientôt !'),
       });
       
       navigate('/');
     } catch (error: any) {
       console.error('Logout error:', error);
       toast({
-        title: "Erreur de déconnexion",
-        description: error.message,
+        title: i18nWithFallback('auth.errors.logoutFailed', 'Erreur de déconnexion'),
+        description: i18nWithFallback('auth.errors.default', error.message),
         variant: "destructive",
       });
     } finally {
@@ -197,7 +241,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       setIsLoading(true);
       
-      if (!user) throw new Error("Aucun utilisateur connecté");
+      if (!user) {
+        throw new Error(i18nWithFallback('auth.errors.noUserLoggedIn', 'Aucun utilisateur connecté'));
+      }
       
       const { error } = await supabase
         .from('profiles')
@@ -210,14 +256,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       await fetchProfile(user.id);
       
       toast({
-        title: "Profil mis à jour",
-        description: "Vos informations ont été enregistrées.",
+        title: i18nWithFallback('auth.success.profileUpdateTitle', 'Profil mis à jour'),
+        description: i18nWithFallback('auth.success.profileUpdateDesc', 'Vos informations ont été enregistrées.'),
       });
     } catch (error: any) {
       console.error('Profile update error:', error);
       toast({
-        title: "Erreur de mise à jour",
-        description: error.message,
+        title: i18nWithFallback('auth.errors.profileUpdateFailed', 'Erreur de mise à jour'),
+        description: i18nWithFallback('auth.errors.default', error.message),
         variant: "destructive",
       });
     } finally {
