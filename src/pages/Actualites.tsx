@@ -5,6 +5,7 @@ import { Search, Calendar, Tag, Plus, Edit, Trash2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 import { Input } from '@/components/ui/input';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
@@ -128,9 +129,9 @@ const Actualites = () => {
             transition={{ duration: 0.4 }}
             className="mb-8 flex justify-between items-center"
           >
-            <div>
+            <div className="flex items-center gap-3">
               <h1 className="text-3xl font-bold text-masonic-blue-900">Actualités</h1>
-              <p className="text-gray-600 mt-1">Restez informé des dernières nouvelles et événements</p>
+              <MasonicSymbol type="checkerboard" size={40} />
             </div>
             <Button 
               onClick={handleCreateNews}
