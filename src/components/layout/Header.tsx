@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../ui-elements/Logo';
 import AnimatedButton from '../ui-elements/AnimatedButton';
-import MasonicSymbol from '../masonic/MasonicSymbols';
 import NotificationIndicator from '../notifications/NotificationIndicator';
 import { cn } from '@/lib/utils';
 import { UserCircle, Menu, X } from 'lucide-react';
@@ -59,12 +57,9 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-3 md:px-6">
         <div className="flex items-center justify-between">
-          {/* Logo with Masonic Symbol */}
+          {/* Logo */}
           <div className="flex items-center">
             <Logo variant="default" size={isMobile ? "sm" : "md"} />
-            <div className="hidden sm:block">
-              <MasonicSymbol type="square-compass" size={32} />
-            </div>
           </div>
           
           {/* Desktop Navigation */}
