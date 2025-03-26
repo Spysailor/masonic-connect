@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from '@/utils/motion';
 import { Link } from 'react-router-dom';
 import { toast } from "sonner";
 import { useTranslation } from 'react-i18next';

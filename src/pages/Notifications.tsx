@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from '@/utils/motion';
 import { Bell, Book, Calendar, Mail, Check, Filter, ArchiveX, RefreshCw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';

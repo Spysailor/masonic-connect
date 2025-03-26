@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 import { formatDistanceToNow } from 'date-fns';
 import { fr, enUS } from 'date-fns/locale';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { motion } from 'framer-motion';
+import { motion } from '@/utils/motion';
 import { useNotifications } from '@/hooks/use-notifications';
 import { NotificationType } from '@/hooks/use-notifications';
 import { useTranslation } from 'react-i18next';
