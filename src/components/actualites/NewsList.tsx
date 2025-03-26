@@ -1,10 +1,11 @@
 
 import React from 'react';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS } from 'date-fns/locale';
 import { Link } from 'react-router-dom';
 import { Calendar, Edit, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
 
 interface NewsListProps {
   loading: boolean;
@@ -19,6 +20,9 @@ const NewsList: React.FC<NewsListProps> = ({
   handleEditNews, 
   handleOpenDeleteDialog 
 }) => {
+  const { t, i18n } = useTranslation();
+  const dateLocale = i18n.language === 'fr' ? fr : enUS;
+
   if (loading) {
     return (
       <div className="flex justify-center py-12">
@@ -30,7 +34,7 @@ const NewsList: React.FC<NewsListProps> = ({
   if (filteredActualites.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-500">Aucune actualité ne correspond à votre recherche.</p>
+        <p className="text-gray-500">{t('actualites.noResults')}</p>
       </div>
     );
   }
@@ -59,7 +63,7 @@ const NewsList: React.FC<NewsListProps> = ({
                 )}
                 <span className="text-gray-500 text-sm ml-2 flex items-center">
                   <Calendar className="h-3 w-3 mr-1" />
-                  {actualite.published_at ? format(new Date(actualite.published_at), 'dd MMMM yyyy', { locale: fr }) : ''}
+                  {actualite.published_at ? format(new Date(actualite.published_at), 'dd MMMM yyyy', { locale: dateLocale }) : ''}
                 </span>
               </div>
               
@@ -76,12 +80,12 @@ const NewsList: React.FC<NewsListProps> = ({
                   <div className="w-8 h-8 rounded-full overflow-hidden mr-2">
                     <img 
                       src={`https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 100)}.jpg`}
-                      alt={actualite.author_name || 'Auteur'} 
+                      alt={actualite.author_name || t('actualites.author')} 
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div>
-                    <span className="text-sm font-medium text-gray-900">{actualite.author_name || 'Administrateur'}</span>
+                    <span className="text-sm font-medium text-gray-900">{actualite.author_name || t('actualites.administrator')}</span>
                   </div>
                 </div>
                 
@@ -93,7 +97,7 @@ const NewsList: React.FC<NewsListProps> = ({
                     className="flex items-center text-blue-600 hover:text-blue-800"
                   >
                     <Edit className="h-3.5 w-3.5 mr-1" />
-                    Modifier
+                    {t('actualites.edit')}
                   </Button>
                   <Button
                     variant="outline"
@@ -102,13 +106,13 @@ const NewsList: React.FC<NewsListProps> = ({
                     className="flex items-center text-red-600 hover:text-red-800"
                   >
                     <Trash2 className="h-3.5 w-3.5 mr-1" />
-                    Supprimer
+                    {t('actualites.delete')}
                   </Button>
                   <Link
                     to={`/actualites/${actualite.id}`}
                     className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 ml-2"
                   >
-                    Lire la suite →
+                    {t('actualites.readMore')} →
                   </Link>
                 </div>
               </div>

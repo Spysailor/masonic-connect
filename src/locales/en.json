@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -407,6 +406,28 @@
         "temple": "Temple",
         "royalArt": "Royal Art"
       }
+    }
+  },
+  "actualites": {
+    "title": "News",
+    "subtitle": "Latest news from our lodge",
+    "createNews": "Create News",
+    "search": "Search news...",
+    "filterByCategory": "Filter by category",
+    "allCategories": "All categories",
+    "noResults": "No news matches your search.",
+    "author": "Author",
+    "administrator": "Administrator",
+    "edit": "Edit",
+    "delete": "Delete",
+    "readMore": "Read more",
+    "success": "Success",
+    "newsDeleted": "The news has been deleted",
+    "errors": {
+      "error": "Error",
+      "fetchFailed": "Error",
+      "cantLoadNews": "Unable to load news",
+      "cantDeleteNews": "Unable to delete the news"
     }
   }
 }

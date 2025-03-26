@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -407,6 +406,28 @@
         "temple": "Temple",
         "royalArt": "Art Royal"
       }
+    }
+  },
+  "actualites": {
+    "title": "Actualités",
+    "subtitle": "Dernières nouvelles de notre loge",
+    "createNews": "Créer une actualité",
+    "search": "Rechercher des actualités...",
+    "filterByCategory": "Filtrer par catégorie",
+    "allCategories": "Toutes les catégories",
+    "noResults": "Aucune actualité ne correspond à votre recherche.",
+    "author": "Auteur",
+    "administrator": "Administrateur",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "readMore": "Lire la suite",
+    "success": "Succès",
+    "newsDeleted": "L'actualité a été supprimée",
+    "errors": {
+      "error": "Erreur",
+      "fetchFailed": "Erreur",
+      "cantLoadNews": "Impossible de charger les actualités",
+      "cantDeleteNews": "Impossible de supprimer l'actualité"
     }
   }
 }

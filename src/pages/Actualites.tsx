@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Card } from '@/components/ui/card';
@@ -14,6 +15,7 @@ import NewsList from '@/components/actualites/NewsList';
 import NewsDeleteDialog from '@/components/actualites/NewsDeleteDialog';
 
 const Actualites = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [actualites, setActualites] = useState<any[]>([]);
@@ -37,8 +39,8 @@ const Actualites = () => {
       } catch (error) {
         console.error('Error fetching news:', error);
         toast({
-          title: "Erreur",
-          description: "Impossible de charger les actualités",
+          title: t('actualites.errors.fetchFailed'),
+          description: t('actualites.errors.cantLoadNews'),
           variant: "destructive"
         });
       } finally {
@@ -47,7 +49,7 @@ const Actualites = () => {
     };
 
     fetchActualites();
-  }, [toast]);
+  }, [toast, t]);
 
   const filteredActualites = actualites.filter(actualite => {
     const matchesSearch = actualite.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -84,14 +86,14 @@ const Actualites = () => {
 
       setActualites(actualites.filter(news => news.id !== selectedNewsId));
       toast({
-        title: "Succès",
-        description: "L'actualité a été supprimée",
+        title: t('actualites.success'),
+        description: t('actualites.newsDeleted'),
       });
     } catch (error) {
       console.error('Error deleting news:', error);
       toast({
-        title: "Erreur",
-        description: "Impossible de supprimer l'actualité",
+        title: t('actualites.errors.error'),
+        description: t('actualites.errors.cantDeleteNews'),
         variant: "destructive"
       });
     } finally {
