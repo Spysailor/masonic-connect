@@ -7,6 +7,7 @@ import { Gavel, Library, Columns, BookOpen, ScrollText, Users, MessageSquare } f
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Logo from '@/components/ui-elements/Logo';
+
 const Index = () => {
   return <div className="min-h-screen bg-white">
       {/* Header */}
@@ -60,7 +61,7 @@ const Index = () => {
       <section className="container mx-auto px-4 py-20">
         <h2 className="text-3xl font-bold text-center mb-12 text-masonic-blue-900">Solutions adaptées à chaque loge</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <PricingCard title="Basique" price="9,99 €" features={["Jusqu'à 30 membres", "Messagerie sécurisée", "Agenda des tenues", "Planches et documents", "Gestion des présences"]} buttonText="Commencer" to="/register" />
+          <PricingCard title="Basique" price="1 €" features={["1€/mois par membre ou 10€/an", "Jusqu'à 30 membres", "Messagerie sécurisée", "Agenda des tenues", "Planches et documents", "Gestion des présences", "Bibliothèque maçonnique"]} buttonText="Commencer" to="/register" />
           <PricingCard title="Premium" price="19,99 €" featured={true} features={["Jusqu'à 100 membres", "Tous les avantages du plan Basique", "Stockage illimité", "Bibliothèque maçonnique", "Tuilage électronique"]} buttonText="Choisir Premium" to="/register?plan=premium" />
           <PricingCard title="Illimité" price="39,99 €" features={["Membres illimités", "Tous les avantages du plan Premium", "Support prioritaire", "Analytiques avancées", "Personnalisation complète"]} buttonText="Contacter" to="/register?plan=unlimited" />
         </div>
@@ -93,7 +94,6 @@ const Index = () => {
     </div>;
 };
 
-// Utility components
 const FeatureCard = ({
   title,
   description,
@@ -113,6 +113,7 @@ const FeatureCard = ({
     <h3 className="text-xl font-bold mb-2 text-masonic-blue-900">{title}</h3>
     <p className="text-gray-600">{description}</p>
   </motion.div>;
+
 const PricingCard = ({
   title,
   price,
@@ -143,6 +144,7 @@ const PricingCard = ({
       {buttonText}
     </Link>
   </motion.div>;
+
 const Testimonial = ({
   quote,
   author
@@ -160,4 +162,5 @@ const Testimonial = ({
     <p className="text-lg mb-4 italic text-gray-700">"{quote}"</p>
     <p className="text-masonic-blue-700 font-medium">— {author}</p>
   </motion.div>;
+
 export default Index;
