@@ -15,12 +15,14 @@ interface MasonicSymbolProps {
   type: SymbolType;
   size?: number | string;
   className?: string;
+  hideImage?: boolean;
 }
 
 const MasonicSymbol: React.FC<MasonicSymbolProps> = ({ 
   type, 
   size = 40, 
-  className = '' 
+  className = '',
+  hideImage = false
 }) => {
   const sizeStyle = typeof size === 'number' ? `${size}px` : size;
   
@@ -44,12 +46,14 @@ const MasonicSymbol: React.FC<MasonicSymbolProps> = ({
         height: sizeStyle,
       }}
     >
-      <img 
-        src={symbolImages[type]} 
-        alt={`Symbole maçonnique: ${type}`}
-        className="w-full h-full object-contain"
-        style={{ maxWidth: "100%", maxHeight: "100%" }}
-      />
+      {!hideImage && (
+        <img 
+          src={symbolImages[type]} 
+          alt={`Symbole maçonnique: ${type}`}
+          className="w-full h-full object-contain"
+          style={{ maxWidth: "100%", maxHeight: "100%" }}
+        />
+      )}
     </div>
   );
 };

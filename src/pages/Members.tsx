@@ -98,7 +98,7 @@ const Members = () => {
                 <p className="text-gray-600 mt-1 break-words">Consultez les profils des membres de la loge Universalys</p>
               </div>
               <div className="hidden md:block">
-                <MasonicSymbol type="square-compass" size={64} />
+                <MasonicSymbol type="square-compass" size={64} hideImage={true} />
               </div>
             </div>
           </motion.div>

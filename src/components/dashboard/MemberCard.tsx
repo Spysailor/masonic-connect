@@ -26,7 +26,7 @@ const MemberCard: React.FC<MemberProps> = ({ member }) => {
         />
         {member.role.toLowerCase().includes('vénérable') && (
           <div className="absolute top-2 right-2">
-            <MasonicSymbol type="square-compass" size={32} className="bg-white/80 rounded-full p-1" />
+            <MasonicSymbol type="square-compass" size={32} className="bg-white/80 rounded-full p-1" hideImage={true} />
           </div>
         )}
       </div>
