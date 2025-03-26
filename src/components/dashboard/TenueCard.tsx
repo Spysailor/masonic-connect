@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 import { MapPin, Calendar } from 'lucide-react';
 
-interface TenueProps {
+export interface TenueProps {
   tenue: {
     id: string;
     title: string;

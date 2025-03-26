@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { formatDate } from '@/utils/formatters';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 
-interface NewsProps {
+export interface NewsProps {
   news: {
     id: string;
     title: string;

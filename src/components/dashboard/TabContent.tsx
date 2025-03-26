@@ -1,12 +1,8 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TenueProps } from './TenueCard';
-import { MemberProps } from './MemberCard';
-import { NewsProps } from './NewsCard';
-import TenueCard from './TenueCard';
-import MemberCard from './MemberCard';
-import NewsCard from './NewsCard';
+import TenueCard, { TenueProps } from './TenueCard';
+import MemberCard, { MemberProps } from './MemberCard';
+import NewsCard, { NewsProps } from './NewsCard';
 
 interface TabContentProps {
   activeTab: string;

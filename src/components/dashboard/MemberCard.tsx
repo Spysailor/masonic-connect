@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Mail, Phone, MessageCircle } from 'lucide-react';
 import MasonicSymbol from '../masonic/MasonicSymbols';
 
-interface MemberProps {
+export interface MemberProps {
   member: {
     id: string;
     name: string;
