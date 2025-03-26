@@ -1,149 +1,157 @@
+
 {
   "common": {
     "appName": "MasonConnect",
-    "dashboard": "Dashboard",
-    "agenda": "Schedule",
-    "brothers": "Brothers",
-    "news": "News",
-    "library": "Library",
-    "messages": "Messages",
-    "login": "Login",
-    "profile": "Profile",
-    "notifications": "Notifications",
-    "search": "Search",
     "loading": "Loading...",
-    "register": "Register",
-    "logout": "Logout"
-  },
-  "index": {
-    "heroTitle": "The digital platform for all masonic lodges",
-    "heroSubtitle": "Create your custom lodge space and connect your brothers and sisters in a few clicks",
-    "createLodge": "Create your lodge",
-    "invitationCode": "I have an invitation code",
-    "featuresTitle": "100% Masonic Features",
-    "pricingTitle": "Our Prices: Symbolic €1",
-    "testimonialTitle": "What our users say",
-    "readyTitle": "Ready to take the step?",
-    "readySubtitle": "Join hundreds of lodges already using our platform",
-    "createSpace": "Create your lodge space"
-  },
-  "features": {
-    "secureComms": {
-      "title": "Secure Communications",
-      "description": "Lodge news, dedicated secure messaging, personalized notifications."
-    },
-    "tenueManagement": {
-      "title": "Meeting Management",
-      "description": "Meeting schedule, attendance confirmation, agape and visitor management, attendance sheets."
-    },
-    "documents": {
-      "title": "Documents & Tracing boards",
-      "description": "Access to tracing boards, rituals, Lodge and Obedience documents."
-    },
-    "memberDirectory": {
-      "title": "Member Directory",
-      "description": "Address book with contacts, customizable profile, route calculation to the temple."
-    },
-    "masonicLibrary": {
-      "title": "Masonic Library",
-      "description": "Catalog of available books, reservation system, masonic references."
-    },
-    "visitorAccess": {
-      "title": "Visitor Access",
-      "description": "QR code for visitors, human validation for calendars, enhanced security."
-    }
-  },
-  "pricing": {
-    "basicMonthly": {
-      "title": "Basic Monthly",
-      "price": "€1",
-      "period": "month",
-      "features": [
-        "€1/month per member",
-        "Secure messaging",
-        "Meeting schedule",
-        "Documents & tracing boards",
-        "Attendance management",
-        "Masonic library"
-      ],
-      "button": "Start"
-    },
-    "basicAnnual": {
-      "title": "Basic Annual",
-      "price": "€10",
-      "period": "year",
-      "features": [
-        "€10/year per member",
-        "Secure messaging",
-        "Meeting schedule",
-        "Documents & tracing boards",
-        "Attendance management",
-        "Masonic library"
-      ],
-      "button": "Special Offer"
-    }
-  },
-  "agenda": {
-    "upcoming": "Upcoming Meetings",
-    "filter": "Filter by degree",
-    "all": "All degrees",
-    "degree": "{{count}}° degree",
-    "list": "List",
-    "calendar": "Calendar",
-    "noEvent": "No meetings scheduled for this date"
-  },
-  "footer": {
-    "description": "The platform dedicated to Freemasons to connect, share and grow together.",
-    "navigation": "Navigation",
-    "resources": "Resources",
-    "legal": "Legal Information",
-    "copyright": "All rights reserved."
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search...",
+    "filter": "Filter",
+    "sort": "Sort",
+    "actions": "Actions",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "yes": "Yes",
+    "no": "No",
+    "more": "More",
+    "less": "Less"
   },
   "dashboard": {
-    "title": "Dashboard",
-    "welcome": "Welcome to your MasonConnect personal space",
-    "quickActions": "Quick Actions",
-    "stats": {
-      "nextTenue": "Next meeting",
-      "membersCount": "Brothers",
-      "planchesCount": "Documents",
-      "unreadMessages": "Messages",
-      "members": "members",
-      "documents": "documents",
-      "unread": "unread",
-      "none": "None"
-    },
-    "tabs": {
-      "agenda": "Schedule",
-      "brothers": "Brothers",
-      "news": "News"
-    },
+    "welcome": "Welcome to your masonic space",
+    "quickAccess": "Quick access",
+    "recentActivity": "Recent activity",
     "upcomingTenues": "Upcoming meetings",
     "lodgeOfficers": "Lodge officers",
     "latestNews": "Latest news",
-    "seeAll": "See all →",
+    "seeAll": "See all",
+    "quickActions": "Quick actions",
+    "stats": {
+      "nextTenue": "Next meeting",
+      "membersCount": "Number of brothers",
+      "planchesCount": "Number of tracing boards",
+      "unreadMessages": "Unread messages",
+      "members": "members",
+      "documents": "documents",
+      "unread": "unread"
+    },
     "actions": {
-      "createTenue": "Create a meeting",
-      "writePlanche": "Write a document",
+      "createTenue": "Create meeting",
+      "writePlanche": "Write tracing board",
       "brothersDirectory": "Brothers directory",
-      "agenda": "Schedule"
+      "agenda": "Calendar"
+    },
+    "tabs": {
+      "agenda": "Calendar",
+      "brothers": "Brothers",
+      "news": "News"
     }
   },
-  "members": {
-    "title": "Brothers Directory",
-    "subtitle": "View the profiles of members from the Universalys lodge",
-    "search": "Search for a brother...",
-    "filters": {
-      "all": "All",
-      "officers": "Officers",
-      "masters": "Masters",
-      "companions": "Companions",
-      "apprentices": "Apprentices"
+  "nav": {
+    "dashboard": "Dashboard",
+    "agenda": "Calendar",
+    "planches": "Tracing boards",
+    "bibliotheque": "Library",
+    "freres": "Brothers",
+    "actualites": "News",
+    "messages": "Messages",
+    "profil": "Profile",
+    "parametres": "Settings",
+    "aide": "Help",
+    "deconnexion": "Logout"
+  },
+  "agenda": {
+    "title": "Calendar",
+    "createTenue": "Create meeting",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "all": "All",
+    "noTenues": "No meetings to display",
+    "search": "Search for a meeting...",
+    "filter": {
+      "title": "Filter meetings",
+      "type": "Meeting type",
+      "degree": "Degree",
+      "date": "Date",
+      "location": "Location",
+      "lodge": "Lodge",
+      "apply": "Apply filters",
+      "reset": "Reset"
     },
-    "contact": {
-      "phone": "Call",
-      "email": "Email",
-      "message": "Message"
+    "tenueTypes": {
+      "all": "All",
+      "regular": "Regular",
+      "initiation": "Initiation",
+      "elevation": "Passing",
+      "installation": "Installation",
+      "white": "Open"
+    },
+    "statuses": {
+      "scheduled": "Scheduled",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "canceled": "Canceled"
+    }
+  },
+  "tenueForm": {
+    "createTitle": "Create a new meeting",
+    "editTitle": "Edit meeting",
+    "createDescription": "Fill in the information below to create a new meeting.",
+    "editDescription": "Modify the information below to update the meeting.",
+    "details": "Details",
+    "agenda": "Agenda",
+    "participants": "Participants",
+    "details": {
+      "title": "Title",
+      "titlePlaceholder": "Enter the meeting title",
+      "type": "Meeting type",
+      "typePlaceholder": "Select the meeting type",
+      "typeOptions": {
+        "regular": "Regular meeting",
+        "initiation": "Initiation",
+        "elevation": "Passing",
+        "installation": "Installation",
+        "white": "Open meeting"
+      },
+      "date": "Date",
+      "datePlaceholder": "Select a date",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "degree": "Degree",
+      "degreeLabel": "degree",
+      "theme": "Theme",
+      "themePlaceholder": "Enter the meeting theme (optional)",
+      "lodge": "Lodge",
+      "lodgePlaceholder": "Enter the lodge name",
+      "location": "Location",
+      "locationPlaceholder": "Enter the meeting location",
+      "address": "Address",
+      "addressPlaceholder": "Enter the full address",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the meeting proceedings (optional)",
+      "notes": "Notes",
+      "notesPlaceholder": "Add additional information (optional)"
+    },
+    "buttons": {
+      "save": "Save meeting",
+      "saveAndShare": "Save and share",
+      "cancel": "Cancel",
+      "delete": "Delete this meeting"
+    },
+    "confirmCancel": {
+      "title": "Discard changes?",
+      "description": "The changes you've made will be lost. Are you sure you want to leave?",
+      "cancel": "Continue editing",
+      "confirm": "Discard"
     }
   },
   "login": {
@@ -173,549 +181,67 @@
   },
   "register": {
     "title": "Create an account",
-    "subtitle": "Join the Universalys lodge",
-    "joinLodge": "Join the Universalys lodge",
-    "obedienceRite": "Grand Lodge of Mauritius • Ancient and Accepted Scottish Rite",
-    "step1": "Personal Information",
-    "step2": "Masonic Information",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "displayName": "Display Name",
-    "displayNamePlaceholder": "Your display name",
-    "displayNameValidation": "Name must contain at least 3 characters",
+    "subtitle": "Sign up to access the masonic space",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Enter your full name",
+    "fullNameValidation": "Full name is required",
     "email": "Email",
     "emailPlaceholder": "your@email.com",
     "emailValidation": "Invalid email",
     "password": "Password",
-    "passwordPlaceholder": "Minimum 8 characters",
-    "passwordValidation": "Password must contain at least 6 characters",
-    "confirmPassword": "Confirm Password",
-    "confirmPasswordPlaceholder": "Confirm your password",
-    "passwordMatch": "Passwords do not match",
-    "lodge": "Lodge",
+    "passwordPlaceholder": "Choose a secure password",
+    "passwordValidation": "Password must be at least 8 characters",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "confirmPasswordValidation": "Passwords do not match",
     "obedience": "Obedience",
-    "rite": "Rite",
+    "obediencePlaceholder": "Select your obedience",
+    "lodge": "Lodge",
+    "lodgePlaceholder": "Enter your lodge name",
+    "lodgeValidation": "Lodge is required",
     "degree": "Degree",
-    "degree1": "Apprentice (1st degree)",
-    "degree2": "Companion (2nd degree)",
-    "degree3": "Master (3rd degree)",
-    "continue": "Continue",
-    "back": "Back",
-    "creating": "Creating account...",
-    "create": "Create my account",
-    "submitButton": "Create my account",
-    "haveAccount": "Already have an account?",
-    "signIn": "Sign in",
-    "loginLink": "Sign in",
-    "termsText": "By creating an account, you agree to our",
-    "termsLink": "terms of service",
+    "terms": "I agree to the terms of service and privacy policy",
+    "termsValidation": "You must agree to the terms",
+    "registerButton": "Create my account",
+    "submitting": "Creating account...",
     "alreadyAccount": "Already have an account?",
-    "demoNotice": "Registration feature not implemented in this demo"
+    "loginLink": "Sign in",
+    "invitationOnly": "Registration is by invitation only",
+    "getInvitation": "Request an invitation"
   },
-  "memberDetail": {
-    "backToDirectory": "Back to directory",
-    "masonicJourney": "Masonic journey",
-    "degree": "Degree",
-    "initiation": "Initiation",
-    "companionPassage": "Passage to companion degree",
-    "lodge": "Lodge",
-    "obedience": "Obedience",
-    "activities": "Activities",
-    "planches": "Planches",
-    "presence": "Presence",
-    "interests": "Interests",
-    "contact": {
-      "mobile": "Mobile",
-      "email": "Email",
-      "address": "Address",
-      "profession": "Profession",
-      "birthdate": "Date of birth",
-      "call": "Call",
-      "sendEmail": "Email"
-    },
-    "planchePresented": "Presented on",
-    "viewAllPlanches": "View all planches",
-    "presenceSince": "Presence at meetings since",
-    "meetings": "meetings out of"
-  },
-  "tenueForm": {
-    "createTitle": "Create a new meeting",
-    "editTitle": "Edit meeting",
-    "createDescription": "Fill in the form to create a meeting",
-    "editDescription": "Fill in the form to modify a meeting",
-    "backToAgenda": "Back to schedule",
-    "details": "Details",
-    "agenda": "Program",
-    "participants": "Participants",
-    "save": "Save changes",
-    "create": "Create meeting",
-    "cancel": "Cancel",
-    "cancelMeeting": "Cancel this meeting",
-    "saving": "Saving...",
-    "cancelDialog": {
-      "title": "Cancel changes",
-      "description": "Are you sure you want to cancel? All unsaved changes will be lost.",
-      "continueEditing": "Continue editing",
-      "quitWithoutSaving": "Quit without saving"
-    },
-    "agendaSection": {
-      "comingSoon": "This feature will be available soon. You will be able to add the detailed program of the meeting.",
-      "defaultProgram": "Default program",
-      "openingWorks": "Opening of works",
-      "minutesReading": "Reading and approval of minutes",
-      "todayWorks": "Today's works",
-      "proposalsBag": "Circulation of proposals bag and charity trunk",
-      "closing": "Closing of works"
-    },
-    "details": {
-      "title": "Meeting title",
-      "titlePlaceholder": "Meeting title",
-      "type": "Meeting type",
-      "typePlaceholder": "Select meeting type",
-      "typeOptions": {
-        "regular": "Regular meeting",
-        "initiation": "Initiation",
-        "elevation": "Elevation",
-        "installation": "Installation",
-        "white": "White open meeting"
-      },
-      "date": "Date",
-      "datePlaceholder": "Choose a date",
-      "startTime": "Start time",
-      "endTime": "End time",
-      "degree": "Degree",
-      "degreeLabel": "degree",
-      "theme": "Theme",
-      "themePlaceholder": "Meeting theme",
-      "lodge": "Lodge",
-      "lodgePlaceholder": "Lodge name",
-      "location": "Location",
-      "locationPlaceholder": "Temple name",
-      "address": "Address",
-      "addressPlaceholder": "Complete address",
-      "description": "Description",
-      "descriptionPlaceholder": "Detailed description of the meeting",
-      "notes": "Additional notes",
-      "notesPlaceholder": "Additional information (dress code, agape, etc.)"
-    },
-    "participants": {
-      "comingSoon": "This feature will be available soon. You will be able to invite brothers and sisters to your meeting.",
-      "defaultOfficers": "Default officers",
-      "positions": {
-        "masterWorshipful": "Worshipful Master",
-        "seniorWarden": "Senior Warden",
-        "juniorWarden": "Junior Warden",
-        "orator": "Orator"
-      }
-    }
-  },
-  "tenueDetail": {
-    "backToAgenda": "Back to schedule",
-    "edit": "Edit",
-    "information": "Information",
-    "proceedings": "Proceedings",
-    "officers": "Officers",
-    "planches": "Documents",
-    "description": "Description",
-    "theme": "Theme",
-    "location": "Location",
-    "lodge": "Lodge",
-    "notes": "Notes",
-    "downloadConvocation": "Download convocation",
-    "attendance": "Attendance",
-    "attendanceStatus": {
-      "present": "I will attend",
-      "absent": "I will not attend",
-      "absenceReason": "Reason for absence",
-      "absenceReasonPlaceholder": "Please provide a reason for your absence...",
-      "confirmResponse": "Confirm my response"
-    },
-    "participants": {
-      "title": "Participants",
-      "confirmed": "Confirmed present",
-      "excused": "Excused absent",
-      "pending": "Awaiting response",
-      "viewList": "View participants list"
-    },
-    "planchesEmpty": "No planche planned for this meeting.",
-    "status": {
-      "confirmed": "Confirmed",
-      "pending": "Pending"
-    }
-  },
-  "planches": {
-    "title": "Planches",
-    "subtitle": "Consult and share your lodge's work",
-    "search": {
-      "placeholder": "Search by title, content or author...",
-      "noResults": "No planches found",
-      "noResultsMessage": "Try modifying your search criteria"
-    },
-    "filters": {
-      "degree": "Filter by degree",
-      "all": "All degrees",
-      "firstDegree": "1° degree",
-      "secondDegree": "2° degree",
-      "thirdDegree": "3° degree",
-      "theme": "Filter by theme"
-    },
-    "createPlanche": "Write a planche",
-    "noPlanche": "No planche found",
-    "planchesFound": "{{count}} planches found",
-    "viewMode": {
-      "grid": "Grid",
-      "list": "List"
-    },
-    "consult": "View"
-  },
-  "bibliotheque": {
-    "title": "Library",
-    "subtitle": "Explore our collection of masonic resources",
-    "tabs": {
-      "planches": "Our Planches",
-      "resources": "Masonic Resources"
-    },
-    "search": "Search in the library...",
-    "filters": "Filters",
-    "createPlanche": "Write a planche",
-    "degree": "degree",
-    "download": "Download",
-    "view": "View",
-    "noResults": "No resources match your search criteria.",
-    "planchesFound": "{{count}} planches found",
-    "resourcesFound": "{{count}} resources found",
-    "resourceTypes": {
-      "book": "Book",
-      "document": "Document",
-      "article": "Article",
-      "planche": "Planche"
-    },
-    "filters": {
-      "resourceType": "Resource type",
-      "allTypes": "All types",
-      "category": "Category",
-      "allCategories": "All categories",
-      "degree": "Degree",
-      "allDegrees": "All degrees",
-      "degreeLabel": "degree",
-      "themes": "Themes",
-      "all": "All"
-    },
-    "viewMode": {
-      "grid": "Grid",
-      "list": "List"
-    }
-  },
-  "plancheDetail": {
-    "backToPlanche": "Back to planches",
-    "planche": "Planche",
-    "firstDegree": "1st degree",
-    "secondDegree": "2nd degree",
-    "thirdDegree": "3rd degree",
-    "author": "Author",
-    "viewProfile": "View profile",
-    "actions": "Actions",
-    "downloadPDF": "Download (PDF)",
-    "share": "Share",
-    "save": "Save",
-    "mockData": {
-      "title": "Symbolism of the mosaic pavement",
-      "worshipfulMaster": "Worshipful Master",
-      "intro": "The mosaic pavement is one of the most visible symbols in masonic lodges. This floor formed of alternating black and white tiles is present in all lodges, regardless of the rite practiced.",
-      "originTitle": "Origin and description",
-      "originDesc1": "The mosaic pavement, also called the \"lodge table\", is directly inspired by the floor of Solomon's Temple. It is made up of alternating white and black tiles, arranged like a checkerboard. In masonic temples, it generally occupies the central part of the lodge.",
-      "originDesc2": "The arrangement of tiles can vary according to rites and obediences, but the symbolism remains similar. The number of tiles is not fixed and can have its own symbolic meaning.",
-      "symbolismTitle": "Symbolism of the mosaic pavement",
-      "symbolismDesc": "The mosaic pavement represents the fundamental duality of human existence. The white and black tiles symbolize the opposites that govern our universe and our life:",
-      "duality": {
-        "item1": "Good and evil",
-        "item2": "Light and darkness",
-        "item3": "Life and death",
-        "item4": "Spirit and matter",
-        "item5": "Day and night",
-        "item6": "Positive and negative"
-      },
-      "dualityDesc": "This duality reminds us that our existence is made up of contrasts and complementarities. The Freemason, in his quest for knowledge, learns to navigate between these opposites to find balance and harmony.",
-      "interpretationsTitle": "Masonic interpretations",
-      "interpretationsIntro": "In Freemasonry, the mosaic pavement is interpreted in several ways:",
-      "interpretation1": {
-        "title": "The initiatic path",
-        "desc": "The pavement represents the path of the initiate, alternating between trials (black tiles) and successes (white tiles)."
-      },
-      "interpretation2": {
-        "title": "The unity of opposites",
-        "desc": "It symbolizes the union of opposites, reminding that opposites do not exclude each other but complement each other."
-      },
-      "interpretation3": {
-        "title": "Common ground",
-        "desc": "It is on this pavement that all brothers meet, whatever their differences, illustrating the universality of masonic brotherhood."
-      },
-      "conclusionTitle": "Conclusion",
-      "conclusionDesc1": "The mosaic pavement is a rich symbol that reminds the mason that his journey is not linear and that duality is an integral part of our existence. It teaches us to seek balance between opposites and to understand that light does not exist without darkness.",
-      "conclusionDesc2": "When walking on this pavement during ceremonies, the Freemason is invited to meditate on his own inner duality and to work on harmonizing the contradictory forces that inhabit him, in his permanent quest for perfection.",
-      "tags": {
-        "symbolism": "Symbolism",
-        "temple": "Temple",
-        "royalArt": "Royal Art"
-      }
-    }
+  "join": {
+    "title": "Join with an invitation",
+    "subtitle": "Enter your invitation code to join the masonic space",
+    "inviteCode": "Invitation code",
+    "inviteCodePlaceholder": "Enter your invitation code",
+    "submitButton": "Continue",
+    "alreadyAccount": "Already have an account?",
+    "loginLink": "Sign in"
   },
   "actualites": {
     "title": "News",
-    "subtitle": "Latest news from our lodge",
-    "createNews": "Create News",
     "createTitle": "Create news",
     "editTitle": "Edit news",
-    "createDescription": "Add new information to share with your brothers",
+    "createDescription": "Write and publish new content for your lodge",
+    "noNews": "No news to display",
     "search": "Search news...",
-    "filterByCategory": "Filter by category",
-    "allCategories": "All categories",
-    "noResults": "No news matches your search.",
-    "author": "Author",
-    "administrator": "Administrator",
-    "edit": "Edit",
-    "delete": "Delete",
-    "readMore": "Read more",
-    "success": "Success",
-    "newsDeleted": "The news has been deleted",
-    "newsCreated": "News has been created",
-    "newsUpdated": "News has been updated",
-    "backToNews": "Back to news",
-    "errors": {
-      "error": "Error",
-      "fetchFailed": "Error",
-      "cantLoadNews": "Unable to load news",
-      "cantDeleteNews": "Unable to delete the news",
-      "cantSaveNews": "Unable to save the news",
-      "missingId": "Missing news ID"
-    },
-    "form": {
-      "title": "Title",
-      "titlePlaceholder": "News title",
-      "titleRequired": "Title is required",
-      "content": "Content",
-      "contentPlaceholder": "News content",
-      "contentRequired": "Content is required",
+    "filter": {
+      "title": "Filter news",
+      "category": "Category",
+      "date": "Date",
       "author": "Author",
-      "authorPlaceholder": "Author name",
-      "imageUrl": "Image URL",
-      "imageUrlPlaceholder": "https://example.com/image.jpg",
-      "invalidUrl": "The image URL must be valid",
-      "create": "Create news",
-      "update": "Update news"
-    }
-  },
-  "messages": {
-    "title": "Messages",
-    "subtitle": "Manage your communications with brothers",
-    "search": "Search messages...",
-    "newMessage": "New message",
-    "tabs": {
-      "inbox": "Inbox",
-      "sent": "Sent",
-      "sentMessage": "Sent messages"
+      "apply": "Apply filters",
+      "reset": "Reset"
     },
-    "filters": {
-      "all": "All messages",
-      "unread": "Unread",
-      "read": "Read"
-    },
-    "empty": {
-      "title": "No messages found",
-      "description": "There are no messages matching your search"
-    }
-  },
-  "profile": {
-    "masterMason": "Master Mason",
-    "thirdDegree": "3rd Degree",
-    "lodge": "Lodge",
-    "initiationDate": "Initiation date",
-    "elevationDate": "Elevation date",
-    "myProfile": "My Profile",
-    "description": "Manage your personal information and preferences",
-    "tabs": {
-      "info": "Personal information",
-      "settings": "Settings",
-      "notifications": "Notifications"
-    },
-    "fullName": "Full name",
-    "grade": "Grade",
-    "email": "Email",
-    "phone": "Phone",
-    "address": "Address",
-    "update": "Update",
-    "save": "Save",
-    "notificationCenter": "Notification Center",
-    "manageNotifications": "Manage your notification preferences",
-    "viewAll": "View all",
-    "notificationPreferences": "Notification preferences",
-    "notifications": {
-      "newTenues": "New meetings",
-      "newTenesDesc": "Receive notifications for new scheduled meetings",
-      "newMessages": "New messages",
-      "newMessagesDesc": "Receive notifications for new messages",
-      "newNews": "New news",
-      "newNewsDesc": "Receive notifications for new lodge news"
-    },
-    "accountSettings": "Account settings",
-    "settings": {
-      "profilePrivacy": "Profile privacy",
-      "profilePrivacyDesc": "Make your profile visible to your lodge brothers only",
-      "twoFactor": "Two-factor authentication",
-      "twoFactorDesc": "Add an extra layer of security to your account",
-      "language": "Language",
-      "modify": "Modify"
-    },
-    "toast": {
-      "updated": "Profile updated",
-      "updatedDescription": "Your personal information has been successfully updated",
-      "settingsSaved": "Settings saved",
-      "notificationPreferencesSaved": "Your notification preferences have been successfully saved",
-      "accountSettingsSaved": "Your account settings have been successfully saved"
-    }
-  },
-  "notifications": {
-    "title": "Notifications",
-    "subtitle": "Stay informed of Universalys lodge activities",
-    "yourNotifications": "Your notifications",
-    "markAllAsRead": "Mark all as read",
-    "clearAll": "Clear all",
-    "filter": "Filter",
-    "refresh": "Refresh",
-    "tabs": {
+    "categories": {
       "all": "All",
-      "unread": "Unread",
-      "events": "Meetings",
-      "messages": "Messages",
-      "documents": "Documents",
-      "info": "Info"
+      "lodge": "Lodge",
+      "event": "Event",
+      "announcement": "Announcement",
+      "other": "Other"
     },
-    "empty": {
-      "title": "No notifications",
-      "description": "You don't have any notifications in this category at the moment."
-    },
-    "markAsRead": "Mark as read",
-    "viewDetails": "View details"
-  },
-  "invitations": {
-    "title": "Invitation Management",
-    "subtitle": "Invite new members to join your lodge",
-    "lodgeSettings": "Lodge Settings",
-    "memberManagement": "Member Management",
-    "invitationCode": "Invitation Code",
-    "generateShareCodes": "Generate and share invitation codes",
-    "currentCode": "Current code",
-    "invitationLink": "Invitation link",
-    "validity": "Validity (days)",
-    "generateNewCode": "Generate a new code",
-    "sendInvitations": "Send Invitations",
-    "inviteBrothers": "Invite brothers to join your virtual lodge",
-    "brotherEmailPlaceholder": "Brother's email to invite",
-    "pending": "Pending ({{count}})",
-    "accepted": "Accepted ({{count}})",
-    "noPendingInvitations": "No pending invitations",
-    "noAcceptedInvitations": "No accepted invitations",
-    "sentOn": "Sent on",
-    "acceptedOn": "Accepted on",
-    "resend": "Resend",
-    "cancel": "Cancel",
-    "viewProfile": "View profile",
-    "newCodeGenerated": "New invitation code generated",
-    "copiedToClipboard": "Copied to clipboard",
-    "validEmailRequired": "Please enter a valid email address",
-    "invitationSent": "Invitation sent to {{email}}",
-    "sending": "Sending...",
-    "send": "Send"
-  },
-  "logeSettings": {
-    "title": "Lodge Settings",
-    "subtitle": "Customize your lodge's virtual space",
-    "configurationOf": "Configuration of",
-    "modifySettings": "Modify your virtual space settings",
-    "saveChanges": "Save changes",
-    "saving": "Saving...",
-    "saveSuccess": "{{tab}} settings updated successfully",
-    "memberManagement": "Member Management",
-    "tabs": {
-      "general": "General",
-      "appearance": "Appearance",
-      "security": "Security",
-      "membership": "Membership"
-    },
-    "general": {
-      "lodgeName": "Lodge name",
-      "obedience": "Obedience",
-      "rite": "Practiced rite",
-      "mainLanguage": "Main language",
-      "selectLanguage": "Select a language",
-      "languages": {
-        "french": "French",
-        "english": "English",
-        "spanish": "Spanish",
-        "german": "German"
-      }
-    },
-    "appearance": {
-      "primaryColor": "Primary color",
-      "secondaryColor": "Secondary color",
-      "lodgeLogo": "Lodge logo",
-      "logoTypes": {
-        "squareCompass": "Square & Compass",
-        "vintage": "Vintage Style",
-        "gLetter": "G Letter"
-      }
-    },
-    "security": {
-      "emailVerification": "Email verification",
-      "emailVerificationDesc": "Require members to verify their email",
-      "twoFactor": "Two-factor authentication",
-      "twoFactorDesc": "Require two-factor authentication for all members",
-      "publicVisibility": "Public visibility",
-      "publicVisibilityDesc": "Make your lodge visible in the public directory",
-      "enabled": "Enabled",
-      "disabled": "Disabled",
-      "visible": "Visible",
-      "hidden": "Hidden"
-    },
-    "membership": {
-      "guestAccess": "Guest access",
-      "guestAccessDesc": "Allow guests to access certain sections",
-      "roleManagement": "Role management",
-      "roleManagementDesc": "Define who can access which features",
-      "invitationsDesc": "Manage invitations to join your lodge",
-      "manageRoles": "Manage member roles",
-      "manageInvitations": "Manage invitations",
-      "allowed": "Allowed",
-      "notAllowed": "Not allowed"
+    "errors": {
+      "missingId": "News ID is missing"
     }
-  },
-  "join": {
-    "title": "Join {{lodgeName}}",
-    "subtitle": "You have been invited to join this virtual lodge",
-    "personalInfo": "Personal Information",
-    "security": "Security",
-    "confirmation": "Confirmation",
-    "continue": "Continue",
-    "back": "Back",
-    "verifyingCode": "Verifying Invitation Code",
-    "verifyingCodeDescription": "Please wait while we verify your code...",
-    "invalidCode": "Invalid Invitation Code",
-    "invalidCodeDescription": "The invitation code is invalid or has expired. Please contact your lodge administrator to obtain a new code.",
-    "backToHome": "Back to Home",
-    "allReady": "Everything is Ready!",
-    "almostJoining": "You are about to join the virtual lodge {{lodgeName}}. Click the button below to finalize your registration.",
-    "summary": "Summary",
-    "create": "Create my account",
-    "creating": "Creating account...",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "password": "Password", 
-    "confirmPassword": "Confirm Password",
-    "passwordPlaceholder": "Minimum 8 characters",
-    "degree": "Masonic Degree",
-    "initiation": "Apprentice (1st degree)",
-    "companion": "Companion (2nd degree)",
-    "master": "Master (3rd degree)"
   }
 }

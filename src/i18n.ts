@@ -41,7 +41,7 @@ i18n
     missingKeyNoValueFallbackToKey: false,
     returnNull: false,
     returnEmptyString: false,
-    returnObjects: true,
+    returnObjects: false, // Changed to false to prevent object returns
     fallbackNS: 'translation'
   });
 
