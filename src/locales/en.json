@@ -1,3 +1,4 @@
+
 {
   "common": {
     "appName": "MasonConnect",
@@ -240,6 +241,47 @@
       "todayWorks": "Today's works",
       "proposalsBag": "Circulation of proposals bag and charity trunk",
       "closing": "Closing of works"
+    },
+    "details": {
+      "title": "Meeting title",
+      "titlePlaceholder": "Meeting title",
+      "type": "Meeting type",
+      "typePlaceholder": "Select meeting type",
+      "typeOptions": {
+        "regular": "Regular meeting",
+        "initiation": "Initiation",
+        "elevation": "Elevation",
+        "installation": "Installation",
+        "white": "White open meeting"
+      },
+      "date": "Date",
+      "datePlaceholder": "Choose a date",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "degree": "Degree",
+      "degreeLabel": "degree",
+      "theme": "Theme",
+      "themePlaceholder": "Meeting theme",
+      "lodge": "Lodge",
+      "lodgePlaceholder": "Lodge name",
+      "location": "Location",
+      "locationPlaceholder": "Temple name",
+      "address": "Address",
+      "addressPlaceholder": "Complete address",
+      "description": "Description",
+      "descriptionPlaceholder": "Detailed description of the meeting",
+      "notes": "Additional notes",
+      "notesPlaceholder": "Additional information (dress code, agape, etc.)"
+    },
+    "participants": {
+      "comingSoon": "This feature will be available soon. You will be able to invite brothers and sisters to your meeting.",
+      "defaultOfficers": "Default officers",
+      "positions": {
+        "masterWorshipful": "Worshipful Master",
+        "seniorWarden": "Senior Warden",
+        "juniorWarden": "Junior Warden",
+        "orator": "Orator"
+      }
     }
   }
 }

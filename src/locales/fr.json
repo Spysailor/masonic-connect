@@ -1,3 +1,4 @@
+
 {
   "common": {
     "appName": "MasonConnect",
@@ -240,6 +241,47 @@
       "todayWorks": "Travaux du jour",
       "proposalsBag": "Circulation du sac des propositions et du tronc de bienfaisance",
       "closing": "Clôture des travaux"
+    },
+    "details": {
+      "title": "Titre de la tenue",
+      "titlePlaceholder": "Titre de la tenue",
+      "type": "Type de tenue",
+      "typePlaceholder": "Sélectionnez le type de tenue",
+      "typeOptions": {
+        "regular": "Tenue régulière",
+        "initiation": "Initiation",
+        "elevation": "Élévation",
+        "installation": "Installation",
+        "white": "Tenue blanche ouverte"
+      },
+      "date": "Date",
+      "datePlaceholder": "Choisir une date",
+      "startTime": "Heure de début",
+      "endTime": "Heure de fin",
+      "degree": "Degré",
+      "degreeLabel": "degré",
+      "theme": "Thème",
+      "themePlaceholder": "Thème de la tenue",
+      "lodge": "Loge",
+      "lodgePlaceholder": "Nom de la loge",
+      "location": "Lieu",
+      "locationPlaceholder": "Nom du temple",
+      "address": "Adresse",
+      "addressPlaceholder": "Adresse complète",
+      "description": "Description",
+      "descriptionPlaceholder": "Description détaillée de la tenue",
+      "notes": "Notes additionnelles",
+      "notesPlaceholder": "Informations complémentaires (tenue vestimentaire, agape, etc.)"
+    },
+    "participants": {
+      "comingSoon": "Cette fonctionnalité sera disponible prochainement. Vous pourrez inviter des frères et sœurs à votre tenue.",
+      "defaultOfficers": "Officiers par défaut",
+      "positions": {
+        "masterWorshipful": "Vénérable Maître",
+        "seniorWarden": "Premier Surveillant",
+        "juniorWarden": "Deuxième Surveillant",
+        "orator": "Orateur"
+      }
     }
   }
 }

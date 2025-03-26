@@ -3,6 +3,7 @@ import React from 'react';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 import { 
   FormField, 
   FormItem, 
@@ -25,6 +26,9 @@ interface TenueDetailsFormProps {
 }
 
 const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
+  const { t, i18n } = useTranslation();
+  const currentLocale = i18n.language === 'fr' ? fr : undefined;
+  
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -33,9 +37,9 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Titre de la tenue</FormLabel>
+              <FormLabel>{t('tenueForm.details.title')}</FormLabel>
               <FormControl>
-                <Input placeholder="Titre de la tenue" {...field} />
+                <Input placeholder={t('tenueForm.details.titlePlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -47,19 +51,19 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
           name="type"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Type de tenue</FormLabel>
+              <FormLabel>{t('tenueForm.details.type')}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Sélectionnez le type de tenue" />
+                    <SelectValue placeholder={t('tenueForm.details.typePlaceholder')} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="regular">Tenue régulière</SelectItem>
-                  <SelectItem value="initiation">Initiation</SelectItem>
-                  <SelectItem value="elevation">Élévation</SelectItem>
-                  <SelectItem value="installation">Installation</SelectItem>
-                  <SelectItem value="white">Tenue blanche ouverte</SelectItem>
+                  <SelectItem value="regular">{t('tenueForm.details.typeOptions.regular')}</SelectItem>
+                  <SelectItem value="initiation">{t('tenueForm.details.typeOptions.initiation')}</SelectItem>
+                  <SelectItem value="elevation">{t('tenueForm.details.typeOptions.elevation')}</SelectItem>
+                  <SelectItem value="installation">{t('tenueForm.details.typeOptions.installation')}</SelectItem>
+                  <SelectItem value="white">{t('tenueForm.details.typeOptions.white')}</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -72,7 +76,7 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
           name="date"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Date</FormLabel>
+              <FormLabel>{t('tenueForm.details.date')}</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -84,9 +88,9 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "EEEE d MMMM yyyy", { locale: fr })
+                        format(field.value, "EEEE d MMMM yyyy", { locale: currentLocale })
                       ) : (
-                        <span>Choisir une date</span>
+                        <span>{t('tenueForm.details.datePlaceholder')}</span>
                       )}
                       <Calendar className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
@@ -99,7 +103,7 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
                     onSelect={field.onChange}
                     disabled={(date) => date < new Date()}
                     initialFocus
-                    locale={fr}
+                    locale={currentLocale}
                     className="p-3 pointer-events-auto"
                   />
                 </PopoverContent>
@@ -115,7 +119,7 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
             name="startTime"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Heure de début</FormLabel>
+                <FormLabel>{t('tenueForm.details.startTime')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
@@ -132,7 +136,7 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
             name="endTime"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Heure de fin</FormLabel>
+                <FormLabel>{t('tenueForm.details.endTime')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
@@ -150,7 +154,7 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
           name="degree"
           render={({ field }) => (
             <FormItem className="space-y-3">
-              <FormLabel>Degré</FormLabel>
+              <FormLabel>{t('tenueForm.details.degree')}</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
@@ -161,19 +165,19 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
                     <FormControl>
                       <RadioGroupItem value="1" />
                     </FormControl>
-                    <FormLabel className="font-normal cursor-pointer">1° degré</FormLabel>
+                    <FormLabel className="font-normal cursor-pointer">1° {t('tenueForm.details.degreeLabel')}</FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-2 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="2" />
                     </FormControl>
-                    <FormLabel className="font-normal cursor-pointer">2° degré</FormLabel>
+                    <FormLabel className="font-normal cursor-pointer">2° {t('tenueForm.details.degreeLabel')}</FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-2 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="3" />
                     </FormControl>
-                    <FormLabel className="font-normal cursor-pointer">3° degré</FormLabel>
+                    <FormLabel className="font-normal cursor-pointer">3° {t('tenueForm.details.degreeLabel')}</FormLabel>
                   </FormItem>
                 </RadioGroup>
               </FormControl>
@@ -187,9 +191,9 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
           name="theme"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Thème</FormLabel>
+              <FormLabel>{t('tenueForm.details.theme')}</FormLabel>
               <FormControl>
-                <Input placeholder="Thème de la tenue" {...field} />
+                <Input placeholder={t('tenueForm.details.themePlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -201,9 +205,9 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
           name="lodge"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Loge</FormLabel>
+              <FormLabel>{t('tenueForm.details.lodge')}</FormLabel>
               <FormControl>
-                <Input placeholder="Nom de la loge" {...field} />
+                <Input placeholder={t('tenueForm.details.lodgePlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -215,11 +219,11 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
           name="location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Lieu</FormLabel>
+              <FormLabel>{t('tenueForm.details.location')}</FormLabel>
               <FormControl>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
-                  <Input className="pl-10" placeholder="Nom du temple" {...field} />
+                  <Input className="pl-10" placeholder={t('tenueForm.details.locationPlaceholder')} {...field} />
                 </div>
               </FormControl>
               <FormMessage />
@@ -232,9 +236,9 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
           name="address"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Adresse</FormLabel>
+              <FormLabel>{t('tenueForm.details.address')}</FormLabel>
               <FormControl>
-                <Input placeholder="Adresse complète" {...field} />
+                <Input placeholder={t('tenueForm.details.addressPlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -247,10 +251,10 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
         name="description"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Description</FormLabel>
+            <FormLabel>{t('tenueForm.details.description')}</FormLabel>
             <FormControl>
               <Textarea 
-                placeholder="Description détaillée de la tenue" 
+                placeholder={t('tenueForm.details.descriptionPlaceholder')} 
                 className="min-h-[100px]" 
                 {...field} 
               />
@@ -265,10 +269,10 @@ const TenueDetailsForm: React.FC<TenueDetailsFormProps> = ({ form }) => {
         name="notes"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Notes additionnelles</FormLabel>
+            <FormLabel>{t('tenueForm.details.notes')}</FormLabel>
             <FormControl>
               <Textarea 
-                placeholder="Informations complémentaires (tenue vestimentaire, agape, etc.)" 
+                placeholder={t('tenueForm.details.notesPlaceholder')} 
                 className="min-h-[100px]" 
                 {...field} 
               />
