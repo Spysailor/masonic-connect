@@ -50,7 +50,7 @@ const NotFound = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <AnimatedButton to="/" variant="primary" size={isMobile ? "default" : "lg"}>
+            <AnimatedButton to="/" variant="primary" size={isMobile ? "md" : "lg"}>
               <HomeIcon className="h-4 w-4 mr-2" />
               {t('common.backToHome', 'Retour à l\'accueil')}
             </AnimatedButton>
@@ -58,7 +58,7 @@ const NotFound = () => {
             <AnimatedButton 
               to="#" 
               variant="secondary" 
-              size={isMobile ? "default" : "lg"}
+              size={isMobile ? "md" : "lg"}
               onClick={() => window.history.back()}
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
