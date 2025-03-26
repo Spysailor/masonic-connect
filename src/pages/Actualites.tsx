@@ -127,8 +127,7 @@ const Actualites = () => {
                 <h1 className="text-3xl font-bold text-masonic-blue-900">Actualités</h1>
                 <MasonicSymbol 
                   type="checkerboard" 
-                  size={40} 
-                  className="ml-2"
+                  size={40}
                 />
               </div>
               <Button 
