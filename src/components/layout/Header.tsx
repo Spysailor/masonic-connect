@@ -1,11 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Logo from '../ui-elements/Logo';
 import AnimatedButton from '../ui-elements/AnimatedButton';
 import NotificationIndicator from '../notifications/NotificationIndicator';
-import LanguageSelector from '../language/LanguageSelector';
 import { cn } from '@/lib/utils';
 import { UserCircle, Menu, X } from 'lucide-react';
 import { useNotifications } from '@/hooks/use-notifications';
@@ -34,7 +32,6 @@ const Header: React.FC = () => {
     { name: t('common.messages'), path: '/messages', translationKey: 'common.messages' },
   ];
   
-  // Handle scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -48,7 +45,6 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Close mobile menu when changing routes
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
@@ -62,12 +58,10 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-3 md:px-6">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <div className="flex items-center">
             <Logo variant="default" size={isMobile ? "sm" : "md"} />
           </div>
           
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
               <Link
@@ -86,8 +80,6 @@ const Header: React.FC = () => {
             ))}
             
             <div className="flex items-center ml-4 space-x-1">
-              <LanguageSelector />
-              
               <Link 
                 to="/notifications"
                 className={cn(
@@ -120,10 +112,7 @@ const Header: React.FC = () => {
             </div>
           </nav>
           
-          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-1">
-            <LanguageSelector />
-            
             <Link 
               to="/notifications"
               className={cn(
@@ -163,7 +152,6 @@ const Header: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile Menu */}
       <div
         className={cn(
           "md:hidden fixed inset-0 top-[48px] bg-white z-40 transition-all duration-300 ease-in-out transform",
