@@ -3,7 +3,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Import translation files
+// Import des fichiers de traduction
 import frCommon from './locales/fr/common.json';
 import frDashboard from './locales/fr/dashboard.json';
 import frNav from './locales/fr/nav.json';
@@ -20,7 +20,7 @@ import enTenueForm from './locales/en/tenueForm.json';
 import enAuth from './locales/en/auth.json';
 import enActualites from './locales/en/actualites.json';
 
-// Construct resources with namespaces
+// Construction des ressources avec les espaces de noms
 const resources = {
   fr: {
     common: frCommon,
@@ -59,15 +59,15 @@ i18n
       order: ['localStorage', 'navigator'],
       caches: ['localStorage']
     },
-    // Ajout de la fonction de résolution des clés de traduction manquantes
+    // Ajout de la fonction de signalement des clés de traduction manquantes
     missingKeyHandler: (lng, ns, key) => {
-      console.warn(`Missing translation key: ${key} for namespace: ${ns} and language: ${lng}`);
+      console.warn(`Clé de traduction manquante: ${key} pour l'espace de noms: ${ns} et la langue: ${lng}`);
     },
     saveMissing: true,
     missingKeyNoValueFallbackToKey: false,
     returnNull: false,
     returnEmptyString: false,
-    returnObjects: false, // Changed to false to prevent object returns
+    returnObjects: false, // Important: empêche le retour d'objets pour éviter des erreurs React
     defaultNS: 'common',
     fallbackNS: 'common'
   });

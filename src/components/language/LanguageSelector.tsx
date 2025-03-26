@@ -16,24 +16,36 @@ const languages = [
   { code: 'en', label: 'English' }
 ];
 
+/**
+ * Composant pour changer la langue de l'application
+ */
 const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
     
-    // Force refresh when on specific pages that need full translation reload
-    const needsRefresh = 
-      (location.pathname === '/bibliotheque' && location.search.includes('type=planche')) ||
-      location.pathname === '/planches' ||
-      location.pathname === '/register' ||
-      location.pathname === '/login' ||
-      location.pathname === '/join';
+    // Liste des pages qui nécessitent un rechargement pour appliquer complètement les traductions
+    const needsRefreshPaths = [
+      '/bibliotheque',
+      '/planches',
+      '/register',
+      '/login',
+      '/join'
+    ];
+    
+    // Vérifie si la page actuelle nécessite un rechargement
+    const needsRefresh = needsRefreshPaths.some(path => {
+      if (path === '/bibliotheque') {
+        return location.pathname === path && location.search.includes('type=planche');
+      }
+      return location.pathname === path;
+    });
       
     if (needsRefresh) {
-      // Force refresh to ensure translations are applied
+      // Force le rechargement pour garantir l'application des traductions
       navigate(0);
     }
   };
@@ -45,6 +57,7 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
           "flex items-center rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors",
           className
         )}
+        aria-label={t('common:language.switchLanguage')}
       >
         <Globe className="h-5 w-5" />
       </DropdownMenuTrigger>

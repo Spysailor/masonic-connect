@@ -23,5 +23,8 @@
   "yes": "Oui",
   "no": "Non",
   "more": "Plus",
-  "less": "Moins"
+  "less": "Moins",
+  "language": {
+    "switchLanguage": "Changer de langue"
+  }
 }
