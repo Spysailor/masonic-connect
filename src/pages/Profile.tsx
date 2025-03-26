@@ -13,7 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 import { useNotifications } from '@/hooks/use-notifications';
-import LanguageSelector from '@/components/ui/LanguageSelector';
+import LanguageSelector from '@/components/language/LanguageSelector';
 
 const Profile = () => {
   const { toast } = useToast();
