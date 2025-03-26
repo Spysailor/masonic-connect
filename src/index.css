@@ -182,6 +182,31 @@
     main {
       @apply pb-20;
     }
+    
+    /* Nouveaux styles pour la landing page mobile */
+    .btn-masonic {
+      @apply px-4 py-2.5 text-base rounded-md;
+    }
+    
+    .feature-card-mobile {
+      @apply flex items-start p-3 rounded-lg;
+    }
+    
+    .feature-icon-mobile {
+      @apply w-10 h-10 mr-3 flex-shrink-0;
+    }
+    
+    .pricing-card-mobile {
+      @apply p-3 rounded-lg;
+    }
+    
+    .landing-section-mobile {
+      @apply py-8 px-3;
+    }
+    
+    .landing-heading-mobile {
+      @apply text-2xl mb-4;
+    }
   }
 }
 
