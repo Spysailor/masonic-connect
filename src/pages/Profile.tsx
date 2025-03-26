@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useTranslation } from 'react-i18next';
+// Remplaçons temporairement l'import qui pose problème
+// import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -32,7 +33,10 @@ const profileFormSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 const Profile = () => {
-  const { t } = useTranslation();
+  // Remplaçons temporairement l'utilisation de t par une fonction
+  // const { t } = useTranslation();
+  const t = (key) => key; // Simple fonction pour éviter les erreurs
+  
   const { user, profile, updateProfile, isLoading: authIsLoading } = useAuth();
   const { isLoading: routeIsLoading } = useProtectedRoute();
   const [isUploading, setIsUploading] = useState(false);
