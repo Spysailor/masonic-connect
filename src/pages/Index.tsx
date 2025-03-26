@@ -7,6 +7,7 @@ import { Gavel, Library, Columns, BookOpen, ScrollText, Users, MessageSquare } f
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Logo from '@/components/ui-elements/Logo';
+
 const Index = () => {
   return <div className="min-h-screen bg-white">
       {/* Header */}
@@ -91,6 +92,7 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 const FeatureCard = ({
   title,
   description,
@@ -110,6 +112,7 @@ const FeatureCard = ({
     <h3 className="text-xl font-bold mb-2 text-masonic-blue-900">{title}</h3>
     <p className="text-gray-600">{description}</p>
   </motion.div>;
+
 const PricingCard = ({
   title,
   price,
@@ -141,6 +144,7 @@ const PricingCard = ({
       {buttonText}
     </Link>
   </motion.div>;
+
 const Testimonial = ({
   quote,
   author
@@ -158,4 +162,5 @@ const Testimonial = ({
     <p className="text-lg mb-4 italic text-gray-700">"{quote}"</p>
     <p className="text-masonic-blue-700 font-medium">— {author}</p>
   </motion.div>;
+
 export default Index;
