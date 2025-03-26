@@ -1,29 +1,29 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 import { cn } from '@/lib/utils';
-import { MessageSquare } from 'lucide-react';
+import { Gavel, Library, Columns, BookOpen, ScrollText, Users, MessageSquare } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Logo from '@/components/ui-elements/Logo';
-
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Header */}
       <Header />
       
       {/* Hero section */}
-      <motion.section 
-        className="container mx-auto px-4 py-32 mt-16 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
+      <motion.section className="container mx-auto px-4 py-32 mt-16 text-center" initial={{
+      opacity: 0,
+      y: 20
+    }} animate={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      duration: 0.8
+    }}>
         <div className="max-w-4xl mx-auto">
-          <div className="mb-6 flex justify-center">
+          <div className="mb-6 flex justify-center py-[24px]">
             <Logo size="lg" variant="default" withText={false} />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-masonic-blue-900">
@@ -47,24 +47,31 @@ const Index = () => {
       <section className="container mx-auto px-4 py-20 bg-gray-50">
         <h2 className="text-3xl font-bold text-center mb-12 text-masonic-blue-900">Fonctionnalités 100% Maçonniques</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <FeatureCard 
-            title="Communications sécurisées" 
-            description="Actualités de la Loge, messagerie interne dédiée et sécurisée, notifications personnalisées."
-            icon={<MessageSquare className="w-12 h-12 text-masonic-blue-700" />}
-            symbolType="eye"
-          />
-          <FeatureCard 
-            title="Gestion des tenues" 
-            description="Agenda des tenues, confirmation de présence, gestion des agapes et visiteurs, feuille de présence."
-            icon={null}
-            symbolType="temple"
-          />
-          <FeatureCard 
-            title="Planches et documents" 
-            description="Accès aux planches, rituels, documents de la Loge et de l'Obédience."
-            icon={null}
-            symbolType="all-seeing-eye-triangle"
-          />
+          <FeatureCard title="Communications sécurisées" description="Actualités de la Loge, messagerie interne dédiée et sécurisée, notifications personnalisées." icon={<MessageSquare className="w-12 h-12 text-masonic-blue-700" />} />
+          <FeatureCard title="Gestion des tenues" description="Agenda des tenues, confirmation de présence, gestion des agapes et visiteurs, feuille de présence." icon={<Gavel className="w-12 h-12 text-masonic-blue-700" />} />
+          <FeatureCard title="Planches et documents" description="Accès aux planches, rituels, documents de la Loge et de l'Obédience." icon={<ScrollText className="w-12 h-12 text-masonic-blue-700" />} />
+          <FeatureCard title="Annuaire des membres" description="Carnet d'adresses avec contacts, profil personnalisable, calcul d'itinéraire vers le temple." icon={<Users className="w-12 h-12 text-masonic-blue-700" />} />
+          <FeatureCard title="Bibliothèque maçonnique" description="Catalogue d'ouvrages disponibles, système de réservation, références maçonniques." icon={<Library className="w-12 h-12 text-masonic-blue-700" />} />
+          <FeatureCard title="Accès visiteurs" description="QR code pour visiteurs, validation humaine pour les calendriers, sécurité renforcée." icon={<Columns className="w-12 h-12 text-masonic-blue-700" />} />
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="container mx-auto px-4 py-20">
+        <h2 className="text-3xl font-bold text-center mb-12 text-masonic-blue-900">Solutions adaptées à chaque loge</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <PricingCard title="Basique" price="9,99 €" features={["Jusqu'à 30 membres", "Messagerie sécurisée", "Agenda des tenues", "Planches et documents", "Gestion des présences"]} buttonText="Commencer" to="/register" />
+          <PricingCard title="Premium" price="19,99 €" featured={true} features={["Jusqu'à 100 membres", "Tous les avantages du plan Basique", "Stockage illimité", "Bibliothèque maçonnique", "Tuilage électronique"]} buttonText="Choisir Premium" to="/register?plan=premium" />
+          <PricingCard title="Illimité" price="39,99 €" features={["Membres illimités", "Tous les avantages du plan Premium", "Support prioritaire", "Analytiques avancées", "Personnalisation complète"]} buttonText="Contacter" to="/register?plan=unlimited" />
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="container mx-auto px-4 py-20 bg-gray-50">
+        <h2 className="text-3xl font-bold text-center mb-12 text-masonic-blue-900">Ce que disent nos utilisateurs</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <Testimonial quote="L'application a révolutionné notre façon de communiquer. Je ne peux plus imaginer gérer notre loge sans cet outil." author="V∴M∴ d'une loge à Paris" />
+          <Testimonial quote="La simplicité d'utilisation combinée à la sécurité des données font de cette application un incontournable pour toute loge moderne." author="Secrétaire d'une loge à Lyon" />
         </div>
       </section>
 
@@ -83,25 +90,74 @@ const Index = () => {
 
       {/* Footer */}
       <Footer />
-    </div>
-  );
+    </div>;
 };
 
 // Utility components
-const FeatureCard = ({ title, description, icon, symbolType }) => (
-  <motion.div 
-    className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all h-full"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-  >
-    <div className="mb-4 text-masonic-blue-700">
-      {icon || <MasonicSymbol type={symbolType} size={48} />}
-    </div>
+const FeatureCard = ({
+  title,
+  description,
+  icon
+}) => <motion.div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all h-full" initial={{
+  opacity: 0,
+  y: 20
+}} whileInView={{
+  opacity: 1,
+  y: 0
+}} viewport={{
+  once: true
+}} transition={{
+  duration: 0.5
+}}>
+    <div className="mb-4 text-masonic-blue-700">{icon}</div>
     <h3 className="text-xl font-bold mb-2 text-masonic-blue-900">{title}</h3>
     <p className="text-gray-600">{description}</p>
-  </motion.div>
-);
-
+  </motion.div>;
+const PricingCard = ({
+  title,
+  price,
+  features,
+  buttonText,
+  featured = false,
+  to
+}) => <motion.div className={cn("p-6 rounded-lg border-2 h-full flex flex-col", featured ? 'border-masonic-blue-700 shadow-lg' : 'border-gray-200 shadow-sm')} initial={{
+  opacity: 0,
+  y: 20
+}} whileInView={{
+  opacity: 1,
+  y: 0
+}} viewport={{
+  once: true
+}} transition={{
+  duration: 0.5
+}}>
+    <h3 className={cn("text-xl font-bold mb-2", featured ? "text-masonic-blue-900" : "text-gray-900")}>{title}</h3>
+    <p className="text-3xl font-bold mb-4">{price}<span className="text-sm font-normal text-gray-500">/mois</span></p>
+    <ul className="mb-6 space-y-2 flex-grow">
+      {features.map((feature, index) => <li key={index} className="flex items-start">
+          <span className="text-green-500 mr-2">✓</span>
+          <span className="text-gray-600">{feature}</span>
+        </li>)}
+    </ul>
+    <Link to={to} className={cn("w-full py-2 rounded-lg font-bold text-center", featured ? 'bg-masonic-blue-700 text-white hover:bg-masonic-blue-600' : 'border border-masonic-blue-700 text-masonic-blue-700 hover:bg-masonic-blue-50')}>
+      {buttonText}
+    </Link>
+  </motion.div>;
+const Testimonial = ({
+  quote,
+  author
+}) => <motion.div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm" initial={{
+  opacity: 0,
+  y: 20
+}} whileInView={{
+  opacity: 1,
+  y: 0
+}} viewport={{
+  once: true
+}} transition={{
+  duration: 0.5
+}}>
+    <p className="text-lg mb-4 italic text-gray-700">"{quote}"</p>
+    <p className="text-masonic-blue-700 font-medium">— {author}</p>
+  </motion.div>;
 export default Index;
