@@ -661,5 +661,34 @@
       "allowed": "Allowed",
       "notAllowed": "Not allowed"
     }
+  },
+  "join": {
+    "title": "Join {{lodgeName}}",
+    "subtitle": "You have been invited to join this virtual lodge",
+    "personalInfo": "Personal Information",
+    "security": "Security",
+    "confirmation": "Confirmation",
+    "continue": "Continue",
+    "back": "Back",
+    "verifyingCode": "Verifying Invitation Code",
+    "verifyingCodeDescription": "Please wait while we verify your code...",
+    "invalidCode": "Invalid Invitation Code",
+    "invalidCodeDescription": "The invitation code is invalid or has expired. Please contact your lodge administrator to obtain a new code.",
+    "backToHome": "Back to Home",
+    "allReady": "Everything is Ready!",
+    "almostJoining": "You are about to join the virtual lodge {{lodgeName}}. Click the button below to finalize your registration.",
+    "summary": "Summary",
+    "create": "Create my account",
+    "creating": "Creating account...",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password", 
+    "confirmPassword": "Confirm Password",
+    "passwordPlaceholder": "Minimum 8 characters",
+    "degree": "Masonic Degree",
+    "initiation": "Apprentice (1st degree)",
+    "companion": "Companion (2nd degree)",
+    "master": "Master (3rd degree)"
   }
 }

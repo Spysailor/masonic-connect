@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 import Logo from '@/components/ui-elements/Logo';
 import AnimatedButton from '@/components/ui-elements/AnimatedButton';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
 
 const Join = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const invitationCode = searchParams.get('code');
@@ -40,7 +42,7 @@ const Join = () => {
             rite: 'Rite Écossais Ancien et Accepté',
           });
         } else {
-          toast.error("Le code d'invitation est invalide ou a expiré");
+          toast.error(t('join.invalidCodeDescription'));
         }
         setVerifying(false);
         setLoading(false);
@@ -49,7 +51,7 @@ const Join = () => {
       setVerifying(false);
       setLoading(false);
     }
-  }, [invitationCode]);
+  }, [invitationCode, t]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -121,8 +123,8 @@ const Join = () => {
         <Logo />
         <div className="mt-8 text-center">
           <div className="animate-spin h-8 w-8 border-4 border-masonic-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <h2 className="text-xl font-semibold text-gray-800">Vérification du code d'invitation</h2>
-          <p className="text-gray-600 mt-2">Veuillez patienter pendant que nous vérifions votre code...</p>
+          <h2 className="text-xl font-semibold text-gray-800">{t('join.verifyingCode')}</h2>
+          <p className="text-gray-600 mt-2">{t('join.verifyingCodeDescription')}</p>
         </div>
       </div>
     );
@@ -136,12 +138,12 @@ const Join = () => {
           <div className="mb-4 flex justify-center">
             <AlertCircle className="h-16 w-16 text-red-500" />
           </div>
-          <h2 className="text-xl font-semibold text-gray-800">Code d'invitation invalide</h2>
+          <h2 className="text-xl font-semibold text-gray-800">{t('join.invalidCode')}</h2>
           <p className="text-gray-600 mt-2 mb-6">
-            Le code d'invitation est invalide ou a expiré. Veuillez contacter l'administrateur de votre loge pour obtenir un nouveau code.
+            {t('join.invalidCodeDescription')}
           </p>
           <Link to="/" className="text-masonic-blue-700 hover:underline">
-            Retour à l'accueil
+            {t('join.backToHome')}
           </Link>
         </div>
       </div>
@@ -166,10 +168,10 @@ const Join = () => {
             </div>
             
             <h1 className="text-2xl font-bold text-center text-masonic-blue-900 mb-2">
-              Rejoindre {lodgeInfo?.name}
+              {t('join.title', { lodgeName: lodgeInfo?.name })}
             </h1>
             <p className="text-center text-gray-600 mb-2">
-              Vous avez été invité à rejoindre cette loge virtuelle
+              {t('join.subtitle')}
             </p>
             <p className="text-center text-gray-500 text-sm mb-6">
               {lodgeInfo?.obedience} • {lodgeInfo?.rite}
@@ -183,7 +185,7 @@ const Join = () => {
                   }`}>
                     1
                   </div>
-                  <span className="ml-2 text-sm font-medium">Informations personnelles</span>
+                  <span className="ml-2 text-sm font-medium">{t('join.personalInfo')}</span>
                 </div>
                 <div className="flex-1 h-1 mx-4 bg-gray-200">
                   <div className={`h-full ${currentStep >= 2 ? 'bg-masonic-blue-700' : 'bg-gray-200'}`} style={{ width: currentStep > 1 ? '100%' : '0%' }}></div>
@@ -194,7 +196,7 @@ const Join = () => {
                   }`}>
                     2
                   </div>
-                  <span className="ml-2 text-sm font-medium">Sécurité</span>
+                  <span className="ml-2 text-sm font-medium">{t('join.security')}</span>
                 </div>
                 <div className="flex-1 h-1 mx-4 bg-gray-200">
                   <div className={`h-full ${currentStep >= 3 ? 'bg-masonic-blue-700' : 'bg-gray-200'}`} style={{ width: currentStep > 2 ? '100%' : '0%' }}></div>
@@ -205,7 +207,7 @@ const Join = () => {
                   }`}>
                     3
                   </div>
-                  <span className="ml-2 text-sm font-medium">Confirmation</span>
+                  <span className="ml-2 text-sm font-medium">{t('join.confirmation')}</span>
                 </div>
               </div>
             </div>
@@ -222,7 +224,7 @@ const Join = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                        Prénom *
+                        {t('join.firstName')} *
                       </label>
                       <input
                         id="firstName"
@@ -236,7 +238,7 @@ const Join = () => {
                     </div>
                     <div>
                       <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                        Nom *
+                        {t('join.lastName')} *
                       </label>
                       <input
                         id="lastName"
@@ -252,7 +254,7 @@ const Join = () => {
                   
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email *
+                      {t('join.email')} *
                     </label>
                     <input
                       id="email"
@@ -268,7 +270,7 @@ const Join = () => {
                   
                   <div>
                     <label htmlFor="degree" className="block text-sm font-medium text-gray-700 mb-1">
-                      Degré maçonnique *
+                      {t('join.degree')} *
                     </label>
                     <select
                       id="degree"
@@ -278,9 +280,9 @@ const Join = () => {
                       className="input-masonic"
                       required
                     >
-                      <option value="1">Apprenti (1er degré)</option>
-                      <option value="2">Compagnon (2ème degré)</option>
-                      <option value="3">Maître (3ème degré)</option>
+                      <option value="1">{t('join.initiation')}</option>
+                      <option value="2">{t('join.companion')}</option>
+                      <option value="3">{t('join.master')}</option>
                     </select>
                   </div>
                   
@@ -291,7 +293,7 @@ const Join = () => {
                       fullWidth
                       onClick={handleNextStep}
                     >
-                      Continuer
+                      {t('join.continue')}
                     </AnimatedButton>
                   </div>
                 </motion.div>
@@ -307,7 +309,7 @@ const Join = () => {
                 >
                   <div>
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                      Mot de passe *
+                      {t('join.password')} *
                     </label>
                     <input
                       id="password"
@@ -316,14 +318,14 @@ const Join = () => {
                       value={formData.password}
                       onChange={handleChange}
                       className="input-masonic"
-                      placeholder="8 caractères minimum"
+                      placeholder={t('join.passwordPlaceholder')}
                       required
                     />
                   </div>
                   
                   <div>
                     <label htmlFor="passwordConfirm" className="block text-sm font-medium text-gray-700 mb-1">
-                      Confirmer le mot de passe *
+                      {t('join.confirmPassword')} *
                     </label>
                     <input
                       id="passwordConfirm"
@@ -342,7 +344,7 @@ const Join = () => {
                       variant="secondary"
                       onClick={handlePrevStep}
                     >
-                      Retour
+                      {t('join.back')}
                     </AnimatedButton>
                     <AnimatedButton
                       type="button"
@@ -350,7 +352,7 @@ const Join = () => {
                       fullWidth
                       onClick={handleNextStep}
                     >
-                      Continuer
+                      {t('join.continue')}
                     </AnimatedButton>
                   </div>
                 </motion.div>
@@ -366,21 +368,21 @@ const Join = () => {
                 >
                   <div className="text-center">
                     <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">Tout est prêt!</h2>
+                    <h2 className="text-xl font-bold text-gray-900 mb-2">{t('join.allReady')}</h2>
                     <p className="text-gray-600 mb-6">
-                      Vous êtes sur le point de rejoindre la loge virtuelle {lodgeInfo?.name}. Cliquez sur le bouton ci-dessous pour finaliser votre inscription.
+                      {t('join.almostJoining', { lodgeName: lodgeInfo?.name })}
                     </p>
                   </div>
                   
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-medium text-gray-800 mb-2">Récapitulatif</h3>
+                    <h3 className="font-medium text-gray-800 mb-2">{t('join.summary')}</h3>
                     <div className="space-y-1 text-sm">
-                      <p><span className="text-gray-500">Nom:</span> {formData.firstName} {formData.lastName}</p>
-                      <p><span className="text-gray-500">Email:</span> {formData.email}</p>
-                      <p><span className="text-gray-500">Degré:</span> {
-                        formData.degree === '1' ? 'Apprenti (1er degré)' : 
-                        formData.degree === '2' ? 'Compagnon (2ème degré)' : 
-                        'Maître (3ème degré)'
+                      <p><span className="text-gray-500">{t('join.lastName')}:</span> {formData.firstName} {formData.lastName}</p>
+                      <p><span className="text-gray-500">{t('join.email')}:</span> {formData.email}</p>
+                      <p><span className="text-gray-500">{t('join.degree')}:</span> {
+                        formData.degree === '1' ? t('join.initiation') : 
+                        formData.degree === '2' ? t('join.companion') : 
+                        t('join.master')
                       }</p>
                       <p><span className="text-gray-500">Loge:</span> {lodgeInfo?.name}</p>
                       <p><span className="text-gray-500">Obédience:</span> {lodgeInfo?.obedience}</p>
@@ -393,7 +395,7 @@ const Join = () => {
                       variant="secondary"
                       onClick={handlePrevStep}
                     >
-                      Retour
+                      {t('join.back')}
                     </AnimatedButton>
                     <AnimatedButton
                       type="submit"
@@ -401,7 +403,7 @@ const Join = () => {
                       fullWidth
                       disabled={loading}
                     >
-                      {loading ? 'Création en cours...' : 'Créer mon compte'}
+                      {loading ? t('join.creating') : t('join.create')}
                     </AnimatedButton>
                   </div>
                 </motion.div>

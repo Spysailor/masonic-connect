@@ -544,5 +544,34 @@
       "allowed": "Autorisé",
       "notAllowed": "Non autorisé"
     }
+  },
+  "join": {
+    "title": "Rejoindre {{lodgeName}}",
+    "subtitle": "Vous avez été invité à rejoindre cette loge virtuelle",
+    "personalInfo": "Informations personnelles",
+    "security": "Sécurité",
+    "confirmation": "Confirmation",
+    "continue": "Continuer",
+    "back": "Retour",
+    "verifyingCode": "Vérification du code d'invitation",
+    "verifyingCodeDescription": "Veuillez patienter pendant que nous vérifions votre code...",
+    "invalidCode": "Code d'invitation invalide",
+    "invalidCodeDescription": "Le code d'invitation est invalide ou a expiré. Veuillez contacter l'administrateur de votre loge pour obtenir un nouveau code.",
+    "backToHome": "Retour à l'accueil",
+    "allReady": "Tout est prêt!",
+    "almostJoining": "Vous êtes sur le point de rejoindre la loge virtuelle {{lodgeName}}. Cliquez sur le bouton ci-dessous pour finaliser votre inscription.",
+    "summary": "Récapitulatif",
+    "create": "Créer mon compte",
+    "creating": "Création en cours...",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "passwordPlaceholder": "8 caractères minimum",
+    "degree": "Degré maçonnique",
+    "initiation": "Apprenti (1er degré)",
+    "companion": "Compagnon (2ème degré)",
+    "master": "Maître (3ème degré)"
   }
 }
