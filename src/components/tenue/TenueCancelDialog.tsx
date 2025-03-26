@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Dialog,
   DialogContent,
@@ -21,6 +22,7 @@ const TenueCancelDialog: React.FC<TenueCancelDialogProps> = ({
   onOpenChange 
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleConfirm = () => {
     onOpenChange(false);
@@ -31,9 +33,9 @@ const TenueCancelDialog: React.FC<TenueCancelDialogProps> = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Annuler les modifications</DialogTitle>
+          <DialogTitle>{t('tenueForm.cancelDialog.title')}</DialogTitle>
           <DialogDescription>
-            Êtes-vous sûr de vouloir annuler ? Toutes les modifications non enregistrées seront perdues.
+            {t('tenueForm.cancelDialog.description')}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -42,14 +44,14 @@ const TenueCancelDialog: React.FC<TenueCancelDialogProps> = ({
             variant="outline" 
             onClick={() => onOpenChange(false)}
           >
-            Continuer l'édition
+            {t('tenueForm.cancelDialog.continueEditing')}
           </Button>
           <Button 
             type="button" 
             variant="destructive" 
             onClick={handleConfirm}
           >
-            Quitter sans sauvegarder
+            {t('tenueForm.cancelDialog.quitWithoutSaving')}
           </Button>
         </DialogFooter>
       </DialogContent>

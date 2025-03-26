@@ -211,5 +211,35 @@
     "viewAllPlanches": "View all planches",
     "presenceSince": "Presence at meetings since",
     "meetings": "meetings out of"
+  },
+  "tenueForm": {
+    "createTitle": "Create a new meeting",
+    "editTitle": "Edit meeting",
+    "createDescription": "Fill in the form to create a meeting",
+    "editDescription": "Fill in the form to modify a meeting",
+    "backToAgenda": "Back to schedule",
+    "details": "Details",
+    "agenda": "Program",
+    "participants": "Participants",
+    "save": "Save changes",
+    "create": "Create meeting",
+    "cancel": "Cancel",
+    "cancelMeeting": "Cancel this meeting",
+    "saving": "Saving...",
+    "cancelDialog": {
+      "title": "Cancel changes",
+      "description": "Are you sure you want to cancel? All unsaved changes will be lost.",
+      "continueEditing": "Continue editing",
+      "quitWithoutSaving": "Quit without saving"
+    },
+    "agendaSection": {
+      "comingSoon": "This feature will be available soon. You will be able to add the detailed program of the meeting.",
+      "defaultProgram": "Default program",
+      "openingWorks": "Opening of works",
+      "minutesReading": "Reading and approval of minutes",
+      "todayWorks": "Today's works",
+      "proposalsBag": "Circulation of proposals bag and charity trunk",
+      "closing": "Closing of works"
+    }
   }
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 interface TenueFormHeaderProps {
@@ -10,6 +11,8 @@ interface TenueFormHeaderProps {
 }
 
 const TenueFormHeader: React.FC<TenueFormHeaderProps> = ({ formMode }) => {
+  const { t } = useTranslation();
+  
   return (
     <>
       <motion.div
@@ -20,16 +23,16 @@ const TenueFormHeader: React.FC<TenueFormHeaderProps> = ({ formMode }) => {
       >
         <Link to="/agenda" className="inline-flex items-center text-masonic-blue-700 hover:text-masonic-blue-900">
           <ArrowLeft className="h-4 w-4 mr-1" />
-          <span>Retour à l'agenda</span>
+          <span>{t('tenueForm.backToAgenda')}</span>
         </Link>
       </motion.div>
       
       <CardHeader className="bg-gradient-to-r from-masonic-blue-800 to-masonic-blue-900 text-white">
         <CardTitle className="text-2xl">
-          {formMode === 'create' ? 'Créer une nouvelle tenue' : 'Modifier la tenue'}
+          {formMode === 'create' ? t('tenueForm.createTitle') : t('tenueForm.editTitle')}
         </CardTitle>
         <CardDescription className="text-gray-200">
-          Remplissez le formulaire pour {formMode === 'create' ? 'créer' : 'modifier'} une tenue
+          {formMode === 'create' ? t('tenueForm.createDescription') : t('tenueForm.editDescription')}
         </CardDescription>
       </CardHeader>
     </>

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 
 interface TenueFormActionsProps {
@@ -15,6 +16,8 @@ const TenueFormActions: React.FC<TenueFormActionsProps> = ({
   onCancel, 
   onDelete 
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="flex flex-col sm:flex-row gap-3 justify-between mt-8">
       <div>
@@ -26,7 +29,7 @@ const TenueFormActions: React.FC<TenueFormActionsProps> = ({
             disabled={isLoading}
             className="w-full sm:w-auto"
           >
-            Annuler cette tenue
+            {t('tenueForm.cancelMeeting')}
           </Button>
         )}
       </div>
@@ -39,7 +42,7 @@ const TenueFormActions: React.FC<TenueFormActionsProps> = ({
           disabled={isLoading}
           className="w-full sm:w-auto"
         >
-          Annuler
+          {t('tenueForm.cancel')}
         </Button>
         
         <Button 
@@ -50,10 +53,10 @@ const TenueFormActions: React.FC<TenueFormActionsProps> = ({
           {isLoading ? (
             <>
               <span className="animate-spin mr-2">⏳</span>
-              Enregistrement...
+              {t('tenueForm.saving')}
             </>
           ) : (
-            formMode === 'create' ? 'Créer la tenue' : 'Sauvegarder les modifications'
+            formMode === 'create' ? t('tenueForm.create') : t('tenueForm.save')
           )}
         </Button>
       </div>

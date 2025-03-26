@@ -1,8 +1,11 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { AlertTriangle, FileText } from 'lucide-react';
 
 const TenueAgendaForm: React.FC = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="space-y-6">
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md">
@@ -12,7 +15,7 @@ const TenueAgendaForm: React.FC = () => {
           </div>
           <div className="ml-3">
             <p className="text-sm text-yellow-700">
-              Cette fonctionnalité sera disponible prochainement. Vous pourrez ajouter le programme détaillé de la tenue.
+              {t('tenueForm.agendaSection.comingSoon')}
             </p>
           </div>
         </div>
@@ -21,7 +24,7 @@ const TenueAgendaForm: React.FC = () => {
       <div className="border rounded-md p-4">
         <div className="flex items-center mb-4">
           <FileText className="mr-2 h-5 w-5 text-gray-500" />
-          <h3 className="font-medium text-gray-700">Programme par défaut</h3>
+          <h3 className="font-medium text-gray-700">{t('tenueForm.agendaSection.defaultProgram')}</h3>
         </div>
         
         <div className="space-y-4">
@@ -31,7 +34,7 @@ const TenueAgendaForm: React.FC = () => {
             </div>
             <div className="flex-grow">
               <div className="bg-gray-50 p-3 rounded-lg border-l-2 border-gray-300">
-                Ouverture des travaux
+                {t('tenueForm.agendaSection.openingWorks')}
               </div>
             </div>
           </div>
@@ -42,7 +45,7 @@ const TenueAgendaForm: React.FC = () => {
             </div>
             <div className="flex-grow">
               <div className="bg-gray-50 p-3 rounded-lg border-l-2 border-gray-300">
-                Lecture et approbation du procès-verbal
+                {t('tenueForm.agendaSection.minutesReading')}
               </div>
             </div>
           </div>
@@ -53,7 +56,7 @@ const TenueAgendaForm: React.FC = () => {
             </div>
             <div className="flex-grow">
               <div className="bg-gray-50 p-3 rounded-lg border-l-2 border-gray-300">
-                Travaux du jour
+                {t('tenueForm.agendaSection.todayWorks')}
               </div>
             </div>
           </div>
@@ -64,7 +67,7 @@ const TenueAgendaForm: React.FC = () => {
             </div>
             <div className="flex-grow">
               <div className="bg-gray-50 p-3 rounded-lg border-l-2 border-gray-300">
-                Circulation du sac des propositions et du tronc de bienfaisance
+                {t('tenueForm.agendaSection.proposalsBag')}
               </div>
             </div>
           </div>
@@ -75,7 +78,7 @@ const TenueAgendaForm: React.FC = () => {
             </div>
             <div className="flex-grow">
               <div className="bg-gray-50 p-3 rounded-lg border-l-2 border-gray-300">
-                Clôture des travaux
+                {t('tenueForm.agendaSection.closing')}
               </div>
             </div>
           </div>

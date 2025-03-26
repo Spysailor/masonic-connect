@@ -211,5 +211,35 @@
     "viewAllPlanches": "Voir toutes les planches",
     "presenceSince": "Présence aux tenues depuis le",
     "meetings": "tenues sur"
+  },
+  "tenueForm": {
+    "createTitle": "Créer une nouvelle tenue",
+    "editTitle": "Modifier la tenue",
+    "createDescription": "Remplissez le formulaire pour créer une tenue",
+    "editDescription": "Remplissez le formulaire pour modifier une tenue",
+    "backToAgenda": "Retour à l'agenda",
+    "details": "Détails",
+    "agenda": "Programme",
+    "participants": "Participants",
+    "save": "Sauvegarder les modifications",
+    "create": "Créer la tenue",
+    "cancel": "Annuler",
+    "cancelMeeting": "Annuler cette tenue",
+    "saving": "Enregistrement...",
+    "cancelDialog": {
+      "title": "Annuler les modifications",
+      "description": "Êtes-vous sûr de vouloir annuler ? Toutes les modifications non enregistrées seront perdues.",
+      "continueEditing": "Continuer l'édition",
+      "quitWithoutSaving": "Quitter sans sauvegarder"
+    },
+    "agendaSection": {
+      "comingSoon": "Cette fonctionnalité sera disponible prochainement. Vous pourrez ajouter le programme détaillé de la tenue.",
+      "defaultProgram": "Programme par défaut",
+      "openingWorks": "Ouverture des travaux",
+      "minutesReading": "Lecture et approbation du procès-verbal",
+      "todayWorks": "Travaux du jour",
+      "proposalsBag": "Circulation du sac des propositions et du tronc de bienfaisance",
+      "closing": "Clôture des travaux"
+    }
   }
 }

@@ -2,6 +2,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -20,6 +21,7 @@ import { useTenueForm } from '@/hooks/useTenueForm';
 
 const TenueForm = () => {
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation();
   const { 
     form, 
     formMode, 
@@ -48,9 +50,9 @@ const TenueForm = () => {
               <CardContent className="pt-6">
                 <Tabs defaultValue="details" className="w-full">
                   <TabsList className="mb-6 w-full grid grid-cols-3">
-                    <TabsTrigger value="details">Détails</TabsTrigger>
-                    <TabsTrigger value="agenda">Programme</TabsTrigger>
-                    <TabsTrigger value="participants">Participants</TabsTrigger>
+                    <TabsTrigger value="details">{t('tenueForm.details')}</TabsTrigger>
+                    <TabsTrigger value="agenda">{t('tenueForm.agenda')}</TabsTrigger>
+                    <TabsTrigger value="participants">{t('tenueForm.participants')}</TabsTrigger>
                   </TabsList>
                   
                   <Form {...form}>
