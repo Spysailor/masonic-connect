@@ -480,13 +480,13 @@ const Dashboard = () => {
                 </Card>
               </Link>
               
-              <Link to="/bibliotheque?type=planche">
+              <Link to="/agenda">
                 <Card className="shadow-sm hover:shadow-md transition-shadow">
                   <CardContent className="p-6 flex flex-col items-center text-center">
                     <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                      <BookOpen className="h-6 w-6 text-masonic-blue-700" />
+                      <Calendar className="h-6 w-6 text-masonic-blue-700" />
                     </div>
-                    <span className="text-sm font-medium text-gray-900">Bibliothèque</span>
+                    <span className="text-sm font-medium text-gray-900">Agenda</span>
                   </CardContent>
                 </Card>
               </Link>
@@ -501,3 +501,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
