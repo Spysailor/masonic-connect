@@ -482,5 +482,67 @@
     "invitationSent": "Invitation envoyée à {{email}}",
     "sending": "Envoi...",
     "send": "Envoyer"
+  },
+  "logeSettings": {
+    "title": "Paramètres de la loge",
+    "subtitle": "Personnalisez l'espace virtuel de votre loge",
+    "configurationOf": "Configuration de",
+    "modifySettings": "Modifiez les paramètres de votre espace virtuel",
+    "saveChanges": "Enregistrer les changements",
+    "saving": "Enregistrement...",
+    "saveSuccess": "Paramètres {{tab}} mis à jour avec succès",
+    "memberManagement": "Gestion des membres",
+    "tabs": {
+      "general": "Général",
+      "appearance": "Apparence",
+      "security": "Sécurité",
+      "membership": "Adhésion"
+    },
+    "general": {
+      "lodgeName": "Nom de la loge",
+      "obedience": "Obédience",
+      "rite": "Rite pratiqué",
+      "mainLanguage": "Langue principale",
+      "selectLanguage": "Sélectionnez une langue",
+      "languages": {
+        "french": "Français",
+        "english": "Anglais",
+        "spanish": "Espagnol",
+        "german": "Allemand"
+      }
+    },
+    "appearance": {
+      "primaryColor": "Couleur principale",
+      "secondaryColor": "Couleur secondaire",
+      "lodgeLogo": "Logo de la loge",
+      "logoTypes": {
+        "squareCompass": "Équerre & Compas",
+        "vintage": "Style Vintage",
+        "gLetter": "Lettre G"
+      }
+    },
+    "security": {
+      "emailVerification": "Vérification d'email",
+      "emailVerificationDesc": "Exiger que les membres vérifient leur email",
+      "twoFactor": "Authentification à deux facteurs",
+      "twoFactorDesc": "Exiger l'authentification à deux facteurs pour tous les membres",
+      "publicVisibility": "Visibilité publique",
+      "publicVisibilityDesc": "Rendre votre loge visible dans le répertoire public",
+      "enabled": "Activé",
+      "disabled": "Désactivé",
+      "visible": "Visible",
+      "hidden": "Cachée"
+    },
+    "membership": {
+      "guestAccess": "Accès invité",
+      "guestAccessDesc": "Permettre aux invités d'accéder à certaines sections",
+      "roleManagement": "Gestion des rôles",
+      "roleManagementDesc": "Définissez qui peut accéder à quelles fonctionnalités",
+      "invitationsDesc": "Gérez les invitations à rejoindre votre loge",
+      "manageRoles": "Gérer les rôles des membres",
+      "manageInvitations": "Gérer les invitations",
+      "allowed": "Autorisé",
+      "notAllowed": "Non autorisé"
+    }
   }
 }

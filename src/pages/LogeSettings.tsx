@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 import { Globe, Mail, Palette, Shield, Users } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -17,6 +18,7 @@ import AnimatedButton from '@/components/ui-elements/AnimatedButton';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 
 const LogeSettings = () => {
+  const { t } = useTranslation();
   const [saving, setSaving] = useState(false);
   const [settings, setSettings] = useState({
     name: 'Universalys',
@@ -41,7 +43,7 @@ const LogeSettings = () => {
     
     // Simulate saving to the backend
     setTimeout(() => {
-      toast.success(`Paramètres ${tab} mis à jour avec succès`);
+      toast.success(t('logeSettings.saveSuccess', { tab }));
       setSaving(false);
     }, 1000);
   };
@@ -60,20 +62,20 @@ const LogeSettings = () => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold text-masonic-blue-900">Paramètres de la loge</h1>
-                <p className="text-gray-600 mt-1">Personnalisez l'espace virtuel de votre loge</p>
+                <h1 className="text-3xl font-bold text-masonic-blue-900">{t('logeSettings.title')}</h1>
+                <p className="text-gray-600 mt-1">{t('logeSettings.subtitle')}</p>
               </div>
               <div className="hidden md:flex gap-2">
                 <Button variant="outline" size="sm" asChild>
                   <Link to="/invitations">
                     <Users className="h-4 w-4 mr-2" />
-                    Invitations
+                    {t('invitations.title')}
                   </Link>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
                   <Link to="/freres">
                     <Users className="h-4 w-4 mr-2" />
-                    Gestion des membres
+                    {t('logeSettings.memberManagement')}
                   </Link>
                 </Button>
               </div>
@@ -82,27 +84,27 @@ const LogeSettings = () => {
           
           <Card className="shadow-md">
             <CardHeader>
-              <CardTitle>Configuration de {settings.name}</CardTitle>
-              <CardDescription>Modifiez les paramètres de votre espace virtuel</CardDescription>
+              <CardTitle>{t('logeSettings.configurationOf')} {settings.name}</CardTitle>
+              <CardDescription>{t('logeSettings.modifySettings')}</CardDescription>
             </CardHeader>
             
             <Tabs defaultValue="general" className="w-full px-6">
               <TabsList className="mb-6 w-full">
                 <TabsTrigger value="general" className="flex-1">
                   <Globe className="h-4 w-4 mr-2" />
-                  Général
+                  {t('logeSettings.tabs.general')}
                 </TabsTrigger>
                 <TabsTrigger value="appearance" className="flex-1">
                   <Palette className="h-4 w-4 mr-2" />
-                  Apparence
+                  {t('logeSettings.tabs.appearance')}
                 </TabsTrigger>
                 <TabsTrigger value="security" className="flex-1">
                   <Shield className="h-4 w-4 mr-2" />
-                  Sécurité
+                  {t('logeSettings.tabs.security')}
                 </TabsTrigger>
                 <TabsTrigger value="membership" className="flex-1">
                   <Users className="h-4 w-4 mr-2" />
-                  Adhésion
+                  {t('logeSettings.tabs.membership')}
                 </TabsTrigger>
               </TabsList>
               
@@ -110,7 +112,7 @@ const LogeSettings = () => {
                 <CardContent className="px-0 pt-0">
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="lodge-name">Nom de la loge</Label>
+                      <Label htmlFor="lodge-name">{t('logeSettings.general.lodgeName')}</Label>
                       <Input 
                         id="lodge-name" 
                         value={settings.name} 
@@ -119,7 +121,7 @@ const LogeSettings = () => {
                     </div>
                     
                     <div>
-                      <Label htmlFor="obedience">Obédience</Label>
+                      <Label htmlFor="obedience">{t('logeSettings.general.obedience')}</Label>
                       <Input 
                         id="obedience" 
                         value={settings.obedience} 
@@ -128,7 +130,7 @@ const LogeSettings = () => {
                     </div>
                     
                     <div>
-                      <Label htmlFor="rite">Rite pratiqué</Label>
+                      <Label htmlFor="rite">{t('logeSettings.general.rite')}</Label>
                       <Input 
                         id="rite" 
                         value={settings.rite} 
@@ -137,19 +139,19 @@ const LogeSettings = () => {
                     </div>
                     
                     <div>
-                      <Label htmlFor="language">Langue principale</Label>
+                      <Label htmlFor="language">{t('logeSettings.general.mainLanguage')}</Label>
                       <Select 
                         value={settings.language}
                         onValueChange={(value) => handleChange('language', value)}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Sélectionnez une langue" />
+                          <SelectValue placeholder={t('logeSettings.general.selectLanguage')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="fr">Français</SelectItem>
-                          <SelectItem value="en">Anglais</SelectItem>
-                          <SelectItem value="es">Espagnol</SelectItem>
-                          <SelectItem value="de">Allemand</SelectItem>
+                          <SelectItem value="fr">{t('logeSettings.general.languages.french')}</SelectItem>
+                          <SelectItem value="en">{t('logeSettings.general.languages.english')}</SelectItem>
+                          <SelectItem value="es">{t('logeSettings.general.languages.spanish')}</SelectItem>
+                          <SelectItem value="de">{t('logeSettings.general.languages.german')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -158,10 +160,10 @@ const LogeSettings = () => {
                 <CardFooter className="px-0">
                   <AnimatedButton
                     variant="primary"
-                    onClick={() => handleSave('généraux')}
+                    onClick={() => handleSave(t('logeSettings.tabs.general').toLowerCase())}
                     disabled={saving}
                   >
-                    {saving ? 'Enregistrement...' : 'Enregistrer les changements'}
+                    {saving ? t('logeSettings.saving') : t('logeSettings.saveChanges')}
                   </AnimatedButton>
                 </CardFooter>
               </TabsContent>
@@ -170,7 +172,7 @@ const LogeSettings = () => {
                 <CardContent className="px-0 pt-0">
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="primary-color">Couleur principale</Label>
+                      <Label htmlFor="primary-color">{t('logeSettings.appearance.primaryColor')}</Label>
                       <div className="flex gap-3">
                         <div className="flex-1">
                           <Input 
@@ -187,7 +189,7 @@ const LogeSettings = () => {
                     </div>
                     
                     <div>
-                      <Label htmlFor="secondary-color">Couleur secondaire</Label>
+                      <Label htmlFor="secondary-color">{t('logeSettings.appearance.secondaryColor')}</Label>
                       <div className="flex gap-3">
                         <div className="flex-1">
                           <Input 
@@ -204,7 +206,7 @@ const LogeSettings = () => {
                     </div>
                     
                     <div>
-                      <Label>Logo de la loge</Label>
+                      <Label>{t('logeSettings.appearance.lodgeLogo')}</Label>
                       <div className="grid grid-cols-3 gap-4 mt-2">
                         {['square-compass', 'square-compass-vintage', 'g-letter'].map(logo => (
                           <div
@@ -216,9 +218,9 @@ const LogeSettings = () => {
                           >
                             <MasonicSymbol type={logo as any} size={48} />
                             <span className="mt-2 text-xs text-center">
-                              {logo === 'square-compass' && 'Équerre & Compas'}
-                              {logo === 'square-compass-vintage' && 'Style Vintage'}
-                              {logo === 'g-letter' && 'Lettre G'}
+                              {logo === 'square-compass' && t('logeSettings.appearance.logoTypes.squareCompass')}
+                              {logo === 'square-compass-vintage' && t('logeSettings.appearance.logoTypes.vintage')}
+                              {logo === 'g-letter' && t('logeSettings.appearance.logoTypes.gLetter')}
                             </span>
                           </div>
                         ))}
@@ -229,10 +231,10 @@ const LogeSettings = () => {
                 <CardFooter className="px-0">
                   <AnimatedButton
                     variant="primary"
-                    onClick={() => handleSave('d\'apparence')}
+                    onClick={() => handleSave(t('logeSettings.tabs.appearance').toLowerCase())}
                     disabled={saving}
                   >
-                    {saving ? 'Enregistrement...' : 'Enregistrer les changements'}
+                    {saving ? t('logeSettings.saving') : t('logeSettings.saveChanges')}
                   </AnimatedButton>
                 </CardFooter>
               </TabsContent>
@@ -242,15 +244,15 @@ const LogeSettings = () => {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-medium">Vérification d'email</h3>
-                        <p className="text-sm text-gray-500">Exiger que les membres vérifient leur email</p>
+                        <h3 className="font-medium">{t('logeSettings.security.emailVerification')}</h3>
+                        <p className="text-sm text-gray-500">{t('logeSettings.security.emailVerificationDesc')}</p>
                       </div>
                       <div>
                         <Button 
                           variant={settings.requireEmailVerification ? "default" : "outline"}
                           onClick={() => handleChange('requireEmailVerification', !settings.requireEmailVerification)}
                         >
-                          {settings.requireEmailVerification ? 'Activé' : 'Désactivé'}
+                          {settings.requireEmailVerification ? t('logeSettings.security.enabled') : t('logeSettings.security.disabled')}
                         </Button>
                       </div>
                     </div>
@@ -259,15 +261,15 @@ const LogeSettings = () => {
                     
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-medium">Authentification à deux facteurs</h3>
-                        <p className="text-sm text-gray-500">Exiger l'authentification à deux facteurs pour tous les membres</p>
+                        <h3 className="font-medium">{t('logeSettings.security.twoFactor')}</h3>
+                        <p className="text-sm text-gray-500">{t('logeSettings.security.twoFactorDesc')}</p>
                       </div>
                       <div>
                         <Button 
                           variant={settings.require2FA ? "default" : "outline"}
                           onClick={() => handleChange('require2FA', !settings.require2FA)}
                         >
-                          {settings.require2FA ? 'Activé' : 'Désactivé'}
+                          {settings.require2FA ? t('logeSettings.security.enabled') : t('logeSettings.security.disabled')}
                         </Button>
                       </div>
                     </div>
@@ -276,15 +278,15 @@ const LogeSettings = () => {
                     
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-medium">Visibilité publique</h3>
-                        <p className="text-sm text-gray-500">Rendre votre loge visible dans le répertoire public</p>
+                        <h3 className="font-medium">{t('logeSettings.security.publicVisibility')}</h3>
+                        <p className="text-sm text-gray-500">{t('logeSettings.security.publicVisibilityDesc')}</p>
                       </div>
                       <div>
                         <Button 
                           variant={settings.isPublic ? "default" : "outline"}
                           onClick={() => handleChange('isPublic', !settings.isPublic)}
                         >
-                          {settings.isPublic ? 'Visible' : 'Cachée'}
+                          {settings.isPublic ? t('logeSettings.security.visible') : t('logeSettings.security.hidden')}
                         </Button>
                       </div>
                     </div>
@@ -293,10 +295,10 @@ const LogeSettings = () => {
                 <CardFooter className="px-0">
                   <AnimatedButton
                     variant="primary"
-                    onClick={() => handleSave('de sécurité')}
+                    onClick={() => handleSave(t('logeSettings.tabs.security').toLowerCase())}
                     disabled={saving}
                   >
-                    {saving ? 'Enregistrement...' : 'Enregistrer les changements'}
+                    {saving ? t('logeSettings.saving') : t('logeSettings.saveChanges')}
                   </AnimatedButton>
                 </CardFooter>
               </TabsContent>
@@ -306,15 +308,15 @@ const LogeSettings = () => {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-medium">Accès invité</h3>
-                        <p className="text-sm text-gray-500">Permettre aux invités d'accéder à certaines sections</p>
+                        <h3 className="font-medium">{t('logeSettings.membership.guestAccess')}</h3>
+                        <p className="text-sm text-gray-500">{t('logeSettings.membership.guestAccessDesc')}</p>
                       </div>
                       <div>
                         <Button 
                           variant={settings.allowGuestAccess ? "default" : "outline"}
                           onClick={() => handleChange('allowGuestAccess', !settings.allowGuestAccess)}
                         >
-                          {settings.allowGuestAccess ? 'Autorisé' : 'Non autorisé'}
+                          {settings.allowGuestAccess ? t('logeSettings.membership.allowed') : t('logeSettings.membership.notAllowed')}
                         </Button>
                       </div>
                     </div>
@@ -322,13 +324,13 @@ const LogeSettings = () => {
                     <Separator />
                     
                     <div>
-                      <h3 className="font-medium mb-2">Gestion des rôles</h3>
-                      <p className="text-sm text-gray-500 mb-4">Définissez qui peut accéder à quelles fonctionnalités</p>
+                      <h3 className="font-medium mb-2">{t('logeSettings.membership.roleManagement')}</h3>
+                      <p className="text-sm text-gray-500 mb-4">{t('logeSettings.membership.roleManagementDesc')}</p>
                       
                       <Link to="/freres" className="block">
                         <Button variant="outline" className="w-full justify-start">
                           <Users className="h-4 w-4 mr-2" />
-                          Gérer les rôles des membres
+                          {t('logeSettings.membership.manageRoles')}
                         </Button>
                       </Link>
                     </div>
@@ -336,13 +338,13 @@ const LogeSettings = () => {
                     <Separator />
                     
                     <div>
-                      <h3 className="font-medium mb-2">Invitations</h3>
-                      <p className="text-sm text-gray-500 mb-4">Gérez les invitations à rejoindre votre loge</p>
+                      <h3 className="font-medium mb-2">{t('invitations.title')}</h3>
+                      <p className="text-sm text-gray-500 mb-4">{t('logeSettings.membership.invitationsDesc')}</p>
                       
                       <Link to="/invitations" className="block">
                         <Button variant="outline" className="w-full justify-start">
                           <Mail className="h-4 w-4 mr-2" />
-                          Gérer les invitations
+                          {t('logeSettings.membership.manageInvitations')}
                         </Button>
                       </Link>
                     </div>
@@ -351,10 +353,10 @@ const LogeSettings = () => {
                 <CardFooter className="px-0">
                   <AnimatedButton
                     variant="primary"
-                    onClick={() => handleSave('d\'adhésion')}
+                    onClick={() => handleSave(t('logeSettings.tabs.membership').toLowerCase())}
                     disabled={saving}
                   >
-                    {saving ? 'Enregistrement...' : 'Enregistrer les changements'}
+                    {saving ? t('logeSettings.saving') : t('logeSettings.saveChanges')}
                   </AnimatedButton>
                 </CardFooter>
               </TabsContent>

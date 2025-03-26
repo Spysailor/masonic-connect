@@ -599,5 +599,67 @@
     "invitationSent": "Invitation sent to {{email}}",
     "sending": "Sending...",
     "send": "Send"
+  },
+  "logeSettings": {
+    "title": "Lodge Settings",
+    "subtitle": "Customize your lodge's virtual space",
+    "configurationOf": "Configuration of",
+    "modifySettings": "Modify your virtual space settings",
+    "saveChanges": "Save changes",
+    "saving": "Saving...",
+    "saveSuccess": "{{tab}} settings updated successfully",
+    "memberManagement": "Member Management",
+    "tabs": {
+      "general": "General",
+      "appearance": "Appearance",
+      "security": "Security",
+      "membership": "Membership"
+    },
+    "general": {
+      "lodgeName": "Lodge name",
+      "obedience": "Obedience",
+      "rite": "Practiced rite",
+      "mainLanguage": "Main language",
+      "selectLanguage": "Select a language",
+      "languages": {
+        "french": "French",
+        "english": "English",
+        "spanish": "Spanish",
+        "german": "German"
+      }
+    },
+    "appearance": {
+      "primaryColor": "Primary color",
+      "secondaryColor": "Secondary color",
+      "lodgeLogo": "Lodge logo",
+      "logoTypes": {
+        "squareCompass": "Square & Compass",
+        "vintage": "Vintage Style",
+        "gLetter": "G Letter"
+      }
+    },
+    "security": {
+      "emailVerification": "Email verification",
+      "emailVerificationDesc": "Require members to verify their email",
+      "twoFactor": "Two-factor authentication",
+      "twoFactorDesc": "Require two-factor authentication for all members",
+      "publicVisibility": "Public visibility",
+      "publicVisibilityDesc": "Make your lodge visible in the public directory",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "visible": "Visible",
+      "hidden": "Hidden"
+    },
+    "membership": {
+      "guestAccess": "Guest access",
+      "guestAccessDesc": "Allow guests to access certain sections",
+      "roleManagement": "Role management",
+      "roleManagementDesc": "Define who can access which features",
+      "invitationsDesc": "Manage invitations to join your lodge",
+      "manageRoles": "Manage member roles",
+      "manageInvitations": "Manage invitations",
+      "allowed": "Allowed",
+      "notAllowed": "Not allowed"
+    }
   }
 }
