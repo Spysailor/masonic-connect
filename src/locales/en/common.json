@@ -1,0 +1,27 @@
+
+{
+  "appName": "MasonConnect",
+  "loading": "Loading...",
+  "save": "Save",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "edit": "Edit",
+  "create": "Create",
+  "search": "Search...",
+  "filter": "Filter",
+  "sort": "Sort",
+  "actions": "Actions",
+  "confirm": "Confirm",
+  "back": "Back",
+  "next": "Next",
+  "previous": "Previous",
+  "submit": "Submit",
+  "success": "Success",
+  "error": "Error",
+  "warning": "Warning",
+  "info": "Information",
+  "yes": "Yes",
+  "no": "No",
+  "more": "More",
+  "less": "Less"
+}

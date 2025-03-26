@@ -1,0 +1,31 @@
+
+{
+  "welcome": "Bienvenue dans votre espace maçonnique",
+  "quickAccess": "Accès rapide",
+  "recentActivity": "Activité récente",
+  "upcomingTenues": "Prochaines tenues",
+  "lodgeOfficers": "Officiers de la loge",
+  "latestNews": "Dernières actualités",
+  "seeAll": "Voir tout",
+  "quickActions": "Actions rapides",
+  "stats": {
+    "nextTenue": "Prochaine tenue",
+    "membersCount": "Nombre de frères",
+    "planchesCount": "Nombre de planches",
+    "unreadMessages": "Messages non lus",
+    "members": "membres",
+    "documents": "documents",
+    "unread": "non lus"
+  },
+  "actions": {
+    "createTenue": "Créer une tenue",
+    "writePlanche": "Rédiger une planche",
+    "brothersDirectory": "Annuaire des frères",
+    "agenda": "Agenda"
+  },
+  "tabs": {
+    "agenda": "Agenda",
+    "brothers": "Frères",
+    "news": "Actualités"
+  }
+}

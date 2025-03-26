@@ -17,7 +17,7 @@ interface TenueLocationFormProps {
 }
 
 const TenueLocationForm: React.FC<TenueLocationFormProps> = ({ form }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('tenueForm');
   
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -26,9 +26,9 @@ const TenueLocationForm: React.FC<TenueLocationFormProps> = ({ form }) => {
         name="lodge"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('tenueForm.details.lodge')}</FormLabel>
+            <FormLabel>{t('details.lodge')}</FormLabel>
             <FormControl>
-              <Input placeholder={t('tenueForm.details.lodgePlaceholder')} {...field} />
+              <Input placeholder={t('details.lodgePlaceholder')} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -40,11 +40,11 @@ const TenueLocationForm: React.FC<TenueLocationFormProps> = ({ form }) => {
         name="location"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('tenueForm.details.location')}</FormLabel>
+            <FormLabel>{t('details.location')}</FormLabel>
             <FormControl>
               <div className="relative">
                 <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
-                <Input className="pl-10" placeholder={t('tenueForm.details.locationPlaceholder')} {...field} />
+                <Input className="pl-10" placeholder={t('details.locationPlaceholder')} {...field} />
               </div>
             </FormControl>
             <FormMessage />
@@ -57,9 +57,9 @@ const TenueLocationForm: React.FC<TenueLocationFormProps> = ({ form }) => {
         name="address"
         render={({ field }) => (
           <FormItem className="md:col-span-2">
-            <FormLabel>{t('tenueForm.details.address')}</FormLabel>
+            <FormLabel>{t('details.address')}</FormLabel>
             <FormControl>
-              <Input placeholder={t('tenueForm.details.addressPlaceholder')} {...field} />
+              <Input placeholder={t('details.addressPlaceholder')} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

@@ -1,0 +1,27 @@
+
+{
+  "title": "Actualités",
+  "createTitle": "Créer une actualité",
+  "editTitle": "Modifier l'actualité",
+  "createDescription": "Rédigez et publiez une nouvelle actualité pour votre loge",
+  "noNews": "Aucune actualité à afficher",
+  "search": "Rechercher dans les actualités...",
+  "filter": {
+    "title": "Filtrer les actualités",
+    "category": "Catégorie",
+    "date": "Date",
+    "author": "Auteur",
+    "apply": "Appliquer les filtres",
+    "reset": "Réinitialiser"
+  },
+  "categories": {
+    "all": "Toutes",
+    "lodge": "Loge",
+    "event": "Événement",
+    "announcement": "Annonce",
+    "other": "Autre"
+  },
+  "errors": {
+    "missingId": "ID de l'actualité manquant"
+  }
+}

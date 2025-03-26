@@ -1,0 +1,34 @@
+
+{
+  "title": "Agenda",
+  "createTenue": "Créer une tenue",
+  "upcoming": "À venir",
+  "past": "Passées",
+  "all": "Toutes",
+  "noTenues": "Aucune tenue à afficher",
+  "search": "Rechercher une tenue...",
+  "filter": {
+    "title": "Filtrer les tenues",
+    "type": "Type de tenue",
+    "degree": "Degré",
+    "date": "Date",
+    "location": "Lieu",
+    "lodge": "Loge",
+    "apply": "Appliquer les filtres",
+    "reset": "Réinitialiser"
+  },
+  "tenueTypes": {
+    "all": "Toutes",
+    "regular": "Régulière",
+    "initiation": "Initiation",
+    "elevation": "Élévation",
+    "installation": "Installation",
+    "white": "Blanche"
+  },
+  "statuses": {
+    "scheduled": "Programmée",
+    "confirmed": "Confirmée",
+    "completed": "Terminée",
+    "canceled": "Annulée"
+  }
+}

@@ -3,16 +3,42 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import frTranslation from './locales/fr.json';
-import enTranslation from './locales/en.json';
+// Import translation files
+import frCommon from './locales/fr/common.json';
+import frDashboard from './locales/fr/dashboard.json';
+import frNav from './locales/fr/nav.json';
+import frAgenda from './locales/fr/agenda.json';
+import frTenueForm from './locales/fr/tenueForm.json';
+import frAuth from './locales/fr/auth.json';
+import frActualites from './locales/fr/actualites.json';
 
-// Les ressources contiennent les traductions
+import enCommon from './locales/en/common.json';
+import enDashboard from './locales/en/dashboard.json';
+import enNav from './locales/en/nav.json';
+import enAgenda from './locales/en/agenda.json';
+import enTenueForm from './locales/en/tenueForm.json';
+import enAuth from './locales/en/auth.json';
+import enActualites from './locales/en/actualites.json';
+
+// Construct resources with namespaces
 const resources = {
   fr: {
-    translation: frTranslation
+    common: frCommon,
+    dashboard: frDashboard,
+    nav: frNav,
+    agenda: frAgenda,
+    tenueForm: frTenueForm,
+    auth: frAuth,
+    actualites: frActualites
   },
   en: {
-    translation: enTranslation
+    common: enCommon,
+    dashboard: enDashboard,
+    nav: enNav,
+    agenda: enAgenda,
+    tenueForm: enTenueForm,
+    auth: enAuth,
+    actualites: enActualites
   }
 };
 
@@ -42,7 +68,8 @@ i18n
     returnNull: false,
     returnEmptyString: false,
     returnObjects: false, // Changed to false to prevent object returns
-    fallbackNS: 'translation'
+    defaultNS: 'common',
+    fallbackNS: 'common'
   });
 
 export default i18n;

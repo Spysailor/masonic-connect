@@ -1,0 +1,34 @@
+
+{
+  "title": "Calendar",
+  "createTenue": "Create meeting",
+  "upcoming": "Upcoming",
+  "past": "Past",
+  "all": "All",
+  "noTenues": "No meetings to display",
+  "search": "Search for a meeting...",
+  "filter": {
+    "title": "Filter meetings",
+    "type": "Meeting type",
+    "degree": "Degree",
+    "date": "Date",
+    "location": "Location",
+    "lodge": "Lodge",
+    "apply": "Apply filters",
+    "reset": "Reset"
+  },
+  "tenueTypes": {
+    "all": "All",
+    "regular": "Regular",
+    "initiation": "Initiation",
+    "elevation": "Passing",
+    "installation": "Installation",
+    "white": "Open"
+  },
+  "statuses": {
+    "scheduled": "Scheduled",
+    "confirmed": "Confirmed",
+    "completed": "Completed",
+    "canceled": "Canceled"
+  }
+}
