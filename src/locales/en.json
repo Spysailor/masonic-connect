@@ -60,5 +60,41 @@
     "joinWithInvitation": "Join with an invitation",
     "emailValidation": "Invalid email",
     "passwordValidation": "Password required"
+  },
+  "messages": {
+    "title": "Messages",
+    "subtitle": "Communicate with your brothers",
+    "newMessage": "New message",
+    "search": "Search messages",
+    "writeMessage": "Write your message...",
+    "startConversation": "Start the conversation by sending a message",
+    "unnamed": "Unnamed",
+    "members": "members",
+    "directMessage": "Direct message",
+    "noConversationSelected": "No conversation selected",
+    "selectConversation": "Select a conversation from the list",
+    "emptySearch": "No conversations found",
+    "newConversation": "New conversation",
+    "newConversationDesc": "Select brothers to start a conversation with",
+    "tabs": {
+      "inbox": "Inbox",
+      "sent": "Sent",
+      "sentMessage": "Your sent messages will appear here"
+    },
+    "filters": {
+      "all": "All messages",
+      "unread": "Unread",
+      "read": "Read"
+    },
+    "empty": {
+      "title": "No messages",
+      "description": "You don't have any messages yet"
+    },
+    "errors": {
+      "loadFailed": "Failed to load messages",
+      "sendFailed": "Failed to send message",
+      "createFailed": "Failed to create conversation",
+      "tryAgain": "Please try again"
+    }
   }
 }

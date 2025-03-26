@@ -60,5 +60,41 @@
     "joinWithInvitation": "Rejoindre avec une invitation",
     "emailValidation": "Email invalide",
     "passwordValidation": "Mot de passe requis"
+  },
+  "messages": {
+    "title": "Messages",
+    "subtitle": "Communiquez avec vos frères",
+    "newMessage": "Nouveau message",
+    "search": "Rechercher des messages",
+    "writeMessage": "Écrivez votre message...",
+    "startConversation": "Commencez la conversation en envoyant un message",
+    "unnamed": "Sans nom",
+    "members": "membres",
+    "directMessage": "Message direct",
+    "noConversationSelected": "Aucune conversation sélectionnée",
+    "selectConversation": "Sélectionnez une conversation dans la liste",
+    "emptySearch": "Aucune conversation trouvée",
+    "newConversation": "Nouvelle conversation",
+    "newConversationDesc": "Sélectionnez des frères pour démarrer une conversation",
+    "tabs": {
+      "inbox": "Boîte de réception",
+      "sent": "Envoyés",
+      "sentMessage": "Vos messages envoyés apparaîtront ici"
+    },
+    "filters": {
+      "all": "Tous les messages",
+      "unread": "Non lus",
+      "read": "Lus"
+    },
+    "empty": {
+      "title": "Pas de messages",
+      "description": "Vous n'avez pas encore de messages"
+    },
+    "errors": {
+      "loadFailed": "Échec du chargement des messages",
+      "sendFailed": "Échec de l'envoi du message",
+      "createFailed": "Échec de la création de la conversation",
+      "tryAgain": "Veuillez réessayer"
+    }
   }
 }
