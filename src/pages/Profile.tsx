@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Mail, MapPin, Phone, Book, Settings, Bell, ExternalLink } from 'lucide-react';
@@ -308,7 +309,10 @@ const Profile = () => {
                             <div className="flex items-center justify-between">
                               <div>
                                 <p className="font-medium">{t('profile.settings.language')}</p>
-                                <p className="text-sm text-gray-500">{i18n.language === 'fr' ? 'Français' : 'English'}</p>
+                                <p className="text-sm text-gray-500">{t('profile.settings.languageDescription')}</p>
+                              </div>
+                              <div className="flex items-center">
+                                <LanguageSelector className="w-auto" />
                               </div>
                             </div>
                           </div>
