@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Mail, MapPin, Phone, Book, Settings, Bell, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -18,12 +19,13 @@ const Profile = () => {
   const { toast } = useToast();
   const { unreadCount } = useNotifications();
   const [activeTab, setActiveTab] = useState('personal');
+  const { t } = useTranslation();
 
   // Mock data for the profile
   const userData = {
     name: 'Jean Dupont',
-    role: 'Maître Maçon',
-    grade: '3ème degré',
+    role: t('profile.masterMason'),
+    grade: t('profile.thirdDegree'),
     lodge: 'Universalys',
     email: 'jean.dupont@example.com',
     phone: '+230 5712 3456',
@@ -35,8 +37,8 @@ const Profile = () => {
 
   const handleUpdateProfile = () => {
     toast({
-      title: "Profil mis à jour",
-      description: "Vos informations ont été mises à jour avec succès.",
+      title: t('profile.toast.updated'),
+      description: t('profile.toast.updatedDescription'),
     });
   };
 
@@ -94,7 +96,7 @@ const Profile = () => {
                         
                         <div className="flex items-center">
                           <Book className="h-4 w-4 mr-3 text-gray-500" />
-                          <span className="text-gray-700">Loge {userData.lodge}</span>
+                          <span className="text-gray-700">{t('profile.lodge')} {userData.lodge}</span>
                         </div>
                       </div>
                       
@@ -102,10 +104,10 @@ const Profile = () => {
                       
                       <div className="space-y-2 text-sm">
                         <p className="text-gray-600">
-                          <span className="font-medium">Date d'initiation:</span> {userData.dateInitiation}
+                          <span className="font-medium">{t('profile.initiationDate')}:</span> {userData.dateInitiation}
                         </p>
                         <p className="text-gray-600">
-                          <span className="font-medium">Date d'élévation:</span> {userData.dateElevation}
+                          <span className="font-medium">{t('profile.elevationDate')}:</span> {userData.dateElevation}
                         </p>
                       </div>
                     </div>
@@ -119,19 +121,19 @@ const Profile = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <User className="mr-2 h-5 w-5 text-masonic-blue-700" />
-                      Mon profil
+                      {t('profile.myProfile')}
                     </CardTitle>
                     <CardDescription>
-                      Gestion de vos informations personnelles et des paramètres de votre compte
+                      {t('profile.description')}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Tabs value={activeTab} onValueChange={setActiveTab}>
                       <TabsList className="grid grid-cols-3 mb-6">
-                        <TabsTrigger value="personal">Informations</TabsTrigger>
-                        <TabsTrigger value="settings">Paramètres</TabsTrigger>
+                        <TabsTrigger value="personal">{t('profile.tabs.info')}</TabsTrigger>
+                        <TabsTrigger value="settings">{t('profile.tabs.settings')}</TabsTrigger>
                         <TabsTrigger value="notifications" className="relative">
-                          Notifications
+                          {t('profile.tabs.notifications')}
                           {unreadCount > 0 && (
                             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">
                               {unreadCount}
@@ -144,7 +146,7 @@ const Profile = () => {
                         <div className="space-y-4">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-gray-700">Nom complet</label>
+                              <label className="text-sm font-medium text-gray-700">{t('profile.fullName')}</label>
                               <input 
                                 type="text" 
                                 className="w-full p-2 border border-gray-300 rounded-md" 
@@ -153,7 +155,7 @@ const Profile = () => {
                             </div>
                             
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-gray-700">Grade</label>
+                              <label className="text-sm font-medium text-gray-700">{t('profile.grade')}</label>
                               <input 
                                 type="text" 
                                 className="w-full p-2 border border-gray-300 rounded-md bg-gray-50" 
@@ -163,7 +165,7 @@ const Profile = () => {
                             </div>
                             
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-gray-700">Email</label>
+                              <label className="text-sm font-medium text-gray-700">{t('profile.email')}</label>
                               <input 
                                 type="email" 
                                 className="w-full p-2 border border-gray-300 rounded-md" 
@@ -172,7 +174,7 @@ const Profile = () => {
                             </div>
                             
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-gray-700">Téléphone</label>
+                              <label className="text-sm font-medium text-gray-700">{t('profile.phone')}</label>
                               <input 
                                 type="tel" 
                                 className="w-full p-2 border border-gray-300 rounded-md" 
@@ -181,7 +183,7 @@ const Profile = () => {
                             </div>
                             
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-gray-700">Adresse</label>
+                              <label className="text-sm font-medium text-gray-700">{t('profile.address')}</label>
                               <input 
                                 type="text" 
                                 className="w-full p-2 border border-gray-300 rounded-md" 
@@ -190,7 +192,7 @@ const Profile = () => {
                             </div>
                             
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-gray-700">Loge</label>
+                              <label className="text-sm font-medium text-gray-700">{t('profile.lodge')}</label>
                               <input 
                                 type="text" 
                                 className="w-full p-2 border border-gray-300 rounded-md bg-gray-50" 
@@ -202,7 +204,7 @@ const Profile = () => {
                           
                           <div className="flex justify-end mt-6">
                             <Button onClick={handleUpdateProfile}>
-                              Mettre à jour
+                              {t('profile.update')}
                             </Button>
                           </div>
                         </div>
@@ -214,26 +216,26 @@ const Profile = () => {
                             <div className="flex items-center">
                               <Bell className="h-5 w-5 text-masonic-blue-600 mr-2" />
                               <div>
-                                <h3 className="font-medium">Centre de notifications</h3>
-                                <p className="text-sm text-gray-600">Gérez toutes vos notifications en un seul endroit</p>
+                                <h3 className="font-medium">{t('profile.notificationCenter')}</h3>
+                                <p className="text-sm text-gray-600">{t('profile.manageNotifications')}</p>
                               </div>
                             </div>
                             <Link to="/notifications">
                               <Button variant="outline" className="flex items-center">
-                                <span>Voir toutes</span>
+                                <span>{t('profile.viewAll')}</span>
                                 <ExternalLink className="ml-1 h-4 w-4" />
                               </Button>
                             </Link>
                           </div>
                           
                           <div className="space-y-3 mt-4">
-                            <h3 className="text-lg font-medium">Préférences de notification</h3>
+                            <h3 className="text-lg font-medium">{t('profile.notificationPreferences')}</h3>
                             
                             <div className="space-y-3">
                               <div className="flex items-center justify-between">
                                 <div>
-                                  <p className="font-medium">Nouvelles tenues</p>
-                                  <p className="text-sm text-gray-500">Recevoir une notification pour les nouvelles tenues</p>
+                                  <p className="font-medium">{t('profile.notifications.newTenues')}</p>
+                                  <p className="text-sm text-gray-500">{t('profile.notifications.newTenesDesc')}</p>
                                 </div>
                                 <div className="flex items-center">
                                   <input type="checkbox" defaultChecked className="h-4 w-4 mr-2" />
@@ -244,8 +246,8 @@ const Profile = () => {
                               
                               <div className="flex items-center justify-between">
                                 <div>
-                                  <p className="font-medium">Nouveaux messages</p>
-                                  <p className="text-sm text-gray-500">Recevoir une notification pour les nouveaux messages</p>
+                                  <p className="font-medium">{t('profile.notifications.newMessages')}</p>
+                                  <p className="text-sm text-gray-500">{t('profile.notifications.newMessagesDesc')}</p>
                                 </div>
                                 <div className="flex items-center">
                                   <input type="checkbox" defaultChecked className="h-4 w-4 mr-2" />
@@ -256,8 +258,8 @@ const Profile = () => {
                               
                               <div className="flex items-center justify-between">
                                 <div>
-                                  <p className="font-medium">Nouvelles actualités</p>
-                                  <p className="text-sm text-gray-500">Recevoir une notification pour les nouvelles actualités</p>
+                                  <p className="font-medium">{t('profile.notifications.newNews')}</p>
+                                  <p className="text-sm text-gray-500">{t('profile.notifications.newNewsDesc')}</p>
                                 </div>
                                 <div className="flex items-center">
                                   <input type="checkbox" defaultChecked className="h-4 w-4 mr-2" />
@@ -268,10 +270,10 @@ const Profile = () => {
                           
                           <div className="flex justify-end mt-6">
                             <Button onClick={() => toast({
-                              title: "Paramètres sauvegardés",
-                              description: "Vos préférences de notification ont été mises à jour.",
+                              title: t('profile.toast.settingsSaved'),
+                              description: t('profile.toast.notificationPreferencesSaved'),
                             })}>
-                              Sauvegarder
+                              {t('profile.save')}
                             </Button>
                           </div>
                         </div>
@@ -279,13 +281,13 @@ const Profile = () => {
                       
                       <TabsContent value="settings" className="space-y-6">
                         <div className="space-y-4">
-                          <h3 className="text-lg font-medium">Paramètres du compte</h3>
+                          <h3 className="text-lg font-medium">{t('profile.accountSettings')}</h3>
                           
                           <div className="space-y-3">
                             <div className="flex items-center justify-between">
                               <div>
-                                <p className="font-medium">Confidentialité du profil</p>
-                                <p className="text-sm text-gray-500">Rendre votre profil visible uniquement aux membres de votre loge</p>
+                                <p className="font-medium">{t('profile.settings.profilePrivacy')}</p>
+                                <p className="text-sm text-gray-500">{t('profile.settings.profilePrivacyDesc')}</p>
                               </div>
                               <div className="flex items-center">
                                 <input type="checkbox" defaultChecked className="h-4 w-4 mr-2" />
@@ -296,8 +298,8 @@ const Profile = () => {
                             
                             <div className="flex items-center justify-between">
                               <div>
-                                <p className="font-medium">Authentification à deux facteurs</p>
-                                <p className="text-sm text-gray-500">Renforcer la sécurité de votre compte</p>
+                                <p className="font-medium">{t('profile.settings.twoFactor')}</p>
+                                <p className="text-sm text-gray-500">{t('profile.settings.twoFactorDesc')}</p>
                               </div>
                               <div className="flex items-center">
                                 <input type="checkbox" className="h-4 w-4 mr-2" />
@@ -308,21 +310,21 @@ const Profile = () => {
                             
                             <div className="flex items-center justify-between">
                               <div>
-                                <p className="font-medium">Langue de l'application</p>
+                                <p className="font-medium">{t('profile.settings.language')}</p>
                                 <p className="text-sm text-gray-500">Français</p>
                               </div>
                               <Button variant="outline" size="sm">
-                                Modifier
+                                {t('profile.settings.modify')}
                               </Button>
                             </div>
                           </div>
                           
                           <div className="flex justify-end mt-6">
                             <Button onClick={() => toast({
-                              title: "Paramètres sauvegardés",
-                              description: "Vos paramètres ont été mis à jour avec succès.",
+                              title: t('profile.toast.settingsSaved'),
+                              description: t('profile.toast.accountSettingsSaved'),
                             })}>
-                              Sauvegarder
+                              {t('profile.save')}
                             </Button>
                           </div>
                         </div>

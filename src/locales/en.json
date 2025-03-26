@@ -498,5 +498,54 @@
       "title": "No messages",
       "description": "No messages match your search."
     }
+  },
+  "profile": {
+    "masterMason": "Master Mason",
+    "thirdDegree": "3rd degree",
+    "lodge": "Lodge",
+    "initiationDate": "Initiation date",
+    "elevationDate": "Elevation date",
+    "myProfile": "My profile",
+    "description": "Manage your personal information and account settings",
+    "tabs": {
+      "info": "Information",
+      "settings": "Settings",
+      "notifications": "Notifications"
+    },
+    "fullName": "Full name",
+    "grade": "Grade",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "update": "Update",
+    "notificationCenter": "Notification center",
+    "manageNotifications": "Manage all your notifications in one place",
+    "viewAll": "View all",
+    "notificationPreferences": "Notification preferences",
+    "save": "Save",
+    "accountSettings": "Account settings",
+    "notifications": {
+      "newTenues": "New meetings",
+      "newTenesDesc": "Receive a notification for new meetings",
+      "newMessages": "New messages",
+      "newMessagesDesc": "Receive a notification for new messages",
+      "newNews": "New news",
+      "newNewsDesc": "Receive a notification for new news"
+    },
+    "settings": {
+      "profilePrivacy": "Profile privacy",
+      "profilePrivacyDesc": "Make your profile visible only to members of your lodge",
+      "twoFactor": "Two-factor authentication",
+      "twoFactorDesc": "Enhance the security of your account",
+      "language": "Application language",
+      "modify": "Modify"
+    },
+    "toast": {
+      "updated": "Profile updated",
+      "updatedDescription": "Your information has been successfully updated.",
+      "settingsSaved": "Settings saved",
+      "notificationPreferencesSaved": "Your notification preferences have been updated.",
+      "accountSettingsSaved": "Your account settings have been successfully updated."
+    }
   }
 }
