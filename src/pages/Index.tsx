@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -8,7 +7,6 @@ import { Gavel, Library, Columns, BookOpen, ScrollText, Users, MessageSquare } f
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Logo from '@/components/ui-elements/Logo';
-
 const Index = () => {
   return <div className="min-h-screen bg-white">
       {/* Header */}
@@ -60,39 +58,10 @@ const Index = () => {
 
       {/* Pricing */}
       <section className="container mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-center mb-12 text-masonic-blue-900">Solutions adaptées à chaque loge</h2>
+        <h2 className="font-bold text-center mb-12 text-masonic-blue-900 text-4xl">Nos Prix : 1 € symbolique</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <PricingCard 
-            title="Basique Mensuel" 
-            price="1 €" 
-            period="mois"
-            features={[
-              "1€/mois par membre", 
-              "Messagerie sécurisée", 
-              "Agenda des tenues", 
-              "Planches et documents", 
-              "Gestion des présences", 
-              "Bibliothèque maçonnique"
-            ]} 
-            buttonText="Commencer" 
-            to="/register" 
-          />
-          <PricingCard 
-            title="Basique Annuel" 
-            price="10 €" 
-            period="an"
-            featured={true}
-            features={[
-              "10€/an par membre", 
-              "Messagerie sécurisée", 
-              "Agenda des tenues", 
-              "Planches et documents", 
-              "Gestion des présences", 
-              "Bibliothèque maçonnique"
-            ]} 
-            buttonText="Offre Spéciale" 
-            to="/register?plan=annual" 
-          />
+          <PricingCard title="Basique Mensuel" price="1 €" period="mois" features={["1€/mois par membre", "Messagerie sécurisée", "Agenda des tenues", "Planches et documents", "Gestion des présences", "Bibliothèque maçonnique"]} buttonText="Commencer" to="/register" />
+          <PricingCard title="Basique Annuel" price="10 €" period="an" featured={true} features={["10€/an par membre", "Messagerie sécurisée", "Agenda des tenues", "Planches et documents", "Gestion des présences", "Bibliothèque maçonnique"]} buttonText="Offre Spéciale" to="/register?plan=annual" />
         </div>
       </section>
 
@@ -122,7 +91,6 @@ const Index = () => {
       <Footer />
     </div>;
 };
-
 const FeatureCard = ({
   title,
   description,
@@ -142,7 +110,6 @@ const FeatureCard = ({
     <h3 className="text-xl font-bold mb-2 text-masonic-blue-900">{title}</h3>
     <p className="text-gray-600">{description}</p>
   </motion.div>;
-
 const PricingCard = ({
   title,
   price,
@@ -174,7 +141,6 @@ const PricingCard = ({
       {buttonText}
     </Link>
   </motion.div>;
-
 const Testimonial = ({
   quote,
   author
@@ -192,5 +158,4 @@ const Testimonial = ({
     <p className="text-lg mb-4 italic text-gray-700">"{quote}"</p>
     <p className="text-masonic-blue-700 font-medium">— {author}</p>
   </motion.div>;
-
 export default Index;
