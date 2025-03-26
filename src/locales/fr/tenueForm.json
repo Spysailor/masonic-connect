@@ -4,9 +4,9 @@
   "editTitle": "Modifier la tenue",
   "createDescription": "Complétez les informations ci-dessous pour créer une nouvelle tenue.",
   "editDescription": "Modifiez les informations ci-dessous pour mettre à jour la tenue.",
-  "details": "Détails",
-  "agenda": "Ordre du jour",
-  "participants": "Participants",
+  "detailsTab": "Détails",
+  "agendaTab": "Ordre du jour",
+  "participantsTab": "Participants",
   "sections": {
     "basicInfo": "Informations de base",
     "location": "Informations de lieu",
