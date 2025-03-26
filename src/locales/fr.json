@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -453,5 +452,35 @@
       "create": "Créer l'actualité",
       "update": "Mettre à jour"
     }
+  },
+  "invitations": {
+    "title": "Gestion des invitations",
+    "subtitle": "Invitez de nouveaux membres à rejoindre votre loge",
+    "lodgeSettings": "Paramètres de la loge",
+    "memberManagement": "Gestion des membres",
+    "invitationCode": "Code d'invitation",
+    "generateShareCodes": "Générez et partagez des codes d'invitation",
+    "currentCode": "Code actuel",
+    "invitationLink": "Lien d'invitation",
+    "validity": "Validité (jours)",
+    "generateNewCode": "Générer un nouveau code",
+    "sendInvitations": "Envoyer des invitations",
+    "inviteBrothers": "Invitez des frères à rejoindre votre loge virtuelle",
+    "brotherEmailPlaceholder": "Email du frère à inviter",
+    "pending": "En attente ({{count}})",
+    "accepted": "Acceptées ({{count}})",
+    "noPendingInvitations": "Aucune invitation en attente",
+    "noAcceptedInvitations": "Aucune invitation acceptée",
+    "sentOn": "Envoyée le",
+    "acceptedOn": "Acceptée le",
+    "resend": "Renvoyer",
+    "cancel": "Annuler",
+    "viewProfile": "Voir le profil",
+    "newCodeGenerated": "Nouveau code d'invitation généré",
+    "copiedToClipboard": "Copié dans le presse-papier",
+    "validEmailRequired": "Veuillez saisir une adresse email valide",
+    "invitationSent": "Invitation envoyée à {{email}}",
+    "sending": "Envoi...",
+    "send": "Envoyer"
   }
 }
