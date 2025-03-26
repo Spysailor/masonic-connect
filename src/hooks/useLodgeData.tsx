@@ -53,8 +53,8 @@ export const useLodgeData = () => {
   });
 
   // Vérifier si l'utilisateur est administrateur
-  const isAdmin = !!profile?.lodge_memberships?.[0]?.role === 'admin' || 
-                  !!profile?.lodge_memberships?.[0]?.office === 'Vénérable Maître';
+  const isAdmin = profile?.lodge_memberships?.[0]?.role === 'admin' || 
+                  profile?.lodge_memberships?.[0]?.office === 'Vénérable Maître';
   
   return {
     lodge,

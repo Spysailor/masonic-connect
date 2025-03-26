@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -97,7 +96,7 @@ const Header: React.FC = () => {
     
     return (
       <>
-        <AnimatedButton to="/login" variant="secondary" size={isMobile ? "xs" : "sm"}>
+        <AnimatedButton to="/login" variant="secondary" size="sm">
           {t('common.login')}
         </AnimatedButton>
         {!isMobile && (
