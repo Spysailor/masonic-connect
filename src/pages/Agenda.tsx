@@ -9,7 +9,8 @@ import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import AgendaFilter from '@/components/agenda/AgendaFilter';
 import AgendaTabView from '@/components/agenda/AgendaTabView';
-import { getTenues, Tenue } from '@/data/tenuesData';
+import { getTenues } from '@/data/tenuesData';
+import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 
 const Agenda = () => {
   const [filterDegree, setFilterDegree] = useState<number | null>(null);
@@ -30,7 +31,7 @@ const Agenda = () => {
     }
     groups[month].push(tenue);
     return groups;
-  }, {} as Record<string, Tenue[]>);
+  }, {} as Record<string, typeof tenues>);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -42,9 +43,12 @@ const Agenda = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mb-8"
+            className="mb-8 flex items-center gap-4"
           >
-            <h1 className="text-3xl font-bold text-masonic-blue-900">Agenda des Tenues</h1>
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl font-bold text-masonic-blue-900">Agenda des Tenues</h1>
+              <MasonicSymbol type="temple" size={40} />
+            </div>
             <p className="text-gray-600 mt-1">Consultez et gérez vos tenues maçonniques</p>
           </motion.div>
           
