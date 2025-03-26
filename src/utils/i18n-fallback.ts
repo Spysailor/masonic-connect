@@ -39,15 +39,15 @@ export const fallbackUseTranslation = (): UseTranslationResult => {
 };
 
 // Export a utility to check if real i18n is available
-let i18nAvailable = false;
-try {
-  require('i18next');
-  i18nAvailable = true;
-} catch (e) {
-  console.warn('i18next not available, using fallbacks');
-}
-
-export const isI18nAvailable = () => i18nAvailable;
+export const isI18nAvailable = () => {
+  try {
+    require('i18next');
+    return true;
+  } catch (e) {
+    console.warn('i18next not available, using fallbacks');
+    return false;
+  }
+};
 
 // Create a HOC to provide fallback i18n context if needed
 export const withI18nFallback = <P extends object>(Component: React.ComponentType<P>) => {
