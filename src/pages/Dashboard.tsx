@@ -1,17 +1,14 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
-import { Calendar, Users, FileText, Bell, BookOpen } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import TenueCard from '@/components/dashboard/TenueCard';
-import MemberCard from '@/components/dashboard/MemberCard';
-import NewsCard from '@/components/dashboard/NewsCard';
-import { Link } from 'react-router-dom';
+import StatCards from '@/components/dashboard/StatCards';
+import TabNavigation from '@/components/dashboard/TabNavigation';
+import TabContent from '@/components/dashboard/TabContent';
+import QuickActions from '@/components/dashboard/QuickActions';
 
 type ProfileWithRelations = {
   id: string;
@@ -253,245 +250,21 @@ const Dashboard = () => {
             <p className="text-gray-600 mt-1">Bienvenue sur votre espace personnel MasonConnect</p>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8"
-          >
-            <Card className="shadow-sm">
-              <CardContent className="p-6 flex items-center">
-                <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mr-4">
-                  <Calendar className="h-6 w-6 text-masonic-blue-700" />
-                </div>
-                <div>
-                  <p className="text-gray-500 text-sm font-medium">Prochaine tenue</p>
-                  <p className="text-lg font-semibold text-masonic-blue-900">{stats?.nextTenue}</p>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="shadow-sm">
-              <CardContent className="p-6 flex items-center">
-                <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mr-4">
-                  <Users className="h-6 w-6 text-masonic-blue-700" />
-                </div>
-                <div>
-                  <p className="text-gray-500 text-sm font-medium">Frères</p>
-                  <p className="text-lg font-semibold text-masonic-blue-900">{stats?.membersCount} membres</p>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="shadow-sm">
-              <CardContent className="p-6 flex items-center">
-                <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mr-4">
-                  <FileText className="h-6 w-6 text-masonic-blue-700" />
-                </div>
-                <div>
-                  <p className="text-gray-500 text-sm font-medium">Planches</p>
-                  <p className="text-lg font-semibold text-masonic-blue-900">{stats?.planchesCount} documents</p>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="shadow-sm">
-              <CardContent className="p-6 flex items-center">
-                <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mr-4">
-                  <Bell className="h-6 w-6 text-masonic-blue-700" />
-                </div>
-                <div>
-                  <p className="text-gray-500 text-sm font-medium">Messages</p>
-                  <p className="text-lg font-semibold text-masonic-blue-900">{stats?.unreadMessages} non lus</p>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <StatCards stats={stats} statsLoading={statsLoading} />
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="mb-6"
-          >
-            <Tabs
-              value={activeTab}
-              onValueChange={setActiveTab}
-              className="w-full"
-            >
-              <TabsList className="w-full bg-white shadow-sm rounded-lg">
-                <TabsTrigger 
-                  value="agenda" 
-                  className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
-                >
-                  Agenda
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="freres" 
-                  className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
-                >
-                  Frères
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="actualites" 
-                  className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
-                >
-                  Actualités
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </motion.div>
+          <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-            className="mb-8"
-          >
-            {activeTab === 'agenda' && (
-              <div>
-                <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold text-masonic-blue-900">Prochaines tenues</h2>
-                  <a href="/agenda" className="text-sm text-masonic-blue-700 font-medium hover:text-masonic-blue-600">
-                    Voir tout →
-                  </a>
-                </div>
-                {tenuesLoading ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {[1, 2, 3].map((i) => (
-                      <Card key={i} className="h-48 animate-pulse">
-                        <div className="h-12 bg-gray-200 rounded-t-xl"></div>
-                        <div className="p-4 space-y-4">
-                          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                          <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {tenues.map((tenue) => (
-                      <TenueCard key={tenue.id} tenue={tenue} />
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-            
-            {activeTab === 'freres' && (
-              <div>
-                <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold text-masonic-blue-900">Officiers de loge</h2>
-                  <a href="/freres" className="text-sm text-masonic-blue-700 font-medium hover:text-masonic-blue-600">
-                    Voir tout →
-                  </a>
-                </div>
-                {membersLoading ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {[1, 2, 3, 4].map((i) => (
-                      <Card key={i} className="h-64 animate-pulse">
-                        <div className="h-40 bg-gray-200 rounded-t-xl"></div>
-                        <div className="p-4 space-y-2">
-                          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                          <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {members.map((member) => (
-                      <MemberCard key={member.id} member={member} />
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-            
-            {activeTab === 'actualites' && (
-              <div>
-                <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold text-masonic-blue-900">Dernières actualités</h2>
-                  <a href="/actualites" className="text-sm text-masonic-blue-700 font-medium hover:text-masonic-blue-600">
-                    Voir tout →
-                  </a>
-                </div>
-                {newsLoading ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {[1, 2].map((i) => (
-                      <Card key={i} className="h-80 animate-pulse">
-                        <div className="h-40 bg-gray-200 rounded-t-xl"></div>
-                        <div className="p-4 space-y-4">
-                          <div className="h-5 bg-gray-200 rounded w-3/4"></div>
-                          <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-                          <div className="h-20 bg-gray-200 rounded w-full"></div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {news.map((item) => (
-                      <NewsCard key={item.id} news={item} />
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-          </motion.div>
+          <TabContent 
+            activeTab={activeTab} 
+            tenues={tenues} 
+            members={members} 
+            news={news} 
+            tenuesLoading={tenuesLoading}
+            membersLoading={membersLoading}
+            newsLoading={newsLoading}
+          />
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
-          >
-            <h2 className="text-xl font-bold text-masonic-blue-900 mb-4">Actions rapides</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Link to="/agenda/create">
-                <Card className="shadow-sm hover:shadow-md transition-shadow">
-                  <CardContent className="p-6 flex flex-col items-center text-center">
-                    <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                      <Calendar className="h-6 w-6 text-masonic-blue-700" />
-                    </div>
-                    <span className="text-sm font-medium text-gray-900">Créer une tenue</span>
-                  </CardContent>
-                </Card>
-              </Link>
-              
-              <Link to="/bibliotheque?type=planche&action=new">
-                <Card className="shadow-sm hover:shadow-md transition-shadow">
-                  <CardContent className="p-6 flex flex-col items-center text-center">
-                    <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                      <FileText className="h-6 w-6 text-masonic-blue-700" />
-                    </div>
-                    <span className="text-sm font-medium text-gray-900">Rédiger une planche</span>
-                  </CardContent>
-                </Card>
-              </Link>
-              
-              <Link to="/freres">
-                <Card className="shadow-sm hover:shadow-md transition-shadow">
-                  <CardContent className="p-6 flex flex-col items-center text-center">
-                    <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                      <Users className="h-6 w-6 text-masonic-blue-700" />
-                    </div>
-                    <span className="text-sm font-medium text-gray-900">Annuaire des Frères</span>
-                  </CardContent>
-                </Card>
-              </Link>
-              
-              <Link to="/agenda">
-                <Card className="shadow-sm hover:shadow-md transition-shadow">
-                  <CardContent className="p-6 flex flex-col items-center text-center">
-                    <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                      <Calendar className="h-6 w-6 text-masonic-blue-700" />
-                    </div>
-                    <span className="text-sm font-medium text-gray-900">Agenda</span>
-                  </CardContent>
-                </Card>
-              </Link>
-            </div>
-          </motion.div>
+          <QuickActions />
         </div>
       </main>
       
@@ -501,4 +274,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
