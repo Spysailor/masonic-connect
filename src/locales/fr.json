@@ -388,7 +388,7 @@
       "interpretationsIntro": "En franc-maçonnerie, le pavé mosaïque est interprété de plusieurs façons :",
       "interpretation1": {
         "title": "Le chemin initiatique",
-        "desc": "Le pavé représente le chemin de l'initié, alternant entre épreuves (carreaux noirs) et réussites (carreaux blancs)."
+        "desc": "Le pavé repr��sente le chemin de l'initié, alternant entre épreuves (carreaux noirs) et réussites (carreaux blancs)."
       },
       "interpretation2": {
         "title": "L'unité des contraires",
@@ -482,6 +482,26 @@
     "invitationSent": "Invitation envoyée à {{email}}",
     "sending": "Envoi...",
     "send": "Envoyer"
+  },
+  "messages": {
+    "title": "Messages",
+    "subtitle": "Gérez vos communications avec les frères",
+    "search": "Rechercher dans les messages...",
+    "newMessage": "Nouveau message",
+    "tabs": {
+      "inbox": "Boîte de réception",
+      "sent": "Envoyés",
+      "sentMessage": "Messages envoyés"
+    },
+    "filters": {
+      "all": "Tous les messages",
+      "unread": "Non lus",
+      "read": "Lus"
+    },
+    "empty": {
+      "title": "Aucun message trouvé",
+      "description": "Il n'y a aucun message correspondant à votre recherche"
+    }
   },
   "logeSettings": {
     "title": "Paramètres de la loge",

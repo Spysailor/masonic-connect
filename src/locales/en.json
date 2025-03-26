@@ -481,21 +481,22 @@
   },
   "messages": {
     "title": "Messages",
-    "subtitle": "Communicate with your brothers",
+    "subtitle": "Manage your communications with brothers",
+    "search": "Search messages...",
     "newMessage": "New message",
-    "search": "Search...",
     "tabs": {
       "inbox": "Inbox",
-      "sent": "Sent"
+      "sent": "Sent",
+      "sentMessage": "Sent messages"
     },
     "filters": {
-      "all": "All",
+      "all": "All messages",
       "unread": "Unread",
       "read": "Read"
     },
     "empty": {
-      "title": "No messages",
-      "description": "No messages match your search."
+      "title": "No messages found",
+      "description": "There are no messages matching your search"
     }
   },
   "profile": {

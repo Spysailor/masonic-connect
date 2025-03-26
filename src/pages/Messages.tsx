@@ -9,11 +9,12 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS } from 'date-fns/locale';
 
 const Messages = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLocale = i18n.language === 'fr' ? fr : enUS;
 
   // Mock data for demonstration
   const messages = [
@@ -173,7 +174,7 @@ const Messages = () => {
                       
                       <TabsContent value="sent" className="mt-3">
                         <div className="text-center py-4 text-gray-500 text-sm">
-                          {t('messages.tabs.sent')}
+                          {t('messages.tabs.sentMessage')}
                         </div>
                       </TabsContent>
                     </Tabs>
@@ -206,7 +207,7 @@ const Messages = () => {
                                     {message.sender}
                                   </p>
                                   <p className="text-xs text-gray-500">
-                                    {format(message.date, 'd MMM', { locale: fr })}
+                                    {format(message.date, 'd MMM', { locale: currentLocale })}
                                   </p>
                                 </div>
                                 <p className={`text-sm truncate ${message.status === 'unread' ? 'font-semibold text-gray-900' : 'text-gray-700'}`}>
