@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -452,6 +451,25 @@
       "invalidUrl": "The image URL must be valid",
       "create": "Create news",
       "update": "Update news"
+    }
+  },
+  "messages": {
+    "title": "Messages",
+    "subtitle": "Communicate with your brothers",
+    "newMessage": "New message",
+    "search": "Search...",
+    "tabs": {
+      "inbox": "Inbox",
+      "sent": "Sent"
+    },
+    "filters": {
+      "all": "All",
+      "unread": "Unread",
+      "read": "Read"
+    },
+    "empty": {
+      "title": "No messages",
+      "description": "No messages match your search."
     }
   }
 }

@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Plus, Mail, Check, Clock, User } from 'lucide-react';
+import { Search, Plus, Mail, Check, Clock } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Input } from '@/components/ui/input';
@@ -12,6 +13,7 @@ import { fr } from 'date-fns/locale';
 
 const Messages = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const { t } = useTranslation();
 
   // Mock data for demonstration
   const messages = [
@@ -101,13 +103,13 @@ const Messages = () => {
           >
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold text-masonic-blue-900">Messages</h1>
-                <p className="text-gray-600 mt-1">Communiquez avec vos frères</p>
+                <h1 className="text-3xl font-bold text-masonic-blue-900">{t('messages.title')}</h1>
+                <p className="text-gray-600 mt-1">{t('messages.subtitle')}</p>
               </div>
               
               <Button className="flex items-center">
                 <Plus className="mr-2 h-4 w-4" />
-                Nouveau message
+                {t('messages.newMessage')}
               </Button>
             </div>
           </motion.div>
@@ -127,7 +129,7 @@ const Messages = () => {
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                       <Input
                         type="text"
-                        placeholder="Rechercher..."
+                        placeholder={t('messages.search')}
                         className="pl-10"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -139,24 +141,24 @@ const Messages = () => {
                     <Tabs defaultValue="inbox">
                       <TabsList className="w-full">
                         <TabsTrigger value="inbox" className="flex-1">
-                          Boîte de réception
+                          {t('messages.tabs.inbox')}
                           {unreadCount > 0 && (
                             <span className="ml-2 bg-masonic-blue-600 text-white text-xs rounded-full px-2 py-0.5">
                               {unreadCount}
                             </span>
                           )}
                         </TabsTrigger>
-                        <TabsTrigger value="sent" className="flex-1">Envoyés</TabsTrigger>
+                        <TabsTrigger value="sent" className="flex-1">{t('messages.tabs.sent')}</TabsTrigger>
                       </TabsList>
                       
                       <TabsContent value="inbox" className="mt-3 space-y-1">
                         <Button variant="ghost" className="w-full justify-start text-gray-700 font-normal hover:bg-gray-100 hover:text-gray-900">
                           <Mail className="mr-2 h-4 w-4 text-gray-500" />
-                          Tous
+                          {t('messages.filters.all')}
                         </Button>
                         <Button variant="ghost" className="w-full justify-start text-gray-700 font-normal hover:bg-gray-100 hover:text-gray-900">
                           <Clock className="mr-2 h-4 w-4 text-yellow-500" />
-                          Non lus
+                          {t('messages.filters.unread')}
                           {unreadCount > 0 && (
                             <span className="ml-2 bg-gray-200 text-gray-700 text-xs rounded-full px-2 py-0.5">
                               {unreadCount}
@@ -165,13 +167,13 @@ const Messages = () => {
                         </Button>
                         <Button variant="ghost" className="w-full justify-start text-gray-700 font-normal hover:bg-gray-100 hover:text-gray-900">
                           <Check className="mr-2 h-4 w-4 text-green-500" />
-                          Lus
+                          {t('messages.filters.read')}
                         </Button>
                       </TabsContent>
                       
                       <TabsContent value="sent" className="mt-3">
                         <div className="text-center py-4 text-gray-500 text-sm">
-                          Messages envoyés
+                          {t('messages.tabs.sent')}
                         </div>
                       </TabsContent>
                     </Tabs>
@@ -221,8 +223,8 @@ const Messages = () => {
                     ) : (
                       <div className="p-8 text-center">
                         <Mail className="mx-auto h-12 w-12 text-gray-400" />
-                        <p className="mt-2 text-lg font-medium text-gray-900">Aucun message</p>
-                        <p className="text-gray-500">Aucun message ne correspond à votre recherche.</p>
+                        <p className="mt-2 text-lg font-medium text-gray-900">{t('messages.empty.title')}</p>
+                        <p className="text-gray-500">{t('messages.empty.description')}</p>
                       </div>
                     )}
                   </ul>
