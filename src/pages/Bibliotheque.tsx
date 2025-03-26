@@ -44,6 +44,7 @@ const Bibliotheque = () => {
   const [selectedDegree, setSelectedDegree] = useState<number | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [categoryView, setCategoryView] = useState<'planches' | 'resources'>('planches');
   
   // Parse the URL query parameters
   useEffect(() => {
@@ -51,6 +52,11 @@ const Bibliotheque = () => {
     const typeParam = params.get('type');
     if (typeParam) {
       setSelectedType(typeParam);
+      if (typeParam === 'planche') {
+        setCategoryView('planches');
+      } else {
+        setCategoryView('resources');
+      }
     }
   }, [location.search]);
 
@@ -231,20 +237,29 @@ const Bibliotheque = () => {
   const types = [...new Set(resources.map(resource => resource.type))];
   const allTags = Array.from(new Set(resources.flatMap(resource => resource.tags || [])));
   
+  // Separate resources into planches and other resources
+  const plancheResources = resources.filter(resource => resource.type === 'planche');
+  const otherResources = resources.filter(resource => resource.type !== 'planche');
+  
   // Filter resources based on search term, type, category, degree, and tag
-  const filteredResources = resources.filter(resource => {
-    const matchesSearch = searchTerm === '' || 
-      resource.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (resource.authorName && resource.authorName.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filterResources = (resourcesList: Resource[]) => {
+    return resourcesList.filter(resource => {
+      const matchesSearch = searchTerm === '' || 
+        resource.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (resource.authorName && resource.authorName.toLowerCase().includes(searchTerm.toLowerCase()));
+        
+      const matchesType = selectedType === null || resource.type === selectedType;
+      const matchesCategory = selectedCategory === null || resource.category === selectedCategory;
+      const matchesDegree = selectedDegree === null || resource.degree === selectedDegree;
+      const matchesTag = selectedTag === null || (resource.tags && resource.tags.includes(selectedTag));
       
-    const matchesType = selectedType === null || resource.type === selectedType;
-    const matchesCategory = selectedCategory === null || resource.category === selectedCategory;
-    const matchesDegree = selectedDegree === null || resource.degree === selectedDegree;
-    const matchesTag = selectedTag === null || (resource.tags && resource.tags.includes(selectedTag));
-    
-    return matchesSearch && matchesType && matchesCategory && matchesDegree && matchesTag;
-  });
+      return matchesSearch && matchesType && matchesCategory && matchesDegree && matchesTag;
+    });
+  };
+
+  const filteredPlanches = filterResources(plancheResources);
+  const filteredResources = filterResources(otherResources);
 
   // Function to get the correct path based on resource type
   const getResourcePath = (resource: Resource) => {
@@ -299,6 +314,213 @@ const Bibliotheque = () => {
     });
   };
 
+  // Function to render resource grid or list
+  const renderResourceList = (resources: Resource[], viewType: string) => {
+    if (resources.length === 0) {
+      return (
+        <div className="text-center py-10">
+          <p className="text-gray-500">Aucune ressource ne correspond à votre recherche.</p>
+        </div>
+      );
+    }
+
+    if (viewType === 'grid') {
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {resources.map((resource) => (
+            <div 
+              key={resource.id} 
+              className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col transition-shadow hover:shadow-md"
+            >
+              {resource.imageUrl && (
+                <div className="aspect-w-16 aspect-h-9">
+                  <img 
+                    src={resource.imageUrl} 
+                    alt={resource.title} 
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              )}
+              
+              <div className="p-5 flex-grow flex flex-col">
+                <div className="flex items-center mb-2">
+                  <span className={cn(
+                    "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium mr-2",
+                    resource.type === 'book' && "bg-blue-100 text-blue-800",
+                    resource.type === 'document' && "bg-green-100 text-green-800",
+                    resource.type === 'article' && "bg-purple-100 text-purple-800",
+                    resource.type === 'planche' && "bg-amber-100 text-amber-800"
+                  )}>
+                    <span className="mr-1">{renderTypeIcon(resource.type)}</span>
+                    {getTypeName(resource.type)}
+                  </span>
+                  
+                  {resource.degree && (
+                    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-800 ${
+                      resource.degree === 1 ? 'bg-blue-50 text-blue-700' : 
+                      resource.degree === 2 ? 'bg-yellow-50 text-yellow-700' : 
+                      'bg-red-50 text-red-700'
+                    }`}>
+                      {resource.degree}° degré
+                    </span>
+                  )}
+                  
+                  {!resource.degree && (
+                    <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-800">
+                      {resource.category}
+                    </span>
+                  )}
+                </div>
+                
+                <h3 className="text-lg font-semibold text-masonic-blue-900 mb-2">{resource.title}</h3>
+                
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">{resource.description}</p>
+                
+                {resource.tags && resource.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {resource.tags.map((tag, index) => (
+                      <span key={index} className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                
+                <div className="flex items-center justify-between mt-auto">
+                  <div className="flex items-center">
+                    <div className="w-7 h-7 rounded-full overflow-hidden mr-2">
+                      <img 
+                        src={`https://randomuser.me/api/portraits/men/${parseInt(resource.id) + 25}.jpg`}
+                        alt={resource.author} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <span className="text-xs text-gray-700">{resource.authorName || resource.author}</span>
+                  </div>
+                  
+                  {resource.downloadUrl && (
+                    <a 
+                      href={resource.downloadUrl}
+                      className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
+                    >
+                      Télécharger
+                    </a>
+                  )}
+                  
+                  <Link
+                    to={getResourcePath(resource)}
+                    className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
+                  >
+                    Consulter →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <div className="divide-y divide-gray-200">
+          {resources.map((resource) => (
+            <div key={resource.id} className="py-4 flex">
+              <div className="flex-shrink-0 mr-4">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-white">
+                  <div className={cn(
+                    "w-10 h-10 rounded-full flex items-center justify-center",
+                    resource.type === 'book' && "bg-blue-600",
+                    resource.type === 'document' && "bg-green-600",
+                    resource.type === 'article' && "bg-purple-600",
+                    resource.type === 'planche' && "bg-amber-600"
+                  )}>
+                    {renderTypeIcon(resource.type)}
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex-grow">
+                <div className="flex items-center mb-1">
+                  <h3 className="text-md font-semibold text-masonic-blue-900">
+                    {resource.title}
+                  </h3>
+                  
+                  <div className="flex ml-2 gap-1">
+                    <span className={cn(
+                      "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium",
+                      resource.type === 'book' && "bg-blue-100 text-blue-800",
+                      resource.type === 'document' && "bg-green-100 text-green-800",
+                      resource.type === 'article' && "bg-purple-100 text-purple-800",
+                      resource.type === 'planche' && "bg-amber-100 text-amber-800"
+                    )}>
+                      {getTypeName(resource.type)}
+                    </span>
+                    
+                    {resource.degree && (
+                      <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
+                        resource.degree === 1 ? 'bg-blue-50 text-blue-700' : 
+                        resource.degree === 2 ? 'bg-yellow-50 text-yellow-700' : 
+                        'bg-red-50 text-red-700'
+                      }`}>
+                        {resource.degree}° degré
+                      </span>
+                    )}
+                    
+                    {!resource.degree && (
+                      <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-800">
+                        {resource.category}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                
+                <p className="text-gray-600 text-sm mb-2 line-clamp-2">{resource.description}</p>
+                
+                {resource.tags && resource.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mb-1">
+                    {resource.tags.slice(0, 3).map((tag, index) => (
+                      <span key={index} className="bg-gray-100 text-gray-600 text-xs px-1.5 py-0.5 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                    {resource.tags.length > 3 && (
+                      <span className="bg-gray-100 text-gray-600 text-xs px-1.5 py-0.5 rounded-full">
+                        +{resource.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
+                )}
+                
+                <div className="flex items-center text-xs text-gray-500">
+                  <span>{resource.authorName || resource.author}</span>
+                  <span className="mx-2">•</span>
+                  <span>{format(resource.date || resource.createdAt || new Date(), 'd MMM yyyy', { locale: fr })}</span>
+                  
+                  <div className="ml-auto">
+                    {resource.downloadUrl && (
+                      <a 
+                        href={resource.downloadUrl}
+                        className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors mr-4"
+                      >
+                        Télécharger
+                      </a>
+                    )}
+                    
+                    <Link
+                      to={getResourcePath(resource)}
+                      className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
+                    >
+                      Consulter →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
@@ -321,354 +543,212 @@ const Bibliotheque = () => {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="mb-8"
           >
+            {/* Category Tabs */}
             <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
-              <div className="mb-6">
-                <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                    <Input
-                      type="text"
-                      placeholder="Rechercher dans la bibliothèque..."
-                      className="pl-10"
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                    />
+              <Tabs 
+                defaultValue="planches" 
+                value={categoryView} 
+                onValueChange={(value) => setCategoryView(value as 'planches' | 'resources')}
+                className="w-full"
+              >
+                <TabsList className="grid w-full grid-cols-2 mb-6">
+                  <TabsTrigger value="planches" className="text-base py-3">
+                    Nos Planches
+                  </TabsTrigger>
+                  <TabsTrigger value="resources" className="text-base py-3">
+                    Ressources Maçonniques
+                  </TabsTrigger>
+                </TabsList>
+                
+                <div className="mb-6">
+                  <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                    <div className="relative flex-1">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                      <Input
+                        type="text"
+                        placeholder="Rechercher dans la bibliothèque..."
+                        className="pl-10"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                      />
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      {categoryView === 'planches' && (
+                        <Link to="/planches/create">
+                          <Button className="whitespace-nowrap">
+                            <Plus className="mr-2 h-4 w-4" />
+                            Rédiger une planche
+                          </Button>
+                        </Link>
+                      )}
+                      
+                      <Button 
+                        variant="outline" 
+                        className="flex items-center gap-2"
+                        onClick={() => setShowFilters(!showFilters)}
+                      >
+                        <Filter className="h-4 w-4" />
+                        Filtres
+                        <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+                      </Button>
+                    </div>
                   </div>
                   
-                  <div className="flex gap-2">
-                    {selectedType === 'planche' && (
-                      <Link to="/planches/create">
-                        <Button className="whitespace-nowrap">
-                          <Plus className="mr-2 h-4 w-4" />
-                          Rédiger une planche
-                        </Button>
-                      </Link>
-                    )}
-                    
-                    <Button 
-                      variant="outline" 
-                      className="flex items-center gap-2"
-                      onClick={() => setShowFilters(!showFilters)}
-                    >
-                      <Filter className="h-4 w-4" />
-                      Filtres
-                      <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
-                    </Button>
-                  </div>
-                </div>
-                
-                {showFilters && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 p-4 bg-gray-50 rounded-lg">
-                    <div>
-                      <label className="text-sm font-medium text-gray-700 mb-1 block">Type de ressource</label>
-                      <Select onValueChange={handleTypeChange} value={selectedType || 'all'}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Tous les types" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Tous les types</SelectItem>
-                          {types.map(type => (
-                            <SelectItem key={type} value={type}>
-                              {getTypeName(type)}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    
-                    <div>
-                      <label className="text-sm font-medium text-gray-700 mb-1 block">Catégorie</label>
-                      <Select onValueChange={(value) => setSelectedCategory(value === 'all' ? null : value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Toutes les catégories" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Toutes les catégories</SelectItem>
-                          {categories.map(category => (
-                            <SelectItem key={category} value={category}>{category}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    
-                    {selectedType === 'planche' && (
+                  {showFilters && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 p-4 bg-gray-50 rounded-lg">
+                      {categoryView === 'resources' && (
+                        <div>
+                          <label className="text-sm font-medium text-gray-700 mb-1 block">Type de ressource</label>
+                          <Select onValueChange={handleTypeChange} value={selectedType || 'all'}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Tous les types" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">Tous les types</SelectItem>
+                              {types.filter(type => type !== 'planche').map(type => (
+                                <SelectItem key={type} value={type}>
+                                  {getTypeName(type)}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
+                      
                       <div>
-                        <label className="text-sm font-medium text-gray-700 mb-1 block">Degré</label>
-                        <Select onValueChange={(value) => setSelectedDegree(value === 'all' ? null : parseInt(value))}>
+                        <label className="text-sm font-medium text-gray-700 mb-1 block">Catégorie</label>
+                        <Select onValueChange={(value) => setSelectedCategory(value === 'all' ? null : value)}>
                           <SelectTrigger>
-                            <SelectValue placeholder="Tous les degrés" />
+                            <SelectValue placeholder="Toutes les catégories" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="all">Tous les degrés</SelectItem>
-                            <SelectItem value="1">1° degré</SelectItem>
-                            <SelectItem value="2">2° degré</SelectItem>
-                            <SelectItem value="3">3° degré</SelectItem>
+                            <SelectItem value="all">Toutes les catégories</SelectItem>
+                            {categories.map(category => (
+                              <SelectItem key={category} value={category}>{category}</SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                       </div>
-                    )}
-                    
-                    <div className={selectedType === 'planche' ? 'sm:col-span-2 md:col-span-3' : 'sm:col-span-2'}>
-                      <label className="text-sm font-medium text-gray-700 mb-1 block">Thèmes</label>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        <button
-                          onClick={() => setSelectedTag(null)}
-                          className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            selectedTag === null 
-                              ? 'bg-masonic-blue-700 text-white' 
-                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          }`}
-                        >
-                          Tous
-                        </button>
-                        
-                        {allTags.map((tag) => (
+                      
+                      {categoryView === 'planches' && (
+                        <div>
+                          <label className="text-sm font-medium text-gray-700 mb-1 block">Degré</label>
+                          <Select onValueChange={(value) => setSelectedDegree(value === 'all' ? null : parseInt(value))}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Tous les degrés" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">Tous les degrés</SelectItem>
+                              <SelectItem value="1">1° degré</SelectItem>
+                              <SelectItem value="2">2° degré</SelectItem>
+                              <SelectItem value="3">3° degré</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
+                      
+                      <div className={categoryView === 'planches' ? 'sm:col-span-2 md:col-span-3' : 'sm:col-span-2'}>
+                        <label className="text-sm font-medium text-gray-700 mb-1 block">Thèmes</label>
+                        <div className="flex flex-wrap gap-2 mt-2">
                           <button
-                            key={tag}
-                            onClick={() => setSelectedTag(tag)}
+                            onClick={() => setSelectedTag(null)}
                             className={`px-3 py-1 rounded-full text-xs font-medium ${
-                              selectedTag === tag 
+                              selectedTag === null 
                                 ? 'bg-masonic-blue-700 text-white' 
                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             }`}
                           >
-                            {tag}
+                            Tous
                           </button>
-                        ))}
+                          
+                          {allTags.map((tag) => (
+                            <button
+                              key={tag}
+                              onClick={() => setSelectedTag(tag)}
+                              className={`px-3 py-1 rounded-full text-xs font-medium ${
+                                selectedTag === tag 
+                                  ? 'bg-masonic-blue-700 text-white' 
+                                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                              }`}
+                            >
+                              {tag}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-              
-              <Tabs defaultValue="grid" className="w-full">
-                <div className="flex justify-between items-center mb-6">
-                  <div className="text-sm text-gray-500">
-                    {filteredResources.length} ressource{filteredResources.length !== 1 ? 's' : ''} trouvée{filteredResources.length !== 1 ? 's' : ''}
-                  </div>
-                  <TabsList>
-                    <TabsTrigger value="grid" className="flex items-center">
-                      <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                      </svg>
-                      Grille
-                    </TabsTrigger>
-                    <TabsTrigger value="list" className="flex items-center">
-                      <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                      </svg>
-                      Liste
-                    </TabsTrigger>
-                  </TabsList>
+                  )}
                 </div>
                 
-                <TabsContent value="grid" className="mt-0">
-                  {filteredResources.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {filteredResources.map((resource) => (
-                        <div 
-                          key={resource.id} 
-                          className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col transition-shadow hover:shadow-md"
-                        >
-                          {resource.imageUrl && (
-                            <div className="aspect-w-16 aspect-h-9">
-                              <img 
-                                src={resource.imageUrl} 
-                                alt={resource.title} 
-                                className="object-cover w-full h-full"
-                              />
-                            </div>
-                          )}
-                          
-                          <div className="p-5 flex-grow flex flex-col">
-                            <div className="flex items-center mb-2">
-                              <span className={cn(
-                                "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium mr-2",
-                                resource.type === 'book' && "bg-blue-100 text-blue-800",
-                                resource.type === 'document' && "bg-green-100 text-green-800",
-                                resource.type === 'article' && "bg-purple-100 text-purple-800",
-                                resource.type === 'planche' && "bg-amber-100 text-amber-800"
-                              )}>
-                                <span className="mr-1">{renderTypeIcon(resource.type)}</span>
-                                {getTypeName(resource.type)}
-                              </span>
-                              
-                              {resource.degree && (
-                                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-800 ${
-                                  resource.degree === 1 ? 'bg-blue-50 text-blue-700' : 
-                                  resource.degree === 2 ? 'bg-yellow-50 text-yellow-700' : 
-                                  'bg-red-50 text-red-700'
-                                }`}>
-                                  {resource.degree}° degré
-                                </span>
-                              )}
-                              
-                              {!resource.degree && (
-                                <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-800">
-                                  {resource.category}
-                                </span>
-                              )}
-                            </div>
-                            
-                            <h3 className="text-lg font-semibold text-masonic-blue-900 mb-2">{resource.title}</h3>
-                            
-                            <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">{resource.description}</p>
-                            
-                            {resource.tags && resource.tags.length > 0 && (
-                              <div className="flex flex-wrap gap-2 mb-4">
-                                {resource.tags.map((tag, index) => (
-                                  <span key={index} className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
-                                    {tag}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-                            
-                            <div className="flex items-center justify-between mt-auto">
-                              <div className="flex items-center">
-                                <div className="w-7 h-7 rounded-full overflow-hidden mr-2">
-                                  <img 
-                                    src={`https://randomuser.me/api/portraits/men/${parseInt(resource.id) + 25}.jpg`}
-                                    alt={resource.author} 
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                                <span className="text-xs text-gray-700">{resource.authorName || resource.author}</span>
-                              </div>
-                              
-                              {resource.downloadUrl && (
-                                <a 
-                                  href={resource.downloadUrl}
-                                  className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
-                                >
-                                  Télécharger
-                                </a>
-                              )}
-                              
-                              <Link
-                                to={getResourcePath(resource)}
-                                className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
-                              >
-                                Consulter →
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
+                <TabsContent value="planches" className="mt-0">
+                  <Tabs defaultValue="grid" className="w-full">
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="text-sm text-gray-500">
+                        {filteredPlanches.length} planche{filteredPlanches.length !== 1 ? 's' : ''} trouvée{filteredPlanches.length !== 1 ? 's' : ''}
+                      </div>
+                      <TabsList>
+                        <TabsTrigger value="grid" className="flex items-center">
+                          <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                          </svg>
+                          Grille
+                        </TabsTrigger>
+                        <TabsTrigger value="list" className="flex items-center">
+                          <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                          </svg>
+                          Liste
+                        </TabsTrigger>
+                      </TabsList>
                     </div>
-                  ) : (
-                    <div className="text-center py-10">
-                      <p className="text-gray-500">Aucune ressource ne correspond à votre recherche.</p>
-                    </div>
-                  )}
+                    
+                    <TabsContent value="grid" className="mt-0">
+                      {renderResourceList(filteredPlanches, 'grid')}
+                    </TabsContent>
+                    
+                    <TabsContent value="list" className="mt-0">
+                      {renderResourceList(filteredPlanches, 'list')}
+                    </TabsContent>
+                  </Tabs>
                 </TabsContent>
                 
-                <TabsContent value="list" className="mt-0">
-                  {filteredResources.length > 0 ? (
-                    <div className="divide-y divide-gray-200">
-                      {filteredResources.map((resource) => (
-                        <div key={resource.id} className="py-4 flex">
-                          <div className="flex-shrink-0 mr-4">
-                            <div className="w-10 h-10 rounded-full flex items-center justify-center text-white">
-                              <div className={cn(
-                                "w-10 h-10 rounded-full flex items-center justify-center",
-                                resource.type === 'book' && "bg-blue-600",
-                                resource.type === 'document' && "bg-green-600",
-                                resource.type === 'article' && "bg-purple-600",
-                                resource.type === 'planche' && "bg-amber-600"
-                              )}>
-                                {renderTypeIcon(resource.type)}
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="flex-grow">
-                            <div className="flex items-center mb-1">
-                              <h3 className="text-md font-semibold text-masonic-blue-900">
-                                {resource.title}
-                              </h3>
-                              
-                              <div className="flex ml-2 gap-1">
-                                <span className={cn(
-                                  "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium",
-                                  resource.type === 'book' && "bg-blue-100 text-blue-800",
-                                  resource.type === 'document' && "bg-green-100 text-green-800",
-                                  resource.type === 'article' && "bg-purple-100 text-purple-800",
-                                  resource.type === 'planche' && "bg-amber-100 text-amber-800"
-                                )}>
-                                  {getTypeName(resource.type)}
-                                </span>
-                                
-                                {resource.degree && (
-                                  <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
-                                    resource.degree === 1 ? 'bg-blue-50 text-blue-700' : 
-                                    resource.degree === 2 ? 'bg-yellow-50 text-yellow-700' : 
-                                    'bg-red-50 text-red-700'
-                                  }`}>
-                                    {resource.degree}° degré
-                                  </span>
-                                )}
-                                
-                                {!resource.degree && (
-                                  <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-800">
-                                    {resource.category}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                            
-                            <p className="text-gray-600 text-sm mb-2 line-clamp-2">{resource.description}</p>
-                            
-                            {resource.tags && resource.tags.length > 0 && (
-                              <div className="flex flex-wrap gap-1 mb-1">
-                                {resource.tags.slice(0, 3).map((tag, index) => (
-                                  <span key={index} className="bg-gray-100 text-gray-600 text-xs px-1.5 py-0.5 rounded-full">
-                                    {tag}
-                                  </span>
-                                ))}
-                                {resource.tags.length > 3 && (
-                                  <span className="bg-gray-100 text-gray-600 text-xs px-1.5 py-0.5 rounded-full">
-                                    +{resource.tags.length - 3}
-                                  </span>
-                                )}
-                              </div>
-                            )}
-                            
-                            <div className="flex items-center text-xs text-gray-500">
-                              <span>{resource.authorName || resource.author}</span>
-                              <span className="mx-2">•</span>
-                              <span>{format(resource.date || resource.createdAt || new Date(), 'd MMM yyyy', { locale: fr })}</span>
-                              
-                              <div className="ml-auto">
-                                {resource.downloadUrl && (
-                                  <a 
-                                    href={resource.downloadUrl}
-                                    className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors mr-4"
-                                  >
-                                    Télécharger
-                                  </a>
-                                )}
-                                
-                                <Link
-                                  to={getResourcePath(resource)}
-                                  className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 transition-colors"
-                                >
-                                  Consulter →
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
+                <TabsContent value="resources" className="mt-0">
+                  <Tabs defaultValue="grid" className="w-full">
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="text-sm text-gray-500">
+                        {filteredResources.length} ressource{filteredResources.length !== 1 ? 's' : ''} trouvée{filteredResources.length !== 1 ? 's' : ''}
+                      </div>
+                      <TabsList>
+                        <TabsTrigger value="grid" className="flex items-center">
+                          <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                          </svg>
+                          Grille
+                        </TabsTrigger>
+                        <TabsTrigger value="list" className="flex items-center">
+                          <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                          </svg>
+                          Liste
+                        </TabsTrigger>
+                      </TabsList>
                     </div>
-                  ) : (
-                    <div className="text-center py-10">
-                      <p className="text-gray-500">Aucune ressource ne correspond à votre recherche.</p>
-                    </div>
-                  )}
+                    
+                    <TabsContent value="grid" className="mt-0">
+                      {renderResourceList(filteredResources, 'grid')}
+                    </TabsContent>
+                    
+                    <TabsContent value="list" className="mt-0">
+                      {renderResourceList(filteredResources, 'list')}
+                    </TabsContent>
+                  </Tabs>
                 </TabsContent>
               </Tabs>
             </div>
