@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 import { cn } from '@/lib/utils';
 import { Gavel, Library, Columns, BookOpen, ScrollText, Users, MessageSquare, ChevronRight } from 'lucide-react';
@@ -11,14 +12,13 @@ import Logo from '@/components/ui-elements/Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
+  const { t } = useTranslation();
   const isMobile = useIsMobile();
   
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
       <Header />
       
-      {/* Hero section */}
       <motion.section 
         className={cn(
           "container mx-auto px-4 text-center", 
@@ -36,13 +36,13 @@ const Index = () => {
             "font-bold mb-6 text-masonic-blue-900",
             isMobile ? "text-3xl" : "text-4xl md:text-5xl"
           )}>
-            La plateforme digitale pour toutes les loges maçonniques
+            {t('index.heroTitle')}
           </h1>
           <p className={cn(
             "mb-8 text-gray-600 mx-auto",
             isMobile ? "text-base max-w-xl" : "text-xl mb-10 max-w-3xl"
           )}>
-            Créez votre espace de loge personnalisé et connectez vos frères et sœurs en quelques clics
+            {t('index.heroSubtitle')}
           </p>
           <div className={cn(
             "flex justify-center gap-4",
@@ -52,19 +52,18 @@ const Index = () => {
               "btn-primary",
               isMobile && "w-full"
             )}>
-              Créer votre loge
+              {t('index.createLodge')}
             </Link>
             <Link to="/join" className={cn(
               "btn-secondary",
               isMobile && "w-full"
             )}>
-              J'ai un code d'invitation
+              {t('index.invitationCode')}
             </Link>
           </div>
         </div>
       </motion.section>
 
-      {/* Features */}
       <section className={cn(
         "container mx-auto px-4 py-20 bg-gray-50",
         isMobile && "py-12"
@@ -73,43 +72,42 @@ const Index = () => {
           "font-bold text-center mb-12 text-masonic-blue-900",
           isMobile ? "text-2xl mb-8" : "text-3xl"
         )}>
-          Fonctionnalités 100% Maçonniques
+          {t('index.featuresTitle')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <FeatureCard 
-            title="Communications sécurisées" 
-            description="Actualités de la Loge, messagerie interne dédiée et sécurisée, notifications personnalisées." 
+            title={t('features.secureComms.title')} 
+            description={t('features.secureComms.description')}
             icon={<MessageSquare className="w-10 h-10 text-masonic-blue-700" />} 
           />
           <FeatureCard 
-            title="Gestion des tenues" 
-            description="Agenda des tenues, confirmation de présence, gestion des agapes et visiteurs, feuille de présence." 
+            title={t('features.tenueManagement.title')} 
+            description={t('features.tenueManagement.description')} 
             icon={<Gavel className="w-10 h-10 text-masonic-blue-700" />} 
           />
           <FeatureCard 
-            title="Planches et documents" 
-            description="Accès aux planches, rituels, documents de la Loge et de l'Obédience." 
+            title={t('features.documents.title')} 
+            description={t('features.documents.description')} 
             icon={<ScrollText className="w-10 h-10 text-masonic-blue-700" />} 
           />
           <FeatureCard 
-            title="Annuaire des membres" 
-            description="Carnet d'adresses avec contacts, profil personnalisable, calcul d'itinéraire vers le temple." 
+            title={t('features.memberDirectory.title')} 
+            description={t('features.memberDirectory.description')} 
             icon={<Users className="w-10 h-10 text-masonic-blue-700" />} 
           />
           <FeatureCard 
-            title="Bibliothèque maçonnique" 
-            description="Catalogue d'ouvrages disponibles, système de réservation, références maçonniques." 
+            title={t('features.masonicLibrary.title')} 
+            description={t('features.masonicLibrary.description')} 
             icon={<Library className="w-10 h-10 text-masonic-blue-700" />} 
           />
           <FeatureCard 
-            title="Accès visiteurs" 
-            description="QR code pour visiteurs, validation humaine pour les calendriers, sécurité renforcée." 
+            title={t('features.visitorAccess.title')} 
+            description={t('features.visitorAccess.description')} 
             icon={<Columns className="w-10 h-10 text-masonic-blue-700" />} 
           />
         </div>
       </section>
 
-      {/* Pricing */}
       <section className={cn(
         "container mx-auto px-4 py-20",
         isMobile && "py-12"
@@ -118,44 +116,43 @@ const Index = () => {
           "font-bold text-center mb-12 text-masonic-blue-900",
           isMobile ? "text-2xl mb-8" : "text-4xl"
         )}>
-          Nos Prix : 1 € symbolique
+          {t('index.pricingTitle')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           <PricingCard 
-            title="Basique Mensuel" 
-            price="1 €" 
-            period="mois" 
+            title={t('pricing.basicMonthly.title')} 
+            price={t('pricing.basicMonthly.price')} 
+            period={t('pricing.basicMonthly.period')} 
             features={[
-              "1€/mois par membre", 
-              "Messagerie sécurisée", 
-              "Agenda des tenues", 
-              "Planches et documents", 
-              "Gestion des présences", 
-              "Bibliothèque maçonnique"
+              t('pricing.basicMonthly.features.0'), 
+              t('pricing.basicMonthly.features.1'), 
+              t('pricing.basicMonthly.features.2'), 
+              t('pricing.basicMonthly.features.3'), 
+              t('pricing.basicMonthly.features.4'), 
+              t('pricing.basicMonthly.features.5')
             ]} 
-            buttonText="Commencer" 
+            buttonText={t('pricing.basicMonthly.button')} 
             to="/register" 
           />
           <PricingCard 
-            title="Basique Annuel" 
-            price="10 €" 
-            period="an" 
+            title={t('pricing.basicAnnual.title')} 
+            price={t('pricing.basicAnnual.price')} 
+            period={t('pricing.basicAnnual.period')} 
             featured={true} 
             features={[
-              "10€/an par membre", 
-              "Messagerie sécurisée", 
-              "Agenda des tenues", 
-              "Planches et documents", 
-              "Gestion des présences", 
-              "Bibliothèque maçonnique"
+              t('pricing.basicAnnual.features.0'), 
+              t('pricing.basicAnnual.features.1'), 
+              t('pricing.basicAnnual.features.2'), 
+              t('pricing.basicAnnual.features.3'), 
+              t('pricing.basicAnnual.features.4'), 
+              t('pricing.basicAnnual.features.5')
             ]} 
-            buttonText="Offre Spéciale" 
+            buttonText={t('pricing.basicAnnual.button')} 
             to="/register?plan=annual" 
           />
         </div>
       </section>
 
-      {/* Testimonials */}
       <section className={cn(
         "container mx-auto px-4 py-20 bg-gray-50",
         isMobile && "py-12"
@@ -164,7 +161,7 @@ const Index = () => {
           "font-bold text-center mb-12 text-masonic-blue-900",
           isMobile ? "text-2xl mb-8" : "text-3xl"
         )}>
-          Ce que disent nos utilisateurs
+          {t('index.testimonialTitle')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           <Testimonial 
@@ -178,7 +175,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Call to action */}
       <section className={cn(
         "container mx-auto px-4 py-20 text-center",
         isMobile && "py-12"
@@ -188,24 +184,23 @@ const Index = () => {
             "font-bold mb-6 text-masonic-blue-900",
             isMobile ? "text-2xl" : "text-3xl"
           )}>
-            Prêt à franchir le pas?
+            {t('index.readyTitle')}
           </h2>
           <p className={cn(
             "mb-8 text-gray-600",
             isMobile ? "text-base" : "text-xl mb-10"
           )}>
-            Rejoignez les centaines de loges qui utilisent déjà notre plateforme
+            {t('index.readySubtitle')}
           </p>
           <Link to="/register" className={cn(
             "btn-primary inline-block",
             isMobile && "w-full"
           )}>
-            Créer votre espace loge
+            {t('index.createSpace')}
           </Link>
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
