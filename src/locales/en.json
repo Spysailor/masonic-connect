@@ -110,6 +110,11 @@
     "details": "Details",
     "agenda": "Agenda",
     "participants": "Participants",
+    "sections": {
+      "basicInfo": "Basic Information",
+      "location": "Location Information",
+      "notes": "Notes and Description"
+    },
     "details": {
       "title": "Title",
       "titlePlaceholder": "Enter the meeting title",

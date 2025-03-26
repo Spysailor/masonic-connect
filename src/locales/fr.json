@@ -110,6 +110,11 @@
     "details": "Détails",
     "agenda": "Ordre du jour",
     "participants": "Participants",
+    "sections": {
+      "basicInfo": "Informations de base",
+      "location": "Informations de lieu",
+      "notes": "Notes et description"
+    },
     "details": {
       "title": "Titre",
       "titlePlaceholder": "Entrez le titre de la tenue",
