@@ -35,7 +35,7 @@ const Logo: React.FC<LogoProps> = ({
     >
       <div className="relative">
         <img 
-          src="/lovable-uploads/0dde5c68-ce03-4035-ada6-3b2f1aae5f7f.png" 
+          src="/lovable-uploads/b87be19d-7ab0-40ca-8629-18541433817e.png" 
           alt="Masonic Square and Compass Logo" 
           className={sizeClasses[size]}
         />

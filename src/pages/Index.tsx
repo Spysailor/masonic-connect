@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 import { cn } from '@/lib/utils';
-import { Gavel, Library, Columns, BookOpen, ScrollText, Users, MessageSquare } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Logo from '@/components/ui-elements/Logo';
@@ -51,31 +50,37 @@ const Index = () => {
             title="Communications sécurisées" 
             description="Actualités de la Loge, messagerie interne dédiée et sécurisée, notifications personnalisées."
             icon={<MessageSquare className="w-12 h-12 text-masonic-blue-700" />}
+            symbolType="eye"
           />
           <FeatureCard 
             title="Gestion des tenues" 
             description="Agenda des tenues, confirmation de présence, gestion des agapes et visiteurs, feuille de présence."
-            icon={<Gavel className="w-12 h-12 text-masonic-blue-700" />}
+            icon={null}
+            symbolType="temple"
           />
           <FeatureCard 
             title="Planches et documents" 
             description="Accès aux planches, rituels, documents de la Loge et de l'Obédience."
-            icon={<ScrollText className="w-12 h-12 text-masonic-blue-700" />}
+            icon={null}
+            symbolType="all-seeing-eye-triangle"
           />
           <FeatureCard 
             title="Annuaire des membres" 
             description="Carnet d'adresses avec contacts, profil personnalisable, calcul d'itinéraire vers le temple."
-            icon={<Users className="w-12 h-12 text-masonic-blue-700" />}
+            icon={null}
+            symbolType="square-compass"
           />
           <FeatureCard 
             title="Bibliothèque maçonnique" 
             description="Catalogue d'ouvrages disponibles, système de réservation, références maçonniques."
-            icon={<Library className="w-12 h-12 text-masonic-blue-700" />}
+            icon={null}
+            symbolType="checkerboard"
           />
           <FeatureCard 
             title="Accès visiteurs" 
             description="QR code pour visiteurs, validation humaine pour les calendriers, sécurité renforcée."
-            icon={<Columns className="w-12 h-12 text-masonic-blue-700" />}
+            icon={null}
+            symbolType="compass"
           />
         </div>
       </section>
@@ -162,7 +167,7 @@ const Index = () => {
 };
 
 // Utility components
-const FeatureCard = ({ title, description, icon }) => (
+const FeatureCard = ({ title, description, icon, symbolType }) => (
   <motion.div 
     className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all h-full"
     initial={{ opacity: 0, y: 20 }}
@@ -170,7 +175,9 @@ const FeatureCard = ({ title, description, icon }) => (
     viewport={{ once: true }}
     transition={{ duration: 0.5 }}
   >
-    <div className="mb-4 text-masonic-blue-700">{icon}</div>
+    <div className="mb-4 text-masonic-blue-700">
+      {icon || <MasonicSymbol type={symbolType} size={48} />}
+    </div>
     <h3 className="text-xl font-bold mb-2 text-masonic-blue-900">{title}</h3>
     <p className="text-gray-600">{description}</p>
   </motion.div>

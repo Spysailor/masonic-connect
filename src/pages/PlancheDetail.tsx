@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import MasonicSymbol from '@/components/masonic/MasonicSymbols';
 
 const PlancheDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -96,7 +97,7 @@ const PlancheDetail = () => {
               <Card className="overflow-hidden">
                 <div className="bg-masonic-blue-800 text-white p-6">
                   <div className="flex items-center space-x-2 text-masonic-blue-200 text-sm mb-2">
-                    <FileText className="h-4 w-4" />
+                    <MasonicSymbol type="compass" size={16} className="text-current" />
                     <span>Planche</span>
                     <span>•</span>
                     <span>
@@ -151,7 +152,7 @@ const PlancheDetail = () => {
                   
                   <div className="space-y-3 text-sm">
                     <div className="flex items-center">
-                      <Building className="h-4 w-4 text-gray-400 mr-3" />
+                      <MasonicSymbol type="temple" size={16} className="text-gray-400 mr-3" />
                       <span className="text-gray-700">{planche.lodge}</span>
                     </div>
                     
@@ -183,16 +184,12 @@ const PlancheDetail = () => {
                     </Button>
                     
                     <Button variant="outline" className="w-full flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                      </svg>
+                      <MasonicSymbol type="all-seeing-eye" size={16} className="mr-2" />
                       Partager
                     </Button>
                     
                     <Button variant="outline" className="w-full flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                      </svg>
+                      <MasonicSymbol type="square-compass" size={16} className="mr-2" />
                       Sauvegarder
                     </Button>
                   </div>
