@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from '@/utils/motion';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@/utils/i18n-wrapper';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, Users, FileText, Bell } from 'lucide-react';
 
