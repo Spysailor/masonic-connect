@@ -116,12 +116,9 @@ const Profile = () => {
               <div className="md:col-span-2 space-y-6">
                 <Card className="border-0 shadow-md">
                   <CardHeader>
-                    <CardTitle className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <User className="mr-2 h-5 w-5 text-masonic-blue-700" />
-                        {t('profile.myProfile')}
-                      </div>
-                      <LanguageSelector />
+                    <CardTitle className="flex items-center">
+                      <User className="mr-2 h-5 w-5 text-masonic-blue-700" />
+                      {t('profile.myProfile')}
                     </CardTitle>
                     <CardDescription>
                       {t('profile.description')}
@@ -313,7 +310,6 @@ const Profile = () => {
                                 <p className="font-medium">{t('profile.settings.language')}</p>
                                 <p className="text-sm text-gray-500">{i18n.language === 'fr' ? 'Français' : 'English'}</p>
                               </div>
-                              <LanguageSelector />
                             </div>
                           </div>
                           
