@@ -29,7 +29,8 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
       (location.pathname === '/bibliotheque' && location.search.includes('type=planche')) ||
       location.pathname === '/planches' ||
       location.pathname === '/register' ||
-      location.pathname === '/login';
+      location.pathname === '/login' ||
+      location.pathname === '/join';
       
     if (needsRefresh) {
       // Force refresh to ensure translations are applied

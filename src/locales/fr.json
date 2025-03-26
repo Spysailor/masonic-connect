@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -149,19 +148,28 @@
   },
   "login": {
     "title": "Connexion",
+    "subtitle": "Connectez-vous à votre espace maçonnique",
     "email": "Email",
+    "emailPlaceholder": "votre@email.com",
+    "emailValidation": "Email invalide",
     "password": "Mot de passe",
+    "passwordPlaceholder": "Votre mot de passe",
+    "passwordValidation": "Le mot de passe est requis",
     "forgotPassword": "Mot de passe oublié?",
     "rememberMe": "Se souvenir de moi",
     "signIn": "Se connecter",
     "signingIn": "Connexion en cours...",
+    "submitButton": "Se connecter",
     "or": "Ou",
+    "noAccount": "Vous n'avez pas de compte?",
+    "registerLink": "S'inscrire",
     "createAccount": "Créer un compte",
     "termsPrefix": "En vous connectant, vous acceptez nos",
     "termsLink": "conditions d'utilisation",
-    "and": "et notre",
+    "and": "et",
     "privacyLink": "politique de confidentialité",
-    "backToHome": "Retour à l'accueil"
+    "backToHome": "Retour à l'accueil",
+    "joinWithInvitation": "Rejoindre avec une invitation"
   },
   "register": {
     "title": "Créer un compte",

@@ -12,14 +12,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
 
-const formSchema = z.object({
-  email: z.string().email({ message: "Email invalide" }),
-  password: z.string().min(1, { message: "Le mot de passe est requis" }),
-});
-
 const Login = () => {
   const { t } = useTranslation();
   const { signIn, isLoading } = useAuth();
+
+  const formSchema = z.object({
+    email: z.string().email({ message: t('login.emailValidation') }),
+    password: z.string().min(1, { message: t('login.passwordValidation') }),
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

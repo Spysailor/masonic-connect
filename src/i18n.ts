@@ -38,7 +38,11 @@ i18n
       console.warn(`Missing translation key: ${key} for language: ${lng}`);
     },
     saveMissing: true,
-    missingKeyNoValueFallbackToKey: false
+    missingKeyNoValueFallbackToKey: false,
+    returnNull: false,
+    returnEmptyString: false,
+    returnObjects: true,
+    fallbackNS: 'translation'
   });
 
 export default i18n;
