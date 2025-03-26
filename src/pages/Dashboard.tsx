@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
@@ -14,7 +13,6 @@ import MemberCard from '@/components/dashboard/MemberCard';
 import NewsCard from '@/components/dashboard/NewsCard';
 import { Link } from 'react-router-dom';
 
-// Define types for Supabase query results
 type ProfileWithRelations = {
   id: string;
   display_name: string | null;
@@ -28,7 +26,6 @@ type ProfileWithRelations = {
   }[] | null;
 };
 
-// Helper type for safely handling potential Supabase query errors
 type QueryResult = {
   id: string;
   display_name: string | null;
@@ -40,7 +37,6 @@ type QueryResult = {
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('agenda');
   
-  // Fetch tenues from Supabase
   const { data: tenues = [], isLoading: tenuesLoading } = useQuery({
     queryKey: ['tenues'],
     queryFn: async () => {
@@ -88,7 +84,6 @@ const Dashboard = () => {
     ]
   });
 
-  // Fetch members from Supabase
   const { data: members = [], isLoading: membersLoading } = useQuery({
     queryKey: ['members'],
     queryFn: async () => {
@@ -111,7 +106,6 @@ const Dashboard = () => {
         
         if (error) throw error;
         
-        // Safely transform the query results to handle potential relationship errors
         return (data as QueryResult[]).map(profile => ({
           id: profile.id,
           name: profile.display_name || 'Membre',
@@ -158,7 +152,6 @@ const Dashboard = () => {
     ]
   });
 
-  // Fetch news from Supabase
   const { data: news = [], isLoading: newsLoading } = useQuery({
     queryKey: ['news'],
     queryFn: async () => {
@@ -199,7 +192,6 @@ const Dashboard = () => {
     ]
   });
 
-  // Fetch stats from Supabase
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['stats'],
     queryFn: async () => {
@@ -261,7 +253,6 @@ const Dashboard = () => {
             <p className="text-gray-600 mt-1">Bienvenue sur votre espace personnel MasonConnect</p>
           </motion.div>
           
-          {/* Quick Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -317,7 +308,6 @@ const Dashboard = () => {
             </Card>
           </motion.div>
           
-          {/* Tabs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -352,7 +342,6 @@ const Dashboard = () => {
             </Tabs>
           </motion.div>
           
-          {/* Tab Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -451,7 +440,6 @@ const Dashboard = () => {
             )}
           </motion.div>
           
-          {/* Quick Actions */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -481,13 +469,13 @@ const Dashboard = () => {
                 </Card>
               </Link>
               
-              <Link to="/messages?action=new">
+              <Link to="/freres">
                 <Card className="shadow-sm hover:shadow-md transition-shadow">
                   <CardContent className="p-6 flex flex-col items-center text-center">
                     <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
-                      <Bell className="h-6 w-6 text-masonic-blue-700" />
+                      <Users className="h-6 w-6 text-masonic-blue-700" />
                     </div>
-                    <span className="text-sm font-medium text-gray-900">Nouveau message</span>
+                    <span className="text-sm font-medium text-gray-900">Annuaire des Frères</span>
                   </CardContent>
                 </Card>
               </Link>
