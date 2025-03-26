@@ -17,7 +17,6 @@ const MobileFooterMenu: React.FC = () => {
     { icon: Users, label: 'Frères', path: '/freres' },
     { icon: MessageSquare, label: 'Messages', path: '/messages' },
     { icon: User, label: 'Profil', path: '/profile' },
-    { icon: Settings, label: 'Loge', path: '/loge-settings' },
   ];
 
   return (

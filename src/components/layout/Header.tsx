@@ -8,6 +8,7 @@ import NotificationIndicator from '../notifications/NotificationIndicator';
 import { cn } from '@/lib/utils';
 import { UserCircle, Menu, X } from 'lucide-react';
 import { useNotifications } from '@/hooks/use-notifications';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface NavLink {
   name: string;
@@ -19,6 +20,7 @@ const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { unreadCount } = useNotifications();
+  const isMobile = useIsMobile();
   
   const navLinks: NavLink[] = [
     { name: 'Accueil', path: '/' },
@@ -52,14 +54,14 @@ const Header: React.FC = () => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-sm",
-        scrolled ? "py-3" : "py-5"
+        scrolled ? "py-2" : "py-3"
       )}
     >
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-3 md:px-6">
         <div className="flex items-center justify-between">
           {/* Logo with Masonic Symbol */}
-          <div className="flex items-center space-x-2">
-            <Logo variant="default" />
+          <div className="flex items-center">
+            <Logo variant="default" size={isMobile ? "sm" : "md"} />
             <div className="hidden sm:block">
               <MasonicSymbol type="square-compass" size={32} />
             </div>
@@ -148,9 +150,9 @@ const Header: React.FC = () => {
               aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             >
               {mobileMenuOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-5 w-5" />
               )}
             </button>
           </div>
@@ -160,7 +162,7 @@ const Header: React.FC = () => {
       {/* Mobile Menu */}
       <div
         className={cn(
-          "md:hidden fixed inset-0 top-[60px] bg-white z-40 transition-all duration-300 ease-in-out transform",
+          "md:hidden fixed inset-0 top-[48px] bg-white z-40 transition-all duration-300 ease-in-out transform",
           mobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         )}
       >

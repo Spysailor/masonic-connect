@@ -84,7 +84,7 @@ const Members = () => {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
       
-      <main className="flex-1 pt-24 pb-16">
+      <main className="flex-1 pt-24 pb-16 mobile-padding-bottom">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -92,10 +92,10 @@ const Members = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold text-masonic-blue-900">Annuaire des Frères</h1>
-                <p className="text-gray-600 mt-1">Consultez les profils des membres de la loge Universalys</p>
+                <h1 className="text-3xl font-bold text-masonic-blue-900 break-words">Annuaire des Frères</h1>
+                <p className="text-gray-600 mt-1 break-words">Consultez les profils des membres de la loge Universalys</p>
               </div>
               <div className="hidden md:block">
                 <MasonicSymbol type="square-compass-vintage" size={64} />
@@ -115,7 +115,7 @@ const Members = () => {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input
                 type="text"
-                placeholder="Rechercher un frère par nom, fonction ou loge..."
+                placeholder="Rechercher un frère..."
                 className="pl-10"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -123,7 +123,7 @@ const Members = () => {
             </div>
             
             <Tabs defaultValue="all" className="w-full">
-              <TabsList className="mb-6 w-full">
+              <TabsList className="mb-6 w-full overflow-x-auto flex flex-nowrap whitespace-nowrap">
                 <TabsTrigger value="all" className="flex-1">Tous</TabsTrigger>
                 <TabsTrigger value="officers" className="flex-1">Officiers</TabsTrigger>
                 <TabsTrigger value="masters" className="flex-1">Maîtres</TabsTrigger>

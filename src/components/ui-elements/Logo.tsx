@@ -15,9 +15,9 @@ const Logo: React.FC<LogoProps> = ({
 }) => {
   // Size classes
   const sizeClasses = {
-    sm: 'h-8',
-    md: 'h-10',
-    lg: 'h-12'
+    sm: 'h-7 w-auto',
+    md: 'h-8 w-auto',
+    lg: 'h-10 w-auto'
   };
   
   // Color classes based on variant
@@ -37,15 +37,15 @@ const Logo: React.FC<LogoProps> = ({
         <img 
           src="/lovable-uploads/0dde5c68-ce03-4035-ada6-3b2f1aae5f7f.png" 
           alt="Masonic Square and Compass Logo" 
-          className={`${sizeClasses[size]} w-auto`}
+          className={sizeClasses[size]}
         />
       </div>
       
       {withText && (
-        <span className={`font-medium tracking-tight ${
-          size === 'sm' ? 'text-lg' : 
-          size === 'md' ? 'text-xl' : 
-          'text-2xl'
+        <span className={`font-medium tracking-tight truncate ${
+          size === 'sm' ? 'text-base' : 
+          size === 'md' ? 'text-lg' : 
+          'text-xl'
         }`}>
           MasonConnect
         </span>

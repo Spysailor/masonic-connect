@@ -77,14 +77,20 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased selection:bg-masonic-blue-200 selection:text-masonic-blue-800;
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-medium tracking-tight;
+    @apply font-medium tracking-tight break-words;
+  }
+  
+  p {
+    @apply break-words;
   }
   
   a, button {
@@ -150,6 +156,33 @@
   .page-transition-exit-active {
     @apply opacity-0 transition-opacity duration-300;
   }
+  
+  /* Styles spécifiques pour mobile */
+  @media (max-width: 768px) {
+    .mobile-container {
+      @apply px-3 py-4;
+    }
+    
+    .mobile-padding-bottom {
+      padding-bottom: 5rem;
+    }
+    
+    .mobile-card {
+      @apply px-3 py-4 rounded-lg overflow-hidden;
+    }
+    
+    .mobile-list-item {
+      @apply text-sm;
+    }
+    
+    .mobile-header {
+      @apply text-xl;
+    }
+    
+    main {
+      @apply pb-20;
+    }
+  }
 }
 
 /* Custom Animations & Effects */
@@ -203,4 +236,23 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Fix pour le problème de texte qui sort des cadres sur mobile */
+@media (max-width: 768px) {
+  .break-words {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Ajouter un padding bas pour éviter que le contenu soit caché derrière le menu mobile */
+  main {
+    padding-bottom: 70px !important;
+  }
+  
+  /* Assurer la responsivité des grilles */
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
 }
