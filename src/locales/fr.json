@@ -96,5 +96,35 @@
     "resources": "Ressources",
     "legal": "Informations légales",
     "copyright": "Tous droits réservés."
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue sur votre espace personnel MasonConnect",
+    "quickActions": "Actions rapides",
+    "stats": {
+      "nextTenue": "Prochaine tenue",
+      "membersCount": "Frères",
+      "planchesCount": "Planches",
+      "unreadMessages": "Messages",
+      "members": "membres",
+      "documents": "documents",
+      "unread": "non lus",
+      "none": "Aucune"
+    },
+    "tabs": {
+      "agenda": "Agenda",
+      "brothers": "Frères",
+      "news": "Actualités"
+    },
+    "upcomingTenues": "Prochaines tenues",
+    "lodgeOfficers": "Officiers de loge",
+    "latestNews": "Dernières actualités",
+    "seeAll": "Voir tout →",
+    "actions": {
+      "createTenue": "Créer une tenue",
+      "writePlanche": "Rédiger une planche",
+      "brothersDirectory": "Annuaire des Frères",
+      "agenda": "Agenda"
+    }
   }
 }

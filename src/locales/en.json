@@ -96,5 +96,35 @@
     "resources": "Resources",
     "legal": "Legal Information",
     "copyright": "All rights reserved."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to your MasonConnect personal space",
+    "quickActions": "Quick Actions",
+    "stats": {
+      "nextTenue": "Next meeting",
+      "membersCount": "Brothers",
+      "planchesCount": "Documents",
+      "unreadMessages": "Messages",
+      "members": "members",
+      "documents": "documents",
+      "unread": "unread",
+      "none": "None"
+    },
+    "tabs": {
+      "agenda": "Schedule",
+      "brothers": "Brothers",
+      "news": "News"
+    },
+    "upcomingTenues": "Upcoming meetings",
+    "lodgeOfficers": "Lodge officers",
+    "latestNews": "Latest news",
+    "seeAll": "See all →",
+    "actions": {
+      "createTenue": "Create a meeting",
+      "writePlanche": "Write a document",
+      "brothersDirectory": "Brothers directory",
+      "agenda": "Schedule"
+    }
   }
 }

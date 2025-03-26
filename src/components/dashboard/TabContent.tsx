@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import TenueCard, { TenueProps } from './TenueCard';
 import MemberCard, { MemberProps } from './MemberCard';
 import NewsCard, { NewsProps } from './NewsCard';
@@ -23,6 +25,8 @@ const TabContent: React.FC<TabContentProps> = ({
   membersLoading,
   newsLoading
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -33,9 +37,9 @@ const TabContent: React.FC<TabContentProps> = ({
       {activeTab === 'agenda' && (
         <div>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-masonic-blue-900">Prochaines tenues</h2>
+            <h2 className="text-xl font-bold text-masonic-blue-900">{t('dashboard.upcomingTenues')}</h2>
             <a href="/agenda" className="text-sm text-masonic-blue-700 font-medium hover:text-masonic-blue-600">
-              Voir tout →
+              {t('dashboard.seeAll')}
             </a>
           </div>
           {tenuesLoading ? (
@@ -63,9 +67,9 @@ const TabContent: React.FC<TabContentProps> = ({
       {activeTab === 'freres' && (
         <div>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-masonic-blue-900">Officiers de loge</h2>
+            <h2 className="text-xl font-bold text-masonic-blue-900">{t('dashboard.lodgeOfficers')}</h2>
             <a href="/freres" className="text-sm text-masonic-blue-700 font-medium hover:text-masonic-blue-600">
-              Voir tout →
+              {t('dashboard.seeAll')}
             </a>
           </div>
           {membersLoading ? (
@@ -93,9 +97,9 @@ const TabContent: React.FC<TabContentProps> = ({
       {activeTab === 'actualites' && (
         <div>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-masonic-blue-900">Dernières actualités</h2>
+            <h2 className="text-xl font-bold text-masonic-blue-900">{t('dashboard.latestNews')}</h2>
             <a href="/actualites" className="text-sm text-masonic-blue-700 font-medium hover:text-masonic-blue-600">
-              Voir tout →
+              {t('dashboard.seeAll')}
             </a>
           </div>
           {newsLoading ? (

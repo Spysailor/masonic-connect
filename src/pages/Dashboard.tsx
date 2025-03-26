@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import StatCards from '@/components/dashboard/StatCards';
@@ -32,6 +33,7 @@ type QueryResult = {
 };
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('agenda');
   
   const { data: tenues = [], isLoading: tenuesLoading } = useQuery({
@@ -246,8 +248,8 @@ const Dashboard = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-masonic-blue-900">Tableau de bord</h1>
-            <p className="text-gray-600 mt-1">Bienvenue sur votre espace personnel MasonConnect</p>
+            <h1 className="text-3xl font-bold text-masonic-blue-900">{t('dashboard.title')}</h1>
+            <p className="text-gray-600 mt-1">{t('dashboard.welcome')}</p>
           </motion.div>
           
           <StatCards stats={stats} statsLoading={statsLoading} />

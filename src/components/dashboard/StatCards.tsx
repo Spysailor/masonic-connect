@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, Users, FileText, Bell } from 'lucide-react';
 
@@ -15,6 +16,8 @@ interface StatCardsProps {
 }
 
 const StatCards: React.FC<StatCardsProps> = ({ stats, statsLoading }) => {
+  const { t } = useTranslation();
+  
   if (statsLoading || !stats) {
     return (
       <motion.div
@@ -51,7 +54,7 @@ const StatCards: React.FC<StatCardsProps> = ({ stats, statsLoading }) => {
             <Calendar className="h-6 w-6 text-masonic-blue-700" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm font-medium">Prochaine tenue</p>
+            <p className="text-gray-500 text-sm font-medium">{t('dashboard.stats.nextTenue')}</p>
             <p className="text-lg font-semibold text-masonic-blue-900">{stats.nextTenue}</p>
           </div>
         </CardContent>
@@ -63,8 +66,8 @@ const StatCards: React.FC<StatCardsProps> = ({ stats, statsLoading }) => {
             <Users className="h-6 w-6 text-masonic-blue-700" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm font-medium">Frères</p>
-            <p className="text-lg font-semibold text-masonic-blue-900">{stats.membersCount} membres</p>
+            <p className="text-gray-500 text-sm font-medium">{t('dashboard.stats.membersCount')}</p>
+            <p className="text-lg font-semibold text-masonic-blue-900">{stats.membersCount} {t('dashboard.stats.members')}</p>
           </div>
         </CardContent>
       </Card>
@@ -75,8 +78,8 @@ const StatCards: React.FC<StatCardsProps> = ({ stats, statsLoading }) => {
             <FileText className="h-6 w-6 text-masonic-blue-700" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm font-medium">Planches</p>
-            <p className="text-lg font-semibold text-masonic-blue-900">{stats.planchesCount} documents</p>
+            <p className="text-gray-500 text-sm font-medium">{t('dashboard.stats.planchesCount')}</p>
+            <p className="text-lg font-semibold text-masonic-blue-900">{stats.planchesCount} {t('dashboard.stats.documents')}</p>
           </div>
         </CardContent>
       </Card>
@@ -87,8 +90,8 @@ const StatCards: React.FC<StatCardsProps> = ({ stats, statsLoading }) => {
             <Bell className="h-6 w-6 text-masonic-blue-700" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm font-medium">Messages</p>
-            <p className="text-lg font-semibold text-masonic-blue-900">{stats.unreadMessages} non lus</p>
+            <p className="text-gray-500 text-sm font-medium">{t('dashboard.stats.unreadMessages')}</p>
+            <p className="text-lg font-semibold text-masonic-blue-900">{stats.unreadMessages} {t('dashboard.stats.unread')}</p>
           </div>
         </CardContent>
       </Card>

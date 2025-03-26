@@ -2,17 +2,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, FileText, Users } from 'lucide-react';
 
 const QuickActions: React.FC = () => {
+  const { t } = useTranslation();
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.4 }}
     >
-      <h2 className="text-xl font-bold text-masonic-blue-900 mb-4">Actions rapides</h2>
+      <h2 className="text-xl font-bold text-masonic-blue-900 mb-4">{t('dashboard.quickActions')}</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Link to="/agenda/create">
           <Card className="shadow-sm hover:shadow-md transition-shadow">
@@ -20,7 +23,7 @@ const QuickActions: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
                 <Calendar className="h-6 w-6 text-masonic-blue-700" />
               </div>
-              <span className="text-sm font-medium text-gray-900">Créer une tenue</span>
+              <span className="text-sm font-medium text-gray-900">{t('dashboard.actions.createTenue')}</span>
             </CardContent>
           </Card>
         </Link>
@@ -31,7 +34,7 @@ const QuickActions: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
                 <FileText className="h-6 w-6 text-masonic-blue-700" />
               </div>
-              <span className="text-sm font-medium text-gray-900">Rédiger une planche</span>
+              <span className="text-sm font-medium text-gray-900">{t('dashboard.actions.writePlanche')}</span>
             </CardContent>
           </Card>
         </Link>
@@ -42,7 +45,7 @@ const QuickActions: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
                 <Users className="h-6 w-6 text-masonic-blue-700" />
               </div>
-              <span className="text-sm font-medium text-gray-900">Annuaire des Frères</span>
+              <span className="text-sm font-medium text-gray-900">{t('dashboard.actions.brothersDirectory')}</span>
             </CardContent>
           </Card>
         </Link>
@@ -53,7 +56,7 @@ const QuickActions: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
                 <Calendar className="h-6 w-6 text-masonic-blue-700" />
               </div>
-              <span className="text-sm font-medium text-gray-900">Agenda</span>
+              <span className="text-sm font-medium text-gray-900">{t('dashboard.actions.agenda')}</span>
             </CardContent>
           </Card>
         </Link>

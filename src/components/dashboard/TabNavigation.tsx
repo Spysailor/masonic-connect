@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useTranslation } from 'react-i18next';
 
 interface TabNavigationProps {
   activeTab: string;
@@ -9,6 +10,8 @@ interface TabNavigationProps {
 }
 
 const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }) => {
+  const { t } = useTranslation();
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -26,19 +29,19 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }
             value="agenda" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            Agenda
+            {t('dashboard.tabs.agenda')}
           </TabsTrigger>
           <TabsTrigger 
             value="freres" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            Frères
+            {t('dashboard.tabs.brothers')}
           </TabsTrigger>
           <TabsTrigger 
             value="actualites" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            Actualités
+            {t('dashboard.tabs.news')}
           </TabsTrigger>
         </TabsList>
       </Tabs>
