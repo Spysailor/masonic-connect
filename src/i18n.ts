@@ -61,7 +61,7 @@ i18n
     },
     // Ajout de la fonction de résolution des clés de traduction manquantes
     missingKeyHandler: (lng, ns, key) => {
-      console.warn(`Missing translation key: ${key} for language: ${lng}`);
+      console.warn(`Missing translation key: ${key} for namespace: ${ns} and language: ${lng}`);
     },
     saveMissing: true,
     missingKeyNoValueFallbackToKey: false,
