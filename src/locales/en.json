@@ -142,5 +142,21 @@
       "email": "Email",
       "message": "Message"
     }
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me",
+    "signIn": "Sign in",
+    "signingIn": "Signing in...",
+    "or": "Or",
+    "createAccount": "Create an account",
+    "termsPrefix": "By logging in, you agree to our",
+    "termsLink": "terms of service",
+    "and": "and",
+    "privacyLink": "privacy policy",
+    "backToHome": "Back to home"
   }
 }

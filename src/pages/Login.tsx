@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 import Logo from '@/components/ui-elements/Logo';
 import AnimatedButton from '@/components/ui-elements/AnimatedButton';
 
 const Login = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -44,14 +46,14 @@ const Login = () => {
               </div>
               
               <h1 className="text-2xl font-bold text-center text-masonic-blue-900 mb-6">
-                Connexion
+                {t('login.title')}
               </h1>
               
               <form onSubmit={handleSubmit}>
                 <div className="space-y-4">
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email
+                      {t('login.email')}
                     </label>
                     <input
                       id="email"
@@ -67,10 +69,10 @@ const Login = () => {
                   <div>
                     <div className="flex items-center justify-between mb-1">
                       <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                        Mot de passe
+                        {t('login.password')}
                       </label>
                       <Link to="/forgot-password" className="text-sm text-masonic-blue-700 hover:text-masonic-blue-600">
-                        Mot de passe oublié?
+                        {t('login.forgotPassword')}
                       </Link>
                     </div>
                     <input
@@ -92,7 +94,7 @@ const Login = () => {
                       className="h-4 w-4 text-masonic-blue-700 border-gray-300 rounded focus:ring-masonic-blue-500"
                     />
                     <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                      Se souvenir de moi
+                      {t('login.rememberMe')}
                     </label>
                   </div>
                   
@@ -103,7 +105,7 @@ const Login = () => {
                       fullWidth
                       disabled={loading}
                     >
-                      {loading ? 'Connexion en cours...' : 'Se connecter'}
+                      {loading ? t('login.signingIn') : t('login.signIn')}
                     </AnimatedButton>
                   </div>
                 </div>
@@ -115,7 +117,7 @@ const Login = () => {
                     <div className="w-full border-t border-gray-200" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-500">Ou</span>
+                    <span className="px-2 bg-white text-gray-500">{t('login.or')}</span>
                   </div>
                 </div>
                 
@@ -124,27 +126,27 @@ const Login = () => {
                     to="/register" 
                     className="block w-full text-center py-3 px-4 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
                   >
-                    Créer un compte
+                    {t('login.createAccount')}
                   </Link>
                 </div>
               </div>
             </div>
             
             <div className="px-8 py-4 bg-gray-50 border-t border-gray-100 text-center text-sm text-gray-600">
-              En vous connectant, vous acceptez nos{' '}
+              {t('login.termsPrefix')}{' '}
               <Link to="/conditions" className="text-masonic-blue-700 hover:text-masonic-blue-600">
-                conditions d'utilisation
+                {t('login.termsLink')}
               </Link>{' '}
-              et notre{' '}
+              {t('login.and')}{' '}
               <Link to="/privacy" className="text-masonic-blue-700 hover:text-masonic-blue-600">
-                politique de confidentialité
+                {t('login.privacyLink')}
               </Link>.
             </div>
           </div>
           
           <div className="mt-6 text-center">
             <Link to="/" className="text-sm text-gray-600 hover:text-masonic-blue-700">
-              Retour à l'accueil
+              {t('login.backToHome')}
             </Link>
           </div>
         </motion.div>

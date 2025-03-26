@@ -142,5 +142,21 @@
       "email": "Email",
       "message": "Message"
     }
+  },
+  "login": {
+    "title": "Connexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié?",
+    "rememberMe": "Se souvenir de moi",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion en cours...",
+    "or": "Ou",
+    "createAccount": "Créer un compte",
+    "termsPrefix": "En vous connectant, vous acceptez nos",
+    "termsLink": "conditions d'utilisation",
+    "and": "et notre",
+    "privacyLink": "politique de confidentialité",
+    "backToHome": "Retour à l'accueil"
   }
 }
