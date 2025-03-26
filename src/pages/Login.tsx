@@ -1,156 +1,125 @@
 
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { toast } from "sonner";
 import { useTranslation } from 'react-i18next';
 import Logo from '@/components/ui-elements/Logo';
 import AnimatedButton from '@/components/ui-elements/AnimatedButton';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useAuth } from '@/hooks/useAuth';
+
+const formSchema = z.object({
+  email: z.string().email({ message: "Email invalide" }),
+  password: z.string().min(1, { message: "Le mot de passe est requis" }),
+});
 
 const Login = () => {
   const { t } = useTranslation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!email || !password) {
-      toast.error("Veuillez saisir votre email et votre mot de passe");
-      return;
+  const { signIn, isLoading } = useAuth();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: ""
     }
-    
-    setLoading(true);
-    
-    // Simulating login - in a real app, this would call an auth service
-    setTimeout(() => {
-      toast.error("Fonctionnalité de connexion non implémentée dans cette démonstration");
-      setLoading(false);
-    }, 1500);
+  });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    await signIn(values.email, values.password);
   };
-  
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="flex-1 flex items-center justify-center p-4">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-          className="w-full max-w-md"
-        >
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div className="p-8">
-              <div className="flex justify-center mb-8">
-                <Logo />
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 p-4">
+      <Link to="/" className="mb-8">
+        <Logo size="lg" />
+      </Link>
+      
+      <Card className="w-full max-w-md">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold text-center">{t('login.title')}</CardTitle>
+          <CardDescription className="text-center">
+            {t('login.subtitle')}
+          </CardDescription>
+        </CardHeader>
+        
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('login.email')}</FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder={t('login.emailPlaceholder')} 
+                        {...field} 
+                        type="email" 
+                        autoComplete="email"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('login.password')}</FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder={t('login.passwordPlaceholder')} 
+                        {...field} 
+                        type="password" 
+                        autoComplete="current-password"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <div className="text-sm text-right">
+                <Link to="/forgot-password" className="text-masonic-blue-700 hover:underline">
+                  {t('login.forgotPassword')}
+                </Link>
               </div>
               
-              <h1 className="text-2xl font-bold text-center text-masonic-blue-900 mb-6">
-                {t('login.title')}
-              </h1>
-              
-              <form onSubmit={handleSubmit}>
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      {t('login.email')}
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="input-masonic"
-                      placeholder="votre@email.com"
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                        {t('login.password')}
-                      </label>
-                      <Link to="/forgot-password" className="text-sm text-masonic-blue-700 hover:text-masonic-blue-600">
-                        {t('login.forgotPassword')}
-                      </Link>
-                    </div>
-                    <input
-                      id="password"
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="input-masonic"
-                      placeholder="••••••••"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="flex items-center">
-                    <input
-                      id="remember-me"
-                      name="remember-me"
-                      type="checkbox"
-                      className="h-4 w-4 text-masonic-blue-700 border-gray-300 rounded focus:ring-masonic-blue-500"
-                    />
-                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                      {t('login.rememberMe')}
-                    </label>
-                  </div>
-                  
-                  <div>
-                    <AnimatedButton
-                      type="submit"
-                      variant="primary"
-                      fullWidth
-                      disabled={loading}
-                    >
-                      {loading ? t('login.signingIn') : t('login.signIn')}
-                    </AnimatedButton>
-                  </div>
-                </div>
-              </form>
-              
-              <div className="mt-6">
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-500">{t('login.or')}</span>
-                  </div>
-                </div>
-                
-                <div className="mt-6">
-                  <Link 
-                    to="/register" 
-                    className="block w-full text-center py-3 px-4 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
-                  >
-                    {t('login.createAccount')}
-                  </Link>
-                </div>
-              </div>
-            </div>
-            
-            <div className="px-8 py-4 bg-gray-50 border-t border-gray-100 text-center text-sm text-gray-600">
-              {t('login.termsPrefix')}{' '}
-              <Link to="/conditions" className="text-masonic-blue-700 hover:text-masonic-blue-600">
-                {t('login.termsLink')}
-              </Link>{' '}
-              {t('login.and')}{' '}
-              <Link to="/privacy" className="text-masonic-blue-700 hover:text-masonic-blue-600">
-                {t('login.privacyLink')}
-              </Link>.
-            </div>
+              <AnimatedButton
+                type="submit"
+                variant="primary"
+                fullWidth
+                disabled={isLoading}
+              >
+                {isLoading ? t('common.loading') : t('login.submitButton')}
+              </AnimatedButton>
+            </form>
+          </Form>
+        </CardContent>
+        
+        <CardFooter className="flex flex-col space-y-4">
+          <div className="text-sm text-center">
+            {t('login.noAccount')} <Link to="/register" className="text-masonic-blue-700 hover:underline">{t('login.registerLink')}</Link>
           </div>
           
-          <div className="mt-6 text-center">
-            <Link to="/" className="text-sm text-gray-600 hover:text-masonic-blue-700">
-              {t('login.backToHome')}
-            </Link>
+          <div className="text-sm text-center text-gray-500">
+            {t('login.or')}
           </div>
-        </motion.div>
-      </div>
+          
+          <div className="text-sm text-center">
+            <Link to="/join" className="text-masonic-blue-700 hover:underline">{t('login.joinWithInvitation')}</Link>
+          </div>
+        </CardFooter>
+      </Card>
     </div>
   );
 };

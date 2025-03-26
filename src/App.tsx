@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { NotificationProvider } from "@/hooks/use-notifications";
 import MobileFooterMenu from "@/components/layout/MobileFooterMenu";
+import { AuthProvider } from "@/hooks/useAuth";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import PublicOnlyRoute from "@/components/PublicOnlyRoute";
 
 // Pages
 import Index from "./pages/Index";
@@ -51,48 +54,189 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NotificationProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <AnimatePresence mode="wait">
-              <Routes>
-                <Route path="/" element={<PageWrapper><Index /></PageWrapper>} />
-                <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
-                <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
-                <Route path="/dashboard" element={<PageWrapper><Dashboard /></PageWrapper>} />
-                <Route path="/freres" element={<PageWrapper><Members /></PageWrapper>} />
-                <Route path="/freres/:id" element={<PageWrapper><MemberDetail /></PageWrapper>} />
-                <Route path="/agenda" element={<PageWrapper><Agenda /></PageWrapper>} />
-                <Route path="/agenda/create" element={<PageWrapper><TenueForm /></PageWrapper>} />
-                <Route path="/agenda/:id/edit" element={<PageWrapper><TenueForm /></PageWrapper>} />
-                <Route path="/agenda/:id" element={<PageWrapper><TenueDetail /></PageWrapper>} />
-                <Route path="/planches" element={<PageWrapper><Planches /></PageWrapper>} />
-                <Route path="/planches/:id" element={<PageWrapper><PlancheDetail /></PageWrapper>} />
-                <Route path="/actualites" element={<PageWrapper><Actualites /></PageWrapper>} />
-                <Route path="/actualites/create" element={<PageWrapper><NewsCreate /></PageWrapper>} />
-                <Route path="/actualites/:id/edit" element={<PageWrapper><NewsEdit /></PageWrapper>} />
-                <Route path="/actualites/:id" element={<PageWrapper><BibliothequeDetail /></PageWrapper>} />
-                <Route path="/messages" element={<PageWrapper><Messages /></PageWrapper>} />
-                <Route path="/bibliotheque" element={<PageWrapper><Bibliotheque /></PageWrapper>} />
-                <Route path="/bibliotheque/:id" element={<PageWrapper><BibliothequeDetail /></PageWrapper>} />
-                <Route path="/profile" element={<PageWrapper><Profile /></PageWrapper>} />
-                <Route path="/notifications" element={<PageWrapper><Notifications /></PageWrapper>} />
-                
-                {/* Nouvelles routes pour la plateforme multi-tenant */}
-                <Route path="/invitations" element={<PageWrapper><Invitations /></PageWrapper>} />
-                <Route path="/loge-settings" element={<PageWrapper><LogeSettings /></PageWrapper>} />
-                <Route path="/join" element={<PageWrapper><Join /></PageWrapper>} />
-                
-                {/* Si aucune route ne correspond, rediriger vers la page NotFound */}
-                <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
-              </Routes>
-            </AnimatePresence>
-            <MobileFooterMenu />
-          </BrowserRouter>
-        </TooltipProvider>
-      </NotificationProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <NotificationProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <AnimatePresence mode="wait">
+                <Routes>
+                  {/* Routes publiques */}
+                  <Route path="/" element={<PageWrapper><Index /></PageWrapper>} />
+                  <Route path="/login" element={
+                    <PageWrapper>
+                      <PublicOnlyRoute>
+                        <Login />
+                      </PublicOnlyRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/register" element={
+                    <PageWrapper>
+                      <PublicOnlyRoute>
+                        <Register />
+                      </PublicOnlyRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/join" element={
+                    <PageWrapper>
+                      <PublicOnlyRoute>
+                        <Join />
+                      </PublicOnlyRoute>
+                    </PageWrapper>
+                  } />
+
+                  {/* Routes protégées (nécessitant une authentification) */}
+                  <Route path="/dashboard" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/freres" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Members />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/freres/:id" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <MemberDetail />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/agenda" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Agenda />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/agenda/create" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <TenueForm />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/agenda/:id/edit" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <TenueForm />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/agenda/:id" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <TenueDetail />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/planches" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Planches />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/planches/:id" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <PlancheDetail />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/actualites" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Actualites />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/actualites/create" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <NewsCreate />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/actualites/:id/edit" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <NewsEdit />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/actualites/:id" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <BibliothequeDetail />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/messages" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Messages />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/bibliotheque" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Bibliotheque />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/bibliotheque/:id" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <BibliothequeDetail />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/profile" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Profile />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/notifications" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Notifications />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/invitations" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <Invitations />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  <Route path="/loge-settings" element={
+                    <PageWrapper>
+                      <ProtectedRoute>
+                        <LogeSettings />
+                      </ProtectedRoute>
+                    </PageWrapper>
+                  } />
+                  
+                  {/* Si aucune route ne correspond, rediriger vers la page NotFound */}
+                  <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
+                </Routes>
+              </AnimatePresence>
+              <MobileFooterMenu />
+            </TooltipProvider>
+          </NotificationProvider>
+        </AuthProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 };
