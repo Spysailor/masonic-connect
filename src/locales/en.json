@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -282,6 +281,40 @@
         "juniorWarden": "Junior Warden",
         "orator": "Orator"
       }
+    }
+  },
+  "tenueDetail": {
+    "backToAgenda": "Back to schedule",
+    "edit": "Edit",
+    "information": "Information",
+    "proceedings": "Proceedings",
+    "officers": "Officers",
+    "planches": "Documents",
+    "description": "Description",
+    "theme": "Theme",
+    "location": "Location",
+    "lodge": "Lodge",
+    "notes": "Notes",
+    "downloadConvocation": "Download convocation",
+    "attendance": "Attendance",
+    "attendanceStatus": {
+      "present": "I will attend",
+      "absent": "I will not attend",
+      "absenceReason": "Reason for absence",
+      "absenceReasonPlaceholder": "Please provide a reason for your absence...",
+      "confirmResponse": "Confirm my response"
+    },
+    "participants": {
+      "title": "Participants",
+      "confirmed": "Confirmed present",
+      "excused": "Excused absent",
+      "pending": "Awaiting response",
+      "viewList": "View participants list"
+    },
+    "planchesEmpty": "No planche planned for this meeting.",
+    "status": {
+      "confirmed": "Confirmed",
+      "pending": "Pending"
     }
   }
 }

@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -282,6 +281,40 @@
         "juniorWarden": "Deuxième Surveillant",
         "orator": "Orateur"
       }
+    }
+  },
+  "tenueDetail": {
+    "backToAgenda": "Retour à l'agenda",
+    "edit": "Modifier",
+    "information": "Informations",
+    "proceedings": "Déroulement",
+    "officers": "Officiers",
+    "planches": "Planches",
+    "description": "Description",
+    "theme": "Thème",
+    "location": "Lieu",
+    "lodge": "Loge",
+    "notes": "Notes",
+    "downloadConvocation": "Télécharger la convocation",
+    "attendance": "Présence",
+    "attendanceStatus": {
+      "present": "Je serai présent",
+      "absent": "Je serai absent",
+      "absenceReason": "Motif d'absence",
+      "absenceReasonPlaceholder": "Veuillez indiquer le motif de votre absence...",
+      "confirmResponse": "Confirmer ma réponse"
+    },
+    "participants": {
+      "title": "Participants",
+      "confirmed": "Présents confirmés",
+      "excused": "Absents excusés",
+      "pending": "En attente de réponse",
+      "viewList": "Voir la liste des participants"
+    },
+    "planchesEmpty": "Aucune planche prévue pour cette tenue.",
+    "status": {
+      "confirmed": "Confirmée",
+      "pending": "En attente"
     }
   }
 }

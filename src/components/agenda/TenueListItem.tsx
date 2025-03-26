@@ -26,8 +26,8 @@ const TenueListItem: React.FC<TenueProps> = ({ tenue }) => {
   const dateLocale = i18n.language === 'fr' ? fr : enUS;
   
   const statusLabels = {
-    confirmed: i18n.language === 'fr' ? 'Confirmée' : 'Confirmed',
-    pending: i18n.language === 'fr' ? 'En attente' : 'Pending'
+    confirmed: t('tenueDetail.status.confirmed'),
+    pending: t('tenueDetail.status.pending')
   };
 
   return (

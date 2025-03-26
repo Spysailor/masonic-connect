@@ -3,18 +3,23 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, MapPin, Download, Clock, Users, BookOpen, Edit } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS } from 'date-fns/locale';
 
 const TenueDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [attendance, setAttendance] = useState<'confirmed' | 'declined' | 'pending'>('pending');
   const [excuse, setExcuse] = useState('');
+  const { t, i18n } = useTranslation();
+  
+  // Use appropriate locale for date formatting
+  const dateLocale = i18n.language === 'fr' ? fr : enUS;
   
   // Mock data for demonstration - in a real app this would be fetched based on the ID
   const tenue = {
@@ -32,26 +37,26 @@ const TenueDetail = () => {
     description: 'Tenue régulière avec lecture de planches et travaux rituels.',
     notes: 'Ne pas oublier vos décors. Un agape suivra la tenue.',
     officiers: [
-      { role: 'Vénérable Maître', name: 'Jean Dupont' },
-      { role: 'Premier Surveillant', name: 'Paul Martin' },
-      { role: 'Deuxième Surveillant', name: 'Philippe Moreau' },
-      { role: 'Orateur', name: 'Pierre Lambert' },
-      { role: 'Secrétaire', name: 'Michel Bernard' },
-      { role: 'Trésorier', name: 'Jacques Renaud' },
-      { role: 'Expert', name: 'André Petit' },
-      { role: 'Maître des Cérémonies', name: 'Robert Leroy' },
+      { role: i18n.language === 'fr' ? 'Vénérable Maître' : 'Worshipful Master', name: 'Jean Dupont' },
+      { role: i18n.language === 'fr' ? 'Premier Surveillant' : 'Senior Warden', name: 'Paul Martin' },
+      { role: i18n.language === 'fr' ? 'Deuxième Surveillant' : 'Junior Warden', name: 'Philippe Moreau' },
+      { role: i18n.language === 'fr' ? 'Orateur' : 'Orator', name: 'Pierre Lambert' },
+      { role: i18n.language === 'fr' ? 'Secrétaire' : 'Secretary', name: 'Michel Bernard' },
+      { role: i18n.language === 'fr' ? 'Trésorier' : 'Treasurer', name: 'Jacques Renaud' },
+      { role: i18n.language === 'fr' ? 'Expert' : 'Expert', name: 'André Petit' },
+      { role: i18n.language === 'fr' ? 'Maître des Cérémonies' : 'Master of Ceremonies', name: 'Robert Leroy' },
     ],
     agenda: [
-      { time: '19:00', activity: 'Ouverture des travaux' },
-      { time: '19:30', activity: 'Lecture et approbation du procès-verbal' },
-      { time: '19:45', activity: 'Présentation de la planche "Symbolisme du pavé mosaïque"' },
-      { time: '20:30', activity: 'Discussions' },
-      { time: '21:30', activity: 'Circulation du sac des propositions et du tronc de bienfaisance' },
-      { time: '21:45', activity: 'Clôture des travaux' },
-      { time: '22:00', activity: 'Agape fraternelle' },
+      { time: '19:00', activity: i18n.language === 'fr' ? 'Ouverture des travaux' : 'Opening of works' },
+      { time: '19:30', activity: i18n.language === 'fr' ? 'Lecture et approbation du procès-verbal' : 'Reading and approval of minutes' },
+      { time: '19:45', activity: i18n.language === 'fr' ? 'Présentation de la planche "Symbolisme du pavé mosaïque"' : 'Presentation of "Symbolism of the mosaic pavement"' },
+      { time: '20:30', activity: i18n.language === 'fr' ? 'Discussions' : 'Discussions' },
+      { time: '21:30', activity: i18n.language === 'fr' ? 'Circulation du sac des propositions et du tronc de bienfaisance' : 'Circulation of proposals bag and charity trunk' },
+      { time: '21:45', activity: i18n.language === 'fr' ? 'Clôture des travaux' : 'Closing of works' },
+      { time: '22:00', activity: i18n.language === 'fr' ? 'Agape fraternelle' : 'Fraternal agape' },
     ],
     planches: [
-      { title: 'Symbolisme du pavé mosaïque', author: 'Jean Dupont', type: 'Planche' },
+      { title: i18n.language === 'fr' ? 'Symbolisme du pavé mosaïque' : 'Symbolism of the mosaic pavement', author: 'Jean Dupont', type: i18n.language === 'fr' ? 'Planche' : 'Document' },
     ],
     fileURL: '#',
     status: 'confirmed' as const,
@@ -76,7 +81,7 @@ const TenueDetail = () => {
           >
             <Link to="/agenda" className="inline-flex items-center text-masonic-blue-700 hover:text-masonic-blue-900">
               <ArrowLeft className="h-4 w-4 mr-1" />
-              <span>Retour à l'agenda</span>
+              <span>{t('tenueDetail.backToAgenda')}</span>
             </Link>
             
             <Link 
@@ -84,7 +89,7 @@ const TenueDetail = () => {
               className="inline-flex items-center text-masonic-blue-700 hover:text-masonic-blue-900"
             >
               <Edit className="h-4 w-4 mr-1" />
-              <span>Modifier</span>
+              <span>{t('tenueDetail.edit')}</span>
             </Link>
           </motion.div>
           
@@ -104,8 +109,9 @@ const TenueDetail = () => {
                       tenue.degree === 2 ? 'bg-yellow-500' : 'bg-red-500'
                     }`}></span>
                     <span>
-                      {tenue.degree === 1 ? '1er degré' : 
-                       tenue.degree === 2 ? '2ème degré' : '3ème degré'}
+                      {i18n.language === 'fr' 
+                        ? `${tenue.degree}er degré` 
+                        : `${tenue.degree}${tenue.degree === 1 ? 'st' : tenue.degree === 2 ? 'nd' : 'rd'} degree`}
                     </span>
                     <span>•</span>
                     <span>{tenue.type}</span>
@@ -116,7 +122,7 @@ const TenueDetail = () => {
                   <div className="flex flex-wrap gap-4 text-sm mt-4">
                     <div className="flex items-center">
                       <Calendar className="h-4 w-4 mr-2" />
-                      <span>{format(tenue.date, 'EEEE d MMMM yyyy', { locale: fr })}</span>
+                      <span>{format(tenue.date, 'EEEE d MMMM yyyy', { locale: dateLocale })}</span>
                     </div>
                     
                     <div className="flex items-center">
@@ -134,44 +140,44 @@ const TenueDetail = () => {
                 <CardContent className="p-6">
                   <Tabs defaultValue="informations" className="w-full">
                     <TabsList className="mb-6 w-full">
-                      <TabsTrigger value="informations" className="flex-1">Informations</TabsTrigger>
-                      <TabsTrigger value="agenda" className="flex-1">Déroulement</TabsTrigger>
-                      <TabsTrigger value="officiers" className="flex-1">Officiers</TabsTrigger>
-                      <TabsTrigger value="planches" className="flex-1">Planches</TabsTrigger>
+                      <TabsTrigger value="informations" className="flex-1">{t('tenueDetail.information')}</TabsTrigger>
+                      <TabsTrigger value="agenda" className="flex-1">{t('tenueDetail.proceedings')}</TabsTrigger>
+                      <TabsTrigger value="officiers" className="flex-1">{t('tenueDetail.officers')}</TabsTrigger>
+                      <TabsTrigger value="planches" className="flex-1">{t('tenueDetail.planches')}</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="informations" className="mt-0">
                       <div className="space-y-4">
                         <div>
-                          <h3 className="text-sm font-medium text-gray-500">Description</h3>
+                          <h3 className="text-sm font-medium text-gray-500">{t('tenueDetail.description')}</h3>
                           <p className="mt-1 text-gray-800">{tenue.description}</p>
                         </div>
                         
                         <div>
-                          <h3 className="text-sm font-medium text-gray-500">Thème</h3>
+                          <h3 className="text-sm font-medium text-gray-500">{t('tenueDetail.theme')}</h3>
                           <p className="mt-1 text-gray-800">{tenue.theme}</p>
                         </div>
                         
                         <div>
-                          <h3 className="text-sm font-medium text-gray-500">Lieu</h3>
+                          <h3 className="text-sm font-medium text-gray-500">{t('tenueDetail.location')}</h3>
                           <p className="mt-1 text-gray-800">{tenue.location}</p>
                           <p className="text-gray-600">{tenue.address}</p>
                         </div>
                         
                         <div>
-                          <h3 className="text-sm font-medium text-gray-500">Loge</h3>
+                          <h3 className="text-sm font-medium text-gray-500">{t('tenueDetail.lodge')}</h3>
                           <p className="mt-1 text-gray-800">{tenue.lodge}</p>
                         </div>
                         
                         <div>
-                          <h3 className="text-sm font-medium text-gray-500">Notes</h3>
+                          <h3 className="text-sm font-medium text-gray-500">{t('tenueDetail.notes')}</h3>
                           <p className="mt-1 text-gray-800">{tenue.notes}</p>
                         </div>
                         
                         <div className="pt-4">
                           <Button variant="outline" className="flex items-center">
                             <Download className="h-4 w-4 mr-2" />
-                            Télécharger la convocation
+                            {t('tenueDetail.downloadConvocation')}
                           </Button>
                         </div>
                       </div>
@@ -214,12 +220,12 @@ const TenueDetail = () => {
                                 <div>
                                   <h3 className="font-medium text-gray-900">{planche.title}</h3>
                                   <p className="text-sm text-gray-500 mt-1">
-                                    Par {planche.author} • {planche.type}
+                                    {i18n.language === 'fr' ? 'Par' : 'By'} {planche.author} • {planche.type}
                                   </p>
                                 </div>
                                 <Button variant="ghost" size="sm" className="text-masonic-blue-700">
                                   <BookOpen className="h-4 w-4 mr-2" />
-                                  Voir
+                                  {i18n.language === 'fr' ? 'Voir' : 'View'}
                                 </Button>
                               </div>
                             </div>
@@ -227,7 +233,7 @@ const TenueDetail = () => {
                         </div>
                       ) : (
                         <div className="text-center text-gray-500 py-4">
-                          Aucune planche prévue pour cette tenue.
+                          {t('tenueDetail.planchesEmpty')}
                         </div>
                       )}
                     </TabsContent>
@@ -245,7 +251,7 @@ const TenueDetail = () => {
             >
               <Card>
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-semibold text-masonic-blue-900 mb-4">Présence</h2>
+                  <h2 className="text-xl font-semibold text-masonic-blue-900 mb-4">{t('tenueDetail.attendance')}</h2>
                   
                   <div className="space-y-4 mb-6">
                     <button
@@ -256,7 +262,7 @@ const TenueDetail = () => {
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
-                      Je serai présent
+                      {t('tenueDetail.attendanceStatus.present')}
                     </button>
                     
                     <button
@@ -267,20 +273,20 @@ const TenueDetail = () => {
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
-                      Je serai absent
+                      {t('tenueDetail.attendanceStatus.absent')}
                     </button>
                   </div>
                   
                   {attendance === 'declined' && (
                     <div className="mb-6">
                       <label htmlFor="excuse" className="block text-sm font-medium text-gray-700 mb-1">
-                        Motif d'absence
+                        {t('tenueDetail.attendanceStatus.absenceReason')}
                       </label>
                       <textarea
                         id="excuse"
                         rows={3}
                         className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
-                        placeholder="Veuillez indiquer le motif de votre absence..."
+                        placeholder={t('tenueDetail.attendanceStatus.absenceReasonPlaceholder')}
                         value={excuse}
                         onChange={(e) => setExcuse(e.target.value)}
                       ></textarea>
@@ -288,35 +294,35 @@ const TenueDetail = () => {
                   )}
                   
                   <Button className="w-full mb-6">
-                    Confirmer ma réponse
+                    {t('tenueDetail.attendanceStatus.confirmResponse')}
                   </Button>
                   
                   <div>
                     <div className="flex items-center mb-4">
                       <Users className="h-5 w-5 text-gray-400 mr-2" />
-                      <h3 className="text-md font-medium text-gray-700">Participants</h3>
+                      <h3 className="text-md font-medium text-gray-700">{t('tenueDetail.participants.title')}</h3>
                     </div>
                     
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
-                        <div className="text-sm font-medium">Présents confirmés</div>
+                        <div className="text-sm font-medium">{t('tenueDetail.participants.confirmed')}</div>
                         <div className="text-sm text-gray-500">12</div>
                       </div>
                       
                       <div className="flex justify-between items-center">
-                        <div className="text-sm font-medium">Absents excusés</div>
+                        <div className="text-sm font-medium">{t('tenueDetail.participants.excused')}</div>
                         <div className="text-sm text-gray-500">4</div>
                       </div>
                       
                       <div className="flex justify-between items-center">
-                        <div className="text-sm font-medium">En attente de réponse</div>
+                        <div className="text-sm font-medium">{t('tenueDetail.participants.pending')}</div>
                         <div className="text-sm text-gray-500">8</div>
                       </div>
                     </div>
                     
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       <Button variant="outline" className="w-full">
-                        Voir la liste des participants
+                        {t('tenueDetail.participants.viewList')}
                       </Button>
                     </div>
                   </div>
