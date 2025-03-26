@@ -40,12 +40,14 @@ import Join from "./pages/Join";
 
 const queryClient = new QueryClient();
 
+// Properly typed PageWrapper component
 interface PageWrapperProps {
   children: React.ReactNode;
 }
 
 const App = () => {
-  const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => (
+  // PageWrapper is now properly typed with the interface
+  const PageWrapper = ({ children }: PageWrapperProps): JSX.Element => (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
