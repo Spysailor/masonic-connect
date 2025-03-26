@@ -13,20 +13,27 @@ import {
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { formatDistanceToNow } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS } from 'date-fns/locale';
 import { useNotifications } from '@/hooks/use-notifications';
+import { useTranslation } from 'react-i18next';
 
 const NotificationIndicator = () => {
   const { toast } = useToast();
   const { notifications, unreadCount, markAllAsRead } = useNotifications();
   const [open, setOpen] = React.useState(false);
+  const { t, i18n } = useTranslation();
+  
+  // Get date locale based on current language
+  const dateLocale = i18n.language === 'fr' ? fr : enUS;
   
   const handleMarkAllAsRead = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     markAllAsRead();
     toast({
-      title: "Toutes les notifications ont été marquées comme lues",
+      title: i18n.language === 'fr' 
+        ? "Toutes les notifications ont été marquées comme lues"
+        : "All notifications have been marked as read",
     });
     setOpen(false);
   };
@@ -45,7 +52,7 @@ const NotificationIndicator = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-80">
         <DropdownMenuLabel className="flex items-center justify-between">
-          <span>Notifications</span>
+          <span>{t('notifications.title')}</span>
           {unreadCount > 0 && (
             <Button 
               variant="ghost" 
@@ -53,7 +60,7 @@ const NotificationIndicator = () => {
               className="h-7 text-xs"
               onClick={handleMarkAllAsRead}
             >
-              Tout marquer comme lu
+              {t('notifications.markAllAsRead')}
             </Button>
           )}
         </DropdownMenuLabel>
@@ -68,7 +75,7 @@ const NotificationIndicator = () => {
                     <div className="flex justify-between items-center">
                       <p className="font-medium text-sm">{notification.title}</p>
                       <span className="text-xs text-gray-500">
-                        {formatDistanceToNow(notification.timestamp, { addSuffix: true, locale: fr })}
+                        {formatDistanceToNow(notification.timestamp, { addSuffix: true, locale: dateLocale })}
                       </span>
                     </div>
                     <p className="text-xs text-gray-600 truncate">{notification.message}</p>
@@ -79,13 +86,13 @@ const NotificationIndicator = () => {
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link to="/notifications" className="cursor-pointer w-full text-center text-sm text-masonic-blue-600 hover:text-masonic-blue-800">
-                Voir toutes les notifications
+                {i18n.language === 'fr' ? "Voir toutes les notifications" : "View all notifications"}
               </Link>
             </DropdownMenuItem>
           </>
         ) : (
           <div className="py-4 text-center text-sm text-gray-500">
-            Aucune notification
+            {i18n.language === 'fr' ? "Aucune notification" : "No notifications"}
           </div>
         )}
       </DropdownMenuContent>

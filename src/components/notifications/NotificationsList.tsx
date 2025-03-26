@@ -4,11 +4,12 @@ import { Bell, Mail, Calendar, BookOpen, CheckCircle, Info, AlertTriangle, X, Ch
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { formatDistanceToNow } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { fr, enUS } from 'date-fns/locale';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { motion } from 'framer-motion';
 import { useNotifications } from '@/hooks/use-notifications';
 import { NotificationType } from '@/hooks/use-notifications';
+import { useTranslation } from 'react-i18next';
 
 interface NotificationsListProps {
   filterType?: string;
@@ -17,6 +18,7 @@ interface NotificationsListProps {
 const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all' }) => {
   const { toast } = useToast();
   const { notifications, markAsRead, deleteNotification } = useNotifications();
+  const { t, i18n } = useTranslation();
   
   // Filter notifications based on active tab
   const filteredNotifications = notifications.filter(notification => {
@@ -24,6 +26,9 @@ const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all
     if (filterType === 'unread') return !notification.read;
     return notification.type === filterType as NotificationType;
   });
+
+  // Get date locale based on current language
+  const dateLocale = i18n.language === 'fr' ? fr : enUS;
 
   // Get icon based on notification type
   const getNotificationIcon = (type: NotificationType) => {
@@ -77,7 +82,7 @@ const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all
                       {notification.title}
                     </p>
                     <span className="text-xs text-gray-500 whitespace-nowrap ml-2">
-                      {formatDistanceToNow(notification.timestamp, { addSuffix: true, locale: fr })}
+                      {formatDistanceToNow(notification.timestamp, { addSuffix: true, locale: dateLocale })}
                     </span>
                   </div>
                   
@@ -89,7 +94,7 @@ const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all
                         href={notification.link} 
                         className="text-sm text-blue-600 hover:text-blue-800 hover:underline font-medium flex items-center"
                       >
-                        Voir les détails →
+                        {t('notifications.viewDetails')} →
                       </a>
                     )}
                     
@@ -102,7 +107,7 @@ const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all
                           onClick={() => markAsRead(notification.id)}
                         >
                           <Check className="mr-1 h-4 w-4" />
-                          Marquer comme lu
+                          {t('notifications.markAsRead')}
                         </Button>
                       )}
                       
@@ -126,9 +131,9 @@ const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all
           <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
             <Bell className="h-8 w-8 text-gray-400" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-1">Pas de notifications</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-1">{t('notifications.empty.title')}</h3>
           <p className="text-sm text-gray-500 max-w-sm">
-            Vous n'avez aucune notification pour le moment dans cette catégorie.
+            {t('notifications.empty.description')}
           </p>
         </div>
       )}

@@ -1,4 +1,3 @@
-
 {
   "common": {
     "appName": "MasonConnect",
@@ -547,5 +546,28 @@
       "notificationPreferencesSaved": "Your notification preferences have been updated.",
       "accountSettingsSaved": "Your account settings have been successfully updated."
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Stay informed of Universalys lodge activities",
+    "yourNotifications": "Your notifications",
+    "markAllAsRead": "Mark all as read",
+    "clearAll": "Clear all",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "tabs": {
+      "all": "All",
+      "unread": "Unread",
+      "events": "Meetings",
+      "messages": "Messages",
+      "documents": "Documents",
+      "info": "Info"
+    },
+    "empty": {
+      "title": "No notifications",
+      "description": "You don't have any notifications in this category at the moment."
+    },
+    "markAsRead": "Mark as read",
+    "viewDetails": "View details"
   }
 }
