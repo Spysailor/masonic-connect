@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 interface LogoProps {
   variant?: 'default' | 'light' | 'dark';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   withText?: boolean;
 }
 
@@ -13,14 +12,13 @@ const Logo: React.FC<LogoProps> = ({
   size = 'md', 
   withText = true 
 }) => {
-  // Size classes
   const sizeClasses = {
     sm: 'h-7 w-auto',
     md: 'h-8 w-auto',
-    lg: 'h-10 w-auto'
+    lg: 'h-10 w-auto',
+    xl: 'h-16 w-auto'
   };
   
-  // Color classes based on variant
   const colorClasses = {
     default: 'text-masonic-blue-800',
     light: 'text-white',
@@ -45,7 +43,8 @@ const Logo: React.FC<LogoProps> = ({
         <span className={`font-medium tracking-tight truncate ${
           size === 'sm' ? 'text-base' : 
           size === 'md' ? 'text-lg' : 
-          'text-xl'
+          size === 'lg' ? 'text-xl' : 
+          'text-2xl'
         }`}>
           MasonConnect
         </span>
