@@ -69,9 +69,9 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
         <span className="ml-2">{icon}</span>
       )}
       
-      {/* Button hover effect */}
+      {/* Basic hover effect instead of animation dependency */}
       <span className="absolute inset-0 overflow-hidden rounded-lg">
-        <span className="absolute inset-0 -translate-x-full hover:translate-x-0 ease-out duration-300 transition-transform bg-opacity-10 bg-white group-hover:translate-x-0"></span>
+        <span className="absolute inset-0 -translate-x-full hover:translate-x-0 ease-out duration-300 transition-transform bg-opacity-10 bg-white"></span>
       </span>
     </>
   );
