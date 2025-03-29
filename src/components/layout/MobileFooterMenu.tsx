@@ -31,22 +31,15 @@ const MobileFooterMenu: React.FC = () => {
             <Link 
               key={item.path} 
               to={item.path} 
-              className="flex flex-col items-center py-1 px-2"
+              className="flex items-center justify-center p-2"
+              aria-label={item.label}
             >
               <item.icon 
                 className={cn(
-                  "h-5 w-5 mb-1",
+                  "h-6 w-6",
                   isActive ? "text-masonic-blue-700" : "text-gray-500"
                 )} 
               />
-              <span 
-                className={cn(
-                  "text-xs",
-                  isActive ? "text-masonic-blue-700 font-medium" : "text-gray-500"
-                )}
-              >
-                {item.label}
-              </span>
             </Link>
           );
         })}
