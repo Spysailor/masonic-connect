@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -179,61 +180,9 @@ const Header: React.FC = () => {
             )}
             
             {renderAuthButtons()}
-            
-            <button
-              className="rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 focus:outline-none"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </button>
           </div>
         </div>
       </div>
-      
-      
-        
-          {navLinks
-            .filter(link => !link.requiresAuth || user)
-            .map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  "px-4 py-3 rounded-md text-base font-medium transition-colors",
-                  location.pathname === link.path || 
-                  (link.path === '/bibliotheque' && location.pathname.startsWith('/planches'))
-                    ? "text-masonic-blue-700 bg-masonic-blue-50"
-                    : "text-gray-600 hover:text-masonic-blue-700 hover:bg-gray-50"
-                )}
-              >
-                {t(link.translationKey)}
-              </Link>
-            ))}
-          
-          {!user && (
-            
-              
-                {t('common.register')}
-              
-            
-          )}
-
-          {user && (
-            <button
-              onClick={handleLogout}
-              className="flex items-center px-4 py-3 rounded-md text-base font-medium text-red-600 hover:bg-red-50"
-            >
-              <LogOut className="mr-2 h-4 w-4" />
-              {t('common.logout')}
-            </button>
-          )}
-        
-      
     </header>
   );
 };
