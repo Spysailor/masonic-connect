@@ -195,13 +195,8 @@ const Header: React.FC = () => {
         </div>
       </div>
       
-      <div
-        className={cn(
-          "md:hidden fixed inset-0 top-[56px] bg-white z-40 transition-all duration-300 ease-in-out transform",
-          mobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-        )}
-      >
-        <nav className="flex flex-col px-4 py-6 space-y-3">
+      
+        
           {navLinks
             .filter(link => !link.requiresAuth || user)
             .map((link) => (
@@ -221,11 +216,11 @@ const Header: React.FC = () => {
             ))}
           
           {!user && (
-            <div className="pt-4">
-              <AnimatedButton to="/register" variant="primary" fullWidth>
+            
+              
                 {t('common.register')}
-              </AnimatedButton>
-            </div>
+              
+            
           )}
 
           {user && (
@@ -237,8 +232,8 @@ const Header: React.FC = () => {
               {t('common.logout')}
             </button>
           )}
-        </nav>
-      </div>
+        
+      
     </header>
   );
 };
