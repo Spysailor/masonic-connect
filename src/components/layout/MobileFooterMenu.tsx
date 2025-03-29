@@ -5,6 +5,7 @@ import { Home, Calendar, Users, MessageSquare, Newspaper, Book } from 'lucide-re
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 const MobileFooterMenu: React.FC = () => {
   const location = useLocation();
@@ -14,12 +15,12 @@ const MobileFooterMenu: React.FC = () => {
   if (!isMobile) return null;
   
   const menuItems = [
-    { icon: Home, label: t('common.dashboard'), path: '/dashboard' },
-    { icon: Calendar, label: t('common.agenda'), path: '/agenda' },
-    { icon: Users, label: t('common.brothers'), path: '/freres' },
-    { icon: Newspaper, label: t('common.news'), path: '/actualites' },
-    { icon: Book, label: t('common.library'), path: '/bibliotheque' },
-    { icon: MessageSquare, label: t('common.messages'), path: '/messages' },
+    { icon: Home, label: i18nWithFallback('common.dashboard', 'Tableau de bord'), path: '/dashboard' },
+    { icon: Calendar, label: i18nWithFallback('common.agenda', 'Agenda'), path: '/agenda' },
+    { icon: Users, label: i18nWithFallback('common.brothers', 'Frères'), path: '/freres' },
+    { icon: Newspaper, label: i18nWithFallback('common.news', 'Actualités'), path: '/actualites' },
+    { icon: Book, label: i18nWithFallback('common.library', 'Bibliothèque'), path: '/bibliotheque' },
+    { icon: MessageSquare, label: i18nWithFallback('common.messages', 'Messages'), path: '/messages' },
   ];
 
   return (

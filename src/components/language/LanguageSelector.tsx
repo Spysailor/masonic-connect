@@ -22,6 +22,8 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
   const navigate = useNavigate();
   
   const changeLanguage = (lng: string) => {
+    if (lng === i18n.language) return;
+    
     i18n.changeLanguage(lng);
     
     // Force refresh when on specific pages that need full translation reload
@@ -34,7 +36,10 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
       location.pathname === '/messages' ||
       location.pathname === '/register' ||
       location.pathname === '/login' ||
-      location.pathname === '/join';
+      location.pathname === '/join' ||
+      location.pathname === '/profile' ||
+      location.pathname.startsWith('/tenue/') ||
+      location.pathname.startsWith('/news/');
       
     if (needsRefresh) {
       // Force refresh to ensure translations are applied

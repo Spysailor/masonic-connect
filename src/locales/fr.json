@@ -1,3 +1,4 @@
+
 {
   "common": {
     "loading": "Chargement...",
@@ -71,117 +72,135 @@
     "emailValidation": "Email invalide",
     "passwordValidation": "Mot de passe requis"
   },
-  "index": {
-    "heroTitle": "Votre espace maçonnique numérique",
-    "heroSubtitle": "Une plateforme sécurisée pour gérer votre loge, communiquer avec vos frères et accéder à vos ressources maçonniques.",
-    "createLodge": "Créer une loge",
-    "invitationCode": "Rejoindre avec un code",
-    "featuresTitle": "Fonctionnalités essentielles",
-    "pricingTitle": "Tarification simple et transparente",
-    "testimonialTitle": "Ce que disent nos utilisateurs",
-    "readyTitle": "Prêt à commencer votre voyage numérique ?",
-    "readySubtitle": "Rejoignez des milliers de frères qui utilisent déjà notre plateforme pour enrichir leur expérience maçonnique.",
-    "createSpace": "Créer votre espace"
-  },
-  "messages": {
-    "title": "Messages",
-    "subtitle": "Communiquez avec vos frères",
-    "newMessage": "Nouveau message",
-    "search": "Rechercher des messages",
-    "writeMessage": "Écrivez votre message...",
-    "startConversation": "Commencez la conversation en envoyant un message",
-    "unnamed": "Sans nom",
-    "members": "membres",
-    "directMessage": "Message direct",
-    "noConversationSelected": "Aucune conversation sélectionnée",
-    "selectConversation": "Sélectionnez une conversation dans la liste",
-    "emptySearch": "Aucune conversation trouvée",
-    "newConversation": "Nouvelle conversation",
-    "newConversationDesc": "Sélectionnez des frères pour démarrer une conversation",
-    "tabs": {
-      "inbox": "Boîte de réception",
-      "sent": "Envoyés",
-      "sentMessage": "Vos messages envoyés apparaîtront ici"
-    },
-    "filters": {
-      "all": "Tous les messages",
-      "unread": "Non lus",
-      "read": "Lus"
-    },
-    "empty": {
-      "title": "Pas de messages",
-      "description": "Vous n'avez pas encore de messages"
-    },
-    "errors": {
-      "loadFailed": "Échec du chargement des messages",
-      "sendFailed": "Échec de l'envoi du message",
-      "createFailed": "Échec de la création de la conversation",
-      "tryAgain": "Veuillez réessayer"
-    }
-  },
-  "dashboard": {
-    "title": "Tableau de bord",
-    "welcome": "Bienvenue dans votre espace maçonnique",
-    "upcomingTenues": "Prochaines tenues",
-    "lodgeOfficers": "Officiers de la loge",
-    "latestNews": "Dernières actualités",
-    "quickActions": "Actions rapides",
-    "seeAll": "Voir tout",
-    "stats": {
-      "nextTenue": "Prochaine tenue",
-      "membersCount": "Membres",
-      "members": "membres",
-      "planchesCount": "Planches",
-      "documents": "documents",
-      "unreadMessages": "Messages non lus",
-      "unread": "non lus"
-    },
-    "tabs": {
-      "agenda": "Agenda",
-      "brothers": "Frères",
-      "news": "Actualités"
-    },
-    "actions": {
-      "createTenue": "Créer une tenue",
-      "writePlanche": "Rédiger une planche",
-      "brothersDirectory": "Annuaire des frères",
-      "agenda": "Consulter l'agenda"
-    }
-  },
-  "agenda": {
-    "title": "Agenda",
-    "upcoming": "Vos prochains événements maçonniques",
-    "filter": "Filtrer par degré",
-    "list": "Liste",
-    "calendar": "Calendrier",
-    "all": "Tous les degrés",
-    "firstDegree": "1er degré",
-    "secondDegree": "2ème degré",
-    "thirdDegree": "3ème degré",
+  "profile": {
+    "title": "Profil",
+    "subtitle": "Gérer vos informations personnelles",
+    "personalTab": "Informations personnelles",
+    "masonicTab": "Informations maçonniques",
+    "personalInfo": "Informations personnelles",
+    "personalInfoDesc": "Modifiez vos informations personnelles",
+    "displayName": "Nom d'affichage",
+    "profession": "Profession",
+    "phoneNumber": "Téléphone",
+    "birthDate": "Date de naissance",
+    "address": "Adresse",
+    "addressPlaceholder": "Votre adresse complète",
+    "interests": "Centres d'intérêt",
+    "interestsPlaceholder": "Vos centres d'intérêt, séparés par des virgules",
+    "interestsDescription": "Ces informations aideront à trouver des frères partageant vos intérêts",
+    "saveButton": "Enregistrer les modifications",
+    "accountInfo": "Informations du compte",
+    "accountInfoDesc": "Gérez les paramètres de votre compte",
+    "email": "Email",
+    "changePassword": "Changer de mot de passe",
+    "masonicInfo": "Informations maçonniques",
+    "masonicInfoDesc": "Informations relatives à votre parcours maçonnique",
+    "initiationDate": "Date d'initiation",
+    "raisingDate": "Date d'élévation",
+    "lodge": "Loge",
+    "role": "Fonction",
     "degree": "Degré",
-    "noTenues": "Aucune tenue à venir",
-    "noTenesDesc": "Il n'y a pas de tenues programmées pour le moment"
+    "joinedAt": "Date d'affiliation",
+    "unknown": "Inconnue",
+    "member": "Membre",
+    "membership": "Appartenances",
+    "noLodge": "Aucune loge",
+    "noMemberships": "Aucune affiliation à une loge",
+    "apprentice": "Apprenti",
+    "fellowcraft": "Compagnon",
+    "master": "Maître"
   },
-  "members": {
-    "title": "Frères",
-    "subtitle": "Annuaire des membres de votre loge",
-    "search": "Rechercher un frère",
-    "filters": {
-      "all": "Tous les membres",
-      "officers": "Officiers",
-      "masters": "Maîtres",
-      "companions": "Compagnons",
-      "apprentices": "Apprentis"
+  "tenueForm": {
+    "createTitle": "Créer une tenue",
+    "createDescription": "Planifiez une nouvelle tenue pour votre loge",
+    "editTitle": "Modifier la tenue",
+    "editDescription": "Modifiez les détails de la tenue",
+    "backToAgenda": "Retour à l'agenda",
+    "details": "Détails",
+    "agenda": "Ordre du jour",
+    "participants": "Participants",
+    "title": "Titre",
+    "titlePlaceholder": "Titre de la tenue",
+    "date": "Date",
+    "startTime": "Heure de début",
+    "endTime": "Heure de fin",
+    "type": "Type",
+    "typeOptions": {
+      "regular": "Régulière",
+      "special": "Spéciale",
+      "initiation": "Initiation",
+      "elevation": "Élévation",
+      "raising": "Élévation"
     },
-    "empty": {
-      "title": "Aucun membre trouvé",
-      "description": "Essayez de modifier vos critères de recherche"
+    "location": "Lieu",
+    "locationPlaceholder": "Nom du temple",
+    "address": "Adresse",
+    "addressPlaceholder": "Adresse complète du lieu",
+    "lodge": "Loge",
+    "lodgePlaceholder": "Nom de la loge",
+    "degree": "Degré",
+    "degreeLabel": "°",
+    "theme": "Thème",
+    "themePlaceholder": "Thème de la tenue (optionnel)",
+    "description": "Description",
+    "descriptionPlaceholder": "Détails supplémentaires",
+    "notes": "Notes",
+    "notesPlaceholder": "Notes pour les participants",
+    "agendaSection": {
+      "defaultProgram": "Programme par défaut",
+      "comingSoon": "Fonctionnalité à venir",
+      "openingWorks": "Ouverture des travaux",
+      "minutesReading": "Lecture du procès-verbal",
+      "todayWorks": "Travaux du jour",
+      "proposalsBag": "Sac des propositions",
+      "closing": "Clôture des travaux"
+    },
+    "participants": {
+      "defaultOfficers": "Officiers par défaut",
+      "comingSoon": "Fonctionnalité à venir",
+      "positions": {
+        "masterWorshipful": "Vénérable Maître",
+        "seniorWarden": "Premier Surveillant",
+        "juniorWarden": "Second Surveillant",
+        "orator": "Orateur"
+      }
+    },
+    "cancel": "Annuler",
+    "create": "Créer",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "cancelConfirm": {
+      "title": "Confirmer l'annulation",
+      "description": "Êtes-vous sûr de vouloir annuler ? Toutes les modifications seront perdues.",
+      "cancel": "Continuer l'édition",
+      "confirm": "Oui, annuler"
+    },
+    "deleteConfirm": {
+      "title": "Confirmer la suppression",
+      "description": "Êtes-vous sûr de vouloir supprimer cette tenue ? Cette action est irréversible.",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimer"
+    },
+    "success": {
+      "created": "Tenue créée avec succès",
+      "updated": "Tenue mise à jour avec succès",
+      "deleted": "Tenue supprimée avec succès"
+    },
+    "error": {
+      "create": "Erreur lors de la création de la tenue",
+      "update": "Erreur lors de la mise à jour de la tenue",
+      "delete": "Erreur lors de la suppression de la tenue",
+      "load": "Erreur lors du chargement de la tenue"
     }
   },
   "actualites": {
     "title": "Actualités",
     "subtitle": "Actualités de la loge et de la maçonnerie",
     "createNews": "Créer une actualité",
+    "createTitle": "Nouvelle actualité",
+    "createDescription": "Rédigez une nouvelle actualité pour votre loge",
+    "editTitle": "Modifier l'actualité",
+    "editDescription": "Modifiez les détails de l'actualité",
     "search": "Rechercher dans les actualités",
     "filterByCategory": "Filtrer par catégorie",
     "allCategories": "Toutes les catégories",
@@ -194,6 +213,14 @@
     "backToNews": "Retour aux actualités",
     "success": "Succès",
     "newsDeleted": "L'actualité a été supprimée",
+    "form": {
+      "title": "Titre",
+      "titlePlaceholder": "Titre de l'actualité",
+      "content": "Contenu",
+      "contentPlaceholder": "Rédigez le contenu de votre actualité...",
+      "author": "Auteur",
+      "authorPlaceholder": "Votre nom (facultatif)"
+    },
     "errors": {
       "error": "Erreur",
       "fetchFailed": "Échec du chargement",
@@ -218,111 +245,8 @@
     "planchesFound": "planches trouvées",
     "resourceTypes": {
       "planche": "Planche"
-    }
-  },
-  "plancheDetail": {
-    "backToPlanche": "Retour à la bibliothèque",
-    "firstDegree": "1er degré",
-    "secondDegree": "2ème degré", 
-    "thirdDegree": "3ème degré",
-    "worshipfulMaster": "Vénérable Maître",
-    "noPlanche": "Planche introuvable",
-    "mockData": {
-      "intro": "Introduction",
-      "originTitle": "Origine",
-      "originDesc1": "Le pavé mosaïque est un élément décoratif et symbolique fondamental dans les loges maçonniques. Il se présente sous la forme d'un tapis ou d'un dessin de carreaux alternant généralement le noir et le blanc, disposé sur le sol de la loge.",
-      "originDesc2": "Son origine remonte aux temples de Salomon, où le sol était recouvert de pierres carrées alternées. Cette symbolique a été reprise par les bâtisseurs de cathédrales au Moyen Âge, puis dans la franc-maçonnerie moderne dès ses débuts au XVIIIe siècle.",
-      "symbolismTitle": "Symbolisme",
-      "symbolismDesc": "Le pavé mosaïque représente la dualité fondamentale qui structure notre compréhension du monde, exprimée par l'alternance des carreaux blancs et noirs. Cette dualité s'exprime à travers plusieurs niveaux de sens :",
-      "duality": {
-        "item1": "Lumière et ténèbres",
-        "item2": "Bien et mal",
-        "item3": "Esprit et matière",
-        "item4": "Sagesse et ignorance",
-        "item5": "Vie et mort",
-        "item6": "Ordre et chaos"
-      },
-      "dualityDesc": "Le franc-maçon est invité à marcher sur ce pavé mosaïque tout au long de son parcours initiatique. Ce faisant, il apprend que les opposés ne sont pas nécessairement contradictoires, mais complémentaires et nécessaires à l'équilibre du monde.",
-      "interpretationsTitle": "Interprétations",
-      "interpretationsIntro": "Le pavé mosaïque se prête à différentes interprétations selon les traditions et les degrés maçonniques :",
-      "interpretation1": {
-        "title": "Le chemin initiatique",
-        "desc": "Les carreaux alternés représentent les épreuves et les joies qui jalonnent le parcours du maçon. La progression sur ce pavé symbolise l'avancement sur le chemin de la connaissance et de la sagesse."
-      },
-      "interpretation2": {
-        "title": "Équilibre et harmonie",
-        "desc": "Le mélange équilibré du noir et du blanc évoque la recherche d'harmonie entre les forces opposées, objectif fondamental du travail maçonnique. C'est la représentation de l'équilibre que le maçon doit trouver en lui-même."
-      },
-      "interpretation3": {
-        "title": "La loi de la polarité",
-        "desc": "Le pavé illustre la loi hermétique de la polarité qui affirme que tout a deux pôles, deux aspects, deux principes. L'initié doit apprendre à transcender cette dualité pour atteindre une compréhension supérieure."
-      },
-      "conclusionTitle": "Conclusion",
-      "conclusionDesc1": "Le pavé mosaïque est bien plus qu'un simple élément décoratif du temple maçonnique. Il constitue un outil pédagogique permanent qui rappelle au franc-maçon l'importance de l'équilibre, de la relativité des choses et de la complémentarité des opposés.",
-      "conclusionDesc2": "Marcher sur le pavé mosaïque, c'est accepter la complexité du monde et chercher à dépasser les contradictions apparentes pour accéder à une vision plus complète et plus harmonieuse de l'existence."
-    }
-  },
-  "tenueDetail": {
-    "status": {
-      "confirmed": "Confirmée",
-      "pending": "En attente",
-      "cancelled": "Annulée"
-    }
-  },
-  "features": {
-    "secureComms": {
-      "title": "Communications sécurisées",
-      "description": "Échangez des messages et documents en toute confidentialité avec des chiffrements de bout en bout."
     },
-    "tenueManagement": {
-      "title": "Gestion des tenues",
-      "description": "Planifiez, organisez et suivez les tenues de votre loge avec facilité et précision."
-    },
-    "documents": {
-      "title": "Gestion documentaire",
-      "description": "Archivez et partagez les documents importants de votre loge en toute sécurité."
-    },
-    "memberDirectory": {
-      "title": "Annuaire des membres",
-      "description": "Accédez facilement aux coordonnées et informations de tous les frères de votre loge."
-    },
-    "masonicLibrary": {
-      "title": "Bibliothèque maçonnique",
-      "description": "Consultez une riche collection de planches, livres et ressources maçonniques."
-    },
-    "visitorAccess": {
-      "title": "Accès visiteurs",
-      "description": "Gérez simplement les visites entre loges et l'accueil des frères visiteurs."
-    }
-  },
-  "pricing": {
-    "basicMonthly": {
-      "title": "Abonnement mensuel",
-      "price": "12€",
-      "period": "mois",
-      "features": [
-        "Jusqu'à 100 membres",
-        "Stockage 10 Go",
-        "Communications sécurisées",
-        "Gestion des tenues",
-        "Bibliothèque maçonnique",
-        "Support par email"
-      ],
-      "button": "Commencer"
-    },
-    "basicAnnual": {
-      "title": "Abonnement annuel",
-      "price": "120€",
-      "period": "an",
-      "features": [
-        "Jusqu'à 100 membres",
-        "Stockage 20 Go",
-        "Communications sécurisées",
-        "Gestion des tenues",
-        "Bibliothèque maçonnique",
-        "Support prioritaire"
-      ],
-      "button": "Économiser 20%"
-    }
+    "degree": "°",
+    "view": "Voir"
   }
 }

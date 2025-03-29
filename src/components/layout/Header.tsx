@@ -10,6 +10,7 @@ import { UserCircle, LogOut } from 'lucide-react';
 import { useNotifications } from '@/hooks/use-notifications';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/hooks/useAuth';
+import LanguageSelector from '../language/LanguageSelector';
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
@@ -30,7 +31,6 @@ interface NavLink {
 const Header: React.FC = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { unreadCount } = useNotifications();
   const isMobile = useIsMobile();
   const { t } = useTranslation();
@@ -58,10 +58,6 @@ const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
 
   const handleLogout = async () => {
     await signOut();
@@ -142,6 +138,8 @@ const Header: React.FC = () => {
               ))}
             
             <div className="flex items-center ml-4 space-x-3">
+              <LanguageSelector />
+              
               {user && (
                 <Link 
                   to="/notifications"
@@ -164,6 +162,8 @@ const Header: React.FC = () => {
           </nav>
           
           <div className="md:hidden flex items-center space-x-2">
+            <LanguageSelector />
+            
             {user && (
               <Link 
                 to="/notifications"
@@ -178,6 +178,7 @@ const Header: React.FC = () => {
                 <NotificationIndicator />
               </Link>
             )}
+            
             {renderAuthButtons()}
           </div>
         </div>

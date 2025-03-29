@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -33,6 +34,11 @@ const TenueForm = () => {
     handleDelete 
   } = useTenueForm(id);
 
+  // Utilise le helper pour éviter d'afficher les clés de traduction directement
+  const getTabLabel = (key: string, fallback: string) => {
+    return i18nWithFallback(`tenueForm.${key}`, fallback);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
@@ -50,9 +56,9 @@ const TenueForm = () => {
               <CardContent className="pt-6">
                 <Tabs defaultValue="details" className="w-full">
                   <TabsList className="mb-6 w-full grid grid-cols-3">
-                    <TabsTrigger value="details">{t('tenueForm.details')}</TabsTrigger>
-                    <TabsTrigger value="agenda">{t('tenueForm.agenda')}</TabsTrigger>
-                    <TabsTrigger value="participants">{t('tenueForm.participants')}</TabsTrigger>
+                    <TabsTrigger value="details">{getTabLabel('details', 'Détails')}</TabsTrigger>
+                    <TabsTrigger value="agenda">{getTabLabel('agenda', 'Ordre du jour')}</TabsTrigger>
+                    <TabsTrigger value="participants">{getTabLabel('participants', 'Participants')}</TabsTrigger>
                   </TabsList>
                   
                   <Form {...form}>

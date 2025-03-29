@@ -35,7 +35,9 @@ try {
         order: ['localStorage', 'navigator'],
         caches: ['localStorage']
       },
-      // Ajout de la fonction de résolution des clés de traduction manquantes
+      nsSeparator: false,
+      keySeparator: '.',
+      // Configuration pour assurer que les clés manquantes ne sont pas affichées telles quelles
       missingKeyHandler: (lng, ns, key) => {
         console.warn(`Missing translation key: ${key} for language: ${lng}`);
       },
