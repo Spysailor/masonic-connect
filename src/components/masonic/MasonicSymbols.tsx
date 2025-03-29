@@ -26,7 +26,6 @@ const MasonicSymbol: React.FC<MasonicSymbolProps> = ({
 }) => {
   const sizeStyle = typeof size === 'number' ? `${size}px` : size;
   
-  // Utilisation directe des nouvelles images téléchargées
   const symbolImages: Record<SymbolType, string> = {
     'checkerboard': '/lovable-uploads/634d8d03-531e-481e-b434-de9b290c0571.png',
     'temple': '/lovable-uploads/2bab891b-a27b-473a-8d5c-61c16add2d0b.png',
@@ -38,6 +37,9 @@ const MasonicSymbol: React.FC<MasonicSymbolProps> = ({
     'square-compass-vintage': '/lovable-uploads/b87be19d-7ab0-40ca-8629-18541433817e.png'
   };
 
+  // If hideImage is true, return null (render nothing)
+  if (hideImage) return null;
+
   return (
     <div 
       className={`inline-flex items-center justify-center ${className}`} 
@@ -46,13 +48,11 @@ const MasonicSymbol: React.FC<MasonicSymbolProps> = ({
         height: sizeStyle,
       }}
     >
-      {!hideImage && (
-        <img 
-          src={symbolImages[type]} 
-          alt={`Masonic symbol: ${type}`} 
-          className="w-full h-full object-contain"
-        />
-      )}
+      <img 
+        src={symbolImages[type]} 
+        alt={`Masonic symbol: ${type}`} 
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 };
