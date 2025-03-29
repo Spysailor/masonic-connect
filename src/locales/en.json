@@ -1,4 +1,3 @@
-
 {
   "common": {
     "loading": "Loading...",
@@ -71,6 +70,18 @@
     "joinWithInvitation": "Join with an invitation",
     "emailValidation": "Invalid email",
     "passwordValidation": "Password required"
+  },
+  "index": {
+    "heroTitle": "Your Digital Masonic Space",
+    "heroSubtitle": "A secure platform to manage your lodge, communicate with your brothers, and access your masonic resources.",
+    "createLodge": "Create a Lodge",
+    "invitationCode": "Join with a Code",
+    "featuresTitle": "Essential Features",
+    "pricingTitle": "Simple and Transparent Pricing",
+    "testimonialTitle": "What Our Users Say",
+    "readyTitle": "Ready to Start Your Digital Journey?",
+    "readySubtitle": "Join thousands of brothers already using our platform to enhance their masonic experience.",
+    "createSpace": "Create Your Space"
   },
   "messages": {
     "title": "Messages",
@@ -256,6 +267,62 @@
       "confirmed": "Confirmed",
       "pending": "Pending",
       "cancelled": "Cancelled"
+    }
+  },
+  "features": {
+    "secureComms": {
+      "title": "Secure Communications",
+      "description": "Exchange messages and documents with complete confidentiality using end-to-end encryption."
+    },
+    "tenueManagement": {
+      "title": "Lodge Meeting Management",
+      "description": "Plan, organize, and track your lodge meetings with ease and precision."
+    },
+    "documents": {
+      "title": "Document Management",
+      "description": "Archive and share important lodge documents securely."
+    },
+    "memberDirectory": {
+      "title": "Member Directory",
+      "description": "Easily access contact information and details for all brothers in your lodge."
+    },
+    "masonicLibrary": {
+      "title": "Masonic Library",
+      "description": "Access a rich collection of tracing boards, books, and masonic resources."
+    },
+    "visitorAccess": {
+      "title": "Visitor Access",
+      "description": "Easily manage visits between lodges and welcome visiting brothers."
+    }
+  },
+  "pricing": {
+    "basicMonthly": {
+      "title": "Monthly Subscription",
+      "price": "$12",
+      "period": "month",
+      "features": [
+        "Up to 100 members",
+        "10 GB storage",
+        "Secure communications",
+        "Lodge meeting management",
+        "Masonic library",
+        "Email support"
+      ],
+      "button": "Get Started"
+    },
+    "basicAnnual": {
+      "title": "Annual Subscription",
+      "price": "$120",
+      "period": "year",
+      "features": [
+        "Up to 100 members",
+        "20 GB storage",
+        "Secure communications",
+        "Lodge meeting management",
+        "Masonic library",
+        "Priority support"
+      ],
+      "button": "Save 20%"
     }
   }
 }

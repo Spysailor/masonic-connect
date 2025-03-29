@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -157,6 +158,24 @@
     @apply opacity-0 transition-opacity duration-300;
   }
   
+  /* Masonic Design Elements */
+  .masonic-title {
+    @apply font-cinzel font-semibold;
+  }
+  
+  .masonic-divider {
+    @apply relative h-px bg-gradient-to-r from-transparent via-masonic-blue-300 to-transparent my-8;
+  }
+  
+  .masonic-divider::before {
+    content: "";
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full border border-masonic-blue-200;
+  }
+  
+  .masonic-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e6eef9' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  
   /* Styles spécifiques pour mobile */
   @media (max-width: 768px) {
     .mobile-container {
@@ -280,4 +299,26 @@ html {
   .grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
+}
+
+/* Masonic symbolic patterns and designs */
+.golden-ratio {
+  position: relative;
+}
+
+.golden-ratio::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='none' stroke='%23E6EEF9' stroke-width='1' d='M61.8,0 L61.8,61.8 L0,61.8 M61.8,38.2 L38.2,38.2 L38.2,61.8 M38.2,23.6 L38.2,0 L100,0 L100,100 L0,100 L0,0'/%3E%3C/svg%3E");
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.masonic-bg-pattern {
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e6eef9' fill-opacity='0.4'%3E%3Cpath d='M30 30 L30 0 L0 0 L0 30 L30 30 Z M60 30 L60 0 L30 0 L30 30 L60 30 Z M60 60 L60 30 L30 30 L30 60 L60 60 Z M30 60 L30 30 L0 30 L0 60 L30 60 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }

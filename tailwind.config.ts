@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -87,6 +88,12 @@ export default {
           }
         }
       },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['Georgia', 'ui-serif', 'serif'],
+        mono: ['Menlo', 'ui-monospace', 'monospace'],
+        cinzel: ['Cinzel', 'serif']
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -156,11 +163,6 @@ export default {
         'scale-in': 'scale-in 0.3s ease-out',
         'scale-out': 'scale-out 0.3s ease-out',
         'rotate-compass': 'rotate-compass 8s linear infinite'
-      },
-      fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['Georgia', 'ui-serif', 'serif'],
-        mono: ['Menlo', 'ui-monospace', 'monospace'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

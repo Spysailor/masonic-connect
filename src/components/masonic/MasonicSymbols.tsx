@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 export type SymbolType = 
@@ -45,7 +46,13 @@ const MasonicSymbol: React.FC<MasonicSymbolProps> = ({
         height: sizeStyle,
       }}
     >
-      {/* Image removed as per user request */}
+      {!hideImage && (
+        <img 
+          src={symbolImages[type]} 
+          alt={`Masonic symbol: ${type}`} 
+          className="w-full h-full object-contain"
+        />
+      )}
     </div>
   );
 };
