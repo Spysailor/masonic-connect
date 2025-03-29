@@ -6,7 +6,7 @@ import Logo from '../ui-elements/Logo';
 import AnimatedButton from '../ui-elements/AnimatedButton';
 import NotificationIndicator from '../notifications/NotificationIndicator';
 import { cn } from '@/lib/utils';
-import { UserCircle, Menu, X, LogOut } from 'lucide-react';
+import { UserCircle, LogOut } from 'lucide-react';
 import { useNotifications } from '@/hooks/use-notifications';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/hooks/useAuth';
@@ -178,7 +178,6 @@ const Header: React.FC = () => {
                 <NotificationIndicator />
               </Link>
             )}
-            
             {renderAuthButtons()}
           </div>
         </div>

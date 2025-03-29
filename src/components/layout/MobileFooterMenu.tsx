@@ -19,6 +19,7 @@ const MobileFooterMenu: React.FC = () => {
     { icon: Users, label: t('common.brothers'), path: '/freres' },
     { icon: Newspaper, label: t('common.news'), path: '/actualites' },
     { icon: Book, label: t('common.library'), path: '/bibliotheque' },
+    { icon: MessageSquare, label: t('common.messages'), path: '/messages' },
   ];
 
   return (
