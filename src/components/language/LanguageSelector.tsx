@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from '@/components/ui/use-toast';
 
 const languages = [
   { code: 'fr', label: 'Français' },
@@ -17,34 +18,49 @@ const languages = [
 ];
 
 const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   
   const changeLanguage = (lng: string) => {
     if (lng === i18n.language) return;
     
-    i18n.changeLanguage(lng);
-    
-    // Force refresh when on specific pages that need full translation reload
-    const needsRefresh = 
-      location.pathname === '/dashboard' ||
-      location.pathname === '/agenda' ||
-      location.pathname === '/bibliotheque' ||
-      location.pathname === '/freres' ||
-      location.pathname === '/actualites' ||
-      location.pathname === '/messages' ||
-      location.pathname === '/register' ||
-      location.pathname === '/login' ||
-      location.pathname === '/join' ||
-      location.pathname === '/profile' ||
-      location.pathname.startsWith('/tenue/') ||
-      location.pathname.startsWith('/news/');
+    i18n.changeLanguage(lng).then(() => {
+      // Afficher une notification de confirmation
+      toast({
+        title: lng === 'fr' ? 'Langue changée' : 'Language changed',
+        description: lng === 'fr' ? 'La langue a été changée en français' : 'Language has been changed to English',
+        duration: 3000,
+      });
       
-    if (needsRefresh) {
-      // Force refresh to ensure translations are applied
-      navigate(0);
-    }
+      // Force refresh when on specific pages that need full translation reload
+      const needsRefresh = 
+        location.pathname === '/dashboard' ||
+        location.pathname === '/agenda' ||
+        location.pathname === '/bibliotheque' ||
+        location.pathname === '/freres' ||
+        location.pathname === '/actualites' ||
+        location.pathname === '/messages' ||
+        location.pathname === '/register' ||
+        location.pathname === '/login' ||
+        location.pathname === '/join' ||
+        location.pathname === '/profile' ||
+        location.pathname.startsWith('/tenue/') ||
+        location.pathname.startsWith('/news/');
+        
+      if (needsRefresh) {
+        // Force refresh to ensure translations are applied
+        console.log(`Refreshing page ${location.pathname} after language change to ${lng}`);
+        navigate(0);
+      }
+    }).catch(error => {
+      console.error('Error changing language:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to change language.',
+        variant: 'destructive',
+      });
+    });
   };
 
   return (

@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 interface TabNavigationProps {
   activeTab: string;
@@ -29,19 +30,19 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }
             value="agenda" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            {t('dashboard.tabs.agenda')}
+            {i18nWithFallback('dashboard.tabs.agenda', 'Agenda')}
           </TabsTrigger>
           <TabsTrigger 
             value="freres" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            {t('dashboard.tabs.brothers')}
+            {i18nWithFallback('dashboard.tabs.brothers', 'Frères')}
           </TabsTrigger>
           <TabsTrigger 
             value="actualites" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            {t('dashboard.tabs.news')}
+            {i18nWithFallback('dashboard.tabs.news', 'Actualités')}
           </TabsTrigger>
         </TabsList>
       </Tabs>

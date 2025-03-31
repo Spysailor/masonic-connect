@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,19 +23,21 @@ const NewsDeleteDialog: React.FC<NewsDeleteDialogProps> = ({
   setDeleteDialogOpen,
   handleDeleteNews
 }) => {
+  const { t } = useTranslation();
+
   return (
     <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Êtes-vous sûr ?</AlertDialogTitle>
+          <AlertDialogTitle>{t('common.confirm')}</AlertDialogTitle>
           <AlertDialogDescription>
-            Cette action ne peut pas être annulée. Cette actualité sera définitivement supprimée.
+            {t('actualites.deleteConfirm.description', 'Cette action ne peut pas être annulée. Cette actualité sera définitivement supprimée.')}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Annuler</AlertDialogCancel>
+          <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
           <AlertDialogAction onClick={handleDeleteNews} className="bg-red-600 hover:bg-red-700">
-            Supprimer
+            {t('common.delete')}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

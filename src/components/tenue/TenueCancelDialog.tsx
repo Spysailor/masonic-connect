@@ -33,9 +33,9 @@ const TenueCancelDialog: React.FC<TenueCancelDialogProps> = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{t('tenueForm.cancelDialog.title')}</DialogTitle>
+          <DialogTitle>{t('tenueForm.cancelConfirm.title')}</DialogTitle>
           <DialogDescription>
-            {t('tenueForm.cancelDialog.description')}
+            {t('tenueForm.cancelConfirm.description')}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -44,14 +44,14 @@ const TenueCancelDialog: React.FC<TenueCancelDialogProps> = ({
             variant="outline" 
             onClick={() => onOpenChange(false)}
           >
-            {t('tenueForm.cancelDialog.continueEditing')}
+            {t('tenueForm.cancelConfirm.cancel')}
           </Button>
           <Button 
             type="button" 
             variant="destructive" 
             onClick={handleConfirm}
           >
-            {t('tenueForm.cancelDialog.quitWithoutSaving')}
+            {t('tenueForm.cancelConfirm.confirm')}
           </Button>
         </DialogFooter>
       </DialogContent>

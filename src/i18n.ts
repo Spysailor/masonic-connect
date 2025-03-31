@@ -35,18 +35,24 @@ try {
         order: ['localStorage', 'navigator'],
         caches: ['localStorage']
       },
-      nsSeparator: false,
-      keySeparator: '.',
-      // Configuration pour assurer que les clés manquantes ne sont pas affichées telles quelles
+      returnEmptyString: false,
+      returnNull: false,
+      fallbackNS: 'translation',
+      saveMissing: true,
+      parseMissingKeyHandler: (key) => {
+        console.warn(`Missing translation key: ${key}`);
+        // Retourne la clé pour qu'elle soit visible dans l'interface
+        return key;
+      },
       missingKeyHandler: (lng, ns, key) => {
         console.warn(`Missing translation key: ${key} for language: ${lng}`);
-      },
-      saveMissing: true,
-      missingKeyNoValueFallbackToKey: false,
-      returnNull: false,
-      returnEmptyString: false,
-      returnObjects: true,
-      fallbackNS: 'translation'
+      }
+    })
+    .then(() => {
+      console.log('i18n initialized successfully');
+    })
+    .catch(error => {
+      console.error('Error during i18n initialization:', error);
     });
 } catch (error) {
   console.error('Error initializing i18n:', error);
