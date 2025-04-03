@@ -1,0 +1,37 @@
+{
+  "title": "Tableau de bord",
+  "welcome": "Bienvenue dans votre espace maçonnique",
+  "stats": {
+    "nextTenue": "Prochaine tenue",
+    "membersCount": "Membres",
+    "members": "membres",
+    "planchesCount": "Planches",
+    "documents": "documents",
+    "unreadMessages": "Messages non lus",
+    "unread": "non lus"
+  },
+  "upcomingTenues": "Prochaines tenues",
+  "lodgeOfficers": "Officiers de la loge",
+  "latestNews": "Dernières actualités", 
+  "seeAll": "Voir tout",
+  "quickActions": "Actions rapides",
+  "actions": {
+    "createTenue": "Créer une tenue",
+    "writePlanche": "Rédiger une planche",
+    "brothersDirectory": "Annuaire des frères",
+    "agenda": "Agenda"
+  },
+  "tenue": {
+    "degree": "°",
+    "attendance": {
+      "confirmed": "Présence confirmée",
+      "pending": "En attente",
+      "declined": "Absence excusée"
+    },
+    "degreeNames": {
+      "1": "Apprenti",
+      "2": "Compagnon",
+      "3": "Maître"
+    }
+  }
+}
