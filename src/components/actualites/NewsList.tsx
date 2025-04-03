@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,12 +21,21 @@ interface NewsItem {
   imageUrl?: string;
 }
 
-interface NewsListProps {
+export interface NewsListProps {
   news: NewsItem[];
   lodgeId?: string;
+  loading?: boolean;
+  handleEditNews?: (id: string) => void;
+  handleOpenDeleteDialog?: (id: string) => void;
 }
 
-const NewsList: React.FC<NewsListProps> = ({ news, lodgeId }) => {
+const NewsList: React.FC<NewsListProps> = ({ 
+  news, 
+  lodgeId, 
+  loading = false,
+  handleEditNews,
+  handleOpenDeleteDialog 
+}) => {
   const [visibleNews, setVisibleNews] = useState<string[]>([]);
   const { t, i18n } = useTranslation();
   const { addNotification } = useNotifications();
@@ -76,6 +86,31 @@ const NewsList: React.FC<NewsListProps> = ({ news, lodgeId }) => {
     },
   };
 
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[1, 2, 3, 4, 5, 6].map((item) => (
+          <Card key={item} className="bg-white shadow-md rounded-lg overflow-hidden">
+            <div className="animate-pulse">
+              <div className="h-48 bg-gray-200"></div>
+              <CardContent className="p-6">
+                <div className="h-4 bg-gray-200 rounded mb-4 w-1/3"></div>
+                <div className="h-6 bg-gray-200 rounded mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2 w-full"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2 w-5/6"></div>
+                <div className="h-4 bg-gray-200 rounded mb-4 w-4/6"></div>
+                <div className="flex justify-between">
+                  <div className="h-8 bg-gray-200 rounded w-24"></div>
+                  {handleEditNews && <div className="h-8 bg-gray-200 rounded w-20"></div>}
+                </div>
+              </CardContent>
+            </div>
+          </Card>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <motion.div
       variants={containerVariants}
@@ -114,11 +149,33 @@ const NewsList: React.FC<NewsListProps> = ({ news, lodgeId }) => {
                       : i18nWithFallback('actualites.readMore', 'Read More')}
                     <ArrowRight className="h-4 w-4 ml-1" />
                   </Button>
-                  {lodgeId && (
-                    <Link to={`/actualites/${item.id}`} className="text-blue-600 hover:underline">
-                      {i18nWithFallback('actualites.viewArticle', 'View Article')}
-                    </Link>
-                  )}
+                  <div className="flex gap-2">
+                    {lodgeId && (
+                      <Link to={`/actualites/${item.id}`} className="text-blue-600 hover:underline">
+                        {i18nWithFallback('actualites.viewArticle', 'View Article')}
+                      </Link>
+                    )}
+                    {handleEditNews && (
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => handleEditNews(item.id)}
+                        className="text-gray-600 hover:text-gray-900"
+                      >
+                        {i18nWithFallback('common.edit', 'Edit')}
+                      </Button>
+                    )}
+                    {handleOpenDeleteDialog && (
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => handleOpenDeleteDialog(item.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        {i18nWithFallback('common.delete', 'Delete')}
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </CardContent>
             </Card>
