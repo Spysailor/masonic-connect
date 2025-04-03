@@ -23,6 +23,32 @@ const parseMissingKeyHandler = (key: string) => {
   return '';
 };
 
+// Ajouter un CSS pour les transitions de langue
+const addLanguageTransitionCSS = () => {
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .language-transition {
+      transition: opacity 0.3s ease;
+      opacity: 0.5;
+    }
+    
+    .language-transition-appear {
+      opacity: 0;
+    }
+    
+    .language-transition-appear-active {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+  `;
+  document.head.appendChild(style);
+};
+
+// Ajouter le CSS au chargement
+if (typeof window !== 'undefined') {
+  addLanguageTransitionCSS();
+}
+
 // Configure and initialize i18next
 try {
   i18n
@@ -51,17 +77,20 @@ try {
         console.warn(`Missing translation key: ${key} for language: ${lng}`);
       },
       parseMissingKeyHandler: parseMissingKeyHandler,
-      // Ajout d'un délai de chargement pour éviter les problèmes de course
+      // Optimisations pour éviter les problèmes de chargement
       load: 'currentOnly',
       // Mise en cache agressive pour éviter les rechargements inutiles
       keySeparator: false,
       nsSeparator: false,
-      // Amélioration de la détection des changements de langue
+      // Configuration pour une meilleure expérience React
       react: {
         useSuspense: false,
         bindI18n: 'languageChanged loaded',
         bindI18nStore: '',
-        nsMode: 'default'
+        nsMode: 'default',
+        // Ne pas recharger la page sur le changement de langue
+        transKeepBasicHtmlNodesFor: ['br', 'strong', 'i', 'p', 'span', 'div'],
+        transSupportBasicHtmlNodes: true,
       }
     })
     .then(() => {

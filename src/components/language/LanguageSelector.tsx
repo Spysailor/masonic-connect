@@ -9,9 +9,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { toast } from '@/components/ui/use-toast';
 import { i18nWithFallback } from '@/utils/i18n-fallback';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const languages = [
   { code: 'fr', label: 'Français' },
@@ -21,13 +22,15 @@ const languages = [
 const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
   const { i18n, t } = useTranslation();
   const location = useLocation();
-  const navigate = useNavigate();
   
   const changeLanguage = (lng: string) => {
     if (lng === i18n.language) return;
     
-    // Stocker la langue explicitement avant de la changer
+    // Stocker la langue explicitement
     localStorage.setItem('i18nextLng', lng);
+    
+    // Appliquer un effet de transition avant le changement de langue
+    document.body.classList.add('language-transition');
     
     i18n.changeLanguage(lng).then(() => {
       // Montrer une notification de confirmation
@@ -44,15 +47,13 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
         duration: 3000,
       });
       
-      // Utilisez cette ligne si vous voulez forcer un rechargement complet (généralement à éviter)
-      // window.location.reload();
-      
-      // Ou utilisez cette approche pour forcer une mise à jour sans rechargement
-      // (cela peut nécessiter des ajustements dans vos composants pour réagir aux changements de langue)
+      // Mise à jour de l'attribut lang du document sans rechargement
       document.documentElement.lang = lng;
       
-      // Si vous utilisez React Router, cette ligne peut aider à forcer un re-rendu de la page actuelle
-      navigate(0);
+      // Réinitialiser la classe de transition après un court délai
+      setTimeout(() => {
+        document.body.classList.remove('language-transition');
+      }, 300);
     }).catch(error => {
       console.error('Error changing language:', error);
       toast({
@@ -75,18 +76,27 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
         <Globe className="h-5 w-5" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {languages.map((language) => (
-          <DropdownMenuItem
-            key={language.code}
-            onClick={() => changeLanguage(language.code)}
-            className={cn(
-              "cursor-pointer",
-              i18n.language === language.code && "font-bold text-masonic-blue-700 bg-masonic-blue-50"
-            )}
-          >
-            {language.label}
-          </DropdownMenuItem>
-        ))}
+        <AnimatePresence mode="wait">
+          {languages.map((language) => (
+            <motion.div
+              key={language.code}
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 5 }}
+              transition={{ duration: 0.2 }}
+            >
+              <DropdownMenuItem
+                onClick={() => changeLanguage(language.code)}
+                className={cn(
+                  "cursor-pointer",
+                  i18n.language === language.code && "font-bold text-masonic-blue-700 bg-masonic-blue-50"
+                )}
+              >
+                {language.label}
+              </DropdownMenuItem>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </DropdownMenuContent>
     </DropdownMenu>
   );

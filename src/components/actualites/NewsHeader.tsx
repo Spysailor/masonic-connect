@@ -19,6 +19,7 @@ const NewsHeader: React.FC<NewsHeaderProps> = ({ handleCreateNews }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       className="mb-8"
+      key={`news-header-${i18n.language}`}
     >
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
