@@ -1,155 +1,132 @@
-
-import React, { memo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, User, Clock, ArrowRight } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { fr, enUS } from 'date-fns/locale';
-import { Link } from 'react-router-dom';
-import { Calendar, Edit, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
+import { Locale } from 'date-fns';
+import { useNotifications } from '@/hooks/use-notifications';
 
-interface NewsListProps {
-  loading: boolean;
-  filteredActualites: any[];
-  handleEditNews: (id: string) => void;
-  handleOpenDeleteDialog: (id: string) => void;
+interface NewsItem {
+  id: string;
+  title: string;
+  content: string;
+  author: string;
+  date: string;
+  imageUrl?: string;
 }
 
-const NewsListItem = memo(({ 
-  actualite, 
-  dateLocale, 
-  t, 
-  handleEditNews, 
-  handleOpenDeleteDialog 
-}: { 
-  actualite: any; 
-  dateLocale: Locale; 
-  t: any; 
-  handleEditNews: (id: string) => void;
-  handleOpenDeleteDialog: (id: string) => void;
-}) => (
-  <article className="border-b border-gray-200 pb-6 last:border-0 last:pb-0">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="md:col-span-1">
-        <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-          <img 
-            src={actualite.image_url || `https://source.unsplash.com/random/800x600?sig=${actualite.id}`} 
-            alt={actualite.title} 
-            className="object-cover w-full h-full"
-            loading="lazy" // Add lazy loading for images
-          />
-        </div>
-      </div>
-      
-      <div className="md:col-span-2">
-        <div className="flex items-center mb-2">
-          {actualite.category && (
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-masonic-blue-100 text-masonic-blue-800">
-              {actualite.category}
-            </span>
-          )}
-          <span className="text-gray-500 text-sm ml-2 flex items-center">
-            <Calendar className="h-3 w-3 mr-1" />
-            {actualite.published_at ? format(new Date(actualite.published_at), 'dd MMMM yyyy', { locale: dateLocale }) : ''}
-          </span>
-        </div>
-        
-        <h2 className="text-xl font-bold text-masonic-blue-900 mb-2">
-          <Link to={`/actualites/${actualite.id}`} className="hover:text-masonic-blue-700">
-            {actualite.title}
-          </Link>
-        </h2>
-        
-        <p className="text-gray-600 mb-4 line-clamp-3">{actualite.content}</p>
-        
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full overflow-hidden mr-2">
-              <img 
-                src={`https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 100)}.jpg`}
-                alt={actualite.author_name || t('actualites.author')} 
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div>
-              <span className="text-sm font-medium text-gray-900">{actualite.author_name || t('actualites.administrator')}</span>
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handleEditNews(actualite.id)}
-              className="flex items-center text-blue-600 hover:text-blue-800"
-            >
-              <Edit className="h-3.5 w-3.5 mr-1" />
-              {t('actualites.edit')}
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handleOpenDeleteDialog(actualite.id)}
-              className="flex items-center text-red-600 hover:text-red-800"
-            >
-              <Trash2 className="h-3.5 w-3.5 mr-1" />
-              {t('actualites.delete')}
-            </Button>
-            <Link
-              to={`/actualites/${actualite.id}`}
-              className="text-sm font-medium text-masonic-blue-700 hover:text-masonic-blue-800 ml-2"
-            >
-              {t('actualites.readMore')} →
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </article>
-));
+interface NewsListProps {
+  news: NewsItem[];
+  lodgeId?: string;
+}
 
-// Main component optimized with React.memo
-const NewsList: React.FC<NewsListProps> = memo(({ 
-  loading, 
-  filteredActualites, 
-  handleEditNews, 
-  handleOpenDeleteDialog 
-}) => {
+const NewsList: React.FC<NewsListProps> = ({ news, lodgeId }) => {
+  const [visibleNews, setVisibleNews] = useState<string[]>([]);
   const { t, i18n } = useTranslation();
-  const dateLocale = i18n.language === 'fr' ? fr : enUS;
+  const { addNotification } = useNotifications();
+  
+  // Get date locale based on current language
+  const dateLocale: Locale = i18n.language === 'fr' ? fr : enUS;
 
-  if (loading) {
-    return (
-      <div className="flex justify-center py-12">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-masonic-blue-700"></div>
-      </div>
+  const toggleNewsVisibility = (id: string) => {
+    setVisibleNews((prevVisibleNews) =>
+      prevVisibleNews.includes(id) ? prevVisibleNews.filter((newsId) => newsId !== id) : [...prevVisibleNews, id]
     );
-  }
+  };
 
-  if (filteredActualites.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <p className="text-gray-500">{t('actualites.noResults')}</p>
-      </div>
-    );
-  }
+  const handleTestNotification = useCallback(() => {
+    addNotification({
+      type: 'info',
+      title: 'Test Notification',
+      message: 'This is a test notification from the news list component.',
+    });
+  }, [addNotification]);
+
+  useEffect(() => {
+    if (news.length > 0) {
+      // Add a notification when news are loaded (for testing purposes)
+      handleTestNotification();
+    }
+  }, [news, handleTestNotification]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: 'easeInOut',
+      },
+    },
+  };
 
   return (
-    <div className="space-y-6">
-      {filteredActualites.map((actualite) => (
-        <NewsListItem 
-          key={actualite.id} 
-          actualite={actualite} 
-          dateLocale={dateLocale} 
-          t={t} 
-          handleEditNews={handleEditNews} 
-          handleOpenDeleteDialog={handleOpenDeleteDialog}
-        />
-      ))}
-    </div>
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
+      <AnimatePresence>
+        {news.map((item) => (
+          <motion.div key={item.id} variants={itemVariants}>
+            <Card className="bg-white shadow-md rounded-lg overflow-hidden">
+              {item.imageUrl && (
+                <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover" />
+              )}
+              <CardContent className="p-6">
+                <div className="flex items-center text-gray-600 text-sm mb-2">
+                  <Calendar className="h-4 w-4 mr-1" />
+                  <time dateTime={item.date}>
+                    {format(new Date(item.date), 'PPP', { locale: dateLocale })}
+                  </time>
+                  <span className="mx-2">•</span>
+                  <User className="h-4 w-4 mr-1" />
+                  <span>{item.author}</span>
+                </div>
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  {visibleNews.includes(item.id)
+                    ? item.content.substring(0, 250)
+                    : item.content.substring(0, 100)}
+                  ...
+                </p>
+                <div className="flex items-center justify-between">
+                  <Button variant="link" onClick={() => toggleNewsVisibility(item.id)}>
+                    {visibleNews.includes(item.id)
+                      ? i18nWithFallback('actualites.readLess', 'Read Less')
+                      : i18nWithFallback('actualites.readMore', 'Read More')}
+                    <ArrowRight className="h-4 w-4 ml-1" />
+                  </Button>
+                  {lodgeId && (
+                    <Link to={`/actualites/${item.id}`} className="text-blue-600 hover:underline">
+                      {i18nWithFallback('actualites.viewArticle', 'View Article')}
+                    </Link>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </motion.div>
   );
-});
-
-NewsList.displayName = 'NewsList';
+};
 
 export default NewsList;

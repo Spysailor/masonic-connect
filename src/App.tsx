@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import { AuthProvider } from '@/hooks/useAuth';
+import { NotificationProvider } from '@/hooks/use-notifications';
 import { AppRoutes } from './routes';
 import './App.css';
 
@@ -33,8 +34,10 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Router>
           <AuthProvider>
-            <AppRoutes />
-            <Toaster />
+            <NotificationProvider>
+              <AppRoutes />
+              <Toaster />
+            </NotificationProvider>
           </AuthProvider>
         </Router>
       </QueryClientProvider>
