@@ -11,7 +11,7 @@ interface NewsHeaderProps {
 }
 
 const NewsHeader: React.FC<NewsHeaderProps> = ({ handleCreateNews }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
   return (
     <motion.div
