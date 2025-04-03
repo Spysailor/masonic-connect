@@ -1,0 +1,49 @@
+{
+  "tenueDetail": {
+    "backToAgenda": "Retour à l'agenda",
+    "edit": "Modifier",
+    "information": "Informations",
+    "proceedings": "Ordre du jour",
+    "officers": "Officiers",
+    "planches": "Planches",
+    "attendance": "Présence",
+    "attendanceStatus": {
+      "present": "Présent",
+      "absent": "Absent",
+      "confirmResponse": "Confirmer ma réponse"
+    },
+    "participants": {
+      "title": "Participants",
+      "confirmed": "Confirmés",
+      "excused": "Excusés",
+      "pending": "En attente",
+      "viewList": "Voir la liste"
+    },
+    "description": "Description",
+    "theme": "Thème",
+    "location": "Lieu",
+    "lodge": "Loge",
+    "notes": "Notes",
+    "downloadConvocation": "Télécharger la convocation"
+  },
+  "tenueForm": {
+    "details": {
+      "title": "Titre",
+      "type": "Type",
+      "typeOptions": {
+        "regular": "Tenue régulière"
+      },
+      "date": "Date",
+      "startTime": "Heure de début",
+      "endTime": "Heure de fin",
+      "degree": "Degré",
+      "degreeLabel": "°",
+      "theme": "Thème",
+      "lodge": "Loge",
+      "location": "Lieu",
+      "address": "Adresse",
+      "description": "Description"
+    },
+    "participants": "Participants"
+  }
+}
