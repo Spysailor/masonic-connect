@@ -1,14 +1,26 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import NewsForm from '@/components/actualites/NewsForm';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { i18nWithFallback } from '@/utils/i18n-fallback';
+import { useSecuredData } from '@/hooks/useSecuredData';
+import { useAuth } from '@/hooks/useAuth';
+import { useLodgeData } from '@/hooks/useLodgeData';
 
-const NewsCreate = () => {
+const NewsCreate = memo(() => {
   const { t, i18n } = useTranslation();
+  const { user } = useAuth();
+  const { lodge, isLoading: isLoadingLodge } = useLodgeData();
+  
+  // Use the secured data hook to ensure proper error handling
+  const { error } = useSecuredData(() => Promise.resolve(true), [user], '/login');
+  
+  if (error) {
+    return null; // The hook will handle the redirect
+  }
   
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -34,21 +46,29 @@ const NewsCreate = () => {
             </motion.div>
           </AnimatePresence>
           
-          <motion.div
-            key={`news-create-form-${i18n.language}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="mb-8"
-          >
-            <NewsForm />
-          </motion.div>
+          {isLoadingLodge ? (
+            <div className="flex justify-center py-12">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-masonic-blue-700"></div>
+            </div>
+          ) : (
+            <motion.div
+              key={`news-create-form-${i18n.language}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="mb-8"
+            >
+              <NewsForm />
+            </motion.div>
+          )}
         </div>
       </main>
       
       <Footer />
     </div>
   );
-};
+});
+
+NewsCreate.displayName = 'NewsCreate';
 
 export default NewsCreate;

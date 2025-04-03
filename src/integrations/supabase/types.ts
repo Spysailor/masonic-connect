@@ -689,6 +689,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      is_lodge_admin: {
+        Args: {
+          lodge_uuid: string
+        }
+        Returns: boolean
+      }
       mark_message_as_read: {
         Args: {
           message_id: string

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,7 @@ interface NewsHeaderProps {
   handleCreateNews: () => void;
 }
 
-const NewsHeader: React.FC<NewsHeaderProps> = ({ handleCreateNews }) => {
+const NewsHeader: React.FC<NewsHeaderProps> = memo(({ handleCreateNews }) => {
   const { t, i18n } = useTranslation();
   
   return (
@@ -41,6 +41,8 @@ const NewsHeader: React.FC<NewsHeaderProps> = ({ handleCreateNews }) => {
       </div>
     </motion.div>
   );
-};
+});
+
+NewsHeader.displayName = 'NewsHeader';
 
 export default NewsHeader;
