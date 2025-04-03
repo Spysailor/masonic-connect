@@ -1,0 +1,49 @@
+{
+  "tenueDetail": {
+    "backToAgenda": "Back to agenda",
+    "edit": "Edit",
+    "information": "Information",
+    "proceedings": "Agenda",
+    "officers": "Officers",
+    "planches": "Papers",
+    "attendance": "Attendance",
+    "attendanceStatus": {
+      "present": "Present",
+      "absent": "Absent",
+      "confirmResponse": "Confirm my response"
+    },
+    "participants": {
+      "title": "Participants",
+      "confirmed": "Confirmed",
+      "excused": "Excused",
+      "pending": "Pending",
+      "viewList": "View list"
+    },
+    "description": "Description",
+    "theme": "Theme",
+    "location": "Location",
+    "lodge": "Lodge",
+    "notes": "Notes",
+    "downloadConvocation": "Download invitation"
+  },
+  "tenueForm": {
+    "details": {
+      "title": "Title",
+      "type": "Type",
+      "typeOptions": {
+        "regular": "Regular meeting"
+      },
+      "date": "Date",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "degree": "Degree",
+      "degreeLabel": "°",
+      "theme": "Theme",
+      "lodge": "Lodge",
+      "location": "Location",
+      "address": "Address",
+      "description": "Description"
+    },
+    "participants": "Participants"
+  }
+}
