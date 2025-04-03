@@ -1,0 +1,68 @@
+{
+  "heroTitle": "MasonConnect",
+  "heroSubtitle": "Secure management platform for Masonic lodges",
+  "createLodge": "Create a lodge",
+  "invitationCode": "Enter invitation code",
+  "featuresTitle": "Features",
+  "pricingTitle": "Pricing",
+  "testimonialTitle": "Testimonials",
+  "readyTitle": "Ready to get started?",
+  "readySubtitle": "Join the lodges that trust MasonConnect for their daily management",
+  "createSpace": "Create your space",
+  "features": {
+    "secureComms": {
+      "title": "Secure Communications",
+      "description": "Exchange with your brothers in complete confidentiality thanks to our encrypted messaging system."
+    },
+    "tenueManagement": {
+      "title": "Meeting Management",
+      "description": "Plan your meetings, manage attendance and share agendas easily."
+    },
+    "documents": {
+      "title": "Digital Archives",
+      "description": "Store and share your official documents and papers in a secure space."
+    },
+    "memberDirectory": {
+      "title": "Member Directory",
+      "description": "Easily find contact information and details for all members of your lodge."
+    },
+    "masonicLibrary": {
+      "title": "Masonic Library",
+      "description": "Access a collection of resources and papers organized by degree."
+    },
+    "visitorAccess": {
+      "title": "Visitor Access",
+      "description": "Allow visiting brothers temporary access to certain resources of your lodge."
+    }
+  },
+  "pricing": {
+    "basicMonthly": {
+      "title": "Monthly Subscription",
+      "price": "$19.99",
+      "period": "month",
+      "features": [
+        "Up to 50 members",
+        "Storage limited to 5 GB",
+        "Meeting management",
+        "Secure messaging",
+        "Paper library",
+        "Technical support"
+      ],
+      "button": "Start now"
+    },
+    "basicAnnual": {
+      "title": "Annual Subscription",
+      "price": "$199.99",
+      "period": "year",
+      "features": [
+        "Up to 50 members",
+        "Storage limited to 10 GB",
+        "Meeting management",
+        "Secure messaging",
+        "Paper library",
+        "Priority technical support"
+      ],
+      "button": "Save 15%"
+    }
+  }
+}
