@@ -127,7 +127,7 @@ const Actualites = () => {
               
               <NewsList
                 loading={loading}
-                filteredActualites={filteredActualites}
+                news={filteredActualites}
                 handleEditNews={handleEditNews}
                 handleOpenDeleteDialog={handleOpenDeleteDialog}
               />
