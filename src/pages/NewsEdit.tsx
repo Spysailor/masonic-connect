@@ -6,13 +6,14 @@ import Footer from '@/components/layout/Footer';
 import NewsForm from '@/components/actualites/NewsForm';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 const NewsEdit = () => {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
   
   if (!id) {
-    return <div>{t('actualites.errors.missingId')}</div>;
+    return <div>{i18nWithFallback('actualites.errors.missingId', 'Missing news ID')}</div>;
   }
   
   return (
@@ -27,8 +28,12 @@ const NewsEdit = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-masonic-blue-900">{t('actualites.editTitle')}</h1>
-            <p className="text-gray-600 mt-1">{t('actualites.createDescription')}</p>
+            <h1 className="text-3xl font-bold text-masonic-blue-900">
+              {i18nWithFallback('actualites.editTitle', 'Edit Article')}
+            </h1>
+            <p className="text-gray-600 mt-1">
+              {i18nWithFallback('actualites.editDescription', 'Modify article details')}
+            </p>
           </motion.div>
           
           <motion.div

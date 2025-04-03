@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -29,15 +30,15 @@ const NewsDeleteDialog: React.FC<NewsDeleteDialogProps> = ({
     <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{t('common.confirm')}</AlertDialogTitle>
+          <AlertDialogTitle>{i18nWithFallback('common.confirm', 'Confirm')}</AlertDialogTitle>
           <AlertDialogDescription>
-            {t('actualites.deleteConfirm.description', 'Cette action ne peut pas être annulée. Cette actualité sera définitivement supprimée.')}
+            {i18nWithFallback('actualites.deleteConfirm.description', 'This action cannot be undone. This news article will be permanently deleted.')}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
+          <AlertDialogCancel>{i18nWithFallback('common.cancel', 'Cancel')}</AlertDialogCancel>
           <AlertDialogAction onClick={handleDeleteNews} className="bg-red-600 hover:bg-red-700">
-            {t('common.delete')}
+            {i18nWithFallback('common.delete', 'Delete')}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

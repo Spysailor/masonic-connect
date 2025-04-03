@@ -16,6 +16,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { fr, enUS } from 'date-fns/locale';
 import { useNotifications } from '@/hooks/use-notifications';
 import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 const NotificationIndicator = () => {
   const { toast } = useToast();
@@ -31,9 +32,10 @@ const NotificationIndicator = () => {
     e.stopPropagation();
     markAllAsRead();
     toast({
-      title: i18n.language === 'fr' 
-        ? "Toutes les notifications ont été marquées comme lues"
-        : "All notifications have been marked as read",
+      title: i18nWithFallback('notifications.markAllAsReadConfirmation', 
+        i18n.language === 'fr' 
+          ? "Toutes les notifications ont été marquées comme lues"
+          : "All notifications have been marked as read"),
     });
     setOpen(false);
   };
@@ -52,7 +54,7 @@ const NotificationIndicator = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-80">
         <DropdownMenuLabel className="flex items-center justify-between">
-          <span>{t('notifications.title')}</span>
+          <span>{i18nWithFallback('notifications.title', 'Notifications')}</span>
           {unreadCount > 0 && (
             <Button 
               variant="ghost" 
@@ -60,7 +62,7 @@ const NotificationIndicator = () => {
               className="h-7 text-xs"
               onClick={handleMarkAllAsRead}
             >
-              {t('notifications.markAllAsRead')}
+              {i18nWithFallback('notifications.markAllAsRead', 'Mark all as read')}
             </Button>
           )}
         </DropdownMenuLabel>
@@ -86,13 +88,13 @@ const NotificationIndicator = () => {
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link to="/notifications" className="cursor-pointer w-full text-center text-sm text-masonic-blue-600 hover:text-masonic-blue-800">
-                {i18n.language === 'fr' ? "Voir toutes les notifications" : "View all notifications"}
+                {i18nWithFallback('notifications.viewAll', 'View all notifications')}
               </Link>
             </DropdownMenuItem>
           </>
         ) : (
           <div className="py-4 text-center text-sm text-gray-500">
-            {i18n.language === 'fr' ? "Aucune notification" : "No notifications"}
+            {i18nWithFallback('notifications.noNotifications', 'No notifications')}
           </div>
         )}
       </DropdownMenuContent>

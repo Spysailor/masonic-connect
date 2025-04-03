@@ -16,7 +16,7 @@ const resources = {
   }
 };
 
-// Configurer un état par défaut pour les traductions manquantes
+// Configurer un gestionnaire pour les traductions manquantes
 const parseMissingKeyHandler = (key: string) => {
   console.warn(`Missing translation key: ${key}`);
   // Retourner une chaîne vide au lieu de la clé pour éviter les problèmes d'affichage
@@ -47,15 +47,22 @@ try {
       returnNull: false,
       fallbackNS: 'translation',
       saveMissing: true,
-      parseMissingKeyHandler: parseMissingKeyHandler,
       missingKeyHandler: (lng, ns, key) => {
         console.warn(`Missing translation key: ${key} for language: ${lng}`);
       },
+      parseMissingKeyHandler: parseMissingKeyHandler,
       // Ajout d'un délai de chargement pour éviter les problèmes de course
       load: 'currentOnly',
       // Mise en cache agressive pour éviter les rechargements inutiles
       keySeparator: false,
       nsSeparator: false,
+      // Amélioration de la détection des changements de langue
+      react: {
+        useSuspense: false,
+        bindI18n: 'languageChanged loaded',
+        bindI18nStore: '',
+        nsMode: 'default'
+      }
     })
     .then(() => {
       console.log('i18n initialized successfully');

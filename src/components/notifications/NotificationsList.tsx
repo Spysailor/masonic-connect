@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import { useNotifications } from '@/hooks/use-notifications';
 import { NotificationType } from '@/hooks/use-notifications';
 import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 interface NotificationsListProps {
   filterType?: string;
@@ -94,7 +95,7 @@ const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all
                         href={notification.link} 
                         className="text-sm text-blue-600 hover:text-blue-800 hover:underline font-medium flex items-center"
                       >
-                        {t('notifications.viewDetails')} →
+                        {i18nWithFallback('notifications.viewDetails', 'View details')} →
                       </a>
                     )}
                     
@@ -107,7 +108,7 @@ const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all
                           onClick={() => markAsRead(notification.id)}
                         >
                           <Check className="mr-1 h-4 w-4" />
-                          {t('notifications.markAsRead')}
+                          {i18nWithFallback('notifications.markAsRead', 'Mark as read')}
                         </Button>
                       )}
                       
@@ -131,9 +132,11 @@ const NotificationsList: React.FC<NotificationsListProps> = ({ filterType = 'all
           <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
             <Bell className="h-8 w-8 text-gray-400" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-1">{t('notifications.empty.title')}</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-1">
+            {i18nWithFallback('notifications.empty.title', 'No notifications')}
+          </h3>
           <p className="text-sm text-gray-500 max-w-sm">
-            {t('notifications.empty.description')}
+            {i18nWithFallback('notifications.empty.description', 'You don\'t have any notifications at the moment.')}
           </p>
         </div>
       )}

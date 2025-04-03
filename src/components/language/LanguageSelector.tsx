@@ -11,6 +11,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from '@/components/ui/use-toast';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 const languages = [
   { code: 'fr', label: 'Français' },
@@ -30,19 +31,33 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
     
     i18n.changeLanguage(lng).then(() => {
       // Montrer une notification de confirmation
+      const successMessage = lng === 'fr' 
+        ? 'La langue a été changée en français' 
+        : 'Language has been changed to English';
+      
       toast({
-        title: lng === 'fr' ? 'Langue changée' : 'Language changed',
-        description: lng === 'fr' ? 'La langue a été changée en français' : 'Language has been changed to English',
+        title: i18nWithFallback(
+          'language.changed', 
+          lng === 'fr' ? 'Langue changée' : 'Language changed'
+        ),
+        description: successMessage,
         duration: 3000,
       });
       
-      // Forcer un rechargement complet de la page pour s'assurer que toutes les traductions sont correctement appliquées
-      window.location.reload();
+      // Utilisez cette ligne si vous voulez forcer un rechargement complet (généralement à éviter)
+      // window.location.reload();
+      
+      // Ou utilisez cette approche pour forcer une mise à jour sans rechargement
+      // (cela peut nécessiter des ajustements dans vos composants pour réagir aux changements de langue)
+      document.documentElement.lang = lng;
+      
+      // Si vous utilisez React Router, cette ligne peut aider à forcer un re-rendu de la page actuelle
+      navigate(0);
     }).catch(error => {
       console.error('Error changing language:', error);
       toast({
-        title: 'Error',
-        description: 'Failed to change language.',
+        title: i18nWithFallback('language.error', 'Error'),
+        description: i18nWithFallback('language.changeFailed', 'Failed to change language.'),
         variant: 'destructive',
       });
     });
@@ -55,7 +70,7 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
           "flex items-center rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors",
           className
         )}
-        aria-label="Changer de langue"
+        aria-label={i18nWithFallback('language.change', 'Change language')}
       >
         <Globe className="h-5 w-5" />
       </DropdownMenuTrigger>

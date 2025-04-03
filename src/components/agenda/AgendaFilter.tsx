@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 interface AgendaFilterProps {
   filterDegree: number | null;
@@ -16,7 +17,7 @@ interface AgendaFilterProps {
 }
 
 const AgendaFilter: React.FC<AgendaFilterProps> = ({ filterDegree, setFilterDegree }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
   const handleValueChange = (value: string) => {
     if (value === "all") {
@@ -31,7 +32,7 @@ const AgendaFilter: React.FC<AgendaFilterProps> = ({ filterDegree, setFilterDegr
       <div className="flex items-center">
         <Filter className="h-5 w-5 text-gray-400 mr-2" />
         <span className="text-sm font-medium text-gray-700 md:inline hidden">
-          {t('agenda.filter')}:
+          {i18nWithFallback('agenda.filter', 'Filter')}:
         </span>
       </div>
       
@@ -41,13 +42,13 @@ const AgendaFilter: React.FC<AgendaFilterProps> = ({ filterDegree, setFilterDegr
           onValueChange={handleValueChange}
         >
           <SelectTrigger className="w-full md:w-[180px]">
-            <SelectValue placeholder={t('agenda.filter')} />
+            <SelectValue placeholder={i18nWithFallback('agenda.filter', 'Filter')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">{t('agenda.all')}</SelectItem>
-            <SelectItem value="1">{t('agenda.degree', { count: 1 })}</SelectItem>
-            <SelectItem value="2">{t('agenda.degree', { count: 2 })}</SelectItem>
-            <SelectItem value="3">{t('agenda.degree', { count: 3 })}</SelectItem>
+            <SelectItem value="all">{i18nWithFallback('agenda.all', 'All')}</SelectItem>
+            <SelectItem value="1">{i18nWithFallback('agenda.degree', '1° degree', { count: 1 })}</SelectItem>
+            <SelectItem value="2">{i18nWithFallback('agenda.degree', '2° degree', { count: 2 })}</SelectItem>
+            <SelectItem value="3">{i18nWithFallback('agenda.degree', '3° degree', { count: 3 })}</SelectItem>
           </SelectContent>
         </Select>
       </div>

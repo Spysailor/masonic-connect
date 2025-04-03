@@ -1,4 +1,3 @@
-
 {
   "common": {
     "loading": "Loading...",
@@ -344,6 +343,34 @@
         "Priority support"
       ],
       "button": "Save 20%"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllAsRead": "Mark all as read",
+    "markAsRead": "Mark as read",
+    "viewDetails": "View details",
+    "viewAll": "View all notifications",
+    "noNotifications": "No notifications",
+    "empty": {
+      "title": "No notifications",
+      "description": "You don't have any notifications at the moment."
+    }
+  },
+  "agenda": {
+    "title": "Agenda",
+    "subtitle": "Check upcoming meetings",
+    "upcoming": "Upcoming meetings",
+    "past": "Past meetings",
+    "createTenue": "Create meeting",
+    "filter": "Filter",
+    "all": "All",
+    "degree": "{{count}}° degree",
+    "noTenues": "No upcoming meetings",
+    "noResults": "No meetings found",
+    "empty": {
+      "title": "Empty agenda",
+      "description": "There are no scheduled meetings at the moment."
     }
   }
 }

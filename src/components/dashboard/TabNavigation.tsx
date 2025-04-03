@@ -11,7 +11,7 @@ interface TabNavigationProps {
 }
 
 const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
   const handleTabChange = (value: string) => {
     // Set a small timeout to prevent racing conditions
@@ -37,19 +37,19 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }
             value="agenda" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            {i18nWithFallback('common.agenda', 'Agenda')}
+            {i18nWithFallback('dashboard.tabs.agenda', 'Agenda')}
           </TabsTrigger>
           <TabsTrigger 
             value="freres" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            {i18nWithFallback('common.brothers', 'Frères')}
+            {i18nWithFallback('dashboard.tabs.brothers', 'Brothers')}
           </TabsTrigger>
           <TabsTrigger 
             value="actualites" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            {i18nWithFallback('common.news', 'Actualités')}
+            {i18nWithFallback('dashboard.tabs.news', 'News')}
           </TabsTrigger>
         </TabsList>
       </Tabs>

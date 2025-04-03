@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import NewsForm from '@/components/actualites/NewsForm';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 const NewsCreate = () => {
   const { t } = useTranslation();
@@ -21,8 +22,12 @@ const NewsCreate = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-masonic-blue-900">{t('actualites.createTitle')}</h1>
-            <p className="text-gray-600 mt-1">{t('actualites.createDescription')}</p>
+            <h1 className="text-3xl font-bold text-masonic-blue-900">
+              {i18nWithFallback('actualites.createTitle', 'New Article')}
+            </h1>
+            <p className="text-gray-600 mt-1">
+              {i18nWithFallback('actualites.createDescription', 'Write a new article for your lodge')}
+            </p>
           </motion.div>
           
           <motion.div

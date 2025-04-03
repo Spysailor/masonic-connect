@@ -1,4 +1,3 @@
-
 {
   "common": {
     "loading": "Chargement...",
@@ -344,6 +343,34 @@
         "Support prioritaire"
       ],
       "button": "Économiser 20%"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllAsRead": "Tout marquer comme lu",
+    "markAsRead": "Marquer comme lu",
+    "viewDetails": "Voir les détails",
+    "viewAll": "Voir toutes les notifications",
+    "noNotifications": "Aucune notification",
+    "empty": {
+      "title": "Aucune notification",
+      "description": "Vous n'avez pas de notifications pour le moment."
+    }
+  },
+  "agenda": {
+    "title": "Agenda",
+    "subtitle": "Consultez les prochaines tenues",
+    "upcoming": "Tenues à venir",
+    "past": "Tenues passées",
+    "createTenue": "Créer une tenue",
+    "filter": "Filtrer",
+    "all": "Tous",
+    "degree": "{{count}}° degré",
+    "noTenues": "Aucune tenue à venir",
+    "noResults": "Aucune tenue trouvée",
+    "empty": {
+      "title": "Agenda vide",
+      "description": "Aucune tenue n'est prévue pour le moment."
     }
   }
 }
