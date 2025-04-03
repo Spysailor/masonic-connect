@@ -29,6 +29,35 @@
     "register": "Register",
     "logout": "Logout"
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to your masonic space",
+    "quickActions": "Quick Actions",
+    "upcomingTenues": "Upcoming Meetings",
+    "lodgeOfficers": "Lodge Officers",
+    "latestNews": "Latest News",
+    "seeAll": "See all",
+    "tabs": {
+      "agenda": "Agenda",
+      "brothers": "Brothers",
+      "news": "News"
+    },
+    "stats": {
+      "nextTenue": "Next Meeting",
+      "membersCount": "Members",
+      "planchesCount": "Papers",
+      "unreadMessages": "Unread Messages",
+      "members": "members",
+      "documents": "documents",
+      "unread": "unread"
+    },
+    "actions": {
+      "createTenue": "Create Meeting",
+      "writePlanche": "Write Paper",
+      "brothersDirectory": "Brothers Directory",
+      "agenda": "Agenda"
+    }
+  },
   "auth": {
     "success": {
       "loginTitle": "Login successful",
@@ -248,5 +277,73 @@
     },
     "degree": "°",
     "view": "View"
+  },
+  "index": {
+    "heroTitle": "Your Digital Masonic Space",
+    "heroSubtitle": "Manage, share and communicate securely with your brothers. A platform dedicated to masonic lodges.",
+    "createLodge": "Create a lodge",
+    "invitationCode": "I have an invitation code",
+    "featuresTitle": "A complete solution for your lodge",
+    "pricingTitle": "Simple and transparent pricing",
+    "testimonialTitle": "They trust us",
+    "readyTitle": "Ready to transform your lodge?",
+    "readySubtitle": "Join hundreds of lodges using our platform to enhance their masonic experience.",
+    "createSpace": "Create my space"
+  },
+  "features": {
+    "secureComms": {
+      "title": "Secure Communications",
+      "description": "Exchange with your brothers in complete confidentiality on our encrypted platform."
+    },
+    "tenueManagement": {
+      "title": "Meeting Management",
+      "description": "Plan, organize and track your lodge meetings effortlessly."
+    },
+    "documents": {
+      "title": "Paper Library",
+      "description": "Archive and share your lodge's papers and works."
+    },
+    "memberDirectory": {
+      "title": "Brothers Directory",
+      "description": "Manage the list of members with their masonic information."
+    },
+    "masonicLibrary": {
+      "title": "Masonic Resources",
+      "description": "Access a library of masonic documents and resources."
+    },
+    "visitorAccess": {
+      "title": "Visitor Management",
+      "description": "Simplify the reception of visiting brothers at your meetings."
+    }
+  },
+  "pricing": {
+    "basicMonthly": {
+      "title": "Monthly Subscription",
+      "price": "$9.99",
+      "period": "month",
+      "features": [
+        "Up to 100 members",
+        "10 GB storage",
+        "Unlimited communications",
+        "Meeting management",
+        "Paper library",
+        "Email support"
+      ],
+      "button": "Get Started"
+    },
+    "basicAnnual": {
+      "title": "Annual Subscription",
+      "price": "$99.99",
+      "period": "year",
+      "features": [
+        "Up to 300 members",
+        "30 GB storage",
+        "Unlimited communications",
+        "Meeting management",
+        "Paper library",
+        "Priority support"
+      ],
+      "button": "Save 20%"
+    }
   }
 }

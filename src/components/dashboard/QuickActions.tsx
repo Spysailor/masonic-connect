@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, FileText, Users } from 'lucide-react';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 const QuickActions: React.FC = () => {
   const { t } = useTranslation();
@@ -15,7 +16,9 @@ const QuickActions: React.FC = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.4 }}
     >
-      <h2 className="text-xl font-bold text-masonic-blue-900 mb-4">{t('dashboard.quickActions')}</h2>
+      <h2 className="text-xl font-bold text-masonic-blue-900 mb-4">
+        {i18nWithFallback('dashboard.quickActions', 'Actions rapides')}
+      </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Link to="/agenda/create">
           <Card className="shadow-sm hover:shadow-md transition-shadow">
@@ -23,7 +26,9 @@ const QuickActions: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
                 <Calendar className="h-6 w-6 text-masonic-blue-700" />
               </div>
-              <span className="text-sm font-medium text-gray-900">{t('dashboard.actions.createTenue')}</span>
+              <span className="text-sm font-medium text-gray-900">
+                {i18nWithFallback('dashboard.actions.createTenue', 'Créer une tenue')}
+              </span>
             </CardContent>
           </Card>
         </Link>
@@ -34,7 +39,9 @@ const QuickActions: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
                 <FileText className="h-6 w-6 text-masonic-blue-700" />
               </div>
-              <span className="text-sm font-medium text-gray-900">{t('dashboard.actions.writePlanche')}</span>
+              <span className="text-sm font-medium text-gray-900">
+                {i18nWithFallback('dashboard.actions.writePlanche', 'Rédiger une planche')}
+              </span>
             </CardContent>
           </Card>
         </Link>
@@ -45,7 +52,9 @@ const QuickActions: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
                 <Users className="h-6 w-6 text-masonic-blue-700" />
               </div>
-              <span className="text-sm font-medium text-gray-900">{t('dashboard.actions.brothersDirectory')}</span>
+              <span className="text-sm font-medium text-gray-900">
+                {i18nWithFallback('dashboard.actions.brothersDirectory', 'Annuaire des frères')}
+              </span>
             </CardContent>
           </Card>
         </Link>
@@ -56,7 +65,9 @@ const QuickActions: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-masonic-blue-100 flex items-center justify-center mb-3">
                 <Calendar className="h-6 w-6 text-masonic-blue-700" />
               </div>
-              <span className="text-sm font-medium text-gray-900">{t('dashboard.actions.agenda')}</span>
+              <span className="text-sm font-medium text-gray-900">
+                {i18nWithFallback('dashboard.actions.agenda', 'Agenda')}
+              </span>
             </CardContent>
           </Card>
         </Link>

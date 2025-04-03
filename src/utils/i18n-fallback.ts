@@ -29,9 +29,8 @@ export const i18nWithFallback = (key: string, fallback: string, ns?: string): st
   
   try {
     const value = i18n.t(key, { ns });
-    // Si la valeur retournée est identique à la clé, c'est que la traduction n'existe pas
+    // If the returned value is identical to the key, the translation doesn't exist
     if (typeof value === 'string' && (value === key || value === '')) {
-      console.warn(`Missing translation for key: ${key}, using fallback: ${fallback}`);
       return fallback;
     }
     return value as string;
@@ -59,9 +58,8 @@ export const formatI18n = (
   
   try {
     const value = i18n.t(key, { ...options, ns });
-    // Si la valeur retournée est identique à la clé, c'est que la traduction n'existe pas
+    // If the returned value is identical to the key, the translation doesn't exist
     if (typeof value === 'string' && (value === key || value === '')) {
-      console.warn(`Missing translation for formatted key: ${key}, using fallback: ${fallback}`);
       return fallback;
     }
     return value as string;
@@ -72,17 +70,16 @@ export const formatI18n = (
 };
 
 /**
- * Vérifie si une traduction existe et retourne un texte de remplacement si ce n'est pas le cas
- * @param t Fonction de traduction i18next
- * @param key Clé de traduction
- * @param defaultText Texte par défaut à utiliser si la traduction n'existe pas
- * @returns Le texte traduit ou le texte par défaut
+ * Check if a translation exists and return a replacement text if not
+ * @param t Translation function from i18next
+ * @param key Translation key
+ * @param defaultText Default text to use if the translation doesn't exist
+ * @returns The translated text or the default text
  */
 export const safeTranslate = (t: Function, key: string, defaultText: string): string => {
   try {
     const translated = t(key);
     if (translated === key) {
-      console.warn(`Missing translation for key: ${key}, using default: ${defaultText}`);
       return defaultText;
     }
     return translated;

@@ -6,7 +6,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import frTranslation from './locales/fr.json';
 import enTranslation from './locales/en.json';
 
-// Les ressources contiennent les traductions
+// Translation resources
 const resources = {
   fr: {
     translation: frTranslation
@@ -16,20 +16,20 @@ const resources = {
   }
 };
 
-// Configuration et initialisation de i18next
+// Configure and initialize i18next
 try {
   i18n
-    // Détecte la langue du navigateur
+    // Detect browser language
     .use(LanguageDetector)
-    // Passe l'instance i18n à react-i18next
+    // Pass i18n instance to react-i18next
     .use(initReactI18next)
-    // Initialisation de i18next
+    // Initialize i18next
     .init({
       resources,
       fallbackLng: 'fr',
       debug: process.env.NODE_ENV === 'development',
       interpolation: {
-        escapeValue: false, // React fait déjà l'échappement
+        escapeValue: false, // React already escapes
       },
       detection: {
         order: ['localStorage', 'navigator'],
@@ -41,7 +41,6 @@ try {
       saveMissing: true,
       parseMissingKeyHandler: (key) => {
         console.warn(`Missing translation key: ${key}`);
-        // Retourne la clé pour qu'elle soit visible dans l'interface
         return key;
       },
       missingKeyHandler: (lng, ns, key) => {

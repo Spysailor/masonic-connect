@@ -30,19 +30,19 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }
             value="agenda" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            {i18nWithFallback('dashboard.tabs.agenda', 'Agenda')}
+            {i18nWithFallback('common.agenda', 'Agenda')}
           </TabsTrigger>
           <TabsTrigger 
             value="freres" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            {i18nWithFallback('dashboard.tabs.brothers', 'Frères')}
+            {i18nWithFallback('common.brothers', 'Frères')}
           </TabsTrigger>
           <TabsTrigger 
             value="actualites" 
             className="flex-1 data-[state=active]:bg-masonic-blue-700 data-[state=active]:text-white"
           >
-            {i18nWithFallback('dashboard.tabs.news', 'Actualités')}
+            {i18nWithFallback('common.news', 'Actualités')}
           </TabsTrigger>
         </TabsList>
       </Tabs>

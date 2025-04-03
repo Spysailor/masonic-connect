@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, Users, FileText, Bell } from 'lucide-react';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 interface StatCardsProps {
   stats: {
@@ -54,7 +55,7 @@ const StatCards: React.FC<StatCardsProps> = ({ stats, statsLoading }) => {
             <Calendar className="h-6 w-6 text-masonic-blue-700" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm font-medium">{t('dashboard.stats.nextTenue')}</p>
+            <p className="text-gray-500 text-sm font-medium">{i18nWithFallback('dashboard.stats.nextTenue', 'Prochaine tenue')}</p>
             <p className="text-lg font-semibold text-masonic-blue-900">{stats.nextTenue}</p>
           </div>
         </CardContent>
@@ -66,8 +67,8 @@ const StatCards: React.FC<StatCardsProps> = ({ stats, statsLoading }) => {
             <Users className="h-6 w-6 text-masonic-blue-700" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm font-medium">{t('dashboard.stats.membersCount')}</p>
-            <p className="text-lg font-semibold text-masonic-blue-900">{stats.membersCount} {t('dashboard.stats.members')}</p>
+            <p className="text-gray-500 text-sm font-medium">{i18nWithFallback('dashboard.stats.membersCount', 'Membres')}</p>
+            <p className="text-lg font-semibold text-masonic-blue-900">{stats.membersCount} {i18nWithFallback('dashboard.stats.members', 'membres')}</p>
           </div>
         </CardContent>
       </Card>
@@ -78,8 +79,8 @@ const StatCards: React.FC<StatCardsProps> = ({ stats, statsLoading }) => {
             <FileText className="h-6 w-6 text-masonic-blue-700" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm font-medium">{t('dashboard.stats.planchesCount')}</p>
-            <p className="text-lg font-semibold text-masonic-blue-900">{stats.planchesCount} {t('dashboard.stats.documents')}</p>
+            <p className="text-gray-500 text-sm font-medium">{i18nWithFallback('dashboard.stats.planchesCount', 'Planches')}</p>
+            <p className="text-lg font-semibold text-masonic-blue-900">{stats.planchesCount} {i18nWithFallback('dashboard.stats.documents', 'documents')}</p>
           </div>
         </CardContent>
       </Card>
@@ -90,8 +91,8 @@ const StatCards: React.FC<StatCardsProps> = ({ stats, statsLoading }) => {
             <Bell className="h-6 w-6 text-masonic-blue-700" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm font-medium">{t('dashboard.stats.unreadMessages')}</p>
-            <p className="text-lg font-semibold text-masonic-blue-900">{stats.unreadMessages} {t('dashboard.stats.unread')}</p>
+            <p className="text-gray-500 text-sm font-medium">{i18nWithFallback('dashboard.stats.unreadMessages', 'Messages non lus')}</p>
+            <p className="text-lg font-semibold text-masonic-blue-900">{stats.unreadMessages} {i18nWithFallback('dashboard.stats.unread', 'non lus')}</p>
           </div>
         </CardContent>
       </Card>

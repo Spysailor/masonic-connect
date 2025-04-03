@@ -29,6 +29,35 @@
     "register": "Inscription",
     "logout": "Déconnexion"
   },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue dans votre espace maçonnique",
+    "quickActions": "Actions rapides",
+    "upcomingTenues": "Tenues à venir",
+    "lodgeOfficers": "Officiers de la loge",
+    "latestNews": "Dernières actualités",
+    "seeAll": "Voir tout",
+    "tabs": {
+      "agenda": "Agenda",
+      "brothers": "Frères",
+      "news": "Actualités"
+    },
+    "stats": {
+      "nextTenue": "Prochaine tenue",
+      "membersCount": "Membres",
+      "planchesCount": "Planches",
+      "unreadMessages": "Messages non lus",
+      "members": "membres",
+      "documents": "documents",
+      "unread": "non lus"
+    },
+    "actions": {
+      "createTenue": "Créer une tenue",
+      "writePlanche": "Rédiger une planche",
+      "brothersDirectory": "Annuaire des frères",
+      "agenda": "Agenda"
+    }
+  },
   "auth": {
     "success": {
       "loginTitle": "Connexion réussie",
@@ -248,5 +277,73 @@
     },
     "degree": "°",
     "view": "Voir"
+  },
+  "index": {
+    "heroTitle": "Votre Espace Maçonnique Numérique",
+    "heroSubtitle": "Gérez, partagez et communiquez en toute sécurité avec vos frères. Une plateforme dédiée aux loges maçonniques.",
+    "createLodge": "Créer une loge",
+    "invitationCode": "J'ai un code d'invitation",
+    "featuresTitle": "Une solution complète pour votre loge",
+    "pricingTitle": "Tarifs simples et transparents",
+    "testimonialTitle": "Ils nous font confiance",
+    "readyTitle": "Prêt à transformer votre loge ?",
+    "readySubtitle": "Rejoignez les centaines de loges qui utilisent notre plateforme pour améliorer leur expérience maçonnique.",
+    "createSpace": "Créer mon espace"
+  },
+  "features": {
+    "secureComms": {
+      "title": "Communications sécurisées",
+      "description": "Échangez avec vos frères en toute confidentialité sur notre plateforme chiffrée."
+    },
+    "tenueManagement": {
+      "title": "Gestion des tenues",
+      "description": "Planifiez, organisez et suivez les tenues de votre loge sans effort."
+    },
+    "documents": {
+      "title": "Bibliothèque de planches",
+      "description": "Archivez et partagez les planches et travaux de votre loge."
+    },
+    "memberDirectory": {
+      "title": "Annuaire des frères",
+      "description": "Gérez la liste des membres avec leurs informations maçonniques."
+    },
+    "masonicLibrary": {
+      "title": "Ressources maçonniques",
+      "description": "Accédez à une bibliothèque de documents et ressources maçonniques."
+    },
+    "visitorAccess": {
+      "title": "Gestion des visiteurs",
+      "description": "Simplifiez l'accueil des frères visiteurs lors de vos tenues."
+    }
+  },
+  "pricing": {
+    "basicMonthly": {
+      "title": "Abonnement Mensuel",
+      "price": "9,99 €",
+      "period": "mois",
+      "features": [
+        "Jusqu'à 100 membres",
+        "Stockage 10 Go",
+        "Communications illimitées",
+        "Gestion des tenues",
+        "Bibliothèque de planches",
+        "Support par email"
+      ],
+      "button": "Commencer"
+    },
+    "basicAnnual": {
+      "title": "Abonnement Annuel",
+      "price": "99,99 €",
+      "period": "an",
+      "features": [
+        "Jusqu'à 300 membres",
+        "Stockage 30 Go",
+        "Communications illimitées",
+        "Gestion des tenues",
+        "Bibliothèque de planches",
+        "Support prioritaire"
+      ],
+      "button": "Économiser 20%"
+    }
   }
 }

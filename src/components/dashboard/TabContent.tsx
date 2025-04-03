@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import TenueCard, { TenueProps } from './TenueCard';
 import MemberCard, { MemberProps } from './MemberCard';
 import NewsCard, { NewsProps } from './NewsCard';
+import { i18nWithFallback } from '@/utils/i18n-fallback';
 
 interface TabContentProps {
   activeTab: string;
@@ -37,9 +38,11 @@ const TabContent: React.FC<TabContentProps> = ({
       {activeTab === 'agenda' && (
         <div>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-masonic-blue-900">{t('dashboard.upcomingTenues')}</h2>
+            <h2 className="text-xl font-bold text-masonic-blue-900">
+              {i18nWithFallback('dashboard.upcomingTenues', 'Tenues à venir')}
+            </h2>
             <a href="/agenda" className="text-sm text-masonic-blue-700 font-medium hover:text-masonic-blue-600">
-              {t('dashboard.seeAll')}
+              {i18nWithFallback('dashboard.seeAll', 'Voir tout')}
             </a>
           </div>
           {tenuesLoading ? (
@@ -67,9 +70,11 @@ const TabContent: React.FC<TabContentProps> = ({
       {activeTab === 'freres' && (
         <div>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-masonic-blue-900">{t('dashboard.lodgeOfficers')}</h2>
+            <h2 className="text-xl font-bold text-masonic-blue-900">
+              {i18nWithFallback('dashboard.lodgeOfficers', 'Officiers de la loge')}
+            </h2>
             <a href="/freres" className="text-sm text-masonic-blue-700 font-medium hover:text-masonic-blue-600">
-              {t('dashboard.seeAll')}
+              {i18nWithFallback('dashboard.seeAll', 'Voir tout')}
             </a>
           </div>
           {membersLoading ? (
@@ -97,9 +102,11 @@ const TabContent: React.FC<TabContentProps> = ({
       {activeTab === 'actualites' && (
         <div>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-masonic-blue-900">{t('dashboard.latestNews')}</h2>
+            <h2 className="text-xl font-bold text-masonic-blue-900">
+              {i18nWithFallback('dashboard.latestNews', 'Dernières actualités')}
+            </h2>
             <a href="/actualites" className="text-sm text-masonic-blue-700 font-medium hover:text-masonic-blue-600">
-              {t('dashboard.seeAll')}
+              {i18nWithFallback('dashboard.seeAll', 'Voir tout')}
             </a>
           </div>
           {newsLoading ? (
