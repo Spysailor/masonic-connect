@@ -28,6 +28,11 @@ const TabContent: React.FC<TabContentProps> = ({
 }) => {
   const { t } = useTranslation();
   
+  // Constantes pour éviter la re-évaluation des conditions
+  const showAgenda = activeTab === 'agenda';
+  const showFreres = activeTab === 'freres';
+  const showActualites = activeTab === 'actualites';
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -35,7 +40,7 @@ const TabContent: React.FC<TabContentProps> = ({
       transition={{ duration: 0.4, delay: 0.3 }}
       className="mb-8"
     >
-      {activeTab === 'agenda' && (
+      {showAgenda && (
         <div>
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-masonic-blue-900">
@@ -57,17 +62,21 @@ const TabContent: React.FC<TabContentProps> = ({
                 </div>
               ))}
             </div>
-          ) : (
+          ) : tenues && tenues.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {tenues.map((tenue) => (
                 <TenueCard key={tenue.id} tenue={tenue} />
               ))}
             </div>
+          ) : (
+            <div className="bg-gray-50 p-8 text-center rounded-lg">
+              <p className="text-gray-500">{i18nWithFallback('dashboard.noUpcomingTenues', 'Aucune tenue à venir')}</p>
+            </div>
           )}
         </div>
       )}
       
-      {activeTab === 'freres' && (
+      {showFreres && (
         <div>
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-masonic-blue-900">
@@ -89,17 +98,21 @@ const TabContent: React.FC<TabContentProps> = ({
                 </div>
               ))}
             </div>
-          ) : (
+          ) : members && members.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {members.map((member) => (
                 <MemberCard key={member.id} member={member} />
               ))}
             </div>
+          ) : (
+            <div className="bg-gray-50 p-8 text-center rounded-lg">
+              <p className="text-gray-500">{i18nWithFallback('dashboard.noMembers', 'Aucun membre')}</p>
+            </div>
           )}
         </div>
       )}
       
-      {activeTab === 'actualites' && (
+      {showActualites && (
         <div>
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-masonic-blue-900">
@@ -122,11 +135,15 @@ const TabContent: React.FC<TabContentProps> = ({
                 </div>
               ))}
             </div>
-          ) : (
+          ) : news && news.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {news.map((item) => (
                 <NewsCard key={item.id} news={item} />
               ))}
+            </div>
+          ) : (
+            <div className="bg-gray-50 p-8 text-center rounded-lg">
+              <p className="text-gray-500">{i18nWithFallback('dashboard.noNews', 'Aucune actualité')}</p>
             </div>
           )}
         </div>

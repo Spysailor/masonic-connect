@@ -16,6 +16,13 @@ const resources = {
   }
 };
 
+// Configurer un état par défaut pour les traductions manquantes
+const parseMissingKeyHandler = (key: string) => {
+  console.warn(`Missing translation key: ${key}`);
+  // Retourner une chaîne vide au lieu de la clé pour éviter les problèmes d'affichage
+  return '';
+};
+
 // Configure and initialize i18next
 try {
   i18n
@@ -33,19 +40,22 @@ try {
       },
       detection: {
         order: ['localStorage', 'navigator'],
-        caches: ['localStorage']
+        caches: ['localStorage'],
+        lookupLocalStorage: 'i18nextLng',
       },
       returnEmptyString: false,
       returnNull: false,
       fallbackNS: 'translation',
       saveMissing: true,
-      parseMissingKeyHandler: (key) => {
-        console.warn(`Missing translation key: ${key}`);
-        return key;
-      },
+      parseMissingKeyHandler: parseMissingKeyHandler,
       missingKeyHandler: (lng, ns, key) => {
         console.warn(`Missing translation key: ${key} for language: ${lng}`);
-      }
+      },
+      // Ajout d'un délai de chargement pour éviter les problèmes de course
+      load: 'currentOnly',
+      // Mise en cache agressive pour éviter les rechargements inutiles
+      keySeparator: false,
+      nsSeparator: false,
     })
     .then(() => {
       console.log('i18n initialized successfully');

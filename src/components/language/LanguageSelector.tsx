@@ -25,17 +25,19 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
   const changeLanguage = (lng: string) => {
     if (lng === i18n.language) return;
     
+    // Stocker la langue explicitement avant de la changer
+    localStorage.setItem('i18nextLng', lng);
+    
     i18n.changeLanguage(lng).then(() => {
-      // Show confirmation notification
+      // Montrer une notification de confirmation
       toast({
         title: lng === 'fr' ? 'Langue changée' : 'Language changed',
         description: lng === 'fr' ? 'La langue a été changée en français' : 'Language has been changed to English',
         duration: 3000,
       });
       
-      // Always refresh the page to ensure all translations are properly applied
-      console.log(`Refreshing page ${location.pathname} after language change to ${lng}`);
-      navigate(0);
+      // Forcer un rechargement complet de la page pour s'assurer que toutes les traductions sont correctement appliquées
+      window.location.reload();
     }).catch(error => {
       console.error('Error changing language:', error);
       toast({
@@ -53,6 +55,7 @@ const LanguageSelector: React.FC<{ className?: string }> = ({ className }) => {
           "flex items-center rounded-md p-2 text-gray-600 hover:text-masonic-blue-700 hover:bg-masonic-blue-50/50 transition-colors",
           className
         )}
+        aria-label="Changer de langue"
       >
         <Globe className="h-5 w-5" />
       </DropdownMenuTrigger>

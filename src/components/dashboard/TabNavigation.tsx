@@ -13,6 +13,13 @@ interface TabNavigationProps {
 const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }) => {
   const { t } = useTranslation();
   
+  const handleTabChange = (value: string) => {
+    // Set a small timeout to prevent racing conditions
+    setTimeout(() => {
+      setActiveTab(value);
+    }, 0);
+  };
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -22,7 +29,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }
     >
       <Tabs
         value={activeTab}
-        onValueChange={setActiveTab}
+        onValueChange={handleTabChange}
         className="w-full"
       >
         <TabsList className="w-full bg-white shadow-sm rounded-lg">
