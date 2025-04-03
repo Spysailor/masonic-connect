@@ -2,114 +2,73 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Session, User } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
 import { i18nWithFallback } from '@/utils/i18n-fallback';
-import { authService, memberService } from '@/services/api';
-import type { Tables } from '@/integrations/supabase/types';
-
-type ProfileWithMemberships = Tables<'profiles'> & {
-  lodge_memberships: Array<
-    Tables<'lodge_memberships'> & {
-      lodges: Tables<'lodges'> | null;
-    }
-  >;
-};
 
 type AuthContextType = {
   session: Session | null;
   user: User | null;
-  profile: ProfileWithMemberships | null;
+  profile: any | null;
   isLoading: boolean;
-  isInitialized: boolean;
-  activeLodgeId: string | null;
-  setActiveLodgeId: (lodgeId: string | null) => void;
-  signIn: (email: string, password: string) => Promise<{success: boolean; error?: string}>;
-  signUp: (email: string, password: string, displayName: string) => Promise<{success: boolean; error?: string}>;
-  signOut: () => Promise<{success: boolean; error?: string}>;
-  updateProfile: (data: Partial<Tables<'profiles'>>) => Promise<{success: boolean; error?: string}>;
-  forgotPassword: (email: string) => Promise<{success: boolean; error?: string}>;
-  updatePassword: (newPassword: string) => Promise<{success: boolean; error?: string}>;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, displayName: string) => Promise<void>;
+  signOut: () => Promise<void>;
+  updateProfile: (data: any) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Clé localStorage pour le lodge actif
-const ACTIVE_LODGE_STORAGE_KEY = 'masonic_connect_active_lodge';
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
-  const [profile, setProfile] = useState<ProfileWithMemberships | null>(null);
+  const [profile, setProfile] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isInitialized, setIsInitialized] = useState<boolean>(false);
-  const [activeLodgeId, setActiveLodgeId] = useState<string | null>(
-    localStorage.getItem(ACTIVE_LODGE_STORAGE_KEY)
-  );
-  
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
 
-  // Persistance de la loge active dans localStorage
   useEffect(() => {
-    if (activeLodgeId) {
-      localStorage.setItem(ACTIVE_LODGE_STORAGE_KEY, activeLodgeId);
-    } else {
-      localStorage.removeItem(ACTIVE_LODGE_STORAGE_KEY);
-    }
-  }, [activeLodgeId]);
-
-  useEffect(() => {
-    // Mise en place de l'écouteur d'événements d'authentification
-    const { data: { subscription } } = authService.onAuthStateChange(
-      async (event, session) => {
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
         console.log('Auth state changed:', event);
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          await fetchProfile(session.user.id);
+          // Use setTimeout to avoid potential deadlocks with Supabase auth
+          setTimeout(() => {
+            fetchProfile(session.user.id);
+          }, 0);
         } else {
           setProfile(null);
-          // Réinitialiser la loge active lors de la déconnexion
-          setActiveLodgeId(null);
         }
       }
     );
 
-    // Initialisation de l'état d'authentification
+    // THEN check for existing session
     const initializeAuth = async () => {
       try {
         setIsLoading(true);
-        const { data, error, status } = await authService.getAuthState();
+        const { data: { session }, error } = await supabase.auth.getSession();
         
-        if (error || status === 'error') {
-          console.error('Error initializing auth:', error);
+        if (error) {
+          console.error('Error getting session:', error);
           return;
         }
         
-        setSession(data.session);
-        setUser(data.user);
+        setSession(session);
+        setUser(session?.user ?? null);
         
-        if (data.user) {
-          await fetchProfile(data.user.id);
-          
-          // Si aucune loge active n'est définie mais que l'utilisateur a des loges, définir la première comme active
-          if (!activeLodgeId && profile?.lodge_memberships?.length > 0) {
-            const firstActiveLodge = profile.lodge_memberships.find(
-              membership => membership.is_active && membership.lodges
-            );
-            if (firstActiveLodge?.lodge_id) {
-              setActiveLodgeId(firstActiveLodge.lodge_id);
-            }
-          }
+        if (session?.user) {
+          await fetchProfile(session.user.id);
         }
       } catch (error) {
-        console.error('Exception initializing auth:', error);
+        console.error('Error initializing auth:', error);
       } finally {
         setIsLoading(false);
-        setIsInitialized(true);
       }
     };
 
@@ -120,74 +79,56 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
-  // Récupération du profil utilisateur avec ses adhésions
+  // Récupérer le profil utilisateur depuis Supabase
   const fetchProfile = async (userId: string) => {
     try {
-      setIsLoading(true);
+      const { data, error } = await supabase
+        .from('profiles')
+        .select(`
+          *,
+          lodge_memberships(
+            id,
+            lodge_id,
+            role,
+            office,
+            degree,
+            is_active,
+            lodges(
+              id,
+              name,
+              logo_url,
+              obedience,
+              rite
+            )
+          )
+        `)
+        .eq('id', userId)
+        .single();
+
+      if (error) {
+        console.error('Error fetching profile:', error);
+        toast({
+          title: i18nWithFallback('auth.errors.profileFetchFailed', 'Erreur de profil'),
+          description: i18nWithFallback('auth.errors.profileFetchFailedDesc', 'Impossible de récupérer votre profil.'),
+          variant: "destructive",
+        });
+        return;
+      }
       
-      // Récupérer le profil
-      const { data: profileData, error: profileError } = await memberService.getMemberById(userId);
-      
-      if (profileError) throw profileError;
-      
-      // Récupérer les adhésions aux loges avec informations sur les loges
-      const { data: memberships, error: membershipsError } = await memberService.getLodgeMemberships(userId);
-      
-      if (membershipsError) throw membershipsError;
-      
-      // Combiner les données
-      const fullProfile: ProfileWithMemberships = {
-        ...(profileData as Tables<'profiles'>),
-        lodge_memberships: memberships || []
-      };
-      
-      setProfile(fullProfile);
+      setProfile(data);
     } catch (error) {
-      console.error('Error fetching profile:', error);
-      toast({
-        title: i18nWithFallback('auth.errors.profileFetchFailed', 'Erreur de profil'),
-        description: i18nWithFallback('auth.errors.profileFetchFailedDesc', 'Impossible de récupérer votre profil.'),
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      console.error('Exception fetching profile:', error);
+      setProfile(null);
     }
   };
 
-  // Connexion améliorée
-  const signIn = async (email: string, password: string): Promise<{success: boolean; error?: string}> => {
+  // Connexion
+  const signIn = async (email: string, password: string) => {
     try {
       setIsLoading(true);
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
       
-      const { data, error, status } = await authService.signIn({
-        email, 
-        password
-      });
-      
-      if (error || status === 'error') {
-        // Traduction des erreurs
-        let errorKey = 'auth.errors.default';
-        let errorMessage = error?.message;
-        
-        if (errorMessage?.includes('Invalid login credentials')) {
-          errorKey = 'auth.errors.invalidCredentials';
-        } else if (errorMessage?.includes('Email not confirmed')) {
-          errorKey = 'auth.errors.emailNotConfirmed';
-        } else if (errorMessage?.includes('network')) {
-          errorKey = 'auth.errors.network';
-        }
-        
-        toast({
-          title: i18nWithFallback('auth.errors.loginFailed', 'Échec de la connexion'),
-          description: i18nWithFallback(errorKey, errorMessage || "Vérifiez vos identifiants et réessayez."),
-          variant: "destructive",
-        });
-        
-        return { 
-          success: false, 
-          error: errorMessage 
-        };
-      }
+      if (error) throw error;
       
       toast({
         title: i18nWithFallback('auth.success.loginTitle', 'Connexion réussie'),
@@ -195,60 +136,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       
       navigate('/dashboard');
-      return { success: true };
     } catch (error: any) {
       console.error('Login error:', error);
       
+      // Map Supabase error codes to translation keys
+      let errorKey = 'auth.errors.default';
+      
+      if (error.message.includes('Invalid login credentials')) {
+        errorKey = 'auth.errors.invalidCredentials';
+      } else if (error.message.includes('Email not confirmed')) {
+        errorKey = 'auth.errors.emailNotConfirmed';
+      } else if (error.message.includes('network')) {
+        errorKey = 'auth.errors.network';
+      }
+      
       toast({
         title: i18nWithFallback('auth.errors.loginFailed', 'Échec de la connexion'),
-        description: error.message || i18nWithFallback('auth.errors.default', 'Une erreur est survenue lors de la connexion.'),
+        description: i18nWithFallback(errorKey, error.message || "Vérifiez vos identifiants et réessayez."),
         variant: "destructive",
       });
-      
-      return { 
-        success: false, 
-        error: error.message 
-      };
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Inscription améliorée
-  const signUp = async (email: string, password: string, displayName: string): Promise<{success: boolean; error?: string}> => {
+  // Inscription
+  const signUp = async (email: string, password: string, displayName: string) => {
     try {
       setIsLoading(true);
-      
-      const { error, status } = await authService.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
-        displayName
+        options: {
+          data: {
+            display_name: displayName
+          }
+        }
       });
       
-      if (error || status === 'error') {
-        // Traduction des erreurs
-        let errorKey = 'auth.errors.default';
-        let errorMessage = error?.message;
-        
-        if (errorMessage?.includes('already registered')) {
-          errorKey = 'auth.errors.emailAlreadyRegistered';
-        } else if (errorMessage?.includes('weak password')) {
-          errorKey = 'auth.errors.weakPassword';
-        } else if (errorMessage?.includes('network')) {
-          errorKey = 'auth.errors.network';
-        }
-        
-        toast({
-          title: i18nWithFallback('auth.errors.signupFailed', 'Échec de l\'inscription'),
-          description: i18nWithFallback(errorKey, errorMessage || "Une erreur est survenue lors de l'inscription."),
-          variant: "destructive",
-        });
-        
-        return { 
-          success: false, 
-          error: errorMessage 
-        };
-      }
+      if (error) throw error;
       
       toast({
         title: i18nWithFallback('auth.success.signupTitle', 'Inscription réussie'),
@@ -256,41 +182,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       
       navigate('/login');
-      return { success: true };
     } catch (error: any) {
       console.error('Signup error:', error);
       
+      // Map error messages to translation keys
+      let errorKey = 'auth.errors.default';
+      
+      if (error.message.includes('already registered')) {
+        errorKey = 'auth.errors.emailAlreadyRegistered';
+      } else if (error.message.includes('weak password')) {
+        errorKey = 'auth.errors.weakPassword';
+      } else if (error.message.includes('network')) {
+        errorKey = 'auth.errors.network';
+      }
+      
       toast({
         title: i18nWithFallback('auth.errors.signupFailed', 'Échec de l\'inscription'),
-        description: error.message || i18nWithFallback('auth.errors.default', 'Une erreur est survenue lors de l\'inscription.'),
+        description: i18nWithFallback(errorKey, error.message || "Une erreur est survenue lors de l'inscription."),
         variant: "destructive",
       });
-      
-      return { 
-        success: false, 
-        error: error.message 
-      };
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Déconnexion améliorée
-  const signOut = async (): Promise<{success: boolean; error?: string}> => {
+  // Déconnexion
+  const signOut = async () => {
     try {
       setIsLoading(true);
+      const { error } = await supabase.auth.signOut();
       
-      const { error, status } = await authService.signOut();
+      if (error) throw error;
       
-      if (error || status === 'error') {
-        throw error || new Error("Erreur lors de la déconnexion");
-      }
-      
-      // Réinitialiser l'état local
       setSession(null);
       setUser(null);
       setProfile(null);
-      setActiveLodgeId(null);
       
       toast({
         title: i18nWithFallback('auth.success.logoutTitle', 'Déconnexion réussie'),
@@ -298,27 +224,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       
       navigate('/');
-      return { success: true };
     } catch (error: any) {
       console.error('Logout error:', error);
-      
       toast({
         title: i18nWithFallback('auth.errors.logoutFailed', 'Erreur de déconnexion'),
-        description: error.message || i18nWithFallback('auth.errors.default', 'Une erreur est survenue lors de la déconnexion.'),
+        description: i18nWithFallback('auth.errors.default', error.message),
         variant: "destructive",
       });
-      
-      return { 
-        success: false, 
-        error: error.message 
-      };
     } finally {
       setIsLoading(false);
     }
   };
 
   // Mise à jour du profil
-  const updateProfile = async (data: Partial<Tables<'profiles'>>): Promise<{success: boolean; error?: string}> => {
+  const updateProfile = async (data: any) => {
     try {
       setIsLoading(true);
       
@@ -326,11 +245,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw new Error(i18nWithFallback('auth.errors.noUserLoggedIn', 'Aucun utilisateur connecté'));
       }
       
-      const { error, status } = await memberService.updateProfile(user.id, data);
+      const { error } = await supabase
+        .from('profiles')
+        .update(data)
+        .eq('id', user.id);
       
-      if (error || status === 'error') {
-        throw error || new Error("Erreur lors de la mise à jour du profil");
-      }
+      if (error) throw error;
       
       // Récupérer le profil mis à jour
       await fetchProfile(user.id);
@@ -339,117 +259,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         title: i18nWithFallback('auth.success.profileUpdateTitle', 'Profil mis à jour'),
         description: i18nWithFallback('auth.success.profileUpdateDesc', 'Vos informations ont été enregistrées.'),
       });
-      
-      return { success: true };
     } catch (error: any) {
       console.error('Profile update error:', error);
-      
       toast({
         title: i18nWithFallback('auth.errors.profileUpdateFailed', 'Erreur de mise à jour'),
-        description: error.message || i18nWithFallback('auth.errors.default', 'Une erreur est survenue lors de la mise à jour du profil.'),
+        description: i18nWithFallback('auth.errors.default', error.message),
         variant: "destructive",
       });
-      
-      return { 
-        success: false, 
-        error: error.message 
-      };
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Réinitialisation de mot de passe
-  const forgotPassword = async (email: string): Promise<{success: boolean; error?: string}> => {
-    try {
-      setIsLoading(true);
-      
-      const { error, status } = await authService.forgotPassword(email);
-      
-      if (error || status === 'error') {
-        throw error || new Error("Erreur lors de la demande de réinitialisation du mot de passe");
-      }
-      
-      toast({
-        title: i18nWithFallback('auth.success.forgotPasswordTitle', 'Email envoyé'),
-        description: i18nWithFallback('auth.success.forgotPasswordDesc', 'Consultez votre boîte mail pour réinitialiser votre mot de passe.'),
-      });
-      
-      return { success: true };
-    } catch (error: any) {
-      console.error('Password reset error:', error);
-      
-      toast({
-        title: i18nWithFallback('auth.errors.forgotPasswordFailed', 'Erreur'),
-        description: error.message || i18nWithFallback('auth.errors.default', 'Une erreur est survenue lors de la demande de réinitialisation.'),
-        variant: "destructive",
-      });
-      
-      return { 
-        success: false, 
-        error: error.message 
-      };
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Mise à jour du mot de passe
-  const updatePassword = async (newPassword: string): Promise<{success: boolean; error?: string}> => {
-    try {
-      setIsLoading(true);
-      
-      const { error, status } = await authService.updatePassword(newPassword);
-      
-      if (error || status === 'error') {
-        throw error || new Error("Erreur lors de la mise à jour du mot de passe");
-      }
-      
-      toast({
-        title: i18nWithFallback('auth.success.passwordUpdateTitle', 'Mot de passe mis à jour'),
-        description: i18nWithFallback('auth.success.passwordUpdateDesc', 'Votre mot de passe a été modifié avec succès.'),
-      });
-      
-      return { success: true };
-    } catch (error: any) {
-      console.error('Password update error:', error);
-      
-      toast({
-        title: i18nWithFallback('auth.errors.passwordUpdateFailed', 'Erreur'),
-        description: error.message || i18nWithFallback('auth.errors.default', 'Une erreur est survenue lors de la mise à jour du mot de passe.'),
-        variant: "destructive",
-      });
-      
-      return { 
-        success: false, 
-        error: error.message 
-      };
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Valeur du contexte d'authentification
   const value = {
     session,
     user,
     profile,
     isLoading,
-    isInitialized,
-    activeLodgeId,
-    setActiveLodgeId,
     signIn,
     signUp,
     signOut,
-    updateProfile,
-    forgotPassword,
-    updatePassword
+    updateProfile
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// Hook personnalisé pour accéder au contexte d'authentification
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
